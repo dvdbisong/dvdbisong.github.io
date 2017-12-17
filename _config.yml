@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Welcome to Jekyll!
 #
 # This config file is meant for settings that affect your whole blog, values
@@ -41,3 +42,23 @@ plugins:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+=======
+# Site settings
+title: Technical Writings
+email: ebisong@ekababisong.org
+#description: ""
+baseurl: ""
+url: "http://dvdbisong.github.io"
+#twitter_username: 
+github_username:  dvdbisong
+
+# Build settings
+markdown: kramdown
+permalink: pretty
+
+highlighter: rouge
+kramdown:
+  input: GFM
+  auto_ids: true
+  syntax_highlighter: rouge
+>>>>>>> 1f2d4eb3e392073cac3acd2feb80db2c1e3eef26
