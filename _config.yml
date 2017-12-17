@@ -1,1 +1,17 @@
-theme: jekyll-theme-cayman
+# Site settings
+title: Technical Writings
+email: ebisong@ekababisong.org
+#description: ""
+baseurl: ""
+url: "http://dvdbisong.github.io"
+github_username:  dvdbisong
+
+# Build settings
+markdown: kramdown
+permalink: pretty
+
+highlighter: rouge
+kramdown:
+  input: GFM
+  auto_ids: true
+  syntax_highlighter: rouge
