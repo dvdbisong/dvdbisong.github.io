@@ -4,6 +4,7 @@ title: 'Understanding Machine Learning: An Executive Overview'
 date: 2017-07-28 09:03:23 +00:00
 category: Technical Writings
 comments: true
+excerpt: "Machine learning is a technology that has grown to prominence over the past ten years (as at this time of writing) and is fast paving the way for the &#8220;Age of Automation&#8221;. This post provides a holistic view of the vital constituents that characterizes machine learning. At the end of this piece, the reader can be able to grasp the major landmarks and foundation stones of the field. Also, this overview provides a structured framework to wade deeper into murkier waters without getting overly overwhelmed."
 permalink: /understanding-machine-learning-executive-overview/
 ---
 Machine learning is a technology that has grown to prominence over the past ten years (as at this time of writing) and is fast paving the way for the &#8220;Age of Automation&#8221;.

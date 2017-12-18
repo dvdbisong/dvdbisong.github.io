@@ -4,6 +4,7 @@ title: Demystifying Deep Learning
 date: 2017-08-03 09:07:02 +00:00
 permalink: /demystifying-deep-learning/
 comments: true
+excerpt: "Learning is a non-trivial task. How we learn deep representations as humans are high up there as one of the great enigmas of the world. What we consider trivial and to some others natural is a complex web of fine-grained and intricate processes that indeed have set us apart as unique creations in the universe both seen and unseen. In this post, I explain in simple terms the origins and promise of deep learning."
 category: Technical Writings
 ---
 Learning is a non-trivial task. How we learn deep representations as humans are high up there as one of the great enigmas of the world. What we consider trivial and to some others natural is a complex web of fine-grained and intricate processes that indeed have set us apart as unique creations in the universe both seen and unseen.

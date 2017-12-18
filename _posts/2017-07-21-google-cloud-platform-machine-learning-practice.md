@@ -4,11 +4,10 @@ title: "A Gentle Introduction to Google Cloud Platform for Machine Learning Prac
 date: 2017-07-21 12:03:51 +00:00
 category: Technical Writings
 comments: true
+excerpt: "In a previous post titled <a href=\"/machine-learning-cloud-notes-layman/\" target=\"_blank\" rel=\"noopener\">Machine Learning on the cloud</a>, we examined in plain language what is machine learning, what is the cloud, and the merits of leveraging cloud resources for machine learning practice. In this post, I introduce GCP as a simple, yet powerful, and cost effective cloud option for performing machine learning. Whats more, I provide a simple walkthrough on how to set up the environment for machine learning model development on GCP."
 permalink: /google-cloud-platform-machine-learning-practice/
 ---
 In a previous post titled <a href="/machine-learning-cloud-notes-layman/" target="_blank" rel="noopener">Machine Learning on the cloud</a>, we examined in plain language what is machine learning, what is the cloud, and the merits of leveraging cloud resources for machine learning practice.
-  
-<!--more-->
 
 In this post, we introduce the Google Cloud Platform as a simple, yet powerful, and cost effective cloud option for performing machine learning. Whats more, we provide a simple walkthrough on how to set up the environment for machine learning model development on GCP.
 
