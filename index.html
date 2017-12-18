@@ -1,18 +1,243 @@
 ---
-layout: default
+title: Home
+permalink: /
 ---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Home | Ekaba Bisong</title>
+  <link href="css/home/bootstrap.min.css" rel="stylesheet" media="screen">
+  <link href="css/home/style.css" rel="stylesheet">
+  <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,500' rel='stylesheet' type='text/css'>
+  <link rel="shortcut icon" type="image/png" href="/favicon.png">
 
-<div class="home">
-  
-  <ul class="posts">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-date">{{ post.date | date: "%b %-d, %Y" }}</span>
-        <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        <br>
-        {{ post.excerpt }}
-      </li>
-    {% endfor %}
-  </ul>
+<!-- Tracking code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-3698471-13']);
+  _gaq.push(['_trackPageview']);
 
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</head>
+
+<body onload="start()">
+
+<div id="header" class="bg1">
+  <div id="topnav">
+    <ul>
+      <li><a href="/writings/">portfolio</a></li>
+    </ul>
+  </div>
+  <div id="headerblob">
+    <img src="assets/ekaba.png" class="img-circle imgme">
+    <div id="headertext">
+      <div id="htname">Ekaba Bisong</div>
+      <div id="htdesc">Carleton University Computer Science M.Sc. candidate</div>
+      <div id="htem">ekaba.bisong _at_ carleton.ca</div>
+      <div id="icons">
+        <div class="svgico">
+          <a href="https://www.linkedin.com/in/ekababisong/"><img src="assets/linkedin.svg"></a>
+        </div>
+        <div class="svgico">
+          <a href="https://dvdbisong.github.io"><img src="assets/rss.svg"></a>
+        </div>
+        <div class="svgico">
+          <a href="https://github.com/dvdbisong"><img src="assets/octocat.svg" width="56px"></a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<div class="container">
+  <div id="timeline">
+    <div class="timelineitem">
+      <div class="tdate">Summer 2017 -</div>
+      <div class="ttitle">Data Scientist at <a href="https://pythian.com/" target="_blank">Pythian</a></div>
+      <div class="tdesc">Machine Learning, Deep Learning, Big Data Analytics, CloudRamp Services, <a href="https://www.credential.net/dnwviycd">Google Certified Professional Data Engineer</a></div>
+    </div>
+    <div class="timelineitem">
+      <div class="tdate">2016 - 2018</div>
+      <div class="ttitle">Carleton University Computer Science M.Sc. candidate</div>
+      <div class="tdesc">Reinforcement Learning, Learning Automata, Pattern Recognition, Adaptive Data Structures. My adviser is <a href="http://people.scs.carleton.ca/~oommen/">John Oommen</a></div>
+    </div>
+    <div class="timelineitem">
+     <div class="tdate">2015-2016</div>
+      <div class="ttitle">Graduate Assistant at the University of Calabar</div>
+      <div class="tdesc">Published my first book on <span class="thigh">"Programming in Java: A Quick Starter Guide"</div><span> ISBN: 978-007-277-2</div>
+    </div>
+    <div class="timelineitem">
+      <div class="tdate">2014</div>
+       <div class="ttitle">Complusory National Service to Nigeria</div>
+       <div class="tdesc">Instructor, Database Design and Development</div>
+     </div>
+    <div class="timelineitem">
+      <div class="tdate">2009-2013
+      </div>
+      <div class="ttitle">Babcock University: BSc</div>
+      <div class="tdesc">Concentrations in Artificial Intelligence and Decision Support Systems</div>
+    </div>
+  </div>
+
+
+<div class="container" style="font-size:18px; font-weight:300;margin-top:50px;margin-bottom:50px;">
+  <b>Bio</b>. I am a Masters graduate student in the School of Computer Science at Carleton University with a research focus on Learning Systems (encompassing learning automata and reinforcement learning), Machine Learning, and Deep Learning. I am also a Data Scientist at Pythian, a big data analytics company headquartered in Ottawa. I am a <a href="https://www.credential.net/dnwviycd">Google Certified Professional Data Engineer</a>.
+  <br><br>
+  <p>My research interests are in the theoretical and practical aspects of machine learning, the principles and algorithms that affect learning and how they are applied to specialized domains in making predictions, especially where there are rapid shifts in observable features as well as how mathematical principles, statistics and probabilistic reasoning can be applied to aid better decision making. I am also interested in researching the frontiers involving the synthesis of deep learning and reinforcement learning (what is now known as deep reinforcement learning), and how they can improve the learning task of an agent interacting with a non-deterministic, non-stationary environment (where exact mathematical analysis are no longer feasible), especially when the states of the environment are only partially observable.</p>
+</div>
+
+<hr class="soft">
+
+<div class="container">
+  <h2>Conference Papers</h2>
+  <div id="pubs">
+	 
+    <div class="pubwrap">
+      <div class="pubd" style="display:inline-block"><a href="http://ieeexplore.ieee.org/document/7962403/">[PDF]</a> Built to Last or Built Too Fast? Evaluating Prediction Models for Build Times, </div>
+      <div class="puba" style="display:inline-block">Bisong, Ekaba, Tran, Eric, and Baysal, Olga</div>
+      <div class="pubv" style="display:inline-block">Proceedings of the 2017 IEEE/ACM 14th International Conference on Mining Software Repositories (MSR 2017). Buenos Aires, Argentina. 20-21 May 2017</div>
+    </div>
+
+		<div>
+			<img src="../assets/thesis/thesis.svg" style="width:100%">
+			<div class="pubd" style="display:inline-block"><a href="#">[PDF]</a> On Adaptively Designing Datastructures within Datastructures: A Learning Automata Hierarchical Scheme <em>(In progress)</em></div><br>
+			<div class="puba" style="display:inline-block">Ekaba Bisong, </div>
+      <div class="pubv" style="display:inline-block">M.Sc. Thesis, 2018</div>
+		</div>    
+
+  </div>
+  </div>
+  <br><br><br>  
+  <hr class="soft">
+
+<div class="container">
+  <h2>Pet Projects</h2>
+  <div class="row">
+
+    <div class="col-md-4">
+      <div class="pp">
+        <a href="https://play.google.com/store/apps/details?id=org.tensorflow.cereal_classifier">
+          <img src="../assets/projects/cereal-classifier.png" class="imgb">
+        </a>
+        <div class="ppt">Cereal Classifier: TensorFlow Android App</div>
+        <div class="ppd">
+          This project builds a cereal box image classifier, based on the Google InceptionV3 model with TensorFlow. Using a technique known as "transfer learning" we can use a pre-trained model such as the InceptionV3 model as a starting point for building a custom image classifier to classify our own images different from the original 1000 classes that the pre-trained model was trained to classify. The app is trained to classify the following cereals: apple cinnamon cheerios, berry kix, chocolate cheerios, cocoa puffs, honeycomb, kelloggs all bran, kelloggs corn pops, kelloggs frosted flakes, kelloggs rice krispies, multi grain cheerios, and sugar crisp.
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="pp">
+        <a href="https://nbviewer.jupyter.org/github/dvdbisong/Credit-Card-Fraud-Detection-using-Extreme-Gradient-Boosting/blob/master/FraudDetection.ipynb">
+        <img src="../assets/projects/FraudDetection.png" class="imgb">
+        </a>
+        <div class="ppt">Credit Card Fraud Detection using Extreme Gradient Boosting</div>
+        <div class="ppd">
+          Credit card fraud detection is the science and art of detecting unusual activity in credit transactions. A major challenge to credit fraud detection research is the availability of real world data due to privacy and legal concerns. In this project, we take the supervised approach to identifying fraud. We will build a function to learn a transaction map to identify fraud from a specific number of attributes. This attributes have already been transformed to their principal components so much cannot be done in terms of feature engineering.
+        </div>
+        
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="pp">
+        <a href="https://nbviewer.jupyter.org/github/dvdbisong/ForestCoverType-XGBoost/blob/master/Forest-CoverType-XGBoost.ipynb">
+          <img src="../assets/projects/ForestCover.png" class="imgb">
+        </a>
+        <div class="ppt">Predicting Forest Cover Type using Extreme Gradient Boosting (xgboost)</div>
+        <div class="ppd">
+          This project develops a classification model using XGBoost to accurately classify and predict forest cover type from a set of cartographic features. The data is gotten from the UCI Machine Learning repository submitted by Jock A. Blackard. This dataset was particularly interesting to me because I previously worked with EcoDev Konsult, an environmental consultancy agency, to estimate Greenhouse Gas Emissions from Land Use, Land Use Change and Forestry (LU-LUCF) in Nigeria using GIS, remote sensing, machine learning and statistical methods.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="showmore" id="showmoreprojects">
+    show more
+  </div>
+
+  <div id="moreprojects">
+    <div class="row">
+      <div class="col-md-5">
+        <div class="pp">
+          <a href="https://dvdbisong.shinyapps.io/BuildTimePredictor/">
+            <img src="../assets/projects/BuildTimePrediction.png" class="imgsm">
+          </a>
+          <div class="ppt">Built to Last or Built Too Fast?</div>
+          <div class="ppd">
+            Long build times can be an issue when integrations are frequent. This project is a cubist “minimum-viable-product” PoC model to predict the build time of a job.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="pp">
+          <a href="https://dvdbisong.shinyapps.io/AgricLandProject">
+            <img src="../assets/projects/AgricNigeria.png" class="imgsm">
+          </a>
+          <div class="ppt">Analysis of Agricultural Trends in Nigeria: A Shiny App</div>
+          <div class="ppd">
+            This application displays a barplot of several agricultural trends in Nigeria from 1961 to 2012. The collected data is from the World Bank Country Database.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="soft">
+
+<center>
+    <span>Ekaba Bisong 2017</span><br>
+    <span class="thigh">Design adapted from <a href="http://cs.stanford.edu/people/karpathy/">Andrej Karpathy</a></span>
+</center>
+
+<!-- place js at end for faster loading -->
+<script src="css/home/jquery-1.11.1.min.js"></script>
+<script src="css/home/bootstrap.min.js"></script>
+<script>
+
+var more_projects_shown = false;
+function start() {
+  $("#showmoreprojects").click(function() {
+    if(!more_projects_shown) {
+      $("#moreprojects").slideDown('fast', function() {
+        $("#showmoreprojects").text('hide');
+      });
+      more_projects_shown = true;
+    } else {
+      $("#moreprojects").slideUp('fast', function() {
+        $("#showmoreprojects").text('show more');
+      });
+      more_projects_shown = false;
+    }
+  });
+
+  var more_pubs_shown = false;
+  $("#showmorepubs").click(function() {
+    if(!more_pubs_shown) {
+      $("#morepubs").slideDown('fast', function() {
+        $("#showmorepubs").text('hide');
+      });
+      more_pubs_shown = true;
+    } else {
+      $("#morepubs").slideUp('fast', function() {
+        $("#showmorepubs").text('show more');
+      });
+      more_pubs_shown = false;
+    }
+  });
+
+}
+
+</script>
+
+</body>
+</html>

@@ -159,6 +159,35 @@ a:visited { color: #205caa; }
   background-color: #fff;
 }
 
+.bctt-click-to-tweet{
+  display: block;
+  background-color: #fff;
+  position: relative;
+  border: 1px solid #dddddd;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  padding: 15px 15px 15px 30px;
+  margin-bottom: 1em;
+  margin-top: 1.75em;
+}
+
+a.bctt-ctt-btn {
+  border-bottom: none !important;
+  margin: 0;
+  padding: 11px 24px 0 0;
+  position: relative;
+  display: block;
+  text-transform: uppercase;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-size: .7em;
+  font-weight: bold;
+  color: #999999 !important;
+  float: right;
+  text-decoration: none !important;
+  background: transparent url(../assets/birdy.png) no-repeat right top 10px;
+  box-shadow: none !important;
+}
+
 
 /* Home styles */
 /* ----------------------------------------------------------*/
@@ -191,6 +220,7 @@ a:visited { color: #205caa; }
 .post-header h1 {
   font-size: 36px;
   letter-spacing: -1.75px;
+  line-height: 1;
   font-weight: 300;
 }
 
@@ -451,5 +481,4 @@ a:visited { color: #205caa; }
     clear: both;
     width: auto;
     margin: 0 0 15px; }
-
 }

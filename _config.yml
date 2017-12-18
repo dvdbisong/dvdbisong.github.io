@@ -1,5 +1,5 @@
 # Site settings
-title: Technical Writings
+title: Portfolio
 email: ebisong@ekababisong.org
 #description: ""
 baseurl: ""
@@ -16,3 +16,4 @@ kramdown:
   input: GFM
   auto_ids: true
   syntax_highlighter: rouge
+  
