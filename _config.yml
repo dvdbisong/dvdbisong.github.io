@@ -7,6 +7,9 @@ url: "http://dvdbisong.github.io"
 #twitter_username: 
 github_username:  dvdbisong
 
+# Google Analytics
+google_analytics: UA-89464100-1
+
 # Build settings
 markdown: kramdown
 permalink: pretty
