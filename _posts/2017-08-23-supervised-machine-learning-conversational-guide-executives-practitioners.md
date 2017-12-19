@@ -3,6 +3,7 @@ layout: post
 title: 'Supervised Machine Learning: A Conversational Guide for Executives and Practitioners'
 date: 2017-08-23 06:25:34 +00:00
 category: Technical Writings
+comments: true
 permalink: /supervised-machine-learning-conversational-guide-executives-practitioners/
 ---
 This post gives a systematic overview of the vital points to consider when building supervised learning models. We address in Q&A style some of the key decisions/issues to go over when building a machine learning/ deep learning model. <!--more--> Whether you are an executive or a machine learning engineer, you can use this article to help start comfortable conversations with each other to facilitate stronger communication about machine learning.
