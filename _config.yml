@@ -1,7 +1,7 @@
 # Site settings
-title: Learning Systems, Machine Learning, Deep Learning
+title: Learning Systems, Machine Learning, Deep Neural Networks, Deep Reinforcement Learning
 email: ebisong@ekababisong.org
-description: "Learning Systems, Machine Learning, Deep neural networks, Deep Reinforcement Learning"
+#description: ""
 baseurl: ""
 url: "https://ekababisong.org/"
 #twitter_username: 
