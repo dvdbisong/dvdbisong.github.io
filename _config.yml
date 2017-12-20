@@ -1,11 +1,21 @@
 # Site settings
-title: Portfolio
+title: Learning Systems, Machine Learning, Deep Learning
 email: ebisong@ekababisong.org
-#description: ""
+description: "Learning Systems, Machine Learning, Deep neural networks, Deep Reinforcement Learning"
 baseurl: ""
-url: "http://dvdbisong.github.io"
+url: "https://ekababisong.org/"
 #twitter_username: 
 github_username:  dvdbisong
+author: Ekaba Bisong
+
+# social
+social:
+  name: Ekaba Bisong
+  links:
+    - https://www.linkedin.com/in/ekababisong/
+    - https://plus.google.com/u/0/+EkabaBisong
+    - https://github.com/dvdbisong
+    - https://stackoverflow.com/users/3353760/ekaba-bisong?tab=profile
 
 # Google Analytics
 google_analytics: UA-89464100-1
@@ -19,4 +29,7 @@ kramdown:
   input: GFM
   auto_ids: true
   syntax_highlighter: rouge
-  
+
+# plugins
+plugins:
+  - jekyll-seo-tag
