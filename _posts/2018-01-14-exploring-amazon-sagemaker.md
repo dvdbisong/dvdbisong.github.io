@@ -6,6 +6,7 @@ category: Technical Writings
 comments: true
 excerpt: "Amazon SageMaker is another cloud-based fully managed data analytics/ machine learning modeling platform for designing, building and deploying data models. The key selling point of Amazon SageMaker is \"zero-setup\". This post takes a tour through spinning up a SageMaker notebook instance for data analytics/ modeling learning models."
 permalink: /exploring-amazon-sagemaker/
+image: ../assets/exploring_sagemaker/1.SM_home.png
 ---
 
 Amazon SageMaker is another cloud-based fully managed data analytics/ machine learning modeling platform for designing, building and deploying data models. The key selling point of Amazon SageMaker is "zero-setup". The concept of "zero-setup" means data science teams can entirely focus on building the model without concern for infrastructure configuration. Also, SageMaker makes available some pre-configured black-boxed modules to streamline the building, training, and deployment of machine learning models. The goal is to further democratize machine learning for software developers without cutting-edge ML expertise.
