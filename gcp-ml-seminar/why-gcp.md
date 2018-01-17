@@ -1,7 +1,6 @@
 ---
 layout: page-seminar
-title: 'Why GCP'
+title: 'Why Google Cloud Platform?'
 permalink: gcp-ml-seminar/why-gcp/
 ---
 
-### Why GCP?
