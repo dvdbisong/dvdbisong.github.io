@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Paper Reviews
+nav: Paper Reviews
 permalink: /papers/
 ---
 
