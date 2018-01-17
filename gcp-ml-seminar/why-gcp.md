@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: page-seminar
 title: 'Why GCP'
 permalink: gcp-ml-seminar/why-gcp/
 ---
