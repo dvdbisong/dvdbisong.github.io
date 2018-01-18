@@ -115,7 +115,7 @@ A project on GCP is like a container of some sort, which houses all GCP resource
 
 <div class="imgcap">
 <img src="../assets/gcp_ml/8.activate-coud-shell.png">
-<div class="thecap">Sctivate cloud shell</div>
+<div class="thecap">Activate cloud shell</div>
 </div>
 
 2). From cloud shell, run the command:
