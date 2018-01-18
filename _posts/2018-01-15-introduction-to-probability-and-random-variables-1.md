@@ -2,7 +2,7 @@
 layout: post
 title: 'An Introduction to Probability and Random Variables for Pattern Recognition 1'
 date: 2018-01-19 09:11:19 +00:00
-category: Technical Writings
+category: #Technical Writings
 comments: true
 excerpt: "This post provides an introduction to probability theory and random variables for pattern recognition. The approach is not to provide formal, rigorous proofs - but outlines proofs by example. This part covers the fundamentals of discrete random variables."
 permalink: /introduction-to-probability-and-random-variables-1/
