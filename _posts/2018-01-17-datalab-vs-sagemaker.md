@@ -50,7 +50,7 @@ While Google Datalab also has a fully managed Jupyter notebook, it does not come
 <div class="thecap"><span style="font-style: italic">Figure 6: </span>Datalab kernels</div>
 </div>
 
-In any case, packages like MxNet, can very easily be installed on Datalab notebooks by running console commands via the Datalab `bash` shell. For example, to install MxNetm on Google Cloud Datalab run the following commands.
+In any case, packages like MxNet, can very easily be installed on Datalab notebooks by running console commands via the Datalab `bash` shell. For example, to install MxNetm on Google Cloud Datalab run the following commands:
 
 ```bash
 %bash
