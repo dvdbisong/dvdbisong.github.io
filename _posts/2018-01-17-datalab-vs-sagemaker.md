@@ -63,7 +63,7 @@ pip install mxnet==0.11.0
 
 This functionality makes Google Datalab quite flexible because other packages like Keras can be installed to the Datalab compute instance.
 
-This feature is also present in Amazon SageMaker. New packages can be installed into the notebook server under the `conda` environment. For example, one can install Keras into SageMaker notebooks by running the code:
+This feature is also present in Amazon SageMaker. New packages can be installed into the notebook server by the command shell by prefixing a `!` before keying in the command. For example, Keras can be installed into SageMaker notebooks by running the code:
 
 ```bash
 !conda install -c conda-forge keras --yes
