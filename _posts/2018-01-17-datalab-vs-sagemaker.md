@@ -50,7 +50,7 @@ While Google Datalab also has a fully managed Jupyter notebook, it does not come
 <div class="thecap"><span style="font-style: italic">Figure 6: </span>Datalab kernels</div>
 </div>
 
-In any case, packages like MxNet, can very easily be installed on Datalab notebooks by running console commands via the Datalab `bash` shell. This functionality makes Google Datalab more flexible because other packages like Keras can be installed to the Datalab compute instance. The converse is not the same for Amazon SageMaker. Any new framework will have to be built into a Docker container and provisioned on the Amazon EC2 Container Registry. For example, to install MxNet run the following commands:
+In any case, packages like MxNet, can very easily be installed on Datalab notebooks by running console commands via the Datalab `bash` shell. For example, to install MxNetm on Google Cloud Datalab run the following commands.
 
 ```bash
 %bash
@@ -60,6 +60,16 @@ wget https://bootstrap.pypa.io/get-pip.py &&$ pip install mxnet==0.11.0 python g
 
 pip install mxnet==0.11.0
 ```
+
+This functionality makes Google Datalab quite flexible because other packages like Keras can be installed to the Datalab compute instance.
+
+This feature is also present in Amazon SageMaker. New packages can be installed into the notebook server under the `conda` environment. For example, one can install Keras into SageMaker notebooks by running the code:
+
+```bash
+!conda install -c conda-forge keras --yes
+```
+
+The flag `--yes` forces conda to accept all requirements during installation.
 
 ### Managed Compute Infrastructure
 Amazon SageMaker runs on a fully managed elastic compute server. This abstracts the data scientist/ developer from DevOps concerns. The compute infrastructure auto-scales with respect to the volume of the processed job. Amazon SageMaker fully takes care of health checks, and outline infrastructure maintenance tasks via the built-in "Amazon CloudWatch monitoring and logging" service.
