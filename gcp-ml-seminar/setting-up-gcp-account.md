@@ -94,7 +94,7 @@ The Cloud shell is a vital component for working with GCP resources. It gives th
 The cloud shell is accessed by clicking on the <span style="color:green">prompt icon</span> in the top-left corner of the window.
 
 <div class="fig figcenter fighighlight">
-     <img src="/assets/seminar_IEEE/activate-cloud-shell.png" width="30%" height="30%">
+     <img src="/assets/seminar_IEEE/activate-cloud-shell.png" width="60%" height="60%">
      <div class="figcaption" style="text-align: center;">
         <span style="font-style: italic">Figure 10: </span>Activate Cloud Shell
      </div>
