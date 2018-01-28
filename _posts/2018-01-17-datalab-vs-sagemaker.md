@@ -84,7 +84,7 @@ Google Datalab does not have such pre-customized machine learning algorithms. Ho
 ### Distributed Training
 Amazon SageMaker trains your models on a set of distributed compute engines under the hood. These machines are relinquished as soon as training is completed.
 
-Google Datalab trains your models on the Datalab instance. Although a very powerful multi-core Datalab instance can be provisioned, it is not distributed across multiple machines. In order to take advantage of distributed training using Cloud ML, the code will have to be packaged as a Python module. As at this time of writing, this feature is limited to TensorFlow code.
+Google Datalab trains your models on the Datalab instance. Although a very powerful multi-core Datalab instance can be provisioned, it is not distributed across multiple machines. Cloud ML is responsible for training learning models across distributed machines. In order to take advantage of Cloud ML, the code will have to be packaged as a Python module. As at this time of writing, this feature is limited to TensorFlow code.
 
 ### Automated Hyper-parameter Tuning
 Amazon SageMaker has an option to perform automated hyper-parameter tuning on your learning model during training. This feature is in preview mode as at this time of writing. But it looks very interesting as it promises to abstract the data scientist or developer from grid search concerns in finding the best set of hyper-parameters for an algorithm training the model.
