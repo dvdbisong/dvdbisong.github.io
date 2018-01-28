@@ -72,9 +72,12 @@ This feature is also present in Amazon SageMaker. New packages can be installed 
 The flag `--yes` forces conda to accept all requirements during installation.
 
 ### Managed Compute Infrastructure
-Amazon SageMaker runs on a fully managed elastic compute server. This abstracts the data scientist/ developer from DevOps concerns. The compute infrastructure auto-scales with respect to the volume of the processed job. Amazon SageMaker fully takes care of health checks, and outline infrastructure maintenance tasks via the built-in "Amazon CloudWatch monitoring and logging" service.
+Amazon SageMaker runs on a fully managed elastic compute server. This relieves the data scientist/ developer from DevOps concerns. The compute infrastructure auto-scales with respect to the volume of the processed job. Amazon SageMaker fully takes care of health checks, and outline infrastructure maintenance tasks via the built-in "Amazon CloudWatch monitoring and logging" service.
 
-Google Datalab also offers a fully managed compute infrastructure. However, the Datalab server instance is not elastic. If you need more compute capabilities, you have to apply to increase your quota limit. But this is a very simple and straightforward process. Monitoring, logging and server maintenance is managed by the Google Cloud Platform via Google Stackdrier.
+Google Datalab also offers a fully managed compute infrastructure. However, the Datalab instance is not auto-elastic. You have to select the instance size when launching Datalab. This size can later be changed. Also, if you need even more compute capabilities, you have to apply to increase your quota limit. But this is a very simple and straightforward process. The Google Cloud Platform manages monitoring, logging, and server maintenance via Google Stackdrier. 
+
+Using Cloud ML to train your model takes advantage of scalable and distributed compute resources. Although Cloud ML only works with code written in TensorFlow. Datalab is often used in conjunction with Cloud ML.
+
 
 ### Optimized Machine Learning Algorithms
 Amazon SageMaker provides pre-optimized machine learning algorithms. These algorithms are particularly enhanced to run on Amazon's compute servers and are acclaimed to outperform similar algorithms from other packages by an order of magnitude. To use these algorithms, you simply connect them to your data source. The goal of these pre-optimized algorithms is to provide easy access for developers who are not particularly skilled in machine learning to take advantage of AI in their software products. The SageMaker custom algorithms span across a variety of supervised (XGBoost, linear/logistic regression), unsupervised (k-means clustering, principal component analysis (PCA)) and deep learning (DeepAR, Seqence2Sequence) algorithms.
