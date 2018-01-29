@@ -14,7 +14,7 @@ The cost of on-premise high-end machines may be untenable for an aspiring ML/ DL
 <div class="fig figcenter fighighlight">
     <img src="/assets/seminar_IEEE/slow-pc-angry.png" width="50%" height="50%">
     <div class="figcaption" style="text-align: center;">
-        <span style="font-style: italic">Figure 1: </span>Frustration of Long Processing Times
+        Figure 1: Frustration of Long Processing Times
     </div>
 </div>
 
@@ -32,7 +32,7 @@ In all the scenarios presented, the cloud comes to the rescue, where thousands o
 <div class="fig figcenter fighighlight">
     <img src="/assets/seminar_IEEE/datacenter.png">
     <div class="figcaption" style="text-align: center;">
-        <span style="font-style: italic">Figure 2: </span>Datacenter illustration
+        Figure 2: Datacenter illustration
     </div>
 </div>
 
@@ -48,6 +48,6 @@ Google Cloud Platform makes available to the public lighting fast computational 
 <div class="fig figcenter fighighlight">
     <img src="/assets/seminar_IEEE/google-cloud-platform.png">
     <div class="figcaption" style="text-align: center;">
-        <span style="font-style: italic">Figure 3: </span>Google Cloud Platform
+        Figure 3: Google Cloud Platform
     </div>
 </div>
