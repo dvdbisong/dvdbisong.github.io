@@ -35,11 +35,11 @@ Python has the `number` and `string` data types in addition to other supported s
 ```python
 # data types
 > type(3)
-Out: int
+'Output': int
 > type(3.0)
-Out: float
+'Output': float
 > type('Jesam Ujong')
-Out: str
+'Output': str
 ```
 
 Other fundamental data types in Python include the lists, tuple, and dictionary. These data types hold a group of items together in sequence. Sequences in Python are indexed from `0`.
@@ -49,9 +49,9 @@ Other fundamental data types in Python include the lists, tuple, and dictionary.
 ```python
 > my_tuple = (5, 4, 3, 2, 1, 'hello')
 > type(my_tuple)
-Out: tuple
+'Output': tuple
 > my_tuple[5]           # return the sixth elelment (indexed from 0)
-Out: 'hello'
+'Output': 'hello'
 > my_tuple[5] = 'hi'    # we cannot alter an immutable data type
 Traceback (most recent call last):
 
@@ -66,12 +66,12 @@ TypeError: 'tuple' object does not support item assignment
 ```python
 > my_list = [4, 8, 16, 32, 64]
 > print(my_list)    # print list items to console
-Out: [4, 8, 16, 32, 64]
+'Output': [4, 8, 16, 32, 64]
 > my_list[3]        # return the fourth list elelment (indexed from 0)
-Out: 32
+'Output': 32
 > my_list[4] = 256
 > print(my_list)
-Out: [4, 8, 16, 32, 256]
+'Output': [4, 8, 16, 32, 256]
 ```
 
 **Dictionaries** contain a mapping from keys to values. A key/value pair is an item in a dictionary. The items in a dictionary are indexed by their keys. The keys in a dictionary can be any *hashable* datatype (hashing transforms a string of characters into a key to speed up search). Values can be of any datatype. In other languages, a dictionary is analogous to a hash table or a map. Dictionaries are surrounded by a pair of braces `{...}`. A dictionary is nor ordered.
@@ -79,12 +79,12 @@ Out: [4, 8, 16, 32, 256]
 ```python
 > my_dict = {'name':'Rijami', 'age':42, 'height':72}
 > my_dict               # dictionary items are un-ordered
-Out: {'age': 42, 'height': 72, 'name': 'Rijami'}
+'Output': {'age': 42, 'height': 72, 'name': 'Rijami'}
 > my_dict['age']        # get dictionary value by indexing on keys
-Out: 42
+'Output': 42
 > my_dict['age'] = 35   # change the value of a dictionary item
 > my_dict['age']
-Out: 35
+'Output': 35
 ```
 
 #### More on Lists
@@ -93,23 +93,23 @@ As earlier mentioned, because list items are mutable, they can be changed, delet
 ```python
 > my_list = [4, 8, 16, 32, 64]
 > my_list
-Out: [4, 8, 16, 32, 64]
+'Output': [4, 8, 16, 32, 64]
 > my_list[1:3]      # slice the 2nd to 4th element (indexed from 0)
-Out: [8, 16]
+'Output': [8, 16]
 > my_list[2:]       # slice from the 3rd element (indexed from 0)
-Out: [16, 32, 64]
+'Output': [16, 32, 64]
 > my_list[:4]       # slice till the 5th element (indexed from 0)
-Out: [4, 8, 16, 32]
+'Output': [4, 8, 16, 32]
 > my_list[-1]       # get the last element in the list
-Out: 64
+'Output': 64
 > min(my_list)      # get the minimum element in the list
-Out: 4
+'Output': 4
 > max(my_list)      # get the maximum element in the list
-Out: 64
+'Output': 64
 > sum(my_list)      # get the sum of elements in the list
-Out: 124
+'Output': 124
 > my_list.index(16) # index(k) - return the index of the first occurence of item k in the list
-Out: 2
+'Output': 2
 ```
 
 When modifying a slice of elements in the list - the right-hand side can be of any length depending that the left-hand size is not a single index
@@ -117,43 +117,43 @@ When modifying a slice of elements in the list - the right-hand side can be of a
 # modifying a list: extended index example
 > my_list[1:4] = [43, 59, 78, 21]
 > my_list
-Out: [4, 43, 59, 78, 21, 64]
+'Output': [4, 43, 59, 78, 21, 64]
 > my_list = [4, 8, 16, 32, 64]  # re-initialize list elementss
 > my_list[1:4] = [43]
 > my_list
-Out: [4, 43, 64]
+'Output': [4, 43, 64]
 
 # modifying a list: single index example
 > my_list[0] = [1, 2, 3]      # this will give a list-on-list
 > my_list
-Out: [[1, 2, 3], 43, 64]
+'Output': [[1, 2, 3], 43, 64]
 > my_list[0:1] = [1, 2, 3]    # again - this is the proper way to extend lists
 > my_list
-Out: [1, 2, 3, 43, 64]
+'Output': [1, 2, 3, 43, 64]
 ```
 
 Some useful list methods include:
 ```python
 > my_list = [4, 8, 16, 32, 64]
 > len(my_list)          # get the length of the list
-Out: 5
+'Output': 5
 > my_list.insert(0,2)   # insert(i,k) - insert the element k at index i
 > my_list
-Out: [2, 4, 8, 16, 32, 64]
+'Output': [2, 4, 8, 16, 32, 64]
 > my_list.remove(8) # remove(k) - remove the first occurence of element k in the list
 > my_list
-Out: [2, 4, 16, 32, 64]
+'Output': [2, 4, 16, 32, 64]
 > my_list.pop(3)    # pop(i) - return the value of the list at index i
-Out: 32
+'Output': 32
 > my_list.reverse() # reverse in-place the elements in the list
 > my_list
-Out: [64, 16, 4, 2]
+'Output': [64, 16, 4, 2]
 > my_list.sort()    # sort in-place the elements in the list
 > my_list
-Out: [2, 4, 16, 64]
+'Output': [2, 4, 16, 64]
 > my_list.clear()   # clear all elements from the list
 > my_list
-Out: []
+'Output': []
 ```
 
 The `append()` method adds an item (could be a list, string, or number) to the end of a list. If the item is a list, the list as a whole is appended to the end of the current list.
@@ -163,7 +163,7 @@ The `append()` method adds an item (could be a list, string, or number) to the e
 > my_list.append('wonder')      # append a string to the end of list
 > my_list.append([256, 512])    # append a list to the end of list
 > my_list
-Out: [4, 8, 16, 32, 64, 2, 'wonder', [256, 512]]
+'Output': [4, 8, 16, 32, 64, 2, 'wonder', [256, 512]]
 ```
 
 The `extend()` method extends the list by adding items from an iterable. An iterable in Python are objects that have special methods that enable you to access elements from that object sequentially. Lists and strings are iterable objects. So `extend` appends all the elements of the iterable to the end of the list.
@@ -180,14 +180,14 @@ TypeError: 'int' object is not iterable
 > my_list.extend('wonder')      # append a string to the end of list
 > my_list.extend([256, 512])    # append a list to the end of list
 > my_list
-Out: [4, 8, 16, 32, 64, 'w', 'o', 'n', 'd', 'e', 'r', 256, 512]
+'Output': [4, 8, 16, 32, 64, 'w', 'o', 'n', 'd', 'e', 'r', 256, 512]
 ```
 
 We can combine a list **with another list** by overloading the operator `+`
 ```python
 > my_list = [4, 8, 16, 32, 64]
 > my_list + [256, 512]
-Out: [4, 8, 16, 32, 64, 256, 512]
+'Output': [4, 8, 16, 32, 64, 256, 512]
 ```
 
 #### Strings
@@ -196,29 +196,29 @@ Strings in Python are enclosed by a pair of parenthesis `''`. Strings are immuta
 ```python
 > my_string = 'Schatz'
 > my_string[0]      # get first index of string
-Out: 'S'
+'Output': 'S'
 > my_string[1:4]    # slice the string from the 2nd to the 5th element (indexed from 0)
-Out: 'cha'
+'Output': 'cha'
 > len(my_string)    # get the length of the string
-Out: 6
+'Output': 6
 > my_string[-1]     # get last element of the string
-Out: 'z'
+'Output': 'z'
 ```
 
 We can operate on string values with the boolean operators
 ```python
 > 't' in my_string
-Out: True
+'Output': True
 > 't' not in my_string
-Out: False
+'Output': False
 > 't' is my_string
-Out: False
+'Output': False
 > 't' is not my_string
-Out: True
+'Output': True
 > 't' == my_string
-Out: False
+'Output': False
 > 't' != my_string
-Out: True
+'Output': True
 ```
 
 We can concatenate two strings to create a new string using the overloaded operator `+`
@@ -227,7 +227,7 @@ We can concatenate two strings to create a new string using the overloaded opera
 > b = 'Love'
 > c = 'You'
 > a + b + c
-Out: 'ILoveYou'
+'Output': 'ILoveYou'
 
 # let's add some space
 > a + ' ' + b +  ' ' + c
@@ -239,15 +239,15 @@ In Python, we can operate on data using familiar algebra operations such as addi
 
 ```python
 > 2 + 2     # addition
-Out: 4
+'Output': 4
 > 5 - 3     # subtraction
-Out: 2
+'Output': 2
 > 4 * 4     # multiplication
-Out: 16
+'Output': 16
 > 10 / 2    # division
-Out: 5.0
+'Output': 5.0
 > 2**4 / (5 + 3)    # use brackets to enforce precedence
-Out: 2.0
+'Output': 2.0
 ```
 
 #### Boolean Operations
@@ -255,17 +255,17 @@ Boolean operations evaluate to `True` or `False`. Boolean operators include the 
 
 ```python
 > 2 < 5
-Out: True
+'Output': True
 > 2 <= 5
-Out: True
+'Output': True
 > 2 > 5
-Out: False
+'Output': False
 > 2 >= 5
-Out: False
+'Output': False
 > 2 != 5
-Out: True
+'Output': True
 > 2 == 5
-Out: False
+'Output': False
 ```
 
 While the logical operators include: Boolean NOT `not`, Boolean AND `and`, Boolean OR `or`. We can also carry-out identity and membership tests using:
@@ -275,13 +275,13 @@ While the logical operators include: Boolean NOT `not`, Boolean AND `and`, Boole
 ```python
 > a = [1, 2, 3]
 > 2 in a
-Out: True
+'Output': True
 > 2 not in a
-Out: False
+'Output': False
 > 2 is a
-Out: False
+'Output': False
 > 2 is not a
-Out: True
+'Output': True
 ```
 
 ### The print() statement
@@ -291,7 +291,7 @@ The `print()` statement is a simple way to show the output of data values to the
 > b = 'Love'
 > c = 'You'
 > print(a, b, c)
-Out: I Love You
+'Output': I Love You
 ```
 
 #### Using the Formatter
@@ -299,10 +299,10 @@ Formatters add a placeholder for inputting a data value into a string output usi
 Other format specifiers can be added with the place-holder curly brackets.
 ```python
 > print("{} {} {}".format(a, b, c))
-Out: I Love You
+'Output': I Love You
 # re-ordering the output
 > print("{2} {1} {0}".format(a, b, c))
-Out: You Love I
+'Output': You Love I
 ```
 
 ### Control Structures
@@ -340,7 +340,7 @@ elif a > 0:
 else:
     print('The number is negative and not an integer')
 
-Out: Number is an integer
+'Output': Number is an integer
 ```
 
 #### The while loop
@@ -362,7 +362,7 @@ while a > 0:
     # decrement a
     a -= 1
 
-Out: Number is 8
+'Output': Number is 8
      Number is 7
      Number is 6
      Number is 5
@@ -395,7 +395,7 @@ a = [2, 4, 6, 8, 10]
 for elem in a:
     print(elem**2)
 
-Out: 4
+'Output': 4
     16
     36
     64
@@ -407,7 +407,7 @@ To loop for a specific number of time use the `range()` function.
 for idx in range(5):
     print('The index is', idx)
 
-Out: The index is 0
+'Output': The index is 0
      The index is 1
      The index is 2
      The index is 3
@@ -433,13 +433,13 @@ for elem in range(0,5):
     squares.append((elem+1)**2)
 
 > squares
-Out: [1, 4, 9, 16, 25]
+'Output': [1, 4, 9, 16, 25]
 ```
 
 The above code can be concisely written as:
 ```python
 > [(elem+1)**2 for elem in range(0,5)]
-Out: [1, 4, 9, 16, 25]
+'Output': [1, 4, 9, 16, 25]
 ```
 
 This is even more elegant in the presence of nested control structures
@@ -450,13 +450,13 @@ for elem in range(0,20):
         evens.append(elem)
 
 > evens
-Out: [2, 4, 6, 8, 10, 12, 14, 16, 18]
+'Output': [2, 4, 6, 8, 10, 12, 14, 16, 18]
 ```
 
 With list comprehension, we can code this as:
 ```python
 > [elem for elem in range(0,20) if elem % 2 == 0 and elem != 0]
-Out: [2, 4, 6, 8, 10, 12, 14, 16, 18]
+'Output': [2, 4, 6, 8, 10, 12, 14, 16, 18]
 ```
 
 #### The break and continue statements
@@ -468,7 +468,7 @@ for val in range(0,10):
         print("Break out of for loop")
         break
 
-Out: The variable val is: 0
+'Output': The variable val is: 0
      The variable val is: 1
      The variable val is: 2
      The variable val is: 3
@@ -490,7 +490,7 @@ while a > 0:
         print("Skip the iteration when a is", a)
         continue
 
-Out: The variable a is: 6
+'Output': The variable a is: 6
      The variable a is: 5
      The variable a is: 4
      Skip the iteration when a is 3
@@ -527,7 +527,7 @@ def squares(number):
     return number**2
 
 > squares(2)
-Out: 4
+'Output': 4
 ```
 
 Here's another function example:
@@ -537,7 +537,7 @@ def _mean_(*number):
     return avg
 
 > _mean_(1,2,3,4,5,6,7,8,9)
-Out: 5.0
+'Output': 5.0
 ```
 The `*` before the parameter `number` indicates that the variable can receive any number of values - which is implicitly bound to a tuple.
 
@@ -552,7 +552,7 @@ Let's see an example:
 ```python
 > square = lambda x: x**2
 > square(2)
-Out: 4
+'Output': 4
 ```
 
 ### Packages and Modules
@@ -572,7 +572,7 @@ Let us take an example by importing a very important package called `numpy` that
 import numpy as np
 
 > np.abs(-10)   # the absolute value of -10
-Out: 10
+'Output': 10
 ```
 
 ### from statement
@@ -587,5 +587,5 @@ Let's see an example:
 from numpy import mean
 
 > mean([2,4,6,8])
-Out: 5.0
+'Output': 5.0
 ```
