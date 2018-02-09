@@ -4,7 +4,7 @@ title: 'NumPy'
 permalink: gcp-ml-seminar/numpy/
 ---
 
-NumPy is a Python library optimized for numerical computing. It bears close semblance with MATLAB, and is equally as powerful when used in conjunction with other packages such as SciPy for various scientific functions, Matplotlib for visualization and Pandas for data management.
+NumPy is a Python library optimized for numerical computing. It bears close semblance with MATLAB and is equally as powerful when used in conjunction with other packages such as SciPy for various scientific functions, Matplotlib for visualization and Pandas for data management.
 
 NumPy core strength lies in its ability to create and manipulate $$n$$-dimensional arrays. This is particularly critical for building Machine learning and Deep learning models. Data is often represented in a matrix-like grid of rows and columns, where each row represents an observation and each column a variable or feature. Hence, NumPy's 2-Dimensional arrays is a natural fit for storing and manipulating datasets.
 
@@ -15,7 +15,7 @@ To begin using NumPy, we'll start by importing the NumPy module:
 import numpy as np
 ```
 
-### NumPy Arrays
+### NumPy 1-D Array
 Let's create a simple 1-D NumPy array:
 ```python
 > my_array = np.array([2,4,6,8,10])
@@ -107,7 +107,7 @@ We can index a sigle element of a NumPy 1-D array similar to how we index a Pyth
 'Output': 0.97219288999999998
 ```
 
-Fancy Indexing in NumPy are advanced mechanisms for indexing array elements based on integers or boolean. This technique is also called <span style="color:green">*masking*</span>.
+Fancy Indexing in NumPy is an advanced mechanism for indexing array elements based on integers or boolean. This technique is also called <span style="color:green">*masking*</span>.
 
 #### Boolean Mask
 Let's index all the even integers in the array using a boolean mask.
@@ -158,8 +158,8 @@ Slicing a NumPy array is also similar to slicing a Python list.
 'Output': array([ 5, 13,  3])
 ```
 
-### Basic Math Operations on Arrays
-The core power of NumPy is in its highly optimized vectorized functions for various mathematical, arithmetic and string operations. We'll explore a couple of basic arithmetic with NumPy 1-D arrays.
+### Basic Math Operations on Arrays: Universal Functions
+The core power of NumPy is in its highly optimized vectorized functions for various mathematical, arithmetic and string operations. In NumPy these functions are called universal functions. We'll explore a couple of basic arithmetic with NumPy 1-D arrays.
 ```python
 # create an array of even numbers between 2 and 10
 > my_array = np.arange(2,11,2)
@@ -177,4 +177,69 @@ The core power of NumPy is in its highly optimized vectorized functions for vari
 > np.exp(my_array)
 'Output': array([  7.38905610e+00,   5.45981500e+01,   4.03428793e+02,
                    2.98095799e+03,   2.20264658e+04])
+```
+
+### Higher-Dimensional Arrays
+As we've seen earlier, the strength of NumPy is its ability to construct and manipulate n-dimensional arrays with highly optimized (i.e., vectorized) operations. Previously, we covered the creation of 1-D arrays (or vectors) in NumPy to get a feel of how NumPy works.
+
+This section will now consider working with 2-D and 3-D arrays. 2-D arrays are ideal for storing data for analysis. Structured data is usually represented in as a grid of rows and columns. And even when data is not necessarily represented in this format, it is often transformed into a tabular form before doing any data analytics or machine learning. Each column represents a feature or attribute and each row an observation.
+
+Also, other data forms like images are adequately represented using 3-D arrays. A colored image is composed of $$n \times n$$ pixels intensity values with a color depth of three for the red, green and blue (RGB) color profiles.
+
+### Creating 2-D arrays (Matrices)
+Let us construct a simple 2-D array
+```python
+# how to construct a 2-D array
+> my_2D = np.array([[2,4,6],
+                    [8,10,12]])
+> my_2D
+'Output': 
+array([[ 2,  4,  6],
+       [ 8, 10, 12]])
+# check the number of dimensions
+> my_2D.ndim
+'Output': 2
+# get the shape of the 2-D array - this example has 2 rows and 3 columns: (r, c)
+> my_2D.shape
+'Output': (2, 3)
+```
+
+Let's explore common methods in practice for creating 2-D NumPy arrays, **which are also matrices**
+```python
+# create a 3x3 array of ones
+> np.ones([3,3])
+'Output': 
+array([[ 1.,  1.,  1.],
+       [ 1.,  1.,  1.],
+       [ 1.,  1.,  1.]])
+# create a 3x3 array of zeros
+> np.zeros([3,3])
+'Output': 
+array([[ 0.,  0.,  0.],
+       [ 0.,  0.,  0.],
+       [ 0.,  0.,  0.]])
+# create a 3x3 array of a particular scalar - full(shape, fill_value)
+> np.full([3,3], 2)
+'Output': 
+array([[2, 2, 2],
+       [2, 2, 2],
+       [2, 2, 2]])
+# create a 3x3, empty uninitialized array
+> np.empty([3,3])
+'Output': 
+array([[ -2.00000000e+000,  -2.00000000e+000,   2.47032823e-323],
+       [  0.00000000e+000,   0.00000000e+000,   0.00000000e+000],
+       [ -2.00000000e+000,  -1.73060571e-077,  -2.00000000e+000]])
+# create a 4x4 identity matrix
+> np.eye(4) # or np.identity(4)
+'Output': 
+array([[ 1.,  0.,  0.,  0.],
+       [ 0.,  1.,  0.,  0.],
+       [ 0.,  0.,  1.,  0.],
+       [ 0.,  0.,  0.,  1.]])
+```
+
+### Creating 3-D arrays
+Let's construct a basic 3-D array
+```python
 ```
