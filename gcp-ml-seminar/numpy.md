@@ -320,7 +320,7 @@ Linear Algebra is a convenient and powerful system for manipulating a set of dat
 #### Matrix Multiplication (dot product)
 First let's create random integers using the method `np.random.randint(low, high=None, size=None,)` which returns random integers from low (inclusive) to high (exclusive).
 ```python
-# create a 3x3 matrix of random integers from 1 to 50
+# create a 3x3 matrix of random integers in the range of 1 to 50
 > A = np.random.randint(1, 50, size=[3,3])
 > B = np.random.randint(1, 50, size=[3,3])
 # print the arrays
@@ -356,7 +356,7 @@ array([[2290, 2478, 2240],
 ```
 
 #### Element-wise operations
-Element-wise matrix operations involve matrices operating on themselves in an element-wise fashion. The action can be an addition, subtraction, division or multiplication (which is commonly called the Hadamard product). The matrices must be of the same shape. **Please note** that while a matrix is of shape $$n\; \times\; n$$, a vector is of shape $$n\; \times\; 1$$. These concepts easily apply to vectors as well.
+Element-wise matrix operations involve matrices operating on themselves in an element-wise fashion. The action can be an addition, subtraction, division or multiplication (which is commonly called the Hadamard product). The matrices must be of the same shape. **Please note** that while a matrix is of shape $$n\; \times\; n\;$$, a vector is of shape $$n\; \times\; 1$$. These concepts easily apply to vectors as well.
 
 <div class="fig figcenter fighighlight">
     <img src="/assets/seminar_IEEE/element-wise.png">
@@ -488,4 +488,181 @@ array([[ 0.05848375, -0.08483755,  0.01823105],
 ```
 
 ### Reshaping
-ABCD
+A NumPy array can be restructured to take-on a different shape. Let's convert a 1-D array to a $$\;m \times n\;$$ matrix
+```python
+# make 20 elements evenly spaced between 0 and 5
+> a = np.linspace(0,5,20)
+> a
+'Output': 
+array([ 0.        ,  0.26315789,  0.52631579,  0.78947368,  1.05263158,
+        1.31578947,  1.57894737,  1.84210526,  2.10526316,  2.36842105,
+        2.63157895,  2.89473684,  3.15789474,  3.42105263,  3.68421053,
+        3.94736842,  4.21052632,  4.47368421,  4.73684211,  5.        ])
+# observe that a is a 1-D array
+> a.shape
+'Output': (20,)
+# reshape into a 5 x 4 matrix
+> A = a.reshape(5, 4)
+> A
+'Output': 
+array([[ 0.        ,  0.26315789,  0.52631579,  0.78947368],
+       [ 1.05263158,  1.31578947,  1.57894737,  1.84210526],
+       [ 2.10526316,  2.36842105,  2.63157895,  2.89473684],
+       [ 3.15789474,  3.42105263,  3.68421053,  3.94736842],
+       [ 4.21052632,  4.47368421,  4.73684211,  5.        ]])
+# The vector a has been reshaped into a 5 by 4 matrix A
+> A.shape
+'Output': (5, 4)
+```
+
+#### Reshape vs. Resize Method
+NumPy has the `np.reshape` and `np.resize` methods. The reshape method returns an ndarray with a modified shape without changing the original array, whereas the resize method changes the original array. Let's see an example
+```python
+# generate 9 elements evenly spaced between 0 and 5
+> a = np.linspace(0,5,9)
+> a
+'Output':  array([ 0.   ,  0.625,  1.25 ,  1.875,  2.5  ,  3.125,  3.75 ,  4.375,  5.   ])
+# the original shape
+> a.shape
+'Output':  (9,)
+# call the resahpe method
+> a.reshape(3,3)
+'Output':  
+array([[ 0.   ,  0.625,  1.25 ],
+       [ 1.875,  2.5  ,  3.125],
+       [ 3.75 ,  4.375,  5.   ]])
+# the original array maintained it's shape
+> a.shape
+'Output':  (9,)
+# call the resize method - resize does not return an array
+> a.resize(3,3)
+# the resize method has changed the shape of the original array
+> a.shape
+'Output':  (3, 3)
+```
+
+#### Stacking Arrays
+NumPy has methods for concatenating arrays - also called stacking. The methods `hstack` and `vstack` are used to stack several arrays along the horizontal and vertical axis respectively.
+
+```python
+# create a 2x2 matrix of random integers in the range of 1 to 20
+> A = np.random.randint(1, 50, size=[3,3])
+> B = np.random.randint(1, 50, size=[3,3])
+# print out the arrays
+> A
+'Output':  
+array([[19, 40, 31],
+       [ 5, 16, 38],
+       [22, 49,  9]])
+
+> B
+'Output':  
+array([[15, 22, 16],
+       [49, 26,  9],
+       [42, 13, 39]])
+```
+
+Let's stack `A` and `B` horizontally using `hstack`. To use `hstack`, the arrays must have the same number of rows. Also, the arrays to be stacked are passed as a tuple to the `hstack` method.
+```python
+# arrays are passed as tuple to hstack
+> np.hstack((A,B))
+'Output':  
+array([[19, 40, 31, 15, 22, 16],
+       [ 5, 16, 38, 49, 26,  9],
+       [22, 49,  9, 42, 13, 39]])
+```
+
+To stack `A` and `B` vertically using `vstack` the arrays must have the same number of columns. The arrays to be stacked are also passed as a tuple to the `vstack` method.
+```python
+# arrays are passed as tuple to hstack
+> np.vstack((A,B))
+'Output':  
+array([[19, 40, 31],
+       [ 5, 16, 38],
+       [22, 49,  9],
+       [15, 22, 16],
+       [49, 26,  9],
+       [42, 13, 39]])
+```
+
+### Broadcasting
+NumPy has an elegant mechanism for arithmetic operation on arrays with different dimensions or shapes. This is simply seen when a scalar is added to a vecor (or 1-D array). The scalar value is conceptually broadcasted or stretched across the rows of the array and added element-wise.
+
+<div class="fig figcenter fighighlight">
+    <img src="/assets/seminar_IEEE/scalar-broadcast.png">
+    <div class="figcaption" style="text-align: center;">
+        Figure 4: Broadcasting example of adding a scalar to a vector (or 1-D array)
+    </div>
+</div>
+
+Matrices with different shapes can be broadcasted to perform arithmetic operation by stretching the dimension of the smaller array. Broadcsting is another vectorized operation for speeding up matrix procesing. However, not all arrays with different shapes can be broadcasted. For broadcasting to occur, the trailing axes for the arrays must be the same size or 1.
+
+In the example below, the matrix `A` and `B` have the same rows, but the columns of matrix `B` is 1. Hence an arithmetic operation can be performed on them by broadcasting and adding the cells element-wise.
+```text
+A      (2d array):  4 x 3       + <perform addition>
+B      (2d array):  4 x 1
+Result (2d array):  4 x 3
+```
+
+See the figure below for more illustration.
+<div class="fig figcenter fighighlight">
+    <img src="/assets/seminar_IEEE/matrix-broadcast.png">
+    <div class="figcaption" style="text-align: center;">
+        Figure 5: Matrix broadcasting example
+    </div>
+</div>
+
+Let's see this in code:
+```python
+# create a 4 X 3 matrix of random integers between 1 and 10
+> A = np.random.randint(1, 10, [4, 3])
+> A
+'Output': 
+array([[9, 9, 5],
+       [8, 2, 8],
+       [6, 3, 1],
+       [5, 1, 4]])
+# create a 4 X 1 matrix of random integers between 1 and 10
+> B = np.random.randint(1, 10, [4, 1])
+> B
+'Output': 
+array([[1],
+       [3],
+       [9],
+       [8]])
+# add A and B
+> A + B
+'Output': 
+array([[10, 10,  6],
+       [11,  5, 11],
+       [15, 12, 10],
+       [13,  9, 12]])
+```
+
+The example below cannot be broadcasted and will result in a <span style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace">ValueError: operands could not be broadcast together with shapes (4,3) (4,2)</span> because the the matrix `A` and `B` have differnt columns and does not fit with the afore-mention rules of broadcasting that the trailing axes for the arrays must be the same size or 1.
+```text
+A      (2d array):  4 x 3       
+B      (2d array):  4 x 2
+The dimensions do not match - they must be either the same or 1
+```
+
+When we try to add the above example in Python, we get an error.
+```python
+> A = np.random.randint(1, 10, [4, 3])
+> B = np.random.randint(1, 10, [4, 2])
+> A + B
+Traceback (most recent call last):
+
+  File "<ipython-input-145-624e41e41a31>", line 1, in <module>
+    A + B
+
+ValueError: operands could not be broadcast together with shapes (4,3) (4,2) 
+```
+
+### Loading Data
+Loading data is an important process in the data analysis/ machine learning pipeline. Data usually comes in `.csv` format. `csv` files can be loaded into Python by using the `loadtxt` method. The parameter `skiprows` skips the first row of the dataset - it is usually the header row of the data.
+```python
+np.loadtxt(open("the_file_name.csv", "rb"), delimiter=",", skiprows=1)
+```
+
+Pandas is a preferred package for loading data in Python. We will learn more about Pandas for data manipulation in the next section.
