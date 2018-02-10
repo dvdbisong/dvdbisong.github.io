@@ -189,7 +189,7 @@ Also, other data forms like images are adequately represented using 3-D arrays. 
 ### Creating 2-D arrays (Matrices)
 Let us construct a simple 2-D array
 ```python
-# how to construct a 2-D array
+# construct a 2-D array
 > my_2D = np.array([[2,4,6],
                     [8,10,12]])
 > my_2D
@@ -230,7 +230,7 @@ array([[2, 2, 2],
 array([[ -2.00000000e+000,  -2.00000000e+000,   2.47032823e-323],
        [  0.00000000e+000,   0.00000000e+000,   0.00000000e+000],
        [ -2.00000000e+000,  -1.73060571e-077,  -2.00000000e+000]])
-# create a 4x4 identity matrix
+# create a 4x4 identity matrix - i.e., a matrix with 1's on its diagonal
 > np.eye(4) # or np.identity(4)
 'Output': 
 array([[ 1.,  0.,  0.,  0.],
@@ -242,4 +242,250 @@ array([[ 1.,  0.,  0.,  0.],
 ### Creating 3-D arrays
 Let's construct a basic 3-D array
 ```python
+# construct a 3-D array
+> my_3D = np.array([[
+                     [2,4,6],
+                     [8,10,12]
+                    ],[
+                     [1,2,3],
+                     [7,9,11]
+                    ]])
+> my_3D
+'Output': 
+array([[[ 2,  4,  6],
+        [ 8, 10, 12]],
+
+       [[ 1,  2,  3],
+        [ 7,  9, 11]]])
+# check the number of dimensions
+> my_3D.ndim
+'Output': 3
+# get the shape of the 3-D array - this example has 2 pages, 2 rows and 3 columns: (p, r, c)
+> my_3D.shapes
+'Output': (2, 2, 3)
 ```
+
+We can also create 3-D arrays with methods such as `ones`, `zeros`, `full`, and `empty` by passing the configuration for `[page, row, columns]` into the `shape` parameter of the methods. For example:
+```python
+# create a 2-page, 3x3 array of ones
+> np.ones([2,3,3])
+'Output': 
+array([[[ 1.,  1.,  1.],
+        [ 1.,  1.,  1.],
+        [ 1.,  1.,  1.]],
+
+       [[ 1.,  1.,  1.],
+        [ 1.,  1.,  1.],
+        [ 1.,  1.,  1.]]])
+# create a 2-page, 3x3 array of zeros
+> np.zeros([2,3,3])
+'Output': 
+array([[[ 0.,  0.,  0.],
+        [ 0.,  0.,  0.],
+        [ 0.,  0.,  0.]],
+
+       [[ 0.,  0.,  0.],
+        [ 0.,  0.,  0.],
+        [ 0.,  0.,  0.]]])
+```
+
+### Indexing/ Slicing of Matrices
+Let's see some examples of indexing and slicing two dimensional arrays. The concept extend nicely from doing the same with 1-D arrays.
+```python
+# create a 3x3 array contain random normal numbers
+> my_3D = np.random.randn(3,3)
+'Output': 
+array([[ 0.99709882, -0.41960273,  0.12544161],
+       [-0.21474247,  0.99555079,  0.62395035],
+       [-0.32453132,  0.3119651 , -0.35781825]])
+# select a particular cell (or element) from a 2-D array.
+> my_3D[1,1]    # In this case, the cell at the 2nd row and column
+'Output': 0.99555079000000002
+# slice the last 3 columns
+> my_3D[:,1:3]
+'Output': 
+array([[-0.41960273,  0.12544161],
+       [ 0.99555079,  0.62395035],
+       [ 0.3119651 , -0.35781825]])
+# slice the first 2 rows and columns
+> my_3D[0:2, 0:2]
+'Output': 
+array([[ 0.99709882, -0.41960273],
+       [-0.21474247,  0.99555079]])
+```
+
+### Matrix Operations: Linear Algebra
+Linear Algebra is a convenient and powerful system for manipulating a set of data features and is one of the strong points of NumPy. Linear algebra is a crucial component of machine learning, and deep learning research and implementation of learning algorithms. NumPy has vectorized routines for various matrix operations. Let's go through a few of them.
+
+#### Matrix Multiplication (dot product)
+First let's create random integers using the method `np.random.randint(low, high=None, size=None,)` which returns random integers from low (inclusive) to high (exclusive).
+```python
+# create a 3x3 matrix of random integers from 1 to 50
+> A = np.random.randint(1, 50, size=[3,3])
+> B = np.random.randint(1, 50, size=[3,3])
+# print the arrays
+> A
+'Output': 
+array([[15, 29, 24],
+       [ 5, 23, 26],
+       [30, 14, 44]])
+> B
+'Output': 
+array([[38, 32, 22],
+       [32, 30, 46],
+       [33, 47, 24]])
+```
+
+We can use the following routines for matrix multiplication, `np.matmul(a,b)` or `a @ b` is using Python 3.6. Using `a @ b` is preferred. Remember that when multiplying matrices, the inner matrix dimensions must agree. For example, if $$A$$ is an $$m × n$$ matrix and $$B$$ is an $$n × p$$ matrix, the product of the matrices will be an $$m \;\times\; p$$ matrix with the inner dimensions of the respective matrices $$n$$ agreeing.
+
+<div class="fig figcenter fighighlight">
+    <img src="/assets/seminar_IEEE/matrix_mul.png">
+    <div class="figcaption" style="text-align: center;">
+        Figure 1: Matrix multiplication
+    </div>
+</div>
+
+
+```python
+# multiply the two matrices A and B (dot product)
+> A @ B    # or np.matmul(A,B)
+'Output': 
+array([[2290, 2478, 2240],
+       [1784, 2072, 1792],
+       [3040, 3448, 2360]])
+```
+
+#### Element-wise operations
+Element-wise matrix operations involve matrices operating on themselves in an element-wise fashion. The action can be an addition, subtraction, division or multiplication (which is commonly called the Hadamard product). The matrices must be of the same shape. **Please note** that while a matrix is of shape $$n\; \times\; n$$, a vector is of shape $$n\; \times\; 1$$. These concepts easily apply to vectors as well.
+
+<div class="fig figcenter fighighlight">
+    <img src="/assets/seminar_IEEE/element-wise.png">
+    <div class="figcaption" style="text-align: center;">
+        Figure 2: Element-wise matrix operations
+    </div>
+</div>
+
+Let's have some examples
+```python
+# Hadamard multiplication of A and B
+> A * B
+'Output': 
+array([[ 570,  928,  528],
+       [ 160,  690, 1196],
+       [ 990,  658, 1056]])
+# add A and B
+> A + B
+'Output': 
+array([[53, 61, 46],
+       [37, 53, 72],
+       [63, 61, 68]])
+# subtract A from B
+> B - A
+'Output': 
+array([[ 23,   3,  -2],
+       [ 27,   7,  20],
+       [  3,  33, -20]])
+# divide A with B
+> A / B
+'Output': 
+array([[ 0.39473684,  0.90625   ,  1.09090909],
+       [ 0.15625   ,  0.76666667,  0.56521739],
+       [ 0.90909091,  0.29787234,  1.83333333]])
+```
+
+#### Scalar Operation
+A matrix can be acted upon by a scalar (i.e., a single numeric entity) in the same way element-wise fashion. This time the scalar operates upon each element of the matrix or vector.
+
+<div class="fig figcenter fighighlight">
+    <img src="/assets/seminar_IEEE/scalar-op.png">
+    <div class="figcaption" style="text-align: center;">
+        Figure 3: Scalar operations
+    </div>
+</div>
+
+Let's look at some examples
+```python
+# Hadamard multiplication of A and a scalar, 0.5
+> A * 0.5
+'Output': 
+array([[  7.5,  14.5,  12. ],
+       [  2.5,  11.5,  13. ],
+       [ 15. ,   7. ,  22. ]])
+# add A and a scalar, 0.5
+> A + 0.5
+'Output': 
+array([[ 15.5,  29.5,  24.5],
+       [  5.5,  23.5,  26.5],
+       [ 30.5,  14.5,  44.5]])
+# subtract a scalar 0.5 from B
+> B - 0.5
+'Output': 
+array([[ 37.5,  31.5,  21.5],
+       [ 31.5,  29.5,  45.5],
+       [ 32.5,  46.5,  23.5]])
+# divide A and a scalar, 0.5
+> A / 0.5
+'Output': 
+array([[ 30.,  58.,  48.],
+       [ 10.,  46.,  52.],
+       [ 60.,  28.,  88.]])
+```
+
+#### Matrix Transposition
+Transposition is a vital matrix operation that reverses the rows and columns of a matrix by flipping the row and column indices. The transpose of a matrix is denoted as $$A^T$$. Observe that the diagonal elements remain unchanged.
+
+<div class="fig figcenter fighighlight">
+    <img src="/assets/seminar_IEEE/matrix-transpose.png">
+    <div class="figcaption" style="text-align: center;">
+        Figure 4: Matrix transpose
+    </div>
+</div>
+
+Let's see an example
+```python
+> A = np.array([[15, 29, 24],
+                [ 5, 23, 26],
+                [30, 14, 44]])
+# transpose A
+> A.T   # or A.transpose()
+'Output': 
+array([[15,  5, 30],
+       [29, 23, 14],
+       [24, 26, 44]]) 
+```
+
+#### The Inverse of a Matrix
+A $$\;m \;\times\; m\;$$ matrix $$\;A\;$$ (also called a square matrix) has an inverse if $$A$$ times another matrix $$B$$ results in the identity matrix $$\;I\;$$ also of shape $$\;m \;\times\; m\;$$. This matrix $$B$$ is called the inverse of $$A$$ and is denoted as $$A^{-1}$$. This relationship is formally written as:
+
+$$A\;A^{-1} = A^{-1}A = I$$
+
+However, not all matrices have an inverse. A matrix with an inverse is called a *nonsingular* or *invertible* matrix, while does whithout an inverse are known as *singular* or *degenerate*.
+
+**Note:** A square matrix is a matrix that has the same number of rows and columns.
+
+Let's use NumPy to get the inverse of a matrix. Some linear algebra modules are found in a sub-module of NumPy called `linalg`.
+```python
+> A = np.array([[15, 29, 24],
+                [ 5, 23, 26],
+                [30, 14, 44]])
+# find the inverse of A
+> np.linalg.inv(A)
+'Output': 
+array([[ 0.05848375, -0.08483755,  0.01823105],
+       [ 0.05054152, -0.00541516, -0.02436823],
+       [-0.05595668,  0.05956679,  0.01805054]])
+```
+
+NumPy also implement the *Moore-Penrose pseudo inverse*, which gives an inverse derivation for degenerate matrices. Generally, it is preferred to use `pinv` to find the inverses of invertible matrices.
+```python
+# using pinv()
+> np.linalg.pinv(A)
+'Output': 
+array([[ 0.05848375, -0.08483755,  0.01823105],
+       [ 0.05054152, -0.00541516, -0.02436823],
+       [-0.05595668,  0.05956679,  0.01805054]])
+
+```
+
+### Reshaping
+ABCD
