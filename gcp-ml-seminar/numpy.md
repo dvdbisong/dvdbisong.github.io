@@ -4,7 +4,7 @@ title: 'NumPy'
 permalink: gcp-ml-seminar/numpy/
 ---
 
-NumPy is a Python library optimized for numerical computing. It bears close semblance with MATLAB and is equally as powerful when used in conjunction with other packages such as SciPy for various scientific functions, Matplotlib for visualization and Pandas for data management.
+NumPy is a Python library optimized for numerical computing. It bears close semblance with MATLAB and is equally as powerful when used in conjunction with other packages such as SciPy for various scientific functions, Matplotlib for visualization and Pandas for data analysis. NumPy is short for numerical python.
 
 NumPy core strength lies in its ability to create and manipulate $$n$$-dimensional arrays. This is particularly critical for building Machine learning and Deep learning models. Data is often represented in a matrix-like grid of rows and columns, where each row represents an observation and each column a variable or feature. Hence, NumPy's 2-Dimensional arrays is a natural fit for storing and manipulating datasets.
 
@@ -459,7 +459,7 @@ A $$\;m \;\times\; m\;$$ matrix $$\;A\;$$ (also called a square matrix) has an i
 
 $$A\;A^{-1} = A^{-1}A = I$$
 
-However, not all matrices have an inverse. A matrix with an inverse is called a *nonsingular* or *invertible* matrix, while does whithout an inverse are known as *singular* or *degenerate*.
+However, not all matrices have an inverse. A matrix with an inverse is called a *nonsingular* or *invertible* matrix, while does without an inverse are known as *singular* or *degenerate*.
 
 **Note:** A square matrix is a matrix that has the same number of rows and columns.
 
@@ -586,7 +586,7 @@ array([[19, 40, 31],
 ```
 
 ### Broadcasting
-NumPy has an elegant mechanism for arithmetic operation on arrays with different dimensions or shapes. This is simply seen when a scalar is added to a vecor (or 1-D array). The scalar value is conceptually broadcasted or stretched across the rows of the array and added element-wise.
+NumPy has an elegant mechanism for arithmetic operation on arrays with different dimensions or shapes. This is simply seen when a scalar is added to a vector (or 1-D array). The scalar value is conceptually broadcasted or stretched across the rows of the array and added element-wise.
 
 <div class="fig figcenter fighighlight">
     <img src="/assets/seminar_IEEE/scalar-broadcast.png">
@@ -595,7 +595,7 @@ NumPy has an elegant mechanism for arithmetic operation on arrays with different
     </div>
 </div>
 
-Matrices with different shapes can be broadcasted to perform arithmetic operation by stretching the dimension of the smaller array. Broadcsting is another vectorized operation for speeding up matrix procesing. However, not all arrays with different shapes can be broadcasted. For broadcasting to occur, the trailing axes for the arrays must be the same size or 1.
+Matrices with different shapes can be broadcasted to perform arithmetic operations by stretching the dimension of the smaller array. Broadcasting is another vectorized operation for speeding up matrix processing. However, not all arrays with different shapes can be broadcasted. For broadcasting to occur, the trailing axes for the arrays must be the same size or 1.
 
 In the example below, the matrix `A` and `B` have the same rows, but the columns of matrix `B` is 1. Hence an arithmetic operation can be performed on them by broadcasting and adding the cells element-wise.
 ```text
@@ -639,7 +639,7 @@ array([[10, 10,  6],
        [13,  9, 12]])
 ```
 
-The example below cannot be broadcasted and will result in a <span style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace">ValueError: operands could not be broadcast together with shapes (4,3) (4,2)</span> because the the matrix `A` and `B` have differnt columns and does not fit with the afore-mention rules of broadcasting that the trailing axes for the arrays must be the same size or 1.
+The example below cannot be broadcasted and will result in a <span style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace">ValueError: operands could not be broadcast together with shapes (4,3) (4,2)</span> because the matrix `A` and `B` have different columns and does not fit with the afore-mention rules of broadcasting that the trailing axes for the arrays must be the same size or 1.
 ```text
 A      (2d array):  4 x 3       
 B      (2d array):  4 x 2
@@ -651,6 +651,7 @@ When we try to add the above example in Python, we get an error.
 > A = np.random.randint(1, 10, [4, 3])
 > B = np.random.randint(1, 10, [4, 2])
 > A + B
+'Output': 
 Traceback (most recent call last):
 
   File "<ipython-input-145-624e41e41a31>", line 1, in <module>
