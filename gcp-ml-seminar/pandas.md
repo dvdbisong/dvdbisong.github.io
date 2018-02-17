@@ -85,9 +85,9 @@ Let's see examples of working with DataFrames.
 4   25           Benue
 ```
 
-We will observe from the above example that a DataFrame is constructed from a dictionary of records where each value is a `Series` datastructure. Also note that each row has an `index` that can be assigned when creating the DataFrame, else the default from 0 to one off the number of records in the DataFrame is used. Creating an index manually is usually not feasible except when working with small dummy datasets.
+We will observe from the above example that a DataFrame is constructed from a dictionary of records where each value is a `Series` data structure. Also note that each row has an `index` that can be assigned when creating the DataFrame, else the default from 0 to one off the number of records in the DataFrame is used. Creating an index manually is usually not feasible except when working with small dummy datasets.
 
-NumPy is frequently used together with Pandas. Let's import the NumPy library and use some of it's functions to demonstrate other ways of creating a quick DataFrame.
+NumPy is frequently used together with Pandas. Let's import the NumPy library and use some of its functions to demonstrate other ways of creating a quick DataFrame.
 ```python
 import numpy as np
 
@@ -146,7 +146,7 @@ array([['Yola', 3178950, 'Adamawa'],
        ['Damaturu', 2321339, 'Yobe'],
        ['Port-Harcourt', 5198716, 'Rivers'],
        ['Jalingo', 2294800, 'Taraba']], dtype=object)
-# the data type of  `DF.values` method is an numoy ndarray
+# the data type of  `DF.values` method is an numpy ndarray
 type(my_DF.values)
 'Output': numpy.ndarray
 ```
@@ -172,7 +172,7 @@ dtype: object
 An `object` data type in Pandas represents `Strings`
 
 ### Data Indexing (Selection/ Subsets)
-Similar to NumPy, Pandas objects can index or subset the dataset to retrieve a specific sub-record of the larger dataset. Note that data indexing returns a new `DataFrame` or `Series` if a 2-D or 1-D array is retrieved. They does not however alter the original dataset. Let's go through some examples of indexing a Pandas DataFrame.
+Similar to NumPy, Pandas objects can index or subset the dataset to retrieve a specific sub-record of the larger dataset. Note that data indexing returns a new `DataFrame` or `Series` if a 2-D or 1-D array is retrieved. They do not, however, alter the original dataset. Let's go through some examples of indexing a Pandas DataFrame.
 
 First let's create a dataframe. Observe the default integer indices assigned.
 ```python
@@ -291,7 +291,7 @@ Name: state_of_origin, dtype: object
 
 ### DataFrame Manipulation
 #### Removing a Row/ Column
-In many cases during the data cleaning process, they may be a need to drop unwanted rows or data variables (i.e., columns). We typically do this using the `drop` function. The `drop` function has a parameter `axis` whose deafult is `0`. If `axis` is set to 1, it drops columns in a dataset, but if left at the default, rows are dropped from the dataset. 
+In many cases during the data cleaning process, they may be a need to drop unwanted rows or data variables (i.e., columns). We typically do this using the `drop` function. The `drop` function has a parameter `axis` whose default is `0`. If `axis` is set to 1, it drops columns in a dataset, but if left at the default, rows are dropped from the dataset. 
 
 Note that when a column or row is dropped a new `DataFrame` or `Series` is returned without altering the original data structure. Let's see some examples.
 ```python
@@ -396,7 +396,7 @@ We observe that adding a new row involves passing to the `append` method, a `Ser
 
 
 #### Data Alignment
-Pandas uses data alignment to align indices when performing some binary arithmetic operation on DataFrames. If two or more DataFrames in an operation do not share a common index, a `NaN` is introduced denoting missing data. Let's see examples of this.
+Pandas utilizes data alignment to align indices when performing some binary arithmetic operation on DataFrames. If two or more DataFrames in an arithmetic operation do not share a common index, a `NaN` is introduced denoting missing data. Let's see examples of this.
 
 ```python
 # create a 3x3 dataframe - remember randint(low, high, size)
@@ -449,7 +449,7 @@ If we do not want a `NaN` signifying missing values to be imputed, we can use th
 ```
 
 #### Combining Datasets
-We may need to combine two or more datasets together, Pandas provides method for such operations. We would consider the simple case of combining dataframes with shared column names using the `concat` method.
+We may need to combine two or more data sets together, Pandas provides methods for such operations. We would consider the simple case of combining data frames with shared column names using the `concat` method.
 
 ```python
 # combine two dataframes column-wise
@@ -479,7 +479,7 @@ Out[246]:
 ```
 
 ### Handling Missing Data
-Dealing with missing data is an important part of the Data cleaning/ data analysis process. Moreover, some machine learning algorithms will not work in the presence of missing data. Let's see some simple Pandas methods for identifying and removing missing data, as well as imputing values into missing data.
+Dealing with missing data is an integral part of the Data cleaning/ data analysis process. Moreover, some machine learning algorithms will not work in the presence of missing data. Let's see some simple Pandas methods for identifying and removing missing data, as well as imputing values into missing data.
 
 #### Identifying missing data
 ```python
@@ -507,7 +507,7 @@ Let's check for missing data in this data frame. The `isnull()` method will retu
 4  False             True
 ```
 
-However, if we want a single answer (i.e., either `True` or `False`) to report if there is a missing data in the dataframe, we will first convert the DataFrame to a NumPy array and use the function `any()`.
+However, if we want a single answer (i.e., either `True` or `False`) to report if there is a missing data in the data frame, we will first convert the DataFrame to a NumPy array and use the function `any()`.
 
 The `any` function returns `True` when at least one of the elements in the dataset is `True`. In this case, `isnull()` returns a DataFrame of booleans where `True` designates a cell with a missing value.
 
@@ -539,7 +539,7 @@ Pandas has a function `dropna()` which is used to filter or remove missing data 
 1  17.0     Cross River
 3  29.0            Abia
 ```
-As we will observe from the above code-block, `dropna()` drops all rows that contain a missing value. But we may not want that. We may rather for example want to drop columns with missing data, or drop rows where all the observations are missing or better still remove consequent on the number of observations present in a particular row.
+As we will observe from the above code-block, `dropna()` drops all rows that contain a missing value. But we may not want that. We may rather, for example, want to drop columns with missing data, or drop rows where all the observations are missing or better still remove consequent on the number of observations present in a particular row.
 
 Let's see examples of this options. First let's expand our example dataset
 ```python
@@ -577,7 +577,7 @@ Drop rows where all the observations are missing.
 4        Jalingo  16.0   2294800.0   Taraba
 ```
 
-Drop rows based on an obervation threshold. By adjusting the `thresh` attribute, we can drop rows where the number of observations in the row are less than the `thresh` value.
+Drop rows based on an observation threshold. By adjusting the `thresh` attribute, we can drop rows where the number of observations in the row is less than the `thresh` value.
 ```python
 # drop rows where number of NaN are less than 3
 > my_DF.dropna(thresh=3)
@@ -614,7 +614,7 @@ Another tactic is to fill missing values with the mean of the column value.
 ```
 
 ### Data Aggregation (Grouping)
-We will touch briefly on a common practice in Data Science, and that is grouping a set of data attributes, either for retrieving some group statistics, or applying a particular set of functions to the group. Grouping is commonly used for data exploration and plotting graphs to understand more about the data set. Missing data are automatically excluded in a grouping operation.
+We will touch briefly on a common practice in Data Science, and that is grouping a set of data attributes, either for retrieving some group statistics or applying a particular set of functions to the group. Grouping is commonly used for data exploration and plotting graphs to understand more about the data set. Missing data are automatically excluded in a grouping operation.
 
 Let's see examples of how this works
 ```python
@@ -678,7 +678,7 @@ Name: Age, dtype: int64
 ```
 
 ### Statistical Summaries
-Descriptive statistics is an important component of the Data Science pipeline. By investigating the properties of the dataset, we can gain better understanding of the data and the relationship betweeen the variables. This information is useful in making decisions about the type of data transformations to carry out or the types of learning algorithms to spot-check. Let's see some examples of simple statistical functions in Pandas.
+Descriptive statistics is an essential component of the Data Science pipeline. By investigating the properties of the dataset, we can gain a better understanding of the data and the relationship between the variables. This information is useful in making decisions about the type of data transformations to carry out or the types of learning algorithms to spot-check. Let's see some examples of simple statistical functions in Pandas.
 
 First, we'll create a Pandas dataframe
 ```python
@@ -711,7 +711,7 @@ max    74.000000  73.000000  66.000000  52.000000
 ```
 
 #### Correlation
-Correlation shows how much relationship exists between two variables. Parametic machine learning methods such as logistic and linear regression can take a performance hit when variables are highly correlated. The correlation values range from `-1` to `1`, with `0` indicating no correlation at all. `-1` signifies that the variables are strongly negtively correlated while `1` shows that the variables are strongly positively correlated. From practice, it is safe to eliminate variables that have a correlation value greater than `-0.7` or `0.7`. A common correlation estimate in use is the Pearson’s Correlation Coe cient.
+Correlation shows how much relationship exists between two variables. Parametric machine learning methods such as logistic and linear regression can take a performance hit when variables are highly correlated. The correlation values range from `-1` to `1`, with `0` indicating no correlation at all. `-1` signifies that the variables are strongly negatively correlated while `1` shows that the variables are strongly positively correlated. In practice, it is safe to eliminate variables that have a correlation value greater than `-0.7` or `0.7`. A common correlation estimate in use is the Pearson’s Correlation Coefficient.
 ```python
 > my_DF.corr(method='pearson')
 'Output':
@@ -723,7 +723,7 @@ Fourth -0.317333 -0.345265  0.334169  1.000000
 ```
 
 #### Skewness
-Another important statistical metric is the skewness of the dataset. Skewness is when a bell-shaped or Normal distribution is shifted towards the right or the left. Pandas offers a convenient function called `skew()` to check the skewness of each variable. Values close to `0` are more normally distributed with less skew.
+Another important statistical metric is the skewness of the dataset. Skewness is when a bell-shaped or Normal distribution is shifted towards the right or the left. Pandas offer a convenient function called `skew()` to check the skewness of each variable. Values close to `0` are more normally distributed with less skew.
 
 ```python
 > my_DF.skew()
