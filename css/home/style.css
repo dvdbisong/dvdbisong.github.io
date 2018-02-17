@@ -158,6 +158,14 @@ li {
   margin-bottom: -5px;
   color: rgb(132,0,0);
 }
+
+.tgreen-bold {
+  font-size: 18px;
+  font-weight: 390;
+  margin-bottom: -5px;
+  color: #090;
+}
+
 .ttitle {
   font-size: 20px;
   font-weight: 400;
@@ -180,6 +188,7 @@ li {
 .thigh {
   color: #070;
 }
+
 .quote {
   color: #777;
   text-align: center;

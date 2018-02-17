@@ -741,3 +741,8 @@ Again, getting data into the programming environment for analysis is a fundament
 ```python
 > my_DF = pd.read_csv('link_to_file/csv_file', sep=',', header = None)
 ```
+
+To export a DataFrame back to `csv`
+```python
+> my_DF.to_csv('file_name.csv')
+```
