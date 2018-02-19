@@ -4,21 +4,21 @@ title: 'Matplotlib and Seaborn'
 permalink: gcp-ml-seminar/matplotlib/
 ---
 
-It is critical to be able to plot the observations and variables of a dataset before subjecting the dataset to some machine learning algorithm or another. Data visualization is essential to understanding your data and to glean insights into the underlying structure of the dataset. This insights helps the scientist in deciding with statistical analysis or which learning algorithm is more appropriate for the given dataset. Also, the scientist can get ideas on appropriate transformations to apply on the dataset.
+It is critical to be able to plot the observations and variables of a dataset before subjecting the dataset to some machine learning algorithm or another. Data visualization is essential to understand your data and to glean insights into the underlying structure of the dataset. This insights helps the scientist in deciding with statistical analysis or which learning algorithm is more appropriate for the given dataset. Also, the scientist can get ideas on suitable transformations to apply to the dataset.
 
-In general, visualization in data science can conveniently be split into **univariate** and **multivariate** data visualizations. Univariate data visualization involves plotting a single variable to understand more about its distribution and structure while multivariate plotsz show the exposes the relationship and structure between two or more variables.
+In general, visualization in data science can conveniently be split into **univariate** and **multivariate** data visualizations. Univariate data visualization involves plotting a single variable to understand more about its distribution and structure while multivariate plots expose the relationship and structure between two or more variables.
 
 ### Matplotlib vs. Seaborn
-Matplotlib is a graphics package for data visualization in Python. Matplotlib has arisen as a key component in the Python Data Science Stack and is well integrated with NumPy and Pandas. The `pyplot` module mirrors closely the MATLAB commands for plotting. Hence, MATLAB users can easily transit to plotting with Python.
+Matplotlib is a graphics package for data visualization in Python. Matplotlib has arisen as a key component in the Python Data Science Stack and is well integrated with NumPy and Pandas. The `pyplot` module mirrors the MATLAB plotting commands closely. Hence, MATLAB users can easily transit to plotting with Python.
 
-Seaborn on the other hand extends the Matplotlib library for creating beautiful graphics with Python using a simpler set of methpds. Seaborn is more integrated for working with Pandas DataFrames. We will go through creating simple essential plots with Matplotlib and Seaborn. 
+Seaborn, on the other hand, extends the Matplotlib library for creating beautiful graphics with Python using a more straightforward set of methods. Seaborn is more integrated for working with Pandas DataFrames. We will go through creating simple essential plots with Matplotlib and Seaborn. 
 
 ### Pandas plotting methods
-Pandas also has a powerful set of plotting functions which we will also use for visualizing our dataset. The reader will observe how we can easily convert datasets from NumPy to Pandas and vice-versa to take advantage of one functionality or the other. The plotting functionality of Pandas is found in the `plotting` module.
+Pandas also has a robust set of plotting functions which we will also use for visualizing our dataset. The reader will observe how we can easily convert datasets from NumPy to Pandas and vice-versa to take advantage of one functionality or the other. The plotting features of Pandas are found in the `plotting` module.
 
 <span style="color:green; font-weight:bold">There are many options and properties for working with `matplotlib`, `seaborn` and `pandas.plotting` functions for data visualization, but as is the theme of this material, the goal is to keep it simple, and give the reader just enough to be dangerous. Deep competency comes with experience and continuous usage. These cannot really be taught.</span>
 
-To begin we will load Matplotlib by importing the `pyplot` module from the `matplotlib` package and the `seaborn` package.
+To begin, we will load Matplotlib by importing the `pyplot` module from the `matplotlib` package and the `seaborn` package.
 ```python
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -31,7 +31,7 @@ import numpy as np
 ```
 
 ### Univariate plots
-Some common and essential univariate plots are line plots, bar plots, histograms and density plots, and the box and whister plot to mention just a few.
+Some common and essential univariate plots are line plots, bar plots, histograms and density plots, and the box and whisker plot to mention just a few.
 
 #### Line plot
 Let's plot a sine graph of 100 points from the negative to positive `exponential` range. The `plot` method allows us to plot lines or markers to the figure.
@@ -125,8 +125,8 @@ plt.show()
     <img src="/assets/seminar_IEEE/scatterplot_seaborn.png">
 </div>
 
-#### Pairwise scatter plots
-Pair-wise scatter plots is a good tool to visualize the relationships between more than two variables in the same plot. However, with higher dimension datasets the plot may become too clogged up, so use with care. Let's see an example of this with Matplotlib and Seaborn.
+#### Pairwise scatter plot
+Pair-wise scatter plot is an effective window for visualizing the relationships among multiple variables within the same plot. However, with higher dimension datasets the plot may become clogged up, so use with care. Let's see an example of this with Matplotlib and Seaborn.
 
 Here, we will use the method `scatter_matrix`, one of plotting functions in Pandas to graph a pair-wise scatterplot matrix.
 
@@ -166,4 +166,49 @@ sns.heatmap(pd.DataFrame(data).corr(), vmin=-1, vmax=1)
 <div class="fig">
     <img src="/assets/seminar_IEEE/cov_scatter_matplotlib.png">
     <img src="/assets/seminar_IEEE/cov_scatter_seaborn.png">
+</div>
+
+### Images
+Matplotlib is also used to visualize images. This processed is utilized when visualizing a dataset of image pixels. You will observe that image data is stored in the computer as an array of pixel intensity values ranging from `0` to `255` across 3 bands for colored images.
+```python
+img = plt.imread('/Users/ekababisong/Pictures/old-students-logo.jpg')
+# check image dimension
+img.shape
+'Output': (232, 240, 3)
+```
+Note that the image contains `232` rows and `240` columns of pixel values across `3` channels (i.e., red, green and blue).
+
+Let's print the first row of the columns in the first channel of our image data. Remeber that each pixel is an intensity value from `0` to `255`. Values closer to `0` are black while those closer to `255` are white.
+```python
+img[0,:,0]
+'Output': 
+array([255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
+       255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
+       255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
+       255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
+       255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 246,
+       246, 246, 248, 248, 250, 252, 253, 253, 253, 255, 255, 255, 255,
+       255, 255, 253, 253, 253, 253, 252, 254, 255, 255, 254, 255, 255,
+       255, 255, 254, 255, 255, 243, 246, 248, 252, 253, 252, 250, 248,
+       251, 252, 251, 251, 249, 248, 249, 249, 255, 255, 254, 249, 247,
+       244, 245, 245, 254, 255, 253, 250, 247, 244, 242, 241, 242, 242,
+       242, 243, 243, 244, 244, 244, 252, 251, 250, 248, 247, 245, 245,
+       244, 250, 253, 255, 255, 254, 253, 254, 255, 254, 252, 250, 247,
+       244, 241, 239, 236, 255, 255, 255, 255, 255, 255, 255, 255, 255,
+       255, 255, 254, 253, 251, 251, 250, 255, 255, 255, 255, 255, 255,
+       255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
+       255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
+       255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
+       255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,
+       255, 255, 255, 255, 255, 255], dtype=uint8)
+```
+
+Now let's plot the image
+```python
+# plot image
+plt.imshow(img)
+plt.show()
+```
+<div class="fig">
+    <img src="/assets/seminar_IEEE/howad_old_boys.png">
 </div>
