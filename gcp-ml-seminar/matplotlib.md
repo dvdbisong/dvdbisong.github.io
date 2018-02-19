@@ -167,5 +167,3 @@ sns.heatmap(pd.DataFrame(data).corr(), vmin=-1, vmax=1)
     <img src="/assets/seminar_IEEE/cov_scatter_matplotlib.png">
     <img src="/assets/seminar_IEEE/cov_scatter_seaborn.png">
 </div>
-
-### Plot customizations
