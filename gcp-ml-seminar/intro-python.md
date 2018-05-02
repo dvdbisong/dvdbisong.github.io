@@ -74,7 +74,7 @@ TypeError: 'tuple' object does not support item assignment
 'Output': [4, 8, 16, 32, 256]
 ```
 
-**Dictionaries** contain a mapping from keys to values. A key/value pair is an item in a dictionary. The items in a dictionary are indexed by their keys. The keys in a dictionary can be any *hashable* datatype (hashing transforms a string of characters into a key to speed up search). Values can be of any datatype. In other languages, a dictionary is analogous to a hash table or a map. Dictionaries are surrounded by a pair of braces `{...}`. A dictionary is nor ordered.
+**Dictionaries** contain a mapping from keys to values. A key/value pair is an item in a dictionary. The items in a dictionary are indexed by their keys. The keys in a dictionary can be any *hashable* datatype (hashing transforms a string of characters into a key to speed up search). Values can be of any datatype. In other languages, a dictionary is analogous to a hash table or a map. Dictionaries are surrounded by a pair of braces `{...}`. A dictionary is not ordered.
 
 ```python
 > my_dict = {'name':'Rijami', 'age':42, 'height':72}
@@ -108,7 +108,7 @@ As earlier mentioned, because list items are mutable, they can be changed, delet
 'Output': 64
 > sum(my_list)      # get the sum of elements in the list
 'Output': 124
-> my_list.index(16) # index(k) - return the index of the first occurence of item k in the list
+> my_list.index(16) # index(k) - return the index of the first occurrence of item k in the list
 'Output': 2
 ```
 

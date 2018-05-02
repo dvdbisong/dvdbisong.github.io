@@ -148,19 +148,19 @@ sns.pairplot(pd.DataFrame(data))
     <img src="/assets/seminar_IEEE/pairwise_scatter_seaborne.png">
 </div>
 
-#### Covariance matrix plots
+#### Correlation matrix plots
 Again, correlation shows how much relationship exists between two variables. By plotting the correlation matrix, we get a visual representation of which variables in the dataset are highly correlated. Remember that parametric machine learning methods such as logistic and linear regression can take a performance hit when variables are highly correlated. Also, in practice, the correlation values that are greater than `-0.7` or `0.7` are for the most part highly correlated.
 
 ```python
 # create the dataset
 data = np.random.random([1000,6])
-# plot covariance matrix using the Matplotlib matshow function
+# plot correlation matrix using the Matplotlib matshow function
 fig = plt.figure()
 ax = fig.add_subplot(111)
 my_plot = ax.matshow(pd.DataFrame(data).corr(), vmin=-1, vmax=1)
 fig.colorbar(my_plot)
 
-# plot covariance matrix with Seaborne heatmap function
+# plot correlation matrix with Seaborne heatmap function
 sns.heatmap(pd.DataFrame(data).corr(), vmin=-1, vmax=1)
 ```
 <div class="fig">
