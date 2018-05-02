@@ -92,7 +92,7 @@ Let's explore a bit with NumPy datatypes:
 ```
 
 ### Indexing + Fancy Indexing (1-D)
-We can index a sigle element of a NumPy 1-D array similar to how we index a Python list.
+We can index a single element of a NumPy 1-D array similar to how we index a Python list.
 ```python
 # create a random numpy 1-D array
 > my_array = np.random.rand(10)
@@ -459,7 +459,7 @@ A $$\;m \;\times\; m\;$$ matrix $$\;A\;$$ (also called a square matrix) has an i
 
 $$A\;A^{-1} = A^{-1}A = I$$
 
-However, not all matrices have an inverse. A matrix with an inverse is called a *nonsingular* or *invertible* matrix, while does without an inverse are known as *singular* or *degenerate*.
+However, not all matrices have an inverse. A matrix with an inverse is called a *nonsingular* or *invertible* matrix, while those without an inverse are known as *singular* or *degenerate*.
 
 **Note:** A square matrix is a matrix that has the same number of rows and columns.
 

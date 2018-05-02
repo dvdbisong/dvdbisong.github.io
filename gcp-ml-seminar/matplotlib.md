@@ -178,7 +178,7 @@ img.shape
 ```
 Note that the image contains `232` rows and `240` columns of pixel values across `3` channels (i.e., red, green and blue).
 
-Let's print the first row of the columns in the first channel of our image data. Remeber that each pixel is an intensity value from `0` to `255`. Values closer to `0` are black while those closer to `255` are white.
+Let's print the first row of the columns in the first channel of our image data. Remember that each pixel is an intensity value from `0` to `255`. Values closer to `0` are black while those closer to `255` are white.
 ```python
 img[0,:,0]
 'Output': 
