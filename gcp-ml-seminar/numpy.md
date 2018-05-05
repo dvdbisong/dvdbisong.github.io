@@ -336,7 +336,7 @@ array([[38, 32, 22],
        [33, 47, 24]])
 ```
 
-We can use the following routines for matrix multiplication, `np.matmul(a,b)` or `a @ b` is using Python 3.6. Using `a @ b` is preferred. Remember that when multiplying matrices, the inner matrix dimensions must agree. For example, if $$A$$ is an $$m × n$$ matrix and $$B$$ is an $$n × p$$ matrix, the product of the matrices will be an $$m \;\times\; p$$ matrix with the inner dimensions of the respective matrices $$n$$ agreeing.
+We can use the following routines for matrix multiplication, `np.matmul(a,b)` or `a @ b` if using Python 3.6. Using `a @ b` is preferred. Remember that when multiplying matrices, the inner matrix dimensions must agree. For example, if $$A$$ is an $$m × n$$ matrix and $$B$$ is an $$n × p$$ matrix, the product of the matrices will be an $$m \;\times\; p$$ matrix with the inner dimensions of the respective matrices $$n$$ agreeing.
 
 <div class="fig figcenter fighighlight">
     <img src="/assets/seminar_IEEE/matrix_mul.png">
