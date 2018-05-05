@@ -1,6 +1,6 @@
 ---
 layout: page-seminar
-title: 'Sickit-learn/ SciPy'
-permalink: gcp-ml-seminar/sickit-learn/
+title: 'Scikit-learn'
+permalink: gcp-ml-seminar/scikit-learn/
 ---
 
