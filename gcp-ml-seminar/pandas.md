@@ -4,12 +4,41 @@ title: 'Pandas'
 permalink: gcp-ml-seminar/pandas/
 ---
 
+Table of contents:
+
+- [Pandas Datastructures](#data_struct)
+  - [Series](#series)
+  - [DataFrames](#dataframes)
+- [Data Indexing (Selection/ Subsets)](#data_indexing)
+  - [Selecting a column from a DataFrame](#select_column)
+  - [Selecting a row from a DataFrame](#select_row)
+  - [Slice cells by row and column from a DataFrame](#slice)
+- [DataFrame Manipulation](#dataframe_manipulation)
+  - [Removing a Row/ Column](#removing_row)
+  - [Adding a Row/ Column](#adding_row)
+  - [Data Alignment](#data_alignment)
+  - [Combining Datasets](#combining_datasets)
+- [Handling Missing Data](#missing_data)
+  - [Identifying missing data](#identify_missing)
+  - [Removing missing data](#remove_missing_data)
+  - [Imputing values into missing data](#imputing_values_missing_data)
+- [Data Aggregation (Grouping)](#data_aggregation)
+- [Statistical Summaries](#stat_summaries)
+  - [Correlation](#correlation)
+  - [Skewness](#skewness)
+- [Importing Data](#importing_data)
+
+
 Pandas is a specialized Python library for data analysis, especially on humongous datasets. It boasts easy to use functionality for reading and writing data, dealing with missing data, reshaping the dataset, massaging the data by slicing, indexing, inserting and deleting data variables and records. Pandas also have an important `groupBy` functionality for aggregating data for defined conditions - useful for plotting and computing data summaries for exploration.
 
 Another key strength of Pandas is in re-ordering and cleaning time series data for time-series analysis. In short, Pandas is the go-to tool for data cleaning and data exploration.
 
+<a name='data_struct'></a>
+
 ### Pandas Datastructures
 Just like NumPy, Pandas can store and manipulate a multi-dimensional array of data. To handle this, Pandas has the `Series` and `DataFrame` data structures.
+
+<a name='series'></a>
 
 #### Series
 The `Series` data structure is for storing a 1-Dimensional array (or vector) of data elements. A series data structure also provides labels to the data items in the form of an `index`. The user can specify this labels via the `index` parameter in the `Series` function, but if the `index` parameter is left unspecified, a default label of 0 to one minus the size of the data elements are assigned.
@@ -64,6 +93,8 @@ e1    2
 e1    6
 dtype: int64
 ```
+
+<a name='dataframes'></a>
 
 #### DataFrames
 A DataFrame is a Pandas data structure for storing and manipulating 2-Dimensional arrays. A 2-Dimensional array is a table-like structure that is similar to an Excel spreadsheet or a relational database table. A DataFrame is a very natural form for storing structured datasets.
@@ -171,6 +202,8 @@ dtype: object
 ```
 An `object` data type in Pandas represents `Strings`
 
+<a name='data_indexing'></a>
+
 ### Data Indexing (Selection/ Subsets)
 Similar to NumPy, Pandas objects can index or subset the dataset to retrieve a specific sub-record of the larger dataset. Note that data indexing returns a new `DataFrame` or `Series` if a 2-D or 1-D array is retrieved. They do not, however, alter the original dataset. Let's go through some examples of indexing a Pandas DataFrame.
 
@@ -189,6 +222,8 @@ First let's create a dataframe. Observe the default integer indices assigned.
 4   25           Benue
 ```
 
+<a name='select_column'></a>
+
 #### Selecting a column from a DataFrame
 Remember that the data type of a DataFrame column is a `Series` because it is a vector or 1-Dimensional array.
 ```python
@@ -204,6 +239,8 @@ Name: age, dtype: int64
 > type(my_DF['age'])
 'Output':  pandas.core.series.Series
 ```
+
+<a name='select_column'></a>
 
 #### Selecting a row from a DataFrame
 Pandas makes use of two unique wrapper attributes for indexing rows from a `DataFrame` or a cell from a `Series` data structure. These attributes are the `iloc` and `loc` - they are also known as indexers. The `iloc` attribute allows you to select or slice row(s) of a DataFrame using the intrinsic Python index format whereas the `loc` attribute uses the explicit indices assigned to the DataFrame. If no explicit index is found, `loc` returns the same value as `iloc`.
@@ -258,6 +295,8 @@ a   17     Cross River
         with these indexers [0] of <class 'int'>
 ```
 
+<a name='slice'></a>
+
 #### Slice cells by row and column from a DataFrame
 First let's create a DataFrame. Remember, we use `iloc` when no explicit index or row labels are assigned.
 ```python
@@ -289,7 +328,12 @@ First let's create a DataFrame. Remember, we use `iloc` when no explicit index o
 Name: state_of_origin, dtype: object
 ```
 
+<a name='dataframe_manipulation'></a>
+
 ### DataFrame Manipulation
+
+<a name='removing_row'></a>
+
 #### Removing a Row/ Column
 In many cases during the data cleaning process, they may be a need to drop unwanted rows or data variables (i.e., columns). We typically do this using the `drop` function. The `drop` function has a parameter `axis` whose default is `0`. If `axis` is set to 1, it drops columns in a dataset, but if left at the default, rows are dropped from the dataset. 
 
@@ -323,6 +367,8 @@ Note that when a column or row is dropped a new `DataFrame` or `Series` is retur
 3            Abia
 4           Benue
 ```
+
+<a name='adding_row'></a>
 
 #### Adding a Row/ Column
 We can add a new column to a Pandas DataFrame by using the `assign` method
@@ -394,6 +440,7 @@ Typically in practice, a fully formed dataset is converted into Pandas for clean
 ```
 We observe that adding a new row involves passing to the `append` method, a `Series` object with the `index` attribute set to the columns of the main DataFrame. Since typically, in given datasets, the index is nothing more than the assigned defaults, we set the attribute `ignore_index` to create a new set of default index values with the new row(s).
 
+<a name='data_alignment'></a>
 
 #### Data Alignment
 Pandas utilizes data alignment to align indices when performing some binary arithmetic operation on DataFrames. If two or more DataFrames in an arithmetic operation do not share a common index, a `NaN` is introduced denoting missing data. Let's see examples of this.
@@ -448,6 +495,8 @@ If we do not want a `NaN` signifying missing values to be imputed, we can use th
 3   12.0    19.0   12.0
 ```
 
+<a name='combining_datasets'></a>
+
 #### Combining Datasets
 We may need to combine two or more data sets together, Pandas provides methods for such operations. We would consider the simple case of combining data frames with shared column names using the `concat` method.
 
@@ -478,8 +527,12 @@ Out[246]:
 3    NaN     NaN    NaN      2       9      2
 ```
 
+<a name='missing_data'></a>
+
 ### Handling Missing Data
 Dealing with missing data is an integral part of the Data cleaning/ data analysis process. Moreover, some machine learning algorithms will not work in the presence of missing data. Let's see some simple Pandas methods for identifying and removing missing data, as well as imputing values into missing data.
+
+<a name='identify_missing'></a>
 
 #### Identifying missing data
 ```python
@@ -516,6 +569,9 @@ Let's see how that works
 > my_DF.isnull().values.any()
 'Output':  True
 ```
+
+<a name='remove_missing_data'></a>
+
 #### Removing missing data
 Pandas has a function `dropna()` which is used to filter or remove missing data from a DataFrame. `dropna()` returns a new DataFrame without missing data. Let's see examples of how this works
 
@@ -588,6 +644,8 @@ Drop rows based on an observation threshold. By adjusting the `thresh` attribute
 4  Jalingo  16.0   2294800.0   Taraba
 ```
 
+<a name='imputing_values_missing_data'></a>
+
 #### Imputing values into missing data
 Imputing values as substitutes for missing data is a standard practice in preparing data for Machine Learning. Pandas has a `fillna()` function for this purpose. A simple approach is to fill `NaN`s with zeros.
 ```python
@@ -612,6 +670,8 @@ Another tactic is to fill missing values with the mean of the column value.
 3  Port-Harcourt  23.0   2598363.0      NaN
 4        Jalingo  16.0   2294800.0   Taraba
 ```
+
+<a name='data_aggregation'></a>
 
 ### Data Aggregation (Grouping)
 We will touch briefly on a common practice in Data Science, and that is grouping a set of data attributes, either for retrieving some group statistics or applying a particular set of functions to the group. Grouping is commonly used for data exploration and plotting graphs to understand more about the data set. Missing data are automatically excluded in a grouping operation.
@@ -677,6 +737,8 @@ Salary
 Name: Age, dtype: int64
 ```
 
+<a name='stat_summaries'></a>
+
 ### Statistical Summaries
 Descriptive statistics is an essential component of the Data Science pipeline. By investigating the properties of the dataset, we can gain a better understanding of the data and the relationship between the variables. This information is useful in making decisions about the type of data transformations to carry out or the types of learning algorithms to spot-check. Let's see some examples of simple statistical functions in Pandas.
 
@@ -710,6 +772,8 @@ min    24.000000  16.000000  16.000000  12.000000
 max    74.000000  73.000000  66.000000  52.000000
 ```
 
+<a name='correlation'></a>
+
 #### Correlation
 Correlation shows how much relationship exists between two variables. Parametric machine learning methods such as logistic and linear regression can take a performance hit when variables are highly correlated. The correlation values range from `-1` to `1`, with `0` indicating no correlation at all. `-1` signifies that the variables are strongly negatively correlated while `1` shows that the variables are strongly positively correlated. In practice, it is safe to eliminate variables that have a correlation value greater than `-0.7` or `0.7`. A common correlation estimate in use is the Pearson’s Correlation Coefficient.
 ```python
@@ -721,6 +785,8 @@ Second  0.587645  1.000000 -0.768495 -0.345265
 Third  -0.014100 -0.768495  1.000000  0.334169
 Fourth -0.317333 -0.345265  0.334169  1.000000
 ```
+
+<a name='skewness'></a>
 
 #### Skewness
 Another important statistical metric is the skewness of the dataset. Skewness is when a bell-shaped or Normal distribution is shifted towards the right or the left. Pandas offer a convenient function called `skew()` to check the skewness of each variable. Values close to `0` are more normally distributed with less skew.
@@ -734,6 +800,8 @@ Third    -0.084490
 Fourth    0.691332
 dtype: float64
 ```
+
+<a name='importing_data'></a>
 
 ### Importing Data
 Again, getting data into the programming environment for analysis is a fundamental and first step for any data analytics or machine learning task. In practice, data usually comes in a comma separated value, `csv` format.
