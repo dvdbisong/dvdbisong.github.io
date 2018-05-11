@@ -4,14 +4,33 @@ title: 'Matplotlib and Seaborn'
 permalink: gcp-ml-seminar/matplotlib/
 ---
 
+Table of contents:
+
+- [Matplotlib vs. Seaborn](#datamatplotlib_seaborn_struct)
+- [Pandas plotting methods](#plotting_methods)
+- [Univariate plots](#univariate_plots)
+  - [Line plot](#line_plot)
+  - [Bar plot](#bar_plot)
+  - [Histogram/ Density plots](#histogram_density_plot)
+  - [Box and whisker plots](#box_whisker_plot)
+- [Multivariate plots](#multivariate_plot)
+  - [Scatter plot](#scatter_plot)
+  - [Pairwise scatter plot](#pairwise)
+  - [Correlation matrix plots](#correlation_matrix)
+- [Images](#images)
+
 It is critical to be able to plot the observations and variables of a dataset before subjecting the dataset to some machine learning algorithm or another. Data visualization is essential to understand your data and to glean insights into the underlying structure of the dataset. This insights helps the scientist in deciding with statistical analysis or which learning algorithm is more appropriate for the given dataset. Also, the scientist can get ideas on suitable transformations to apply to the dataset.
 
 In general, visualization in data science can conveniently be split into **univariate** and **multivariate** data visualizations. Univariate data visualization involves plotting a single variable to understand more about its distribution and structure while multivariate plots expose the relationship and structure between two or more variables.
+
+<a name='matplotlib_seaborn'></a>
 
 ### Matplotlib vs. Seaborn
 Matplotlib is a graphics package for data visualization in Python. Matplotlib has arisen as a key component in the Python Data Science Stack and is well integrated with NumPy and Pandas. The `pyplot` module mirrors the MATLAB plotting commands closely. Hence, MATLAB users can easily transit to plotting with Python.
 
 Seaborn, on the other hand, extends the Matplotlib library for creating beautiful graphics with Python using a more straightforward set of methods. Seaborn is more integrated for working with Pandas DataFrames. We will go through creating simple essential plots with Matplotlib and Seaborn. 
+
+<a name='plotting_methods'></a>
 
 ### Pandas plotting methods
 Pandas also has a robust set of plotting functions which we will also use for visualizing our dataset. The reader will observe how we can easily convert datasets from NumPy to Pandas and vice-versa to take advantage of one functionality or the other. The plotting features of Pandas are found in the `plotting` module.
@@ -30,8 +49,12 @@ import pandas as pd
 import numpy as np
 ```
 
+<a name='univariate_plots'></a>
+
 ### Univariate plots
 Some common and essential univariate plots are line plots, bar plots, histograms and density plots, and the box and whisker plot to mention just a few.
+
+<a name='line_plot'></a>
 
 #### Line plot
 Let's plot a sine graph of 100 points from the negative to positive `exponential` range. The `plot` method allows us to plot lines or markers to the figure.
@@ -48,6 +71,8 @@ plt.show()
     <img src="/assets/seminar_IEEE/line-sine.png">
     <img src="/assets/seminar_IEEE/cos_rdash_dot.png">
 </div>
+
+<a name='bar_plot'></a>
 
 #### Bar plot
 Let's create a simple bar plot using the `bar` method.
@@ -66,6 +91,8 @@ plt.show()
     <img src="/assets/seminar_IEEE/bar_plot_seaborn.png">
 </div>
 
+<a name='histogram_density_plot'></a>
+
 #### Histogram/ Density plots
 Histogram and Density plots are essential for examining the statistical distribution of a variable. For a simple histogram, we'll create a set of 100,000 points from the normal distribution.
 ```python
@@ -82,6 +109,7 @@ plt.show()
     <img src="/assets/seminar_IEEE/histogram_density_simple.png">
 </div>
 
+<a name='box_whisker_plot'></a>
 
 #### Box and whisker plots
 Boxplots, also popularly called Box and whiskers plot is another useful visualization technique for gaining insights into the underlying data distribution. The boxplot draws a box with the upper line representing the 75th percentile and the lower line the 25th percentile. A line is drawn at the center of the box indicating the 50th percentile or median value. The whiskers at both ends give an estimation of the spread or variance of the data values. The dots at the tail end of the whiskers represent possible outlier values.
@@ -100,8 +128,12 @@ plt.show()
     <img src="/assets/seminar_IEEE/boxplot_seaborn.png">
 </div>
 
+<a name='multivariate_plot'></a>
+
 ### Multivariate plots
 Common multivariate visualizations include the scatter plot and its extension the pairwise plot, parallel coordinates plots and the covariance matrix plot.
+
+<a name='scatter_plot'></a>
 
 #### Scatter plot
 Scatter plot exposes the relationships between two variables in a dataset.
@@ -124,6 +156,8 @@ plt.show()
     <img src="/assets/seminar_IEEE/scatterplot_matplotlib.png">
     <img src="/assets/seminar_IEEE/scatterplot_seaborn.png">
 </div>
+
+<a name='pairwise'></a>
 
 #### Pairwise scatter plot
 Pair-wise scatter plot is an effective window for visualizing the relationships among multiple variables within the same plot. However, with higher dimension datasets the plot may become clogged up, so use with care. Let's see an example of this with Matplotlib and Seaborn.
@@ -148,6 +182,8 @@ sns.pairplot(pd.DataFrame(data))
     <img src="/assets/seminar_IEEE/pairwise_scatter_seaborne.png">
 </div>
 
+<a name='correlation_matrix'></a>
+
 #### Correlation matrix plots
 Again, correlation shows how much relationship exists between two variables. By plotting the correlation matrix, we get a visual representation of which variables in the dataset are highly correlated. Remember that parametric machine learning methods such as logistic and linear regression can take a performance hit when variables are highly correlated. Also, in practice, the correlation values that are greater than `-0.7` or `0.7` are for the most part highly correlated.
 
@@ -167,6 +203,8 @@ sns.heatmap(pd.DataFrame(data).corr(), vmin=-1, vmax=1)
     <img src="/assets/seminar_IEEE/cov_scatter_matplotlib.png">
     <img src="/assets/seminar_IEEE/cov_scatter_seaborn.png">
 </div>
+
+<a name='images'></a>
 
 ### Images
 Matplotlib is also used to visualize images. This processed is utilized when visualizing a dataset of image pixels. You will observe that image data is stored in the computer as an array of pixel intensity values ranging from `0` to `255` across 3 bands for colored images.
