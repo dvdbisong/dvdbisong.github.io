@@ -4,6 +4,32 @@ title: 'NumPy'
 permalink: gcp-ml-seminar/numpy/
 ---
 
+Table of contents:
+
+- [NumPy 1-D Array](#numpy_1D)
+- [NumPy Datatypes](#datatypes)
+- [Indexing + Fancy Indexing (1-D)](#indexing)
+  - [Boolean Mask](#boolean_mask)
+  - [Integer Mask](#integer_mask)
+  - [Slicing a 1-D Array](#slicing_1D)
+- [Basic Math Operations on Arrays: Universal Functions](#math)
+- [Higher-Dimensional Arrays](#higer_arrays)
+  - [Creating 2-D arrays (Matrices)](#2D_matrices)
+  - [Creating 3-D arrays](#3D_matrices)
+  - [Indexing/ Slicing of Matrices](#mat_slicing)
+- [Matrix Operations: Linear Algebra](#mat_operations)
+  - [Matrix Multiplication (dot product)](#mat_multip)
+  - [Element-wise operations](#elem_operations)
+  - [Scalar Operation](#scal_op)
+  - [Matrix Transposition](#mat_trans)
+  - [The Inverse of a Matrix](#inverse_matrix)
+- [Reshaping](#reshaping)
+  - [Reshape vs. Resize Method](#reshape_resize)
+  - [Stacking Arrays](#stacking_arr)
+- [Broadcasting](#broadcasting)
+- [Loading Data](#loading_data)
+
+
 NumPy is a Python library optimized for numerical computing. It bears close semblance with MATLAB and is equally as powerful when used in conjunction with other packages such as SciPy for various scientific functions, Matplotlib for visualization and Pandas for data analysis. NumPy is short for numerical python.
 
 NumPy core strength lies in its ability to create and manipulate $$n$$-dimensional arrays. This is particularly critical for building Machine learning and Deep learning models. Data is often represented in a matrix-like grid of rows and columns, where each row represents an observation and each column a variable or feature. Hence, NumPy's 2-Dimensional arrays is a natural fit for storing and manipulating datasets.
@@ -14,6 +40,8 @@ To begin using NumPy, we'll start by importing the NumPy module:
 ```python
 import numpy as np
 ```
+
+<a name='numpy_1D'></a>
 
 ### NumPy 1-D Array
 Let's create a simple 1-D NumPy array:
@@ -62,6 +90,7 @@ Let's explore other useful methods often employed for creating arrays
 > np.zeros(5)
 'Output': array([ 0.,  0.,  0.,  0.,  0.])
 ```
+<a name='datatypes'></a>
 
 ### NumPy Datatypes
 NumPy boasts a broad range of numerical datatypes in comparison with vanilla Python. This extended datatype support is useful for dealing with different kinds of signed and unsigned integer and floating-point numbers and well as booleans and complex numbers for scientific computation. NumPy datatypes include the `bool_`, `int`(8,16,32,64), `uint`(8,16,32,64), `float`(16,32,64), `complex`(64,128) as well as the `int_`, `float_` and `complex_` to mention just a few.
@@ -91,6 +120,8 @@ Let's explore a bit with NumPy datatypes:
 'Output': dtype('float64')
 ```
 
+<a name='indexing'></a>
+
 ### Indexing + Fancy Indexing (1-D)
 We can index a single element of a NumPy 1-D array similar to how we index a Python list.
 ```python
@@ -108,6 +139,8 @@ We can index a single element of a NumPy 1-D array similar to how we index a Pyt
 ```
 
 Fancy Indexing in NumPy is an advanced mechanism for indexing array elements based on integers or boolean. This technique is also called <span style="color:green">*masking*</span>.
+
+<a name='boolean_mask'></a>
 
 #### Boolean Mask
 Let's index all the even integers in the array using a boolean mask.
@@ -127,6 +160,8 @@ Observe that the code `my_array % 2 == 0` output's an array of booleans
 'Output': array([ True, False, False, False,  True, False,  True, False, False, False], dtype=bool)
 ```
 
+<a name='integer_mask'></a>
+
 #### Integer Mask
 Let's select all elements with **even indices** in the array.
 ```python
@@ -144,6 +179,8 @@ Remember that array indices are indexed from `0`. So the second element, `9` is 
 'Output': array([1, 3, 5, 7, 9])
 ```
 
+<a name='slicing_1D'></a>
+
 ### Slicing a 1-D Array
 Slicing a NumPy array is also similar to slicing a Python list.
 ```python
@@ -157,6 +194,8 @@ Slicing a NumPy array is also similar to slicing a Python list.
 > my_array[-3:]
 'Output': array([ 5, 13,  3])
 ```
+
+<a name='math'></a>
 
 ### Basic Math Operations on Arrays: Universal Functions
 The core power of NumPy is in its highly optimized vectorized functions for various mathematical, arithmetic and string operations. In NumPy these functions are called universal functions. We'll explore a couple of basic arithmetic with NumPy 1-D arrays.
@@ -179,12 +218,16 @@ The core power of NumPy is in its highly optimized vectorized functions for vari
                    2.98095799e+03,   2.20264658e+04])
 ```
 
+<a name='higer_arrays'></a>
+
 ### Higher-Dimensional Arrays
 As we've seen earlier, the strength of NumPy is its ability to construct and manipulate n-dimensional arrays with highly optimized (i.e., vectorized) operations. Previously, we covered the creation of 1-D arrays (or vectors) in NumPy to get a feel of how NumPy works.
 
 This section will now consider working with 2-D and 3-D arrays. 2-D arrays are ideal for storing data for analysis. Structured data is usually represented in as a grid of rows and columns. And even when data is not necessarily represented in this format, it is often transformed into a tabular form before doing any data analytics or machine learning. Each column represents a feature or attribute and each row an observation.
 
 Also, other data forms like images are adequately represented using 3-D arrays. A colored image is composed of $$n \times n$$ pixels intensity values with a color depth of three for the red, green and blue (RGB) color profiles.
+
+<a name='2D_matrices'></a>
 
 ### Creating 2-D arrays (Matrices)
 Let us construct a simple 2-D array
@@ -239,6 +282,8 @@ array([[ 1.,  0.,  0.,  0.],
        [ 0.,  0.,  0.,  1.]])
 ```
 
+<a name='3D_matrices'></a>
+
 ### Creating 3-D arrays
 Let's construct a basic 3-D array
 ```python
@@ -289,6 +334,8 @@ array([[[ 0.,  0.,  0.],
         [ 0.,  0.,  0.]]])
 ```
 
+<a name='mat_slicing'></a>
+
 ### Indexing/ Slicing of Matrices
 Let's see some examples of indexing and slicing two dimensional arrays. The concept extend nicely from doing the same with 1-D arrays.
 ```python
@@ -314,8 +361,12 @@ array([[ 0.99709882, -0.41960273],
        [-0.21474247,  0.99555079]])
 ```
 
+<a name='mat_operations'></a>
+
 ### Matrix Operations: Linear Algebra
 Linear Algebra is a convenient and powerful system for manipulating a set of data features and is one of the strong points of NumPy. Linear algebra is a crucial component of machine learning, and deep learning research and implementation of learning algorithms. NumPy has vectorized routines for various matrix operations. Let's go through a few of them.
+
+<a name='mat_multip'></a>
 
 #### Matrix Multiplication (dot product)
 First let's create random integers using the method `np.random.randint(low, high=None, size=None,)` which returns random integers from low (inclusive) to high (exclusive).
@@ -355,6 +406,8 @@ array([[2290, 2478, 2240],
        [3040, 3448, 2360]])
 ```
 
+<a name='elem_operations'></a>
+
 #### Element-wise operations
 Element-wise matrix operations involve matrices operating on themselves in an element-wise fashion. The action can be an addition, subtraction, division or multiplication (which is commonly called the Hadamard product). The matrices must be of the same shape. **Please note** that while a matrix is of shape $$n\; \times\; n\;$$, a vector is of shape $$n\; \times\; 1$$. These concepts easily apply to vectors as well.
 
@@ -392,6 +445,8 @@ array([[ 0.39473684,  0.90625   ,  1.09090909],
        [ 0.15625   ,  0.76666667,  0.56521739],
        [ 0.90909091,  0.29787234,  1.83333333]])
 ```
+
+<a name='scal_op'></a>
 
 #### Scalar Operation
 A matrix can be acted upon by a scalar (i.e., a single numeric entity) in the same way element-wise fashion. This time the scalar operates upon each element of the matrix or vector.
@@ -431,6 +486,8 @@ array([[ 30.,  58.,  48.],
        [ 60.,  28.,  88.]])
 ```
 
+<a name='mat_trans'></a>
+
 #### Matrix Transposition
 Transposition is a vital matrix operation that reverses the rows and columns of a matrix by flipping the row and column indices. The transpose of a matrix is denoted as $$A^T$$. Observe that the diagonal elements remain unchanged.
 
@@ -453,6 +510,8 @@ array([[15,  5, 30],
        [29, 23, 14],
        [24, 26, 44]]) 
 ```
+
+<a name='inverse_matrix'></a>
 
 #### The Inverse of a Matrix
 A $$\;m \;\times\; m\;$$ matrix $$\;A\;$$ (also called a square matrix) has an inverse if $$A$$ times another matrix $$B$$ results in the identity matrix $$\;I\;$$ also of shape $$\;m \;\times\; m\;$$. This matrix $$B$$ is called the inverse of $$A$$ and is denoted as $$A^{-1}$$. This relationship is formally written as:
@@ -487,6 +546,8 @@ array([[ 0.05848375, -0.08483755,  0.01823105],
 
 ```
 
+<a name='reshaping'></a>
+
 ### Reshaping
 A NumPy array can be restructured to take-on a different shape. Let's convert a 1-D array to a $$\;m \times n\;$$ matrix
 ```python
@@ -515,6 +576,8 @@ array([[ 0.        ,  0.26315789,  0.52631579,  0.78947368],
 'Output': (5, 4)
 ```
 
+<a name='reshape_resize'></a>
+
 #### Reshape vs. Resize Method
 NumPy has the `np.reshape` and `np.resize` methods. The reshape method returns an ndarray with a modified shape without changing the original array, whereas the resize method changes the original array. Let's see an example
 ```python
@@ -540,6 +603,8 @@ array([[ 0.   ,  0.625,  1.25 ],
 > a.shape
 'Output':  (3, 3)
 ```
+
+<a name='stacking_arr'></a>
 
 #### Stacking Arrays
 NumPy has methods for concatenating arrays - also called stacking. The methods `hstack` and `vstack` are used to stack several arrays along the horizontal and vertical axis respectively.
@@ -584,6 +649,8 @@ array([[19, 40, 31],
        [49, 26,  9],
        [42, 13, 39]])
 ```
+
+<a name='broadcasting'></a>
 
 ### Broadcasting
 NumPy has an elegant mechanism for arithmetic operation on arrays with different dimensions or shapes. This is simply seen when a scalar is added to a vector (or 1-D array). The scalar value is conceptually broadcasted or stretched across the rows of the array and added element-wise.
@@ -659,6 +726,8 @@ Traceback (most recent call last):
 
 ValueError: operands could not be broadcast together with shapes (4,3) (4,2) 
 ```
+
+<a name='loading_data'></a>
 
 ### Loading Data
 Loading data is an important process in the data analysis/ machine learning pipeline. Data usually comes in `.csv` format. `csv` files can be loaded into Python by using the `loadtxt` method. The parameter `skiprows` skips the first row of the dataset - it is usually the header row of the data.
