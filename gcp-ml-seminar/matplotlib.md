@@ -6,7 +6,7 @@ permalink: gcp-ml-seminar/matplotlib/
 
 Table of contents:
 
-- [Matplotlib vs. Seaborn](#datamatplotlib_seaborn_struct)
+- [Matplotlib vs. Seaborn](#matplotlib_seaborn)
 - [Pandas plotting methods](#plotting_methods)
 - [Univariate plots](#univariate_plots)
   - [Line plot](#line_plot)

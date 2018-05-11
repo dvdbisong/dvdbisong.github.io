@@ -4,10 +4,35 @@ title: 'Introduction to Python Programming'
 permalink: gcp-ml-seminar/intro-python/
 ---
 
+Table of contents:
+
+- [Data and Operations](#data_op)
+- [Data Types](#data_types)
+  - [More on Lists](#more_on_lists)
+  - [Strings](#strings)
+- [Arithmetic and Boolean Operations](#arithmetic_ops)
+  - [Arithmetic Operations](#arithmetic_ops)
+  - [Boolean Operations](#boolean_ops)
+- [The print() statement](#print_statement)
+  - [Using the Formatter](#formatter)
+- [Control Structures](#control_structures)
+  - [The if / elif (else-if) statements](#if_else_statement)
+  - [The while loop](#while_loop)
+  - [The for loop](#for_loop)
+  - [List Comprehensions](#list_compreh)
+  - [The break and continue statements](#break_continue)
+- [Functions](#functions)
+  - [User-defined functions](#user_defined_fn)
+  - [Lambda expressions](#lambda)
+- [Packages and Modules](#packages_modules)
+  - [import statement](#import)
+  - [from statement](#from)
+
 This tutorial gives a quick overview of Python programming for Data Science. Python is one of the preferred languages for Data Science in the industry. A good programming language is one in which a good number of reusable machine learning/deep learning functions exists. These methods have been written, debugged and tested by the best experts in the field, as well as a large supporting community of developers that contribute their time and expertise to maintain and improve the code. Having this functions relieves the practitioner from the internals of a particular algorithm to instead think and work at a higher level.
 
 We will go through the foundations of programming with python in this tutorial. This tutorial forms a framework for working with higher-level packages such as Numpy, Pandas, Matplotlib, TensorFlow and Keras. The programming paradigm we will cover in this tutorial will also equip a complete beginner to quickly appreciate and work with other similar languages such as R, which is also very important in the Data Science community.
 
+<a name='data_op'></a>
 
 ### Data and Operations
 All of programming, and indeed all of Computer Science revolves around storing data and operating on that data to generate information. Data is stored in a memory block on the computer. Think of a memory block as a container that holds or stores the data that is put into it. When data is operated upon, the newly processed data is also stored in memory. Data is operated by using arithmetic and boolean expressions and functions.
@@ -28,6 +53,8 @@ The act of place data to a variable is called **assignment**.
 > x = 1
 > user_name = 'Emmanuel Okoi'
 ```
+
+<a name='data_types'></a>
 
 ### Data Types
 Python has the `number` and `string` data types in addition to other supported specialized datatypes. The `number` datatype, for instance, can be an `int` or a `float`. Strings are surrounded by quotes in Python.
@@ -86,6 +113,8 @@ TypeError: 'tuple' object does not support item assignment
 > my_dict['age']
 'Output': 35
 ```
+
+<a name='more_on_lists'></a>
 
 #### More on Lists
 As earlier mentioned, because list items are mutable, they can be changed, deleted and sliced to produce a new list.
@@ -190,6 +219,8 @@ We can combine a list **with another list** by overloading the operator `+`
 'Output': [4, 8, 16, 32, 64, 256, 512]
 ```
 
+<a name='strings'></a>
+
 #### Strings
 Strings in Python are enclosed by a pair of parenthesis `''`. Strings are immutable. This means they cannot be altered when assigned or when a string variable is created. Strings can be indexed like a list as well as sliced to create new lists.
 
@@ -233,7 +264,12 @@ We can concatenate two strings to create a new string using the overloaded opera
 > a + ' ' + b +  ' ' + c
 ```
 
+<a name='arithmetic_boolean_ops'></a>
+
 ### Arithmetic and Boolean Operations
+
+<a name='arithmetic_ops'></a>
+
 #### Arithmetic Operations
 In Python, we can operate on data using familiar algebra operations such as addition `+`, subtraction `-`, multiplication `*`, division `/`, and exponentiation `**`.
 
@@ -249,6 +285,8 @@ In Python, we can operate on data using familiar algebra operations such as addi
 > 2**4 / (5 + 3)    # use brackets to enforce precedence
 'Output': 2.0
 ```
+
+<a name='boolean_ops'></a>
 
 #### Boolean Operations
 Boolean operations evaluate to `True` or `False`. Boolean operators include the comparison and logical operators. The Comparison operator includes: less than or equal to `<=`, less than `<`, greater than or equal to `>=`, greater than `>`, not equal to `!=`, equal to `==`.
@@ -284,6 +322,8 @@ While the logical operators include: Boolean NOT `not`, Boolean AND `and`, Boole
 'Output': True
 ```
 
+<a name='print_statement'></a>
+
 ### The print() statement
 The `print()` statement is a simple way to show the output of data values to the console. Variables can be concatenated using the `,`. Space is implicitly added after the comma.
 ```python
@@ -293,6 +333,8 @@ The `print()` statement is a simple way to show the output of data values to the
 > print(a, b, c)
 'Output': I Love You
 ```
+
+<a name='formatter'></a>
 
 #### Using the Formatter
 Formatters add a placeholder for inputting a data value into a string output using the curly brace `{}`. The format method from the `str` class is invoked to receive the value as a parameter. The number of parameters in the format method should match the number of placeholders in the string representation.
@@ -305,8 +347,12 @@ Other format specifiers can be added with the place-holder curly brackets.
 'Output': You Love I
 ```
 
+<a name='control_structures'></a>
+
 ### Control Structures
 Programs need to make decisions which results in executing a particular set of instructions or a specific block of code repeatedly. With control structures, we would have the ability to write programs that can make logical decisions and execute an instruction set until a terminating condition occurs.
+
+<a name='if_else_statement'></a>
 
 #### The if / elif (else-if) statements
 The `if / elif` (else-if) statement executes a set of instructions if the tested condition evaluates to `true`. The `else` statement specifies the code that should execute if none of the previous conditions evaluate to `true`. It can be visualized by the flow-chart below:
@@ -343,6 +389,8 @@ else:
 'Output': Number is an integer
 ```
 
+<a name='while_loop'></a>
+
 #### The while loop
 The `while` loop evaluates a condition, which if `true`, repeatedly executes the set of instructions within the while block. It does so until the condition evaluates to `false`. The `while` statement is visualized by the flow-chart below:
 
@@ -371,6 +419,8 @@ while a > 0:
      Number is 2
      Number is 1
 ```
+
+<a name='for_loop'></a>
 
 #### The for loop
 The `for` loop repeats the statements within its code block until a terminating condition is reached. It is different from the while loop in that it knows exactly how many times the iteration should occur. The `for` loop is controlled by an iterable expression (i.e., expressions in which elements can be accessed sequentially) . The `for` statement is visualized by the flow-chart below:
@@ -413,6 +463,8 @@ for idx in range(5):
      The index is 3
      The index is 4
 ```
+
+<a name='list_compreh'></a>
 
 #### List Comprehensions
 Using list comprehension, we can succinctly re-write a for-loop that iteratively builds a new list using an elegant syntax. Assuming we want to build a new list using a `for-loop`, we will write it as:
@@ -459,6 +511,8 @@ With list comprehension, we can code this as:
 'Output': [2, 4, 6, 8, 10, 12, 14, 16, 18]
 ```
 
+<a name='break_continue'></a>
+
 #### The break and continue statements
 The `break` statement terminates the execution of the nearest enclosing loop (for, while loops) in which it appears.
 ```python
@@ -498,6 +552,8 @@ while a > 0:
      The variable a is: 1
 ```
 
+<a name='functions'></a>
+
 ### Functions
 A function is a code block that carries out a particular action. Functions are called by the programmer when needed by making a **function call**. Python comes pre-packaged with lots of useful functions to simplify programming. The programmer can also write custom functions.
 
@@ -513,6 +569,8 @@ Functions are visualized as a black-box that receives a set of objects as input,
         Figure 5: Functions
     </div>
 </div>
+
+<a name='user_defined_fn'></a>
 
 #### User-defined functions
 A function is defined using the `def` keyword. The syntax for creating a function is as follows:
@@ -541,6 +599,8 @@ def _mean_(*number):
 ```
 The `*` before the parameter `number` indicates that the variable can receive any number of values - which is implicitly bound to a tuple.
 
+<a name='lambda'></a>
+
 #### Lambda expressions
 Lambda expressions provide a concise and succinct way to write simple functions that contain just a single-line. Lambas now and again can be very useful but in general, working with `def` may be more readable. The syntax for lambdas are as follows:
 
@@ -555,8 +615,12 @@ Let's see an example:
 'Output': 4
 ```
 
+<a name='packages_modules'></a>
+
 ### Packages and Modules
 A module is simply a Python source-file, and packages are a collection of modules. Modules written by other programmers can be incorporated into your source-code by using `import` and `from` statements.
+
+<a name='import'></a>
 
 #### import statement
 The `import` statement allows you to load any Python module into your source file. It has the following syntax:
@@ -574,6 +638,8 @@ import numpy as np
 > np.abs(-10)   # the absolute value of -10
 'Output': 10
 ```
+
+<a name='from'></a>
 
 ### from statement
 The `from` statement allows you to import a specific feature from a module into your source file. The syntax is as follows:
