@@ -12,6 +12,7 @@ Table of contents:
 - [Data Indexing (Selection/ Subsets)](#data_indexing)
   - [Selecting a column from a DataFrame](#select_column)
   - [Selecting a row from a DataFrame](#select_row)
+  - [Selecting multiple rows and columns from a DataFrame](#select_multi_row_col)
   - [Slice cells by row and column from a DataFrame](#slice)
 - [DataFrame Manipulation](#dataframe_manipulation)
   - [Removing a Row/ Column](#removing_row)
@@ -227,7 +228,7 @@ First let's create a dataframe. Observe the default integer indices assigned.
 #### Selecting a column from a DataFrame
 Remember that the data type of a DataFrame column is a `Series` because it is a vector or 1-Dimensional array.
 ```python
-> my_DF['age']
+> my_DF[['age']]
 'Output':  
 0    15
 1    17
@@ -240,7 +241,20 @@ Name: age, dtype: int64
 'Output':  pandas.core.series.Series
 ```
 
-<a name='select_column'></a>
+To select multiple columns, enclose the column names as `strings` with the double quare-brackets ``[[ ]]``. As an example:
+
+```python
+> my_DF[['age','state_of_origin']]
+'Output':  
+   age state_of_origin
+0   15           Lagos
+1   17     Cross River
+2   21            Kano
+3   29            Abia
+4   25           Benue
+```
+
+<a name='select_row'></a>
 
 #### Selecting a row from a DataFrame
 Pandas makes use of two unique wrapper attributes for indexing rows from a `DataFrame` or a cell from a `Series` data structure. These attributes are the `iloc` and `loc` - they are also known as indexers. The `iloc` attribute allows you to select or slice row(s) of a DataFrame using the intrinsic Python index format whereas the `loc` attribute uses the explicit indices assigned to the DataFrame. If no explicit index is found, `loc` returns the same value as `iloc`.
@@ -293,6 +307,30 @@ a   17     Cross River
     Traceback (most recent call last):
     TypeError: cannot do label indexing on <class 'pandas.core.indexes.base.Index'> 
         with these indexers [0] of <class 'int'>
+```
+
+<a name='select_multi_row_col'></a>
+
+#### Selecting multiple rows and columns from a DataFrame
+Let's use the `loc` method to select multiple rows and columns from a Pandas DataFrame
+
+```python
+# select rows with age greater than 20
+> my_DF.loc[my_DF.age > 20]
+'Output':  
+   age state_of_origin
+2   21            Kano
+3   29            Abia
+4   25           Benue
+```
+
+```python
+# find states of origin with age greater than or equal to 25
+> my_DF.loc[my_DF.age >= 25, 'state_of_origin']
+'Output':  
+Out[29]: 
+3     Abia
+4    Benue
 ```
 
 <a name='slice'></a>
@@ -814,3 +852,334 @@ To export a DataFrame back to `csv`
 ```python
 > my_DF.to_csv('file_name.csv')
 ```
+
+<a name='timeseries'></a>
+
+## Timeseries with Pandas
+One of the core strength of Pandas is its powerful set of functions for manipulating Timeseries datasets. A couple of these functions are covered in this material.
+
+<a name='import_ts'></a>
+
+#### Importing a Dataset with a DateTime column
+When importing a dataset that has a column containing datetime entries. Pandas has an attribite in the `read_csv` method called `parse_dates` that converts the datetime column from strings into Pandas `date` datatype. The attribute `index_col` uses the the column of datetimes as an index to the DataFrame.
+
+The method `head()` prints out the first 5 rows of the DataFrame, while the method `tail()` prints out the last 5 rows of the DataFrame. This function is very useful for taking a peek at a large DataFrame without having to bear the computational cost of printing it out entirely.
+
+```python
+# load the data
+> data = pd.read_csv('crypto-markets.csv', parse_dates=['date'], index_col='date')
+> data.head()
+'Output':
+	slug	symbol	name	ranknow	open	high	low	close	volume	market	close_ratio	spread
+date												
+2013-04-28	bitcoin	BTC	Bitcoin	1	135.30	135.98	132.10	134.21	0	1500520000	0.5438	3.88
+2013-04-29	bitcoin	BTC	Bitcoin	1	134.44	147.49	134.00	144.54	0	1491160000	0.7813	13.49
+2013-04-30	bitcoin	BTC	Bitcoin	1	144.00	146.93	134.05	139.00	0	1597780000	0.3843	12.88
+2013-05-01	bitcoin	BTC	Bitcoin	1	139.00	139.89	107.72	116.99	0	1542820000	0.2882	32.17
+2013-05-02	bitcoin	BTC	Bitcoin	1	116.38	125.60	92.28	105.21	0	1292190000	0.3881	33.32
+```
+
+Let's examine the index of the imported data, notice that they are the datetime entries.
+```python
+# get the row indices
+> data.index
+'Output':
+DatetimeIndex(['2013-04-28', '2013-04-29', '2013-04-30', '2013-05-01',
+               '2013-05-02', '2013-05-03', '2013-05-04', '2013-05-05',
+               '2013-05-06', '2013-05-07',
+               ...
+               '2018-01-01', '2018-01-02', '2018-01-03', '2018-01-04',
+               '2018-01-05', '2018-01-06', '2018-01-07', '2018-01-08',
+               '2018-01-09', '2018-01-10'],
+              dtype='datetime64[ns]', name='date', length=659373, freq=None)
+```
+
+<a name='ts_selection'></a>
+
+### Selection Using DatetimeIndex
+The `DatetimeIndex` can be used to select the observations of the dataset in various interesting ways. For example, we can select the observation of an exact day, or the observations belonging to a particular month or year. More the selected observation can be subsetted by columns and grouped to give more insight in understanding the dataset.
+
+Let's see some examples
+
+<a name='ts_select_date'></a>
+
+#### Select a particular date
+
+```python
+# select a particular date
+> data['2018-01-05'].head()
+'Output':
+                    slug symbol          name  ranknow      open      high  \
+date                                                                         
+2018-01-05       bitcoin    BTC       Bitcoin        1  15477.20  17705.20   
+2018-01-05      ethereum    ETH      Ethereum        2    975.75   1075.39   
+2018-01-05        ripple    XRP        Ripple        3      3.30      3.56   
+2018-01-05  bitcoin-cash    BCH  Bitcoin Cash        4   2400.74   2648.32   
+2018-01-05       cardano    ADA       Cardano        5      1.17      1.25   
+
+                     low         close       volume        market  \
+date                                                                
+2018-01-05  15202.800000  17429.500000  23840900000  259748000000   
+2018-01-05    956.330000    997.720000   6683150000   94423900000   
+2018-01-05      2.830000      3.050000   6288500000  127870000000   
+2018-01-05   2370.590000   2584.480000   2115710000   40557600000   
+2018-01-05      0.903503      0.999559    508100000   30364400000   
+
+            close_ratio   spread  
+date                              
+2018-01-05       0.8898  2502.40  
+2018-01-05       0.3476   119.06  
+2018-01-05       0.3014     0.73  
+2018-01-05       0.7701   277.73  
+2018-01-05       0.2772     0.35
+```
+
+```python
+# select a range of dates
+> data['2018-01-05':'2018-01-06'].head()
+'Output':
+                slug symbol      name  ranknow      open      high       low  \
+date                                                                           
+2018-01-05   bitcoin    BTC   Bitcoin        1  15477.20  17705.20  15202.80   
+2018-01-06   bitcoin    BTC   Bitcoin        1  17462.10  17712.40  16764.60   
+2018-01-05  ethereum    ETH  Ethereum        2    975.75   1075.39    956.33   
+2018-01-06  ethereum    ETH  Ethereum        2    995.15   1060.71    994.62   
+2018-01-05    ripple    XRP    Ripple        3      3.30      3.56      2.83   
+
+               close       volume        market  close_ratio   spread  
+date                                                                   
+2018-01-05  17429.50  23840900000  259748000000       0.8898  2502.40  
+2018-01-06  17527.00  18314600000  293091000000       0.8044   947.80  
+2018-01-05    997.72   6683150000   94423900000       0.3476   119.06  
+2018-01-06   1041.68   4662220000   96326500000       0.7121    66.09  
+2018-01-05      3.05   6288500000  127870000000       0.3014     0.73 
+```
+
+<a name='ts_select_month'></a>
+
+#### Select a month
+
+```python
+# select a particular month
+> data['2018-01'].head()
+'Output':
+               slug symbol     name  ranknow     open     high      low  \
+date                                                                      
+2018-01-01  bitcoin    BTC  Bitcoin        1  14112.2  14112.2  13154.7   
+2018-01-02  bitcoin    BTC  Bitcoin        1  13625.0  15444.6  13163.6   
+2018-01-03  bitcoin    BTC  Bitcoin        1  14978.2  15572.8  14844.5   
+2018-01-04  bitcoin    BTC  Bitcoin        1  15270.7  15739.7  14522.2   
+2018-01-05  bitcoin    BTC  Bitcoin        1  15477.2  17705.2  15202.8   
+
+              close       volume        market  close_ratio  spread  
+date                                                                 
+2018-01-01  13657.2  10291200000  236725000000       0.5248   957.5  
+2018-01-02  14982.1  16846600000  228579000000       0.7972  2281.0  
+2018-01-03  15201.0  16871900000  251312000000       0.4895   728.3  
+2018-01-04  15599.2  21783200000  256250000000       0.8846  1217.5  
+2018-01-05  17429.5  23840900000  259748000000       0.8898  2502.4
+```
+
+<a name='ts_select_year'></a>
+
+#### Select a year
+
+```python
+# select a particular year
+> data['2018'].head()
+'Output':
+               slug symbol     name  ranknow     open     high      low  \
+date                                                                      
+2018-01-01  bitcoin    BTC  Bitcoin        1  14112.2  14112.2  13154.7   
+2018-01-02  bitcoin    BTC  Bitcoin        1  13625.0  15444.6  13163.6   
+2018-01-03  bitcoin    BTC  Bitcoin        1  14978.2  15572.8  14844.5   
+2018-01-04  bitcoin    BTC  Bitcoin        1  15270.7  15739.7  14522.2   
+2018-01-05  bitcoin    BTC  Bitcoin        1  15477.2  17705.2  15202.8   
+
+              close       volume        market  close_ratio  spread  
+date                                                                 
+2018-01-01  13657.2  10291200000  236725000000       0.5248   957.5  
+2018-01-02  14982.1  16846600000  228579000000       0.7972  2281.0  
+2018-01-03  15201.0  16871900000  251312000000       0.4895   728.3  
+2018-01-04  15599.2  21783200000  256250000000       0.8846  1217.5  
+2018-01-05  17429.5  23840900000  259748000000       0.8898  2502.4
+```
+
+<a name='ts_select_cols_summaries'></a>
+
+### Subset Data Columns and Find Summaries
+
+Get the closing prices of Bitcoin stocks for the Month of January
+```python
+> data.loc[data.slug == 'bitcoin', 'close']['2018-01']
+'Output':
+date
+2018-01-01    13657.2
+2018-01-02    14982.1
+2018-01-03    15201.0
+2018-01-04    15599.2
+2018-01-05    17429.5
+2018-01-06    17527.0
+2018-01-07    16477.6
+2018-01-08    15170.1
+2018-01-09    14595.4
+2018-01-10    14973.3
+```
+
+Find the mean market value of Ethereum for the Month of January
+```python
+> data.loc[data.slug == 'ethereum', 'market']['2018-01'].mean()
+'Output':
+96739480000.0
+```
+
+<a name='ts_resampling'></a>
+
+### Resampling datetime objects
+A Pandas DataFrame with an index of `DatetimeIndex`, `PeriodIndex`, or `TimedeltaIndex` can be resampled to any of the date time frequencies from seconds, to minutes, to months. Let's see some examples.
+
+Let's get the average monthly closing values for Litecoin.
+```python
+> data.loc[data.slug == 'bitcoin', 'close'].resample('M').mean().head()
+'Output':
+date
+2013-04-30    139.250000
+2013-05-31    119.993226
+2013-06-30    107.761333
+2013-07-31     90.512258
+2013-08-31    113.905161
+Freq: M, Name: close, dtype: float64
+```
+
+Get the average weekly market value of Bitcoin Cash.
+```python
+> data.loc[data.symbol == 'BCH', 'market'].resample('W').mean().head()
+'Output':
+date
+2017-07-23    0.000000e+00
+2017-07-30    0.000000e+00
+2017-08-06    3.852961e+09
+2017-08-13    4.982661e+09
+2017-08-20    7.355117e+09
+Freq: W-SUN, Name: market, dtype: float64
+```
+
+<a name='ts_to_datetime'></a>
+
+### Convert to datetime datatype using `to_datetime`
+Pandas uses the `to_datetime` method to convert strings to Pandas datetime datatype. The `to_datetime` method is smart enough to infer a `datetime` representation from a string of dates passed with different formats. The default output format of `to_datetime` is in the following order `year, month, day, minute, second, millisecond, microsecond, nanosecond`.
+
+The input to `to_datetime` is recognized as `month, day, year`. Although can easily be modified by setting the attributes `dayfirst` or `yearfirst` to `True`.
+
+For example, if `dayfirst` is set to `True`, the input is recognized as `day, month, year`.
+
+Let's see an example of this.
+```python
+# create list of dates
+> my_dates = ['Friday, May 11, 2018', '11/5/2018', '11-5-2018', '5/11/2018', '2018.5.11']
+> pd.to_datetime(my_dates)
+'Output':
+DatetimeIndex(['2018-05-11', '2018-11-05', '2018-11-05', '2018-05-11',
+               '2018-05-11'],
+              dtype='datetime64[ns]', freq=None)
+```
+
+Let's set `dayfirst` to `True`. Observe that the first input in the string is treated as a day in the output.
+```python
+# set dayfirst to True
+> pd.to_datetime('5-11-2018', dayfirst = True)
+'Output':
+Timestamp('2018-11-05 00:00:00')
+```
+
+### The shift() method
+A typical step in a timeseries use-case is to convert the timeseries dataset into a supervised learning framework for predicting the outcome for a given time instant. The `shift()` method is used to adjust a Pandas DataFrame column by shifting the observations forwards or backward. If the observations are pulled backward (or lagged), `NaNs` are attached at the tail of the column. But if the values are pushed forward, the head of the column will contain `NaNs`. This step is important for adjusting the `target` variable of a dataset to predict outcomes $n$-days or steps or instances into the future. Let's see some examples
+
+Subset columns for the observations related to Bitcoin Cash.
+
+```python
+# subset a few columns
+> data_subset_BCH = data.loc[data.symbol == 'BCH', ['open','high','low','close']]
+> data_subset_BCH.head()
+'Output':
+              open    high     low   close
+date                                      
+2017-07-23  555.89  578.97  411.78  413.06
+2017-07-24  412.58  578.89  409.21  440.70
+2017-07-25  441.35  541.66  338.09  406.90
+2017-07-26  407.08  486.16  321.79  365.82
+2017-07-27  417.10  460.97  367.78  385.48
+```
+
+Now let's create a target variable that contains the closing rates 3 days into the future.
+```python
+> data_subset_BCH['close_4_ahead'] = data_subset_BCH['close'].shift(-4)
+> data_subset_BCH.head()
+'Output': 
+              open    high     low   close  close_4_ahead
+date                                                     
+2017-07-23  555.89  578.97  411.78  413.06         385.48
+2017-07-24  412.58  578.89  409.21  440.70         406.05
+2017-07-25  441.35  541.66  338.09  406.90         384.77
+2017-07-26  407.08  486.16  321.79  365.82         345.66
+2017-07-27  417.10  460.97  367.78  385.48         294.46
+```
+
+Observe that the tail of the column `close_4_head` contains `NaNs`.
+```python
+> data_subset_BCH.tail()
+'Output': 
+               open     high      low    close  close_4_ahead
+date                                                         
+2018-01-06  2583.71  2829.69  2481.36  2786.65        2895.38
+2018-01-07  2784.68  3071.16  2730.31  2786.88            NaN
+2018-01-08  2786.60  2810.32  2275.07  2421.47            NaN
+2018-01-09  2412.36  2502.87  2346.68  2391.56            NaN
+2018-01-10  2390.02  2961.20  2332.48  2895.38            NaN
+```
+
+### Rolling Windows
+Pandas provides a function called `rolling()` to find the rolling or moving statistics of values in a column over a specified window. The window is the "number of observations used in calculating the statistic". So we can find the rolling sums or rolling means of a variable. These statistics are vital when working with timeseries datasets. Let's see some examples
+
+Let's find the rolling means for the closing variable over a 30-day window.
+```python
+# find the rolling means for Bitcoin cash
+> rolling_means = data_subset_BCH['close'].rolling(window=30).mean()
+```
+
+The first few values of the `rolling_means` variable contain `NaNs` because the method computes the rolling statistic from the earliest time to the latest time in the dataset. Let's print out the first 5 values using the `head` method.
+```python
+> rolling_means.head()
+Out[75]: 
+date
+2017-07-23   NaN
+2017-07-24   NaN
+2017-07-25   NaN
+2017-07-26   NaN
+2017-07-27   NaN
+```
+
+Now see the last 5 values using the `tail` method.
+```python
+> rolling_means.tail()
+'Output': 
+date
+2018-01-06    2403.932000
+2018-01-07    2448.023667
+2018-01-08    2481.737333
+2018-01-09    2517.353667
+2018-01-10    2566.420333
+Name: close, dtype: float64
+```
+Let's do a quick plot of the rolling means using the Pandas plotting function. More on plotting in the next section.
+```python
+# plot the rolling means for Bitcoin cash
+> data_subset_BCH['close'].rolling(window=30).mean().plot(label='Rolling Average over 30 days')
+```
+
+<div class="fig figcenter fighighlight">
+    <img src="/assets/seminar_IEEE/rolling_average_BCH.png">
+    <div class="figcaption" style="text-align: center;">
+        Figure 2: Rolling Average Closing price over 30 days for Bitcon Cash.
+    </div>
+</div>
