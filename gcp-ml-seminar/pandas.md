@@ -28,6 +28,17 @@ Table of contents:
   - [Correlation](#correlation)
   - [Skewness](#skewness)
 - [Importing Data](#importing_data)
+- [Timeseries with Pandas](#timeseries)
+  - [Importing a Dataset with a DateTime column](#import_ts)
+  - [Selection Using DatetimeIndex](#ts_selection)
+    - [Select a particular date](#ts_select_date)
+    - [Select a month](#ts_select_month)
+    - [Select a year](#ts_select_year)
+  - [Subset Data Columns and Find Summaries](#ts_select_cols_summaries)
+  - [Resampling datetime objects](#ts_resampling)
+  - [Convert to datetime datatype using `to_datetime`](#ts_to_datetime)
+  - [The shift() method](#ts_shift)
+  - [Rolling Windows](#ts_rolling)
 
 
 Pandas is a specialized Python library for data analysis, especially on humongous datasets. It boasts easy to use functionality for reading and writing data, dealing with missing data, reshaping the dataset, massaging the data by slicing, indexing, inserting and deleting data variables and records. Pandas also have an important `groupBy` functionality for aggregating data for defined conditions - useful for plotting and computing data summaries for exploration.
@@ -1092,6 +1103,8 @@ Let's set `dayfirst` to `True`. Observe that the first input in the string is tr
 Timestamp('2018-11-05 00:00:00')
 ```
 
+<a name='ts_shift'></a>
+
 ### The shift() method
 A typical step in a timeseries use-case is to convert the timeseries dataset into a supervised learning framework for predicting the outcome for a given time instant. The `shift()` method is used to adjust a Pandas DataFrame column by shifting the observations forwards or backward. If the observations are pulled backward (or lagged), `NaNs` are attached at the tail of the column. But if the values are pushed forward, the head of the column will contain `NaNs`. This step is important for adjusting the `target` variable of a dataset to predict outcomes $n$-days or steps or instances into the future. Let's see some examples
 
@@ -1137,6 +1150,8 @@ date
 2018-01-09  2412.36  2502.87  2346.68  2391.56            NaN
 2018-01-10  2390.02  2961.20  2332.48  2895.38            NaN
 ```
+
+<a name='ts_rolling'></a>
 
 ### Rolling Windows
 Pandas provides a function called `rolling()` to find the rolling or moving statistics of values in a column over a specified window. The window is the "number of observations used in calculating the statistic". So we can find the rolling sums or rolling means of a variable. These statistics are vital when working with timeseries datasets. Let's see some examples
