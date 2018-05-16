@@ -35,6 +35,34 @@ a:visited { color: #205caa; }
   zoom: 1;
 }
 
+/* BY Ekaba: Tables */
+/* ----------------------------------------------------------*/
+
+#my_table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#my_table td, #my_table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#my_table tr:nth-child(even){background-color: #f2f2f2;}
+
+#my_table tr:hover {background-color: #ddd;}
+
+#my_table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: rgb(25, 104, 153);
+  color: white;
+}
+
+
+/* ----------------------------------------------------------*/
+
 
 /* Layout Styles */
 /* ----------------------------------------------------------*/
