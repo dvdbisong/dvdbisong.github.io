@@ -16,7 +16,7 @@ Table of contents:
   - [Encoding Categorical Variables](#encod_categ)
   - [Input Missing Data](#inp_missing)
   - [Generating Higer Order Polynomial Features](#higer_polyn)
-- [Machine learning estimators](#estimators)
+- [Machine learning algorithms](#algorithms)
   - [Supervised learning](#supervised_learning) 
   - [Unsupervised learning](#un_supervised_learning)
   - [Ensemble Algorithms](#ensemble)
@@ -31,8 +31,12 @@ Table of contents:
 - [Model evaluation](#evaluation)
   - [Regression evaluation metrics](#reg_evaluation) 
   - [Classification evaluation metrics](#class_evaluation) 
-- [Pipeliens: Coordinating Workflows](#pipelines)
+- [Pipelines: Streamlining Machine Learning Workflows](#pipelines)
+  - [Pipelines using `make_pipeline`](#pipeline_make_pipeline)
+  - [Pipelines using `feature_union`](#pipeline_feature_union)
 - [Model tuning](#tuning)
+  - [Grid Search](#grid_search)
+  - [Randomized Search](#randomized_search)
 
 Scikit-learn is a Python library that provides a standard interface for implementing Machine Learning algorithms. It includes other ancillary functions that are integral to the machine learning pipeline such as data pre-processing steps, data resampling techniques, evaluation parameters and search interfaces for tuning/ optimizing an algorithms performance.
 
@@ -547,9 +551,9 @@ array([[ 1.,  5.,  8., 25., 40., 64.],
        [ 1.,  1.,  5.,  1.,  5., 25.]]
 ```
 
-<a name="estimators"></a>
+<a name="algorithms"></a>
 
-### Machine learning estimators
+### Machine learning algorithms
 Scikit-learn provides convenient modules for implementing a variety of machine learning models. We'll briefly survey implementing a few supervised and unsupervised machine learning models using Scikit-learn fantastic interface. Scikit-learn provides a consistent set of methods, which are the `fit()` method for fitting models to the training dataset and the `predict()` method for using the fitted parameters to make a prediction on the test dataset. The examples in this section is geared at explaining working with Scikit-learn, hence we are not so keen on the model performance.
 
 <a name="supervised_learning"></a>
@@ -1555,4 +1559,282 @@ Accuracy: 0.953% (0.025%)
 print("Log-Loss likelihood: %.3f%% (%.3f%%)" % (logloss_cv_result.mean(), logloss_cv_result.std()))
 'Output':
 Log-Loss likelihood: -0.348% (0.027%)
+```
+
+<a name="pipelines"></a>
+
+### Pipelines: Streamlining Machine Learning Workflows
+The concept of pipelines in scikit-learn is a compelling tool for chaining a bunch of operations together to form a tidy process flow of data transforms from one state to another. The operations that constitute a pipeline can be any of scikit-learn's transformers (i.e., modules with a `fit` and `transform` method, or a `fit_transform method`) or classifiers (i.e., modules with a `fit` and `predict` method, or a `fit_predict` method). Classifiers are also called predictors.
+
+For a typical machine learning workflow, the steps taken may involve cleaning the data, feature engineering, scaling the dataset and then fitting a model. Pipelines can be used in this case to chain these operations together into a coherent workflow. They have the advantage of providing a convenient and consistent interface for calling at once a sequence of operations.
+
+These transformers or predictors are collectively called estimators in scikit-learn terminology. In the last two paragraphs, we called them operations.
+
+Another advantage of pipelines is that it safeguards against accidentally fitting a transform on the entire dataset and thereby leaking statistics influenced by the test data to the machine learning model while training. For example, if a standardizer is fitted on the whole dataset, the test set will be compromised because the test observations have contributed in estimating the mean and standard deviation for scaling the training set before fitting the model.
+
+Finally, only the last step of the pipeline can be a classifier or predictor. All the stages of the pipeline must contain a `transform` method except the final stage, which can be a transformer or a classifier.
+
+To begin using scikit-learn pipelines, first import:
+```python
+from sklearn.pipeline import Pipeline
+```
+
+Let's see some examples of working with Pipelines in Scikit-learn. In the following example, we'll apply a scaling transform to standardize our dataset and then use a Support Vector Classifier to train the model.
+
+```python
+# import packages
+> from sklearn.svm import SVC
+> from sklearn import datasets
+> from sklearn.model_selection import KFold
+> from sklearn.model_selection import cross_val_score
+> from sklearn.pipeline import Pipeline
+
+# load dataset
+> data = datasets.load_iris()
+
+# separate features and target
+> X = data.data
+> y = data.target
+
+# create the pipeline
+> estimators = [
+    ('standardize' , StandardScaler()),
+    ('svc', SVC())
+]
+
+# build the pipeline model
+> pipe = Pipeline(estimators)
+
+# run the pipeline
+> kfold = KFold(n_splits=3, shuffle=True)
+> cv_result = cross_val_score(pipe, X, y, cv=kfold)
+
+# evaluate the model performance
+> print("Accuracy: %.3f%% (%.3f%%)" % (cv_result.mean()*100.0, cv_result.std()*100.0))
+'Output':
+Accuracy: 94.667% (0.943%)
+```
+
+<a name="pipeline_make_pipeline"></a>
+
+#### Pipelines using `make_pipeline`
+Another method for building machine learning pipelines is by using the `make_pipeline` method. For the next example, we use PCA to select the best six features and reduce the dimensionality of the dataset, and then we'll fit the model using Random Forests for regression. 
+
+```python
+> from sklearn.pipeline import make_pipeline
+> from sklearn.svm import SVR
+> from sklearn import datasets
+> from sklearn.model_selection import KFold
+> from sklearn.model_selection import cross_val_score
+> from sklearn.decomposition import PCA
+> from sklearn.pipeline import Pipeline
+> from sklearn.ensemble import RandomForestRegressor
+
+# load dataset
+> data = datasets.load_boston()
+
+# separate features and target
+> X = data.data
+> y = data.target
+
+# build the pipeline model
+> pipe = make_pipeline(
+    PCA(n_components=9),
+    RandomForestRegressor()
+)
+
+# run the pipeline
+> kfold = KFold(n_splits=4, shuffle=True)
+> cv_result = cross_val_score(pipe, X, y, cv=kfold)
+
+# evaluate the model performance
+> print("Accuracy: %.3f%% (%.3f%%)" % (cv_result.mean()*100.0, cv_result.std()*100.0))
+'Output':
+Accuracy: 73.750% (2.489%)
+```
+
+<a name="pipeline_feature_union"></a>
+
+#### Pipelines using FeatureUnion
+Scikit-learn provides a module for merging the output of several transformers called `feature_union`. It does this by fitting each transformer independently to the dataset, and then their respective outputs are combined to form a transformed dataset for training the model.
+
+FeatureUnion works in the same way as a Pipeline, and in many ways can be thought of as a means of building complex pipelines within a Pipeline.
+
+Let's see an example using FeatureUnion. Here, we will combine the output of Recursive Feature Elimination (RFE) and PCA for feature engineering, and then we'll apply the Stochastic Gradient Boosting (SGB) ensemble model for regression to train the model.
+
+```python
+> from sklearn.ensemble import GradientBoostingRegressor
+> from sklearn.ensemble import RandomForestRegressor
+> from sklearn import datasets
+> from sklearn.model_selection import KFold
+> from sklearn.model_selection import cross_val_score
+> from sklearn.feature_selection import RFE
+> from sklearn.decomposition import PCA
+> from sklearn.pipeline import Pipeline
+> from sklearn.pipeline import make_pipeline
+> from sklearn.pipeline import make_union
+
+# load dataset
+> data = datasets.load_boston()
+
+# separate features and target
+> X = data.data
+> y = data.target
+
+# construct pipeline for feature engineering - make_union similar to make_pipeline
+> feature_engr = make_union(
+    RFE(estimator=RandomForestRegressor(), n_features_to_select=6),
+    PCA(n_components=9)
+)
+
+# build the pipeline model
+> pipe = make_pipeline(
+    feature_engr,
+    GradientBoostingRegressor()
+)
+
+# run the pipeline
+> kfold = KFold(n_splits=4, shuffle=True)
+> cv_result = cross_val_score(pipe, X, y, cv=kfold)
+
+# evaluate the model performance
+> print("Accuracy: %.3f%% (%.3f%%)" % (cv_result.mean()*100.0, cv_result.std()*100.0))
+'Output':
+Accuracy: 88.956% (1.493%)
+```
+
+<a name="tuning"></a>
+
+### Model tuning
+Each machine learning model has a set of options or configurations that can be tuned to optimize the model when fitting to data. This configurations are called **hyper-parameters**. Hence, for each hyper-parameter there exist a range of values that can be chosen. Taking into consideration the number of hyper-parameters that an algorithm has, the entire space can become exponentially large and infeasibile to explore all of them. Scikit-learn provides two convenient modules for searching through the hyper-parameters space of an agorithm to find the best values for each hyper-parameters that optimizes the model.
+
+These modules are the:
+- Grid Search, and
+- Randomized Search
+
+<a name="grid_search"></a>
+
+#### Grid Search
+Grid search comprehensively explores all the specified hyper-parameter values for an estimator. It is implemented using the `GridSearchCV` module. Let's see an example using the Random Forest for Regression. The hyper-parameters we'll search over are:
+- the number of trees in the forest, `n_estimators`,
+- the maximum depth of the tree, `max_depth`, and
+- the minimum number of samples required to split an internal node, `min_samples_leaf`.
+
+```python
+> from sklearn.model_selection import GridSearchCV
+> from sklearn.ensemble import RandomForestRegressor
+> from sklearn import datasets
+
+# load dataset
+> data = datasets.load_boston()
+
+# separate features and target
+> X = data.data
+> y = data.target
+
+# construct grid search parameters in a dictionary
+> parameters = {
+    'n_estimators': [2, 4, 6, 8, 10, 12, 14, 16],
+    'max_depth': [2, 4, 6, 8],
+    'min_samples_leaf': [1,2,3,4,5]
+    }
+
+# create the model
+> rf_model = RandomForestRegressor()
+
+# run the grid search
+> grid_search = GridSearchCV(estimator=rf_model, param_grid=parameters)
+
+# fit the model
+> grid_search.fit(X,y)
+'Output':
+GridSearchCV(cv=None, error_score='raise',
+       estimator=RandomForestRegressor(bootstrap=True, criterion='mse', max_depth=None,
+           max_features='auto', max_leaf_nodes=None,
+           min_impurity_decrease=0.0, min_impurity_split=None,
+           min_samples_leaf=1, min_samples_split=2,
+           min_weight_fraction_leaf=0.0, n_estimators=10, n_jobs=1,
+           oob_score=False, random_state=None, verbose=0, warm_start=False),
+       fit_params=None, iid=True, n_jobs=1,
+       param_grid={'n_estimators': [2, 4, 6, 8, 10, 12, 14, 16], 'max_depth': [2, 4, 6, 8], 'min_samples_leaf': [1, 2, 3, 4, 5]},
+       pre_dispatch='2*n_jobs', refit=True, return_train_score='warn',
+       scoring=None, verbose=0)
+
+# evaluate the model performance
+> print("Best Accuracy: %.3f%%" %  (grid_search.best_score_*100.0))
+'Output':
+Best Accuracy: 57.917%
+
+# best set of hyper-parameter values
+> print("Best n_estimators: %d \nBest max_depth: %d \nBest min_samples_leaf: %d " %  \
+            (grid_search.best_estimator_.n_estimators, \
+            grid_search.best_estimator_.max_depth, \
+            grid_search.best_estimator_.min_samples_leaf))
+'Output':
+Best n_estimators: 14 
+Best max_depth: 8 
+Best min_samples_leaf: 1
+```
+
+<a name="randomized_search"></a>
+
+#### Randomized Search
+As opposed to Grid Search, not all the provided hyper-parameter values are evaluated, but rather a determined number of hyper-parameter values are sampled from a random uniform distribution. The number of hyper-parameter values that can be evaluated is determined by the `n_iter` attribute of the `RandomizedSearchCV` module.
+
+In this example, we will use the same scenario as in the Grid Search case.
+
+```python
+> from sklearn.model_selection import RandomizedSearchCV
+> from sklearn.ensemble import RandomForestRegressor
+> from sklearn import datasets
+
+# load dataset
+> data = datasets.load_boston()
+
+# separate features and target
+> X = data.data
+> y = data.target
+
+# construct grid search parameters in a dictionary
+> parameters = {
+    'n_estimators': [2, 4, 6, 8, 10, 12, 14, 16],
+    'max_depth': [2, 4, 6, 8],
+    'min_samples_leaf': [1,2,3,4,5]
+    }
+
+# create the model
+> rf_model = RandomForestRegressor()
+
+# run the grid search
+> randomized_search = RandomizedSearchCV(estimator=rf_model, param_distributions=parameters, n_iter=10)
+
+# fit the model
+> randomized_search.fit(X,y)
+'Output':
+RandomizedSearchCV(cv=None, error_score='raise',
+          estimator=RandomForestRegressor(bootstrap=True, criterion='mse', max_depth=None,
+           max_features='auto', max_leaf_nodes=None,
+           min_impurity_decrease=0.0, min_impurity_split=None,
+           min_samples_leaf=1, min_samples_split=2,
+           min_weight_fraction_leaf=0.0, n_estimators=10, n_jobs=1,
+           oob_score=False, random_state=None, verbose=0, warm_start=False),
+          fit_params=None, iid=True, n_iter=10, n_jobs=1,
+          param_distributions={'n_estimators': [2, 4, 6, 8, 10, 12, 14, 16], 'max_depth': [2, 4, 6, 8], 'min_samples_leaf': [1, 2, 3, 4, 5]},
+          pre_dispatch='2*n_jobs', random_state=None, refit=True,
+          return_train_score='warn', scoring=None, verbose=0)
+
+# evaluate the model performance
+> print("Best Accuracy: %.3f%%" %  (randomized_search.best_score_*100.0))
+'Output':
+Best Accuracy: 57.856%
+
+# best set of hyper-parameter values
+> print("Best n_estimators: %d \nBest max_depth: %d \nBest min_samples_leaf: %d " %  \
+            (randomized_search.best_estimator_.n_estimators, \
+            randomized_search.best_estimator_.max_depth, \
+            randomized_search.best_estimator_.min_samples_leaf))
+'Output':
+Best n_estimators: 12 
+Best max_depth: 6 
+Best min_samples_leaf: 5
 ```
