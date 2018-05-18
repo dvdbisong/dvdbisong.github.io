@@ -4,6 +4,14 @@ title: 'Why Google Cloud Platform?'
 permalink: gcp-ml-seminar/why-gcp/
 ---
 
+Table of contents:
+
+- [Computational Challenges of Training Learning Models](#computational_challenge)
+- [The Cloud to the Rescue](#cloud_resuce)
+- [Enter Google Cloud Platform](#enter_gcp)
+
+<a name="computational_challenge"></a>
+
 ### Computational Challenges of Training Learning Models
 A significant challenge involved in training computers to learn using machine learning/ deep learning (ML/ DL) is computational power. Running a suite of an experiment on a decent CPU (e.g., a QuadCore i7, with 8GB RAM) can take upwards of 3 hours to days and even weeks for the algorithms to converge and produce a result set.
 
@@ -17,6 +25,8 @@ The cost of on-premise high-end machines may be untenable for an aspiring ML/ DL
         Figure 1: Frustration of Long Processing Times
     </div>
 </div>
+
+<a name="cloud_resuce"></a>
 
 ### The Cloud to the Rescue
 The cloud represents a large set of computers that are networked together in groups called data centers. These data centers are often distributed across multiple geographical locations. The size of a group, for example, is over 100, 000 sq ft (and those are the smaller sizes!).
@@ -35,6 +45,8 @@ In all the scenarios presented, the cloud comes to the rescue, where thousands o
         Figure 2: Datacenter illustration
     </div>
 </div>
+
+<a name="enter_gcp"></a>
 
 ### Enter Google Cloud Platform
 One of the big competitors in the cloud computing space is Google, with their cloud resource offering termed as “Google Cloud Platform” popularly referred to as GCP for short. Google Cloud Platform is a simple, yet powerful, and cost-effective cloud option for performing machine learning.
