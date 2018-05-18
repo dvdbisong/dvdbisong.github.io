@@ -2,7 +2,6 @@
 layout: page-seminar
 title: 'Why Google Cloud Platform?'
 permalink: gcp-ml-seminar/why-gcp/
-image: /assets/seminar_IEEE/google-cloud-platform.png
 ---
 
 Table of contents:
