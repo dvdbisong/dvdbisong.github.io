@@ -4,9 +4,20 @@ title: 'An Overview of Google Cloud Platform Services'
 permalink: gcp-ml-seminar/gcp-services/
 ---
 
+Table of contents:
+
+- [Cloud Compute](#cloud_compute)
+- [Cloud Storage](#cloud_storage)
+- [Big Data/ Analytics](#big_data_analytics)
+- [Cloud AI](#cloud_ai)
+- [Skinny Data Migration Pipeline](#data_migration)
+
+
 Google Cloud Platform offers a wide range of services for securing, storing, serving and analyzing data. These cloud services form a secure cloud perimeter for data, where different operations and transformations can be carried out on the data without it ever leaving the cloud perimeter. This data hub is sometimes referred to as a data lake.
 
 The services offered by Google Cloud include Compute, Storage, Big Data/ Analytics, Artificial Intelligence (AI), and other networking, developer, and management services. Let's briefly review some of the features of the Google Cloud ecosystem.
+
+<a name="cloud_compute"></a>
 
 ### Cloud Compute
 Google Compute services are provisioned virtual machines that are physically running on Google's data centers around the world. The compute services consist of the compute engine (virtual computing instances for custom processing), app engine (a cloud managed platform for developing web, mobile, and IoT app), kubernetes engine (orchestration manager for custom docker containers based on Kubernetes), container registry (private container storage) and serverless cloud functions (cloud-based functions to connect or extend cloud services).
@@ -20,6 +31,8 @@ For our purposes of machine learning modeling, the cloud compute engine is most 
     </div>
 </div>
 
+<a name="cloud_storage"></a>
+
 ### Cloud Storage
 Google cloud storage options provide scalable and real-time storage access to live and archival data within the cloud perimeter. Cloud storage is set-up to cater for any conceivable storage demand. Data stored on Google cloud storage is available anytime, and from any location around the world. Whats more, this massive storage power comes at an almost negligible cost, taking into consideration the size and economic value of the stored data. Moreover, acknowledging the accessibility, security, and consistency provided by cloud storage, the cost is non-equivalent.
 
@@ -31,6 +44,8 @@ The cloud storage products include cloud storage (general purpose storage platfo
         <span style="font-style: italic">Figure 2: </span>Cloud Storage Products
     </div>
 </div>
+
+<a name="big_data_analytics"></a>
 
 ### Big Data/ Analytics
 Google Cloud Platform offers a range of serverless big data and analytics solutions for data warehousing, stream, and batch analytics, cloud-managed Hadoop ecosystems, cloud-based messaging systems and data exploration. These services provide multiple perspectives to mining/ generating real-time intelligence from big-data.
@@ -46,6 +61,8 @@ Cloud Datalab is our point of emphasis among the suite of services under the ana
     </div>
 </div>
 
+<a name="cloud_ai"></a>
+
 ### Cloud AI
 Google Cloud AI offers a cloud service for businesses and individuals to leverage pre-trained models for custom artificial intelligence tasks through the use of REST APIs. This is the same service leveraged by notable Google applications such as Google Translate, Photos, and Inbox.
 
@@ -59,6 +76,8 @@ Cloud Machine Learning is often used in conjunction with Datalab to train Tensor
         <span style="font-style: italic">Figure 4: </span>Cloud AI services
     </div>
 </div>
+
+<a name="data_migration"></a>
 
 ### Skinny Data Migration Pipeline
 The critical pieces of the cloud platform under consideration with respect to designing and training machine learning models on data in the cloud is <span style="color:green">Google Cloud Datalab</span> and <span style="color:green">Google Cloud Storage</span>. The external data is transferred into the cloud perimeter and stored on cloud storage - from there it is loaded into cloud datalab for model design/ training using machine learning/ deep learning algorithms.
