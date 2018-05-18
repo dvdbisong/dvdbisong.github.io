@@ -4,6 +4,14 @@ title: 'Setting Up an account on Google Cloud Platform'
 permalink: gcp-ml-seminar/setting-up-gcp-account/
 ---
 
+Table of contents:
+
+- [Creating an Account](#create_account)
+- [GCP Resources: Projects](#gcp_projects)
+- [Accessing Cloud Platform Services](#platform_services)
+- [Account Users and Permissions](#users_permissions)
+- [The Cloud Shell](#cloud_shell)
+
 This post walks through setting up a Google Cloud Platform account. A GCP account gives access to all of the platform's infrastructure and services. For a new account, a $300 credit is awarded, to be spent over a period of 12 months. This offer is great as it gives ample time to explore the different features and services of Google's cloud offering.
 
 Note that to register an account requires a valid credit card to validate that it is an authentic user, as opposed to a robot. However, the credit card won't be charged after the trial ends, except Google is authorized to do so.
