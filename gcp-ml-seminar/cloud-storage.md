@@ -4,9 +4,18 @@ title: 'Google Cloud Storage'
 permalink: gcp-ml-seminar/cloud-storage/
 ---
 
+Table of contents:
+
+- [Create a bucket](#create-a-bucket)
+- [Uploading data to a bucket](#uploading-data-to-a-bucket)
+- [Delete objects from a bucket](#delete-objects-from-a-bucket)
+- [Free up storage resource](#free-up-storage-resource)
+
 Google cloud storage is a storage solution for virtually any type of data. Cloud storage is used to store both live and archival data and has guarantees of scalability (can store data of any size), consistency (the most updated version is served on request), durability (data is redundantly placed in separate geographic locations to eliminate loss), and high-availability (data is always available and accessible).
 
 Let's take a brief tour through spinning and cleaning-up a storage bucket, as well as uploading to and deleting files (also called objects) from a cloud storage bucket.
+
+<a name="create-a-bucket"></a>
 
 ### Create a bucket
 A bucket is as the name implies, simply a container for storing data. A bucket is first created, before storing data in Google cloud storage.
@@ -27,6 +36,8 @@ To create a bucket,
         <span style="font-style: italic">Figure 2: </span>Create a bucket
      </div>
 </div>
+
+<a name="uploading-data-to-a-bucket"></a>
 
 ### Uploading data to a bucket
 Individual files or a complete folder can be uploaded into the bucket. As an example, let's upload a file from the local machine.
@@ -50,6 +61,8 @@ To upload a file to a cloud storage bucket on GCP,
      </div>
 </div>
 
+<a name="delete-objects-from-a-bucket"></a>
+
 ### Delete objects from a bucket
 Click the check-box beside the file and click <span style="color:green">delete</span>, to delete an object from a bucket.
 <div class="fig figcenter fighighlight">
@@ -58,6 +71,8 @@ Click the check-box beside the file and click <span style="color:green">delete</
         <span style="font-style: italic">Figure 6: </span>Delete a file
      </div>
 </div>
+
+<a name="free-up-storage-resource"></a>
 
 ### Free up storage resource
 To delete a bucket, or free-up a storage resource to prevent billing on a resource that is not used, click the check-box beside the bucket in question, and click <span style="color:green">delete</span> to remove the bucket and its contents. This action is not recoverable.
