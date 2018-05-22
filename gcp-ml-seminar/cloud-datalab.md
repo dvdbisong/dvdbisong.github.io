@@ -4,9 +4,18 @@ title: 'Google Datalab'
 permalink: gcp-ml-seminar/cloud-datalab/
 ---
 
+Table of contents:
+
+- [Enable Google Compute Engine and Cloud Source Repositories APIs](#enable-google-compute-engine-and-cloud-source-repositories-apis)
+- [Launch a Datalab Instance from gcloud](#launch-a-datalab-instance-from-gcloud)
+- [Open a notebook](#open-a-notebook)
+- [Shutting down/ Deleting the instance](#shutting-down--deleting-the-instance)
+
 Google Cloud datalab provides an interactive environment (via Jupyter notebooks) for analyzing data and designing machine learning models. Datalab is actually hosted on a Google Compute Engine with an attached disk capacity for storing the Jupyter notebooks.
 
 In this piece, we'll be launching Cloud Datalab for machine learning design using the gcloud command-line console. 
+
+<a name="enable-google-compute-engine-and-cloud-source-repositories-apis"></a>
 
 ### Enable Google Compute Engine and Cloud Source Repositories APIs
 On a new account, first, enable Google Compute API and then the Cloud Source Repositories API before launching datalab.
@@ -43,6 +52,8 @@ On a new account, first, enable Google Compute API and then the Cloud Source Rep
         Figure 7: Google Cloud Source Repositories API Dashboard
      </div>
 </div>
+
+<a name="launch-a-datalab-instance-from-gcloud"></a>
 
 ### Launch a Datalab Instance from gcloud
 Working with the gcloud console allows us to interact with Google Cloud resources using the command-line directly from the browser. This tool is very convenient because the user need not install the Google Cloud SDK on the local machine. The gcloud feature allows users of low-end computers to do a lot of resource interaction directly within the cloud perimeter.
@@ -83,6 +94,8 @@ To launch a datalab instance,
      </div>
 </div>
 
+<a name="open-a-notebook"></a>
+
 ### Open a notebook
 To open a new notebook. Click on <span style="color:red;">New Notebook</span> at the top-left hand corner of the instance page.
 
@@ -92,6 +105,8 @@ To open a new notebook. Click on <span style="color:red;">New Notebook</span> at
         Figure 14: New Notebook
      </div>
 </div>
+
+<a name="shutting-down--deleting-the-instance"></a>
 
 ### Shutting down/ Deleting the instance
 To shut down the instance,
