@@ -12,7 +12,7 @@ Amazon SageMaker and Google Datalab have fully managed cloud Jupyter notebooks f
 
 <div class="imgcap">
 <img src="../assets/datalab-sagemaker/1-datalab-sagemaker.png" width="50%" height="50%">
-<div class="thecap"><span style="font-style: italic">Figure 1: </span>Google Datalab vs. Amazon SageMaker</div>
+<div class="thecap">Figure 1: Google Datalab vs. Amazon SageMaker</div>
 </div>
 
 ### Notebook Deployment
@@ -20,19 +20,19 @@ Amazon SageMaker and Google Datalab both offer simple notebook server setup proc
 
 <div class="imgcap">
 <img src="../assets/datalab-sagemaker/3.deploy-sagemaker.png">
-<div class="thecap"><span style="font-style: italic">Figure 2: </span>Amazon SageMaker Dashboard</div>
+<div class="thecap">Figure 2: Amazon SageMaker Dashboard</div>
 </div>
 
 With Google Datalab, the notebook instance is launched via the Google cloud shell from the Google Cloud Console interface by executing the command `datalab create`. This command can also be executed via the Google Cloud SDK installed on a local machine.
 
 <div class="imgcap">
 <img src="../assets/gcp_ml/8.activate-coud-shell.png">
-<div class="thecap"><span style="font-style: italic">Figure 3: </span>Activate cloud shell</div>
+<div class="thecap">Figure 3: Activate cloud shell</div>
 </div>
 
 <div class="imgcap">
 <img src="../assets/gcp_ml/9.start-datalab.png">
-<div class="thecap"><span style="font-style: italic">Figure 4: </span>Start datalab</div>
+<div class="thecap">Figure 4: Start datalab</div>
 </div>
 
 ### Pre-loaded Notebook Libraries
@@ -40,14 +40,14 @@ Amazon SageMaker Jupyter notebooks come pre-configured to run Apache Spark (incl
 
 <div class="imgcap">
 <img src="../assets/datalab-sagemaker/2.sagemaker_notebook_console.png" width="50%" height="50%">
-<div class="thecap"><span style="font-style: italic">Figure 5: </span>Amazon Notebook Pre-loaded packages</div>
+<div class="thecap">Figure 5: Amazon Notebook Pre-loaded packages</div>
 </div>
 
 While Google Datalab also has a fully managed Jupyter notebook, it does not come pre-installed with MxNet and Apache Spark. However, TensorFlow (as you will expect) is pre-loaded on all Datalab managed notebooks kernels.
 
 <div class="imgcap">
 <img src="../assets/datalab-sagemaker/4.datalab_notebook_options.png" width="50%" height="50%">
-<div class="thecap"><span style="font-style: italic">Figure 6: </span>Datalab kernels</div>
+<div class="thecap">Figure 6: Datalab kernels</div>
 </div>
 
 In any case, packages like MxNet, can very easily be installed on Datalab notebooks by running console commands via the Datalab `bash` shell. For example, to install MxNetm on Google Cloud Datalab run the following commands:
