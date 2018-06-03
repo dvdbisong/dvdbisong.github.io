@@ -4,6 +4,17 @@ title: 'What is Machine Learning'
 permalink: gcp-ml-seminar/what-is-machine-learning/
 ---
 
+Table of contents:
+
+- [The Role of Data](#the-role-of-data)
+- [Core Components of Machine Learning](#core-components-of-machine-learning)
+- [Training, Test and Validation datasets](#training--test-and-validation-datasets)
+- [Bias vs. Variance Tradeoff](#bias-vs-variance-tradeoff)
+- [Evaluating Model Quality](#evaluating-model-quality)
+- [Resampling Techniques](#resampling-techniques)
+- [Machine learning algorithms](#machine-learning-algorithms)
+- [Machine Learning Packages](#machine-learning-packages)
+
 Machine learning is a system of computing tools, and scientific methods for training a computer to learn and make inferences from data. It is a sub-field of Artificial Intelligence that aims to mimic the human biological approach to learning by receiving signals from the environment in the form of data and processing that data to gain intelligence on the state of the world.
 
 Moreso, Machine learning is an interdisciplinary study, although a lot of research advances is in the domain of computer science, the field is built on the foundations of mathematics, statistics, cognitive sciences and other areas such as psychology, and linguistics.
