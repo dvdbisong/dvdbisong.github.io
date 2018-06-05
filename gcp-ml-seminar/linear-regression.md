@@ -4,6 +4,13 @@ title: 'Linear Regression'
 permalink: gcp-ml-seminar/linear-regression/
 ---
 
+Table of contents:
+
+- [A visual representation](#a-visual-representation)
+- [Optimization for Machine Learning: Gradient Descent](#optimization-for-machine-learning--gradient-descent)
+- [Cost Function for Linear Regression](#cost-function-for-linear-regression)
+- [What are its strengths and weaknesses](#what-are-its-strengths-and-weaknesses)
+
 Linear regression is used to predict real-valued outputs, and it assumes a linear dependence/ relationship between the variables of the dataset. Hence, it is a parametric algorithm. In linear regression, the prevailing assumption is that the output or the response variable (i.e., the unit that we want to predict) can be modeled as a linear combination of the input (or predictor) variables.
 A linear combination is the addition of a certain number of vectors scaled (or adjusted) by an arbitrary constant. A vector is a mathematical construct for representing a set of numbers.
 
