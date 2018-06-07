@@ -50,6 +50,7 @@ $$Cost(h(t),\;y)=\begin{cases}
 
 The cost function also known as log-loss, is set up in this form to output the penalty made on the algorithm if $$h(t)$$ predicts one class, and the actual output is another.
 
+<a name="#multi-class-classification--multinomial-logistic-regression"></a>
 ### Multi-class classification/ multinomial logistic regression
 In multi-class or multinomial logistic regression, the labels of the dataset contain more than 2 classes. The multinomial logistic regression setup (i.e., cost function and optimization procedure) is structurally similar to logistic regression, the only difference being that the output of logistic regression is 2 classes, while multinomial have greater than 2 classes.
 
