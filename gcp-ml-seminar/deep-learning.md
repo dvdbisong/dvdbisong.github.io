@@ -4,7 +4,19 @@ title: 'Deep Learning Explained: Artificial Neural Networks'
 permalink: gcp-ml-seminar/deep-learning/
 ---
 
+Table of contents:
+
+- [The representation challenge](#representation_challenge)
+- [An Inspiration from the Brain](#inspiration_from_the_brain)
+- [The Neural Network Architecture](#neural_network_architecture)
+- [Training the Network](#training_the_network)
+- [Cost Function or Loss Function](#cost_function)
+- [The Backpropagation Algorithm](#backpropagation)
+- [Activation Functions](#activation_function)
+
 Deep learning is a branch of learning systems that is built on the Machine Learning algorithm called Neural Network. Deep learning extends the neural network in very interesting ways that enables the network algorithm to perform very well in building prediction models around complex problems such as computer vision and language modeling. A number of technologies that have resulted from this advancement include self-driving cars and automatic speech translation to mention just a few.
+
+<a name="representation_challenge"></a>
 
 ### The representation challenge
 Learning is a non-trivial task. How we learn deep representations as humans are high up there as one of the great enigmas of the world. What we consider trivial and to some others natural is a complex web of fine-grained and intricate processes that indeed have set us apart as unique creations in the universe both seen and unseen.
@@ -12,6 +24,8 @@ Learning is a non-trivial task. How we learn deep representations as humans are 
 One of the greatest challenges of AI research is to get the computer to understand or to innately decompose structural representations of problems just like a human being would.
 
 Deep learning approaches this conudrum by learning the underlying representations, also called the deep representations or the hierarchical representations of the dataset based. That is why deep learning is also called representation learning.
+
+<a name="inspiration_from_the_brain"></a>
 
 ### An Inspiration from the Brain
 Scientists more often than not look to nature for inspiration when performing incredible feats. Notably, the birds inspired the airplane. In that vein, there is no better type to look to as an antitype of intelligence as the human brain.
@@ -34,6 +48,7 @@ The following are the three most important components of neurons that are of pri
 
 Building on the inspiration of the biological neuron, the artificial neural network (ANN) is a society of connectionist agents that learn and transfer information from one artificial neuron to the other. As data transfers between neurons, a hierarchy of representations or a hierarchy of features is learned. Hence the name deep representation learning or deep learning.
 
+<a name="neural_network_architecture"></a>
 
 ### The Neural Network Architecture
 An artificial neural network is composed of:
@@ -51,6 +66,7 @@ An artificial neural network is composed of:
 The input layer receives information from the features of the dataset, some computation takes place, and data propagates to the hidden layer(s).
 The hidden layer(s) is where the workhorse of deep learning occurs. The hidden layer(s) can consist of multiple neuron modules as shown in the image above. Each hidden network layer learns a more sophisticated set of feature representations. The decision on the number of neurons in a layer (network width) and the number of hidden layers (network depth) which forms the network topology are all design choices.
 
+<a name="training_the_network"></a>
 
 ### Training the Network
 A weight is assigned to every neuron. This controls the activations in the neuron as the information of what the neural network is trying to learn moves from one layer of the network neurons to another. The weights (also called parameters) are initially initialized as a random value but are later adjusted as the network begins to learn.
@@ -64,8 +80,12 @@ So the activations of the neurons in the next layer are determined by the sum of
     </div>
 </div>
 
+<a name="cost_function"></a>
+
 ### Cost Function or Loss Function
 The quadratic cost which is also known as the mean squared error or the maximum likelihood estimate finds the sum of the difference between the estimated probability and the actual class label - used for regression problems. The cross-entropy cost function, also called the negative log-likelihood or binary cross-entropy, increases as the predicted probability estimates differ from the actual class label in a classification problem.
+
+<a name="backpropagation"></a>
 
 ### The Backpropagation Algorithm
 Backpropagation is the process by which we train the neural network to get better at improving its prediction accuracy. To train the neural network we need to find a mechanism for adjusting the weights of the network, this in turns affects the value of the activations within each neuron and consequently updates the value of the predicted output layer. The first time we run the feedforward algorithm, the activations at the output layer are most likely incorrect with a high error estimate or cost function.
@@ -80,6 +100,8 @@ The goal of backpropagation is to repeatedly go back and adjust the weights of e
 </div>
 
 The Backpropagation algorithm works by computing the cost function at the output layer by comparing the predicted output of the neural network with the actual outputs from the dataset. It then employs gradient descent (earlier discussed) to calculate the gradient of the cost function using the weights of the neurons at each successive layer and update the weights propagating back through the network.
+
+<a name="activation_function"></a>
 
 ### Activation Functions
 Activation functions act on the weighted sum in the neuron (which is nothing more than the weighted sum of weights and their added bias) by passing it through a non-linear function to decide if that neuron should fire or propagate its information or not to the succeeding neural layers.
