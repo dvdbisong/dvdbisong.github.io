@@ -31,8 +31,8 @@ Table of contents:
 - [Model evaluation](#model-evaluation)
   - [Regression evaluation metrics](#regression-evaluation-metrics)
   - [Classification evaluation metrics](#classification-evaluation-metrics)
-- [Pipelines: Streamlining Machine Learning Workflows](#pipelines--streamlining-machine-learning-workflows)
-  - [Pipelines using `make_pipeline`](#pipelines-using-make-pipeline)
+- [Pipelines: Streamlining Machine Learning Workflows](#pipelines-streamlining-machine-learning-workflows)
+  - [Pipelines using `make_pipeline`](#pipelines-using-makepipeline)
   - [Pipelines using FeatureUnion](#pipelines-using-featureunion)
 - [Model tuning](#model-tuning)
   - [Grid Search](#grid-search)
@@ -447,7 +447,7 @@ array([['5', '0', '8'],
 
 # one_hot_encode X
 > one_hot_encoder = OneHotEncoder()
-> encode_categorical = encode_categorical.reshape(len(X[:,1]), 1)
+> encode_categorical = X[:,1].reshape(len(X[:,1]), 1)
 > one_hot_encode_X = one_hot_encoder.fit_transform(encode_categorical)
 
 # print one_hot encoded matrix - use todense() to print sparse matrix

@@ -16,7 +16,7 @@ Table of contents:
 - [The print() statement](#the-print-statement)
     - [Using the Formatter](#using-the-formatter)
 - [Control Structures](#control-structures)
-    - [The if / elif (else-if) statements](#the-if---elif-else-if-statements)
+    - [The if / elif (else-if) statements](#the-if--elif-else-if-statements)
     - [The while loop](#the-while-loop)
     - [The for loop](#the-for-loop)
     - [List Comprehensions](#list-comprehensions)

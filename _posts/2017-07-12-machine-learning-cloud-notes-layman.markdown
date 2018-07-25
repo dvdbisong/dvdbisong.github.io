@@ -4,7 +4,7 @@ title: "Machine Learning on the Cloud: Notes for the Layman"
 date: 2017-07-12 00:28:30.000000000 -04:00
 comments: true
 excerpt: "Computational expenses have always been the bane of large-scale machine learning. In this post, I explain the fundamentals of Machine Learning on the cloud and the opportunities of unbridled computational horsepower made available by leveraging cloud infrastructures."
-category: Technical Writings
+category: Writings
 permalink: /machine-learning-cloud-notes-layman/
 ---
 ### What is Machine Learning?

@@ -417,6 +417,30 @@ Note that when a column or row is dropped a new `DataFrame` or `Series` is retur
 4           Benue
 ```
 
+Let's see examples of removing a row given a condition.
+```python
+> my_DF = pd.DataFrame({'age': [15,17,21,29,25], \
+            'state_of_origin':['Lagos', 'Cross River', 'Kano', 'Abia', 'Benue']})
+> my_DF
+'Output':  
+   age state_of_origin
+0   15           Lagos
+1   17     Cross River
+2   21            Kano
+3   29            Abia
+4   25           Benue
+
+# drop all rows less than 20
+> my_DF.drop(my_DF[my_DF['age'] < 20].index, inplace=True)
+
+> my_DF
+'Output':  
+   age state_of_origin
+2   21            Kano
+3   29            Abia
+4   25           Benue
+```
+
 <a name='adding_row'></a>
 
 #### Adding a Row/ Column

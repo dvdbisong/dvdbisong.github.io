@@ -2,7 +2,7 @@
 layout: post
 title: 'Supervised Machine Learning: A Conversational Guide for Executives and Practitioners'
 date: 2017-08-23 06:25:34 +00:00
-category: Technical Writings
+category: Writings
 comments: true
 permalink: /supervised-machine-learning-conversational-guide-executives-practitioners/
 image: ../assets/super_ml/model_complexity_error_training_test.png

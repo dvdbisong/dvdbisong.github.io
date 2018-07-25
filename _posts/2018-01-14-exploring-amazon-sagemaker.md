@@ -2,7 +2,7 @@
 layout: post
 title: 'Exploring Amazon SageMaker'
 date: 2018-01-14 04:15:19 +00:00
-category: Technical Writings
+category: Writings
 comments: true
 excerpt: "Amazon SageMaker is another cloud-based fully managed data analytics/ machine learning modeling platform for designing, building and deploying data models. The key selling point of Amazon SageMaker is \"zero-setup\". This post takes a tour through spinning up a SageMaker notebook instance for data analytics/ modeling learning models."
 permalink: /exploring-amazon-sagemaker/

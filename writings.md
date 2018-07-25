@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Technical Writings
-nav: Technical Writings
+title: Writings
+nav: Writings
 permalink: /writings/
 ---
 

@@ -2,7 +2,7 @@
 layout: post
 title: 'A Comparative Analysis of Amazon SageMaker and Google Datalab'
 date: 2018-01-17 05:58:00 +00:00
-category: Technical Writings
+category: Writings
 comments: true
 excerpt: "Google Datalab and Amazon SageMaker have fully managed cloud Jupyter notebooks for designing and developing machine learning and deep learning models by leveraging serverless cloud engines. However, they exist key differences between the two offerings as much as they have a lot in common. This post carries out a comparative analysis to examine the subtle differences and similarities between the two cloud-based machine learning as-a-service platforms."
 permalink: /datalab-vs-sagemaker/
