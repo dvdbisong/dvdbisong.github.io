@@ -6,13 +6,13 @@ permalink: gcp-ml-seminar/deep-learning/
 
 Table of contents:
 
-- [The representation challenge](#representation_challenge)
-- [An Inspiration from the Brain](#inspiration_from_the_brain)
-- [The Neural Network Architecture](#neural_network_architecture)
-- [Training the Network](#training_the_network)
-- [Cost Function or Loss Function](#cost_function)
-- [The Backpropagation Algorithm](#backpropagation)
-- [Activation Functions](#activation_function)
+- [The representation challenge](#the-representation-challenge)
+- [An Inspiration from the Brain](#an-inspiration-from-the-brain)
+- [The Neural Network Architecture](#the-neural-network-architecture)
+- [Training the Network](#training-the-network)
+- [Cost Function or Loss Function](#cost-function-or-loss-function)
+- [The Backpropagation Algorithm](#the-backpropagation-algorithm)
+- [Activation Functions](#activation-functions)
 
 Deep learning is a branch of learning systems that is built on the Machine Learning algorithm called Neural Network. Deep learning extends the neural network in very interesting ways that enables the network algorithm to perform very well in building prediction models around complex problems such as computer vision and language modeling. A number of technologies that have resulted from this advancement include self-driving cars and automatic speech translation to mention just a few.
 
