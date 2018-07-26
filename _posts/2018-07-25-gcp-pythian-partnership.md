@@ -2,7 +2,7 @@
 layout: post
 title: 'Google NEXT 2018: Google Cloud Platform and the Pythian Partnership'
 date: 2018-07-25 06:00:00 +00:00
-category: Writings
+category: #Writings
 comments: true
 excerpt: "Google Cloud partnership with Pythian could never be better at this time. As Diana Green put it, \"customers really win when the tech companies partner\". Pythian is firmly stationed as a key partner in the cloud ecosystem with Google, working hand-in-hand to bring enterprise data work-loads and products to the cloud and to enable companies to optimize their cloud strategy and develop their cloud competencies."
 permalink: /gcp-pythian-partnership/
