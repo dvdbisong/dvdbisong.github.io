@@ -132,7 +132,7 @@ Let's go through each API function briefly.
 </thead>
 <tbody>
 <tr>
-<td markdown="span">Numeric column `tf.feature_columns.numeric_column()`</td>
+<td markdown="span">Numeric column `tf.feature_column.numeric_column()`</td>
 <td markdown="span">This is a high-level wrapper for numeric features in the dataset.</td>
 </tr>
 <tr>
@@ -191,14 +191,18 @@ The Estimator class exposes four major methods, namely, the `fit()`, `evaluate()
 ### TensorBoard
 TensorBoard is an interactive visualization tool that comes bundled with TensorFlow. The goal of TensorBoard is to gain a visual insight into how the computational graph is constructed and executed. This information provides greater visibility for understanding, optimizing and debugging deep learning models.
 
-To use TensorBoard, summaries of operations (also called summary ops) within the Graph are exported to a location on disk using the helper class `tf.summaries`. The stored information about the model is then accessed using TensorBoard by running the command from the Datalab cell.
+To use TensorBoard, summaries of operations (also called summary ops) within the Graph are exported to a location on disk using the helper class `tf.summaries`. TensorBoard visualizations can be accessed with by pointing the `--logdir` attribute of the `tensorboard` command to the log path or by running the command `ml.TensorBoard.start` from the Datalab cell using the `google.datalab.ml` package.
 
-```python
-tensorboard_pid = ml.TensorBoard.start('/path/to/logs')
+```bash
+# running tensorboard
+tensorboard --logdir=/path/to/logs
 ```
 
-After use, close the TensorBoard instance by running:
 ```python
+# running tensorboard from Datalab cell
+tensorboard_pid = ml.TensorBoard.start('/path/to/logs')
+
+# After use, close the TensorBoard instance by running:
 ml.TensorBoard.stop(tensorboard_pid)
 ```
 
@@ -367,6 +371,9 @@ If a Variable is not to be used for training, it can be manually added to the `L
 
 Let's see examples of creating and initializing and working with a `tf.Variable` Tensor. In this example, we will write a TensorFlow programme to calculate the running average of a sequence of $$n$$ numbers.
 ```python
+# clear graph (if any) before running
+tf.reset_default_graph()
+
 data = [2, 4, 6, 8, 10, 12, 14, \
          16, 18, 20, 22, 24, 26, \
          28, 30, 32, 34, 36, 38, \
@@ -375,16 +382,15 @@ running_sum = tf.Variable(0, dtype=tf.float32)
 running_average = tf.Variable(0, dtype=tf.float32)
 
 with tf.Session() as sess:
-     # initialize all variables
-     sess.run(tf.global_variables_initializer())
+    # initialize all variables
+    sess.run(tf.global_variables_initializer())
     
-     for index, value in enumerate(data):
-         sum_op = tf.assign_add(running_sum, value)
-         average_op = tf.assign(running_average, sum_op/(index+1))
-         sess.run(average_op)
-    
-     print('Running sum: {}'.format(running_sum.eval()))    
-     print('Running average: {}'.format(running_average.eval()))
+    for index, value in enumerate(data):
+        sum_op = tf.assign_add(running_sum, value)
+        average_op = tf.assign(running_average, sum_op/(index+1))
+        print(sess.run(average_op))
+    print('Running sum: {}'.format(running_sum.eval()))
+    print('Running average: {}'.format(running_average.eval()))
 
 'Output':
 Running sum: 650.0
@@ -466,6 +472,7 @@ def delete_flags(FLAGS):
  ```python
  # import packages
 import numpy as np
+import tensorflow as tf
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
@@ -1063,6 +1070,55 @@ with tf.Session(config=tf.ConfigProto(
     print(sess.run(result))
 ```
 
+Where there are multiple GPUs on the machine, TensorFlow doesn't automatically choose where to run the code, it has to be manually assigned when working with low/medium level Tensor APIs. Using Estimators is a different proposition, which is why it is generally a preferred option for using TensorFlow as we will see later.
+
+TensorFlow can leverage processing on multiple GPUs to greatly speed up the speed of computation, especially when training a complex network architecture. To take advantage of this parallel processing, a replica of the network architecture resides on each GPU machine and trains a subset of the data. However, for synchronous updates, the model parameters from each tower (or GPU machines) are stored and updated on a CPU to speed up processing. Moreso this type of mean or averaging is what CPUs are generally good at. Moreso, it is a known case that GPUs take a performance hit when moving data from one tower to another. A diagram of this operation is shown in Figure 10.
+
+<div class="fig figcenter fighighlight">
+    <img src="/assets/seminar_IEEE/multiple_GPUs.png">
+    <div class="figcaption" style="text-align: center;">
+        Figure 10: Framework for training on Multiple GPUs.
+    </div>
+</div>
+
+Here is an example in code of executing subsets of the data on different GPU devices:
+```python
+import tensorflow as tf
+
+# clear graph (if any) before running
+tf.reset_default_graph()
+
+data = [2, 4, 6, 8, 10, 12, 14, \
+         16, 18, 20, 22, 24, 26, \
+         28, 30, 32, 34, 36, 38, \
+         40, 42, 44, 46, 48, 50]
+
+global_average = []
+with tf.device('/device:GPU:1'):
+    sum_op_1 = tf.Variable(0, dtype=tf.float32)
+    for value in data[:int(len(data)/2)]:
+        sum_op_1 = tf.assign_add(sum_op_1, value)
+    global_average.append(sum_op_1)
+         
+with tf.device('/device:GPU:2'):
+    sum_op_2 = tf.Variable(0, dtype=tf.float32)
+    for value in data[int(len(data)/2):]:
+        sum_op_2 = tf.assign_add(sum_op_2, value)
+    global_average.append(sum_op_2)
+
+with tf.device('/cpu:0'):
+    average_op = tf.add_n(global_average)/len(data)
+
+sess = tf.Session(config=tf.ConfigProto(
+        allow_soft_placement=True, log_device_placement=True))
+sess.run(tf.global_variables_initializer())
+print('Running average: {}'.format(sess.run(average_op)))
+sess.close()
+
+'Output':
+Running average: 26.0
+```
+
 #### Convolutional Neural Networks
 In this example, we will build a Convolutional Neural Network (CNN) to classify images from the CIFAR-10 dataset. CIFAR-10 is another standard image classification dataset to classify a coloured 32 x 32 pixel image data into 10 image classes namely, airplane, automobile, bird, cat, deer, dog, frog, horse, ship, and truck. In keeping with the simplicity of this text, we will work with the version of this dataset that comes prepacked with Keras `tf.keras.datasets` instead of writing the code to download and import the dataset from <a href="https://www.cs.toronto.edu/~kriz/cifar.html">https://www.cs.toronto.edu/~kriz/cifar.html</a> into Python. Moreso, the focus of this section is exclusively on using TensorFlow functions to build a CNN classifier.
 
@@ -1303,7 +1359,7 @@ From the preceding code listing, take note of the following steps and functions:
 <div class="fig figcenter fighighlight">
     <img src="/assets/seminar_IEEE/cnn_tensorboard.png">
     <div class="figcaption" style="text-align: center;">
-        Figure 10: Visualization of CNN Graph with TensorBoard. Top left: Graph Dashboard - showing visual diagram of the CNN architecture. Top right: Scalars dashboard - illustrates the changes in the Accuracy and F1 score. Bottom left: Scalars dashboard - shows the changes in the Loss and Precision score. Bottom right:** Scalars dashboard - screenshot of Precision and Recall score.
+        Figure 11: Visualization of CNN Graph with TensorBoard. Top left: Graph Dashboard - showing visual diagram of the CNN architecture. Top right: Scalars dashboard - illustrates the changes in the Accuracy and F1 score. Bottom left: Scalars dashboard - shows the changes in the Loss and Precision score. Bottom right:** Scalars dashboard - screenshot of Precision and Recall score.
     </div>
 </div>
 
