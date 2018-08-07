@@ -15,7 +15,7 @@ Table of contents:
 - [The Long Short Term Memory (LSTM) Network](#the-long-short-term-memory-lstm-network)
 
 ### An Overview of RNN
-Recurrent Neural Networks (RNN) are another specialized scheme of Neural Network Architectures. RNNs are particularly tuned for time-series or sequential tasks. Recurrent Neural Networks are developed to solve learning problems where information about the past (i.e., past instances/ events) are directly linked to making future predictions. Such sequential examples play-up frequently in many real-world tasks such as language modelling where the previous words in the sentence are used to determine what the next word will be. Also in stock market prediction, the last hour/day/week's stock prices define the future stock movement.
+Recurrent Neural Networks (RNN) are another specialized scheme of Neural Network Architectures. RNNs are particularly tuned for time-series or sequential tasks, they are developed to solve learning problems where information about the past (i.e., past instances/ events) are directly linked to making future predictions. Such sequential examples play-up frequently in many real-world tasks such as language modelling where the previous words in the sentence are used to determine what the next word will be. Also in stock market prediction, the last hour/day/week's stock prices define the future stock movement.
 
 In a sequential problem, there is a looping or feedback framework that connects the output of one sequence to the input of the next sequence. RNNs are ideal for processing 1-Dimensional sequential data, unlike the grid-like 2-Dimensional image data in Convolutional Neural Networks.
 
