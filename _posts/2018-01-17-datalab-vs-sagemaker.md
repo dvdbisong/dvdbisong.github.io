@@ -76,23 +76,23 @@ Amazon SageMaker runs on a fully managed elastic compute server. This relieves t
 
 Google Datalab also offers a fully managed compute infrastructure. However, the Datalab instance is not auto-elastic. You have to select the instance size when launching Datalab. This size can later be changed. Also, if you need even more compute capabilities, you have to apply to increase your quota limit. But this is a very simple and straightforward process. The Google Cloud Platform manages monitoring, logging, and server maintenance via Google Stackdrier. 
 
-Using Cloud ML to train your model takes advantage of scalable and distributed compute resources. Although Cloud ML only works with code written in TensorFlow. Datalab is often used in conjunction with Cloud ML.
+Using Cloud ML to train your model takes advantage of scalable and distributed compute resources. Datalab is often used in conjunction with Cloud ML.
 
 
 ### Optimized Machine Learning Algorithms
 Amazon SageMaker provides pre-optimized machine learning algorithms. These algorithms are particularly enhanced to run on Amazon's compute servers and are acclaimed to outperform similar algorithms from other packages by an order of magnitude. To use these algorithms, you simply connect them to your data source. The goal of these pre-optimized algorithms is to provide easy access for developers who are not particularly skilled in machine learning to take advantage of AI in their software products. The SageMaker custom algorithms span across a variety of supervised (XGBoost, linear/logistic regression), unsupervised (k-means clustering, principal component analysis (PCA)) and deep learning (DeepAR, Seqence2Sequence) algorithms.
 
-Google Datalab does not have such pre-customized machine learning algorithms. However, machine learning models that are built using TensorFlow are optimized to run on distributed tensor processing units via the Google Cloud ML service. This is also a very powerful feature when working with petabyte scale data.
+Google Datalab does not have such pre-customized machine learning algorithms. However, machine learning models that are built using TensorFlow, Scikit-Learn or XGBoost are optimized to run on distributed machines via the Google Cloud ML engine. This is also a very powerful feature when working with petabyte scale data.
 
 ### Distributed Training
 Amazon SageMaker trains your models on a set of distributed compute engines under the hood. These machines are relinquished as soon as training is completed.
 
-Google Datalab trains your models on the Datalab instance. Although a very powerful multi-core Datalab instance can be provisioned, it is not distributed across multiple machines. Cloud ML is responsible for training learning models across distributed machines. In order to take advantage of Cloud ML, the code will have to be packaged as a Python module. As at this time of writing, this feature is limited to TensorFlow code.
+Google Datalab trains your models on the Datalab instance. Although a very powerful multi-core Datalab instance can be provisioned, it is not distributed across multiple machines. Cloud ML is responsible for training learning models across distributed machines. In order to take advantage of Cloud ML, the code will have to be packaged as a Python module.
 
 ### Automated Hyper-parameter Tuning
 Amazon SageMaker has an option to perform automated hyper-parameter tuning on your learning model during training. This feature is in preview mode as at this time of writing. But it looks very interesting as it promises to abstract the data scientist or developer from grid search concerns in finding the best set of hyper-parameters for an algorithm training the model.
 
-Google Cloud Datalab (standalone) does not have this sort of functionality. However, Google CloudML has a feature called HyperTune which automatically optimizes your learning model for an improved accuracy or minimized error loss. Training with CloudML is a very powerful feature for training petabyte scale learning models on the Google Cloud Platform. The only downside is that this functionality is limited to models trained with Google TensorFlow.
+Google Cloud Datalab (standalone) does not have this sort of functionality. However, Google CloudML has a feature called HyperTune which automatically optimizes your learning model for an improved accuracy or minimized error loss. Training with CloudML is a very powerful feature for training petabyte scale learning models on the Google Cloud Platform.
 
 ### Model Deployment
 Trained models can be deployed for production directly from Amazon SageMaker to an elastic compute infrastructure with high availability. SageMaker spins up the EC2 instance, deploys the model as well as implements a secure HTTPs endpoint for the application. By integrating this seamless deployment feature to SageMaker, revised/ new machine learning models can quickly be pushed into production without DevOps overhead.

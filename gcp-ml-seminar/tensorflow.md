@@ -28,11 +28,13 @@ Table of contents:
     - [Visualizing with TensorBoard](#visualizing-with-tensorboard)
     - [Running TensorFlow with GPUs](#running-tensorflow-with-gpus)
     - [Convolutional Neural Networks](#convolutional-neural-networks)
+    - [Saving and Loading Models](#saving-and-loading-models)
     - [Recurrent Neural Networks](#recurrent-neural-networks)
     - [Autoencoders](#autoencoders)
-- [Using Estimators](#using-estimators)
+- [TensorFlow High-Level APIs: Using Estimators](#tensorflow-high-level-apis-using-estimators)
     - [...](#)
 - [TF Serving](#tf-serving)
+- [Eager Execution](#eager-execution)
 - [TensorFlow Keras](#tensorflow-keras)
 
 TensorFlow is a specialized numerical computation library for Deep Learning. It is as of writing the preferred tool by numerous deep learning researchers and industry practitioners for developing deep learning models and architectures as well as for serving learned models into production servers and software products.
@@ -1363,17 +1365,20 @@ From the preceding code listing, take note of the following steps and functions:
     </div>
 </div>
 
-#### Recurrent Neural Networks
+#### Saving and Loading Models
 
+#### Recurrent Neural Networks
 
 
 #### Autoencoders
 
-### Using Estimators
+### TensorFlow High-Level APIs: Using Estimators
 #### ...
 
 
 
 ### TF Serving
+
+### Eager Execution
 
 ### TensorFlow Keras
