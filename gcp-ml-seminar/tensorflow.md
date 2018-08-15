@@ -10,32 +10,35 @@ Table of contents:
 - [Navigating through the TensorFlow API](#navigating-through-the-tensorflow-api)
     - [The Low-Level TensorFlow API](#the-low-level-tensorflow-api)
     - [The Mid-Level TensorFlow API](#the-mid-level-tensorflow-api)
-        - [**Layers**](#layers)
-        - [**Datasets**](#datasets)
+    - [Layers](#layers)
+    - [Datasets](#datasets)
     - [The High-Level TensorFlow API](#the-high-level-tensorflow-api)
-        - [**FeatureColumns**](#featurecolumns)
-        - [**Estimator API**](#estimator-api)
+    - [FeatureColumns](#featurecolumns)
+    - [Estimator API](#estimator-api)
 - [TensorBoard](#tensorboard)
 - [The Low/Mid-Level API: Building Computational Graphs and Sessions](#the-lowmid-level-api-building-computational-graphs-and-sessions)
-    - [A Simple TensorFlow Programme](#a-simple-tensorflow-programme)
-    - [Working with Placeholders](#working-with-placeholders)
-    - [Session.run() vs. Tensor.eval()](#sessionrun-vs-tensoreval)
-    - [Working with Variables](#working-with-variables)
-    - [Variable scope](#variable-scope)
-    - [Linear Regression with TensorFlow](#linear-regression-with-tensorflow)
-    - [Classification with TensorFlow](#classification-with-tensorflow)
-    - [Multilayer Perceptron (MLP)](#multilayer-perceptron-mlp)
-    - [Visualizing with TensorBoard](#visualizing-with-tensorboard)
-    - [Running TensorFlow with GPUs](#running-tensorflow-with-gpus)
-    - [Convolutional Neural Networks](#convolutional-neural-networks)
-    - [Saving and Loading Models](#saving-and-loading-models)
-    - [Recurrent Neural Networks](#recurrent-neural-networks)
-    - [Autoencoders](#autoencoders)
+- [A Simple TensorFlow Programme](#a-simple-tensorflow-programme)
+- [Working with Placeholders](#working-with-placeholders)
+- [Session.run() vs. Tensor.eval()](#sessionrun-vs-tensoreval)
+- [Working with Variables](#working-with-variables)
+- [Variable scope](#variable-scope)
+- [Linear Regression with TensorFlow](#linear-regression-with-tensorflow)
+- [Classification with TensorFlow](#classification-with-tensorflow)
+- [Multilayer Perceptron (MLP)](#multilayer-perceptron-mlp)
+- [Visualizing with TensorBoard](#visualizing-with-tensorboard)
+- [Running TensorFlow with GPUs](#running-tensorflow-with-gpus)
+- [Convolutional Neural Networks](#convolutional-neural-networks)
+- [Save and Restore TensorFlow Graph Variables](#save-and-restore-tensorflow-graph-variables)
+- [Recurrent Neural Networks](#recurrent-neural-networks)
+    - [Univariate Timeseries with RNN](#univariate-timeseries-with-rnn)
+    - [Deep RNN](#deep-rnn)
+    - [Multivariate Timeseries with RNN](#multivariate-timeseries-with-rnn)
+- [Autoencoders](#autoencoders)
+- [Building Efficient Input Pipelines with the Dataset API](#building-efficient-input-pipelines-with-the-dataset-api)
 - [TensorFlow High-Level APIs: Using Estimators](#tensorflow-high-level-apis-using-estimators)
-    - [...](#)
-- [TF Serving](#tf-serving)
+    - [Using the Pre-Made or Canned Estimator](#using-the-pre-made-or-canned-estimator)
+    - [Building a Custom Estimator](#building-a-custom-estimator)
 - [Eager Execution](#eager-execution)
-- [TensorFlow Keras](#tensorflow-keras)
 
 TensorFlow is a specialized numerical computation library for Deep Learning. It is as of writing the preferred tool by numerous deep learning researchers and industry practitioners for developing deep learning models and architectures as well as for serving learned models into production servers and software products.
 
@@ -82,7 +85,7 @@ The low-level API gives the tools for building network graphs from the ground-up
 #### The Mid-Level TensorFlow API
 TensorFlow provides a set of reusable packages for simplifying the process involved in creating Computational Graphs. Some example of these functions include the Layers `(tf.layers)`, Datasets `(tf.data)`, Metrics `(tf.metrics)` and Loss `(tf.losses)` packages.
 
-##### **Layers**
+#### Layers
 The Layers package `(tf.layers)` provides a handy set of functions to simplify the construction of layers in a neural network architecture. For example, consider the convolutional network architecture in Figure 4, and how the layers API simplifies the creation of the network layers.
 
 <div class="fig figcenter fighighlight">
@@ -92,7 +95,7 @@ The Layers package `(tf.layers)` provides a handy set of functions to simplify t
     </div>
 </div>
 
-##### **Datasets**
+#### Datasets
 The Datasets package `(tf.data)` provides a convenient set of high-level functions for creating complex dataset input pipelines. The goal of the Dataset package is to have a fast, flexible and easy to use interface for fetching data from various data sources, performing data transform operations on them before passing them as inputs to the learning model. The Dataset API provides a more efficient means of fetching records from a dataset. The major classes of the Dataset API are illustrated in Figure 5 below:
 
 <div class="fig figcenter fighighlight">
@@ -111,7 +114,7 @@ From the illustration in Figure 5, the subclasses perform the following function
 #### The High-Level TensorFlow API
 The High-level API provides a simplified API calls that encapsulate lots of the details that are typically involved in creating a deep learning TensorFlow model. These high-level abstractions make it easier to develop powerful deep learning models quickly, with fewer lines of code. However, it is not so flexible when it boils down to tweaking some nitty-gritty parameter of the model. But it is the preferred go to to get an end-to-end modeling pipeline up and running.
 
-##### **FeatureColumns**
+#### FeatureColumns
 TensorFlow offers a high-level API called FeatureColumns `tf.feature_column` for describing the features of the dataset that will be fed into an Estimator for training and validation. This makes easy the preparation of data for modeling, such as the conversion of categorical features of the dataset into a one-hot encoded vector. The canned estimators which we'll mention in the next sub-section have an attribute called `feature_columns`, which will receive the features of the dataset, wrapped with the `tf.feature_column` API functions.
 
 The `feature_column` API is broadly divided into two categories, they are the categorical and dense columns, and together they consist of nine function calls. The categories and subsequent functions  are illustrated in Figure 6.
@@ -168,7 +171,7 @@ Let's go through each API function briefly.
 </tbody>
 </table>
 
-##### **Estimator API**
+#### Estimator API
 The Estimator API is a high-level TensorFlow functionality that is aimed at reducing the complexity involved in building machine learning models by exposing methods that abstract common models and processes. There are two ways of working with Estimators and they include:
 - **Using the Pre-made Estimators:** The pre-made Estimators, are black-box models made available by the TensorFlow team for building common machine learning/ deep learning architectures such as Linear Regression/ Classification, Random Forests Regression/ Classification and Deep Neural Networks for regression and classification. An illustration of the pre-made Estimators as subclasses of the Estimator class is shown in Figure 7.
 
@@ -196,7 +199,7 @@ TensorBoard is an interactive visualization tool that comes bundled with TensorF
 To use TensorBoard, summaries of operations (also called summary ops) within the Graph are exported to a location on disk using the helper class `tf.summaries`. TensorBoard visualizations can be accessed with by pointing the `--logdir` attribute of the `tensorboard` command to the log path or by running the command `ml.TensorBoard.start` from the Datalab cell using the `google.datalab.ml` package.
 
 ```bash
-# running tensorboard
+# running tensorboard via the terminal
 tensorboard --logdir=/path/to/logs
 ```
 
@@ -230,7 +233,7 @@ When building a low-level TensorFlow programme, a default Graph is automatically
 
 High-Level APIs like the Estimators and Keras API handle the construction and execution of the Computational Graph under the hood.
 
-#### A Simple TensorFlow Programme
+### A Simple TensorFlow Programme
 Let's start by building a simple computational graph. In this programme, we will build a graph to find the roots of the quadratic expression $$x^2 + 3x – 4 = 0$$.
 ```python
 a = tf.constant(1, name='a')
@@ -314,7 +317,7 @@ print(result)
 sess.close()
 ```
 
-#### Working with Placeholders
+### Working with Placeholders
 Let's run another simple example, but this time, we'll be working with placeholders `tf.placeholder`. In this example, we will build a computational graph to find the solution to the Pythagorean Theorem, $$a^2 + b^2 = c^2$$ given that $$a = 7$$ and $$b = 24.$$
 
 ```python
@@ -337,9 +340,14 @@ with tf.Session() as sess:
 
 Observe that the `run()` method Session object referenced as `sess.run()` has an attribute called `feed_dict`. This attribute is responsible for passing data into the placeholder before executing the graph.
 
-#### Session.run() vs. Tensor.eval()
+### Session.run() vs. Tensor.eval()
 The method `Tensor.eval()` is similar to running `Session.run(Tensor)` with the distinct difference being that a Session run can compute the result of more than one Tensor at the same time. Consider the following example:
 ```python
+import tensorflow as tf
+
+# clear graph (if any) before running
+tf.reset_default_graph()
+
 a = tf.constant(2)
 b = tf.constant(4)
 # multiplication
@@ -355,9 +363,17 @@ with tf.Session() as sess:
      result = sess.run([c, z])
      print(result)
 'Output': [8, 243]
+
+# using Tensor.eval()
+with tf.Session() as sess:
+    print(c.eval())
+    print(z.eval())
+'Output':
+8
+243
 ```
 
-#### Working with Variables
+### Working with Variables
 The `Variable` Tensor is used to store persistent data that can be shared and updated by operations in a computational graph when a Session is executed. A major difference between the `tf.Variable`  Tensor and other Tensor objects is that the data stored in `tf.Variable` is accessible across multiple sessions. So different graphs within the same application can share and modify a value in a `tf.Variable` tensor.
 
 Before working with `tf.Variables`, here are a few key points to have at hand:
@@ -372,7 +388,10 @@ All the Variables within a TensorFlow programme can be accessed through a named 
 If a Variable is not to be used for training, it can be manually added to the `LOCAL_VARIABLES` member of the `tf.GraphKeys` class (i.e., `tf.GraphKeys.LOCAL_VARIABLES`) using the `collections` attribute of either `tf.Variable()` or `tf.get_variable()` methods for creating a Variable. Another option is to set the `trainable` attribute of either of the Variable creation methods to `False`.
 
 Let's see examples of creating and initializing and working with a `tf.Variable` Tensor. In this example, we will write a TensorFlow programme to calculate the running average of a sequence of $$n$$ numbers.
+
 ```python
+import tensorflow as tf
+
 # clear graph (if any) before running
 tf.reset_default_graph()
 
@@ -399,7 +418,7 @@ Running sum: 650.0
 Running average: 26.0
 ```
 
-#### Variable scope
+### Variable scope
 Variable scope is a technique for regulating how variables are reused in a TensorFlow program especially when working with functions that implicitly create and manipulate variables. Another advantage of variable scopes is that it assigns name scopes to Variables, thereby making it easier for code readability and debugging. Variable scope is implemented using the class `tf.variable_scope`. In the following example, the variables for computing a Pythagorean triple is wrapped into a function for which we make repeated calls. Using variable scope makes it clear that a new set of variables are to be created else the code will result in an error after the first call to the function because the variables already exist. Also very importantly, calling the method `tf.reset_default_graph()` clears the graph, and hence the variable scopes. This is important if you want to run the same script over again.
 
 ```python
@@ -455,7 +474,7 @@ or reuse=tf.AUTO_REUSE in VarScope? Originally defined at:
     exec(code_obj, self.user_global_ns, self.user_ns)
 ```
 
-#### Linear Regression with TensorFlow
+### Linear Regression with TensorFlow
 In this section, we use TensorFlow to implement a Linear Regression machine learning model. This example builds on previous examples in familiarizing with TensorFlow for building learning models. The goal is to strengthen experience with common TensorFlow low-level modeling functions as well as the two-part step to modeling with includes building computational graphs and executing them in Sessions.
 
 We define a set of flags using the Module `tf.app.flags`. These flags are a convenient way to wrap and define the static variables that are used in the program. However, if the value of a flag is changed, it must be cleared before it can be re-initialized. The code in the method below is called to reset the flags in a TensorFlow programme. It is used a lot in this book.
@@ -469,10 +488,10 @@ def delete_flags(FLAGS):
          FLAGS.__delattr__(keys)
 ```
 
- In the example below, we use the sample Boston house-prices dataset from the **Scikit-learn dataset package** to build a Linear Regression model with TensorFlow.
+In the example below, we use the sample Boston house-prices dataset from the **Scikit-learn dataset package** to build a Linear Regression model with TensorFlow.
 
- ```python
- # import packages
+```python
+# import packages
 import numpy as np
 import tensorflow as tf
 from sklearn import datasets
@@ -500,10 +519,11 @@ X_test = scaler_X_test.transform(X_test)
 
 # call method to clear existing flags
 delete_flags(tf.flags.FLAGS)
+
 # wrap parameters as flags
 flags = tf.app.flags
 flags.DEFINE_float('learning_rate', 0.01, 'initial learning rate.')
-flags.DEFINE_integer('training_steps', 1000, 'number of steps to run model trainer.')
+flags.DEFINE_integer('epochs', 1000, 'number of steps to run model trainer.')
 flags.DEFINE_integer('display', 100, 'display training information per step.')
 flags.DEFINE_integer('ncols', X_train.shape[1], 'number of features in dataset.')
 flags.DEFINE_integer('batch_size', 100, 'number of batches.')
@@ -542,78 +562,51 @@ rmse = tf.metrics.root_mean_squared_error(labels = input_y,
 
 # execute in Session
 with tf.Session() as sess:
-     # initialize all variables
-     tf.global_variables_initializer().run()
-     tf.local_variables_initializer().run()
-    
-     ##############################
-     # Train the model iteratively
-     ##############################
-     for steps in range(FLAGS.training_steps):
-         mini_batch = zip(range(0, FLAGS.length, FLAGS.batch_size),
-                    range(FLAGS.batch_size, FLAGS.length+1, FLAGS.batch_size))
+    # initialize all variables
+    tf.global_variables_initializer().run()
+    tf.local_variables_initializer().run()
+   
+    # Train the model
+    for steps in range(FLAGS.epochs):
+        mini_batch = zip(range(0, FLAGS.length, FLAGS.batch_size),
+                   range(FLAGS.batch_size, FLAGS.length+1, FLAGS.batch_size))
         
-         # train data in mini-batches
-         for (start, end) in mini_batch:
-             sess.run(training_op, feed_dict = {input_X: X_train[start:end],
-                                                input_y: y_train[start:end]})
+        # train data in mini-batches
+        for (start, end) in mini_batch:
+            sess.run(training_op, feed_dict = {input_X: X_train[start:end],
+                                               input_y: y_train[start:end]})
     
-         # print training performance 
-         if (steps+1) % FLAGS.display == 0:
-             print('Step: {}'.format((steps+1)))
-             # evaluate loss function
-             loss_fn = sess.run(loss, feed_dict = {input_X: X_train,
-                                                   input_y: y_train})
-             print('Training loss (mse): {}'.format(loss_fn))
-     
-             ###########################        
-             # Evaluate on test dataset
-             ###########################
-             test_loss = sess.run(loss, feed_dict = {input_X: X_test,
+        # evaluate loss function
+        if (steps+1) % FLAGS.display == 0:            
+            train_loss = sess.run(loss, feed_dict = {input_X: X_train,
+                                                     input_y: y_train})
+            test_loss = sess.run(loss, feed_dict = {input_X: X_test,
                                                    input_y: y_test})
-             print('Test loss (mse): {}'.format(test_loss))
     
+            print('Step {}: \tTrain loss: {:.2f} \tTest loss: {:.2f}'.format(
+                    (steps+1), train_loss, test_loss))
+
     # report rmse for training and test data
     print('\nTraining set (rmse): {}'.format(sess.run(rmse,
           feed_dict = {input_X: X_train, input_y: y_train})[1]))
     print('Test set (rmse): {}'.format(sess.run(rmse,
           feed_dict = {input_X: X_test, input_y: y_test})[1]))
-
+          
 'Output':
-Step: 100
-Training loss: 22.466781616210938
-Test loss: 22.07303237915039
-Step: 200
-Training loss: 22.200075149536133
-Test loss: 22.23221206665039
-Step: 300
-Training loss: 22.1683406829834
-Test loss: 22.329965591430664
-Step: 400
-Training loss: 22.148780822753906
-Test loss: 22.37472915649414
-Step: 500
-Training loss: 22.132509231567383
-Test loss: 22.398637771606445
-Step: 600
-Training loss: 22.120956420898438
-Test loss: 22.415691375732422
-Step: 700
-Training loss: 22.113548278808594
-Test loss: 22.429784774780273
-Step: 800
-Training loss: 22.10904312133789
-Test loss: 22.441659927368164
-Step: 900
-Training loss: 22.106372833251953
-Test loss: 22.45148468017578
-Step: 1000
-Training loss: 22.104806900024414
-Test loss: 22.45938491821289
+Step 100:       Train loss: 23.52       Test loss: 25.54
+Step 200:       Train loss: 22.66       Test loss: 24.68
+Step 300:       Train loss: 22.46       Test loss: 24.49
+Step 400:       Train loss: 22.39       Test loss: 24.40
+Step 500:       Train loss: 22.36       Test loss: 24.35
+Step 600:       Train loss: 22.34       Test loss: 24.32
+Step 700:       Train loss: 22.33       Test loss: 24.30
+Step 800:       Train loss: 22.33       Test loss: 24.28
+Step 900:       Train loss: 22.32       Test loss: 24.27
+Step 1000:      Train loss: 22.32       Test loss: 24.27
 
-Training set (rmse): 4.701574802398682
-Test set (rmse): 4.711030006408691
- ```
+Training set (rmse): 4.724502086639404
+Test set (rmse): 4.775963306427002
+```
 
 Here are a few points and methods to take note of in the preceding code listing for Linear Regression with TensorFlow:
  - Note that transformation to standardize the feature dataset is performed after splitting the data into train and test sets. This action is performed in this manner to prevent information from the training data to pollute the test data which must remain unseen by the model.
@@ -623,12 +616,13 @@ Here are a few points and methods to take note of in the preceding code listing 
  - Flags implemented with `tf.app.flags` is used to cleanly and elegantly manage the static parameters for tuning the model.
  - The `tf.local_variables_initializer()` works just like the `tf.global_variables_initializer()`, however, the former initializes variables that are local to the machine whereas the later initializes variables that are shared across a distributed environment.
 
-#### Classification with TensorFlow
+### Classification with TensorFlow
 In this example, we use the popular Iris flowers dataset to build a multivariable Logistic Regression machine learning classifier with TensorFlow. The dataset is gotten from the Scikit-learn dataset package. 
 
 ```python
 # import packages
 import numpy as np
+import tensorflow as tf
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder
@@ -653,10 +647,11 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, shuffle=True)
 
 # call method to clear existing flags
 delete_flags(tf.flags.FLAGS)
+
 # wrap parameters as flags
 flags = tf.app.flags
 flags.DEFINE_float('learning_rate', 0.3, 'initial learning rate.')
-flags.DEFINE_integer('training_steps', 1000, 'number of steps to run model trainer.')
+flags.DEFINE_integer('epochs', 1000, 'number of steps to run model trainer.')
 flags.DEFINE_integer('display', 100, 'display training information per step.')
 flags.DEFINE_integer('ncols', X_train.shape[1], 'number of features in dataset.')
 flags.DEFINE_integer('batch_size', 30, 'number of batches.')
@@ -692,88 +687,63 @@ accuracy = tf.metrics.accuracy(labels =  tf.argmax(input_y, 1),
 
 # execute in Session
 with tf.Session() as sess:
-     # initialize all variables
-     tf.global_variables_initializer().run()
-     tf.local_variables_initializer().run()
+    # initialize all variables
+    tf.global_variables_initializer().run()
+    tf.local_variables_initializer().run()
     
-     ##############################
-     # Train the model iteratively
-     ##############################
-     for steps in range(FLAGS.training_steps):
-         mini_batch = zip(range(0, FLAGS.length,  FLAGS.batch_size),
-                    range(FLAGS.batch_size, FLAGS.length+1, FLAGS.batch_size))
+    # Train the model
+    for steps in range(FLAGS.epochs):
+        mini_batch = zip(range(0, FLAGS.length, FLAGS.batch_size),
+                   range(FLAGS.batch_size, FLAGS.length+1, FLAGS.batch_size))
         
-         # train data in mini-batches
-         for (start, end) in mini_batch:
-             sess.run(training_op, feed_dict = {input_X: X_train[start:end],
+        # train data in mini-batches
+        for (start, end) in mini_batch:
+            sess.run(training_op, feed_dict = {input_X: X_train[start:end],
                                                input_y: y_train[start:end]})
-          # print training performance 
-         if (steps+1) % FLAGS.display == 0:
-             print('Step: {}'.format((steps+1)))
-             # evaluate loss function
-             loss_fn = sess.run(loss, feed_dict = {input_X: X_train,
-                                                  input_y: y_train})
-             print('Training loss: {}'.format(loss_fn))
     
-             ###########################        
-             # Evaluate on test dataset
-             ###########################
-             test_loss = sess.run(loss, feed_dict = {input_X: X_test,
+        # evaluate loss function
+        if (steps+1) % FLAGS.display == 0:            
+            train_loss = sess.run(loss, feed_dict = {input_X: X_train,
+                                                     input_y: y_train})
+    
+            test_loss = sess.run(loss, feed_dict = {input_X: X_test,
                                                    input_y: y_test})
-             print('Test loss: {}'.format(test_loss))
+    
+            print('Step {}: \tTrain loss: {:.2f} \tTest loss: {:.2f}'.format(
+                    (steps+1), train_loss, test_loss))
             
-     # report accuracy for training and test data
-     print('\nTraining set (accuracy): {}'.format(sess.run(accuracy,
+    # report accuracy for training and test data
+    print('\nTraining set (accuracy): {}'.format(sess.run(accuracy,
            feed_dict = {input_X: X_train, input_y: y_train})[1]))
-     print('Test set (accuracy): {}'.format(sess.run(accuracy,
+    print('Test set (accuracy): {}'.format(sess.run(accuracy,
            feed_dict = {input_X: X_test, input_y: y_test})[1]))
 
 'Output':
-Step: 100
-Training loss: 0.11763448268175125
-Test loss: 0.11864632368087769
-Step: 200
-Training loss: 0.09227178245782852
-Test loss: 0.10881338268518448
-Step: 300
-Training loss: 0.08043140172958374
-Test loss: 0.10699447989463806
-Step: 400
-Training loss: 0.07292187213897705
-Test loss: 0.10686689615249634
-Step: 500
-Training loss: 0.06772999465465546
-Test loss: 0.10725913196802139
-Step: 600
-Training loss: 0.06385920941829681
-Test loss: 0.10787633806467056
-Step: 700
-Training loss: 0.060805533081293106
-Test loss: 0.10861878842115402
-Step: 800
-Training loss: 0.058298494666814804
-Test loss: 0.10943695157766342
-Step: 900
-Training loss: 0.05618155747652054
-Test loss: 0.11029914766550064
-Step: 1000
-Training loss: 0.054356906563043594
-Test loss: 0.11118444800376892
+Step 100:       Train loss: 0.10        Test loss: 0.21
+Step 200:       Train loss: 0.08        Test loss: 0.20
+Step 300:       Train loss: 0.07        Test loss: 0.18
+Step 400:       Train loss: 0.06        Test loss: 0.17
+Step 500:       Train loss: 0.05        Test loss: 0.17
+Step 600:       Train loss: 0.05        Test loss: 0.16
+Step 700:       Train loss: 0.05        Test loss: 0.16
+Step 800:       Train loss: 0.04        Test loss: 0.15
+Step 900:       Train loss: 0.04        Test loss: 0.15
+Step 1000:      Train loss: 0.04        Test loss: 0.15
 
 Training set (accuracy): 0.9910714030265808
-Test set (accuracy): 0.9866666793823242
+Test set (accuracy): 0.9733333587646484
 ```
 
 From the preceding code listing, take note of the following steps and functions:
 - Note how the target variable `y` is converted to a one-hot encoded matrix by using the `OneHotEncoder` function from Scikit-learn. They exist a TensorFlow method named `tf.one_hot` for performing the same function, even easier! The reader is encouraged to experiment with this.
 - Observe how the `tf.reduce_mean` and the `tf.nn.softmax_cross_entropy_with_logits_v2` methods are used to implement the logistic function for learning the probabilities that a data record or observation belongs to a particular class.
 - The Gradient Descent optimization algorithm ` tf.train.GradientDescentOptimizer` is used to train the logistic model.
-- Observe how the `weight` and `bias` variables are updated by the gradient descent optimizer within the `Session` when the `training_op` variable is executed. The variable `training_op` minimizes the logistic model which is the`loss` variable in the code. The `loss` variable, in turn, calls the `weight` and `bias` variables in implementing the linear model.
+- Observe how the `weight` and `bias` variables are updated by the gradient descent optimizer within the `Session` when the `training_op` variable is executed. The variable `training_op` minimizes the logistic model which is the `loss` variable in the code. The `loss` variable, in turn, calls the `weight` and `bias` variables in implementing the linear model.
 - The `tf.metrics.accuracy` method is used to implement the operation to compute the Accuracy of the model after training.
 - Again observe how `tf.app.flags` is used to cleanly and elegantly manage the static parameters for tuning the model.
 
 
-#### Multilayer Perceptron (MLP)
+### Multilayer Perceptron (MLP)
 In this section, we'll use the popular MNIST handwriting dataset to classify a set of handwriting images into their respective classes. This dataset is the _defacto_ dataset to work with when starting off with building a classifier for **image classification** problems. Nicely, because of its popularity, the MNIST dataset comes prepacked with TensorFlow in the module `tensorflow.examples.tutorials.mnist`. However, the original dataset can easily be downloaded from Yann LecCun's MNIST page (<a href="http://yann.lecun.com/exdb/mnist/">http://yann.lecun.com/exdb/mnist/</a>).
 
 The following code example will build a simple MLP Neural Network for the computer to classify a handwriting image into its appropriate class. This tutorial will introduce working with several TensorFlow methods for building neural networks. The code snippet follows with comments (as usual). A more detailed explanation of the code listing is provided thereafter. The network architecture has the following layers:
@@ -844,37 +814,23 @@ with tf.Session() as sess:
                                              rate_hidden: 0.5})
         # print accuracy after some steps 
         if (steps+1) % PRINT_FLAG == 0:
-            print('Step: {}'.format((steps+1)))
-            # evaluate loss function
             accuracy_train = sess.run(accuracy, {X: trainX, y: trainY,
                                                 rate_hidden: 1.0})
-            print('Accuracy on training data: {}'.format(accuracy_train[1]))
-        
-            # Evaluate on test dataset
             accuracy_test = sess.run(accuracy, {X: testX, y: testY,
                                                 rate_hidden: 1.0})
-            print('Accuracy on testing data: {}'.format(accuracy_test[1]))
+            print('Step {}: \tTraining Accuracy: {:.2f} \tTest Accuracy: {:.2f}'.format(
+                    (steps+1), accuracy_train[1], accuracy_test[1]))
 
 'Output':
 Extracting ./tmp/mnist_data/train-images-idx3-ubyte.gz
 Extracting ./tmp/mnist_data/train-labels-idx1-ubyte.gz
 Extracting ./tmp/mnist_data/t10k-images-idx3-ubyte.gz
 Extracting ./tmp/mnist_data/t10k-labels-idx1-ubyte.gz
-Step: 2
-Accuracy on training data: 0.9679999947547913
-Accuracy on testing data: 0.9668307900428772
-Step: 4
-Accuracy on training data: 0.9682750105857849
-Accuracy on testing data: 0.9678077101707458
-Step: 6
-Accuracy on training data: 0.9711459279060364
-Accuracy on testing data: 0.9710820317268372
-Step: 8
-Accuracy on training data: 0.9735280275344849
-Accuracy on testing data: 0.9734153747558594
-Step: 10
-Accuracy on training data: 0.9751968383789062
-Accuracy on testing data: 0.9750461578369141
+Step 2:         Training Accuracy: 0.96         Test Accuracy: 0.96
+Step 4:         Training Accuracy: 0.96         Test Accuracy: 0.96
+Step 6:         Training Accuracy: 0.97         Test Accuracy: 0.97
+Step 8:         Training Accuracy: 0.97         Test Accuracy: 0.97
+Step 10:        Training Accuracy: 0.97         Test Accuracy: 0.97
 ```
 
 From the preceding code listing, take note of the following steps and functions:
@@ -885,7 +841,7 @@ From the preceding code listing, take note of the following steps and functions:
   -  Adadelta optimizer `tf.train.AdadeltaOptimizer`, and
   -  Adagrad optimizer `tf.train.AdagradOptimizer`.
 
-#### Visualizing with TensorBoard
+### Visualizing with TensorBoard
 In this section, before proceeding with building advanced deep neural network models with TensorFlow, we will first examine visualizing our TensorFlow graphs and statistics using TensorBoard, as this becomes an indispensable tool moving forward. Here we improve on the previous code to build a model for handwriting image classification by adding methods to visualize the graph and other variable statistics in TensorBoard. Details of the code are provided after the listing.
 
 ```python
@@ -898,6 +854,7 @@ tf.reset_default_graph()
 
 # download data into current directory
 data = input_data.read_data_sets('./tmp/mnist_data', one_hot = True)
+
 # split data int training and evaluation sets
 trainX = data.train.images
 trainY = data.train.labels
@@ -968,40 +925,23 @@ with tf.Session() as sess:
                                              rate_hidden: 0.5})
         # print accuracy after some steps 
         if (steps+1) % PRINT_FLAG == 0:
-            print('Step: {}'.format((steps+1)))
-            # evaluate loss function
-            acc_train, summ_train = sess.run([accuracy, merged],
-                                             {X:trainX, y:trainY, rate_hidden:1.0})
-            # write train summary
-            train_writer.add_summary(summ_train, (steps+1))
-            print('Accuracy on training data: {}'.format(acc_train[1]))
-        
-            # Evaluate on test dataset
-            acc_test, summ_test = sess.run([accuracy, merged],
-                                           {X:testX, y:testY, rate_hidden:1.0})
-            test_writer.add_summary(summ_test, (steps+1))
-            print('Accuracy on testing data: {}'.format(acc_test[1]))
+            accuracy_train = sess.run(accuracy, {X: trainX, y: trainY,
+                                                rate_hidden: 1.0})
+            accuracy_test = sess.run(accuracy, {X: testX, y: testY,
+                                                rate_hidden: 1.0})
+            print('Step {}: \tTraining Accuracy: {:.2f} \tTest Accuracy: {:.2f}'.format(
+                    (steps+1), accuracy_train[1], accuracy_test[1]))
 
 'Output':
 Extracting ./tmp/mnist_data/train-images-idx3-ubyte.gz
 Extracting ./tmp/mnist_data/train-labels-idx1-ubyte.gz
 Extracting ./tmp/mnist_data/t10k-images-idx3-ubyte.gz
 Extracting ./tmp/mnist_data/t10k-labels-idx1-ubyte.gz
-Step: 2
-Accuracy on training data: 0.9624000191688538
-Accuracy on testing data: 0.9613692164421082
-Step: 4
-Accuracy on training data: 0.9632916450500488
-Accuracy on testing data: 0.9626615643501282
-Step: 6
-Accuracy on training data: 0.966232419013977
-Accuracy on testing data: 0.9660820364952087
-Step: 8
-Accuracy on training data: 0.9665399789810181
-Accuracy on testing data: 0.96605384349823
-Step: 10
-Accuracy on training data: 0.969085693359375
-Accuracy on testing data: 0.9690707921981812
+Step 2:         Training Accuracy: 0.96         Test Accuracy: 0.96
+Step 4:         Training Accuracy: 0.96         Test Accuracy: 0.96
+Step 6:         Training Accuracy: 0.97         Test Accuracy: 0.97
+Step 8:         Training Accuracy: 0.97         Test Accuracy: 0.97
+Step 10:        Training Accuracy: 0.97         Test Accuracy: 0.97
 ```
 
 From the preceding code listing, take note of the following steps and functions:
@@ -1021,7 +961,7 @@ To run TensorBoard, execute the code `tensorboard_pid = ml.TensorBoard.start('./
     </div>
 </div>
 
-#### Running TensorFlow with GPUs
+### Running TensorFlow with GPUs
 GPU is short for Graphics Processing Unit. It is a specialized processor designed for carrying out simple calculations on massive datasets, which is often the case when building models with deep learning techniques. TensorFlow supports processing on both the CPUs and GPUs.
 
 Certain TensorFlow operations (like matrix multiplication `tf.matmul`) are optimized to run on both CPUs and GPUs. When such operations are called, TensorFlow attempts to run them first on the systems GPU, if no GPUs are present, then TensorFlow will run on the CPU. To know which device is exeuting a particular operation set the attribute `log_device_placement` to `True` when creating the Session object. As an example:
@@ -1061,6 +1001,7 @@ with tf.device('/gpu:0'):
 ```
 
 If multiple devices exits on the system, for example multiple GPUs, set the attribute `allow_soft_placement` to `True` when creating a Session object to allow TensorFlow to select the available and supported device on the system, if the specifc one assigned is not present.
+
 ```python
 with tf.device('/gpu:0'):
     mul_2 = tf.constant([2, 4, 6, 8, 10, 12, 14, 16, 18], shape=[3, 3], name='mul_2')
@@ -1084,6 +1025,7 @@ TensorFlow can leverage processing on multiple GPUs to greatly speed up the spee
 </div>
 
 Here is an example in code of executing subsets of the data on different GPU devices:
+
 ```python
 import tensorflow as tf
 
@@ -1121,7 +1063,7 @@ sess.close()
 Running average: 26.0
 ```
 
-#### Convolutional Neural Networks
+### Convolutional Neural Networks
 In this example, we will build a Convolutional Neural Network (CNN) to classify images from the CIFAR-10 dataset. CIFAR-10 is another standard image classification dataset to classify a coloured 32 x 32 pixel image data into 10 image classes namely, airplane, automobile, bird, cat, deer, dog, frog, horse, ship, and truck. In keeping with the simplicity of this text, we will work with the version of this dataset that comes prepacked with Keras `tf.keras.datasets` instead of writing the code to download and import the dataset from <a href="https://www.cs.toronto.edu/~kriz/cifar.html">https://www.cs.toronto.edu/~kriz/cifar.html</a> into Python. Moreso, the focus of this section is exclusively on using TensorFlow functions to build a CNN classifier.
 
 The CNN model architecture implemented loosely mirrors the Krizhevsky's architecture. The network architecture has the following layers:
@@ -1147,7 +1089,7 @@ import google.datalab.ml as ml
 # clear graph (if any) before running
 tf.reset_default_graph()
 
-# download and load data from https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz
+# method to download and load data from https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz
 (x_train, y_train), (x_test, y_test) = tf.keras.datasets.cifar10.load_data()
 
 # convert targets to one-hot vectors
@@ -1361,24 +1303,1110 @@ From the preceding code listing, take note of the following steps and functions:
 <div class="fig figcenter fighighlight">
     <img src="/assets/seminar_IEEE/cnn_tensorboard.png">
     <div class="figcaption" style="text-align: center;">
-        Figure 11: Visualization of CNN Graph with TensorBoard. Top left: Graph Dashboard - showing visual diagram of the CNN architecture. Top right: Scalars dashboard - illustrates the changes in the Accuracy and F1 score. Bottom left: Scalars dashboard - shows the changes in the Loss and Precision score. Bottom right:** Scalars dashboard - screenshot of Precision and Recall score.
+        Figure 11: Visualization of CNN Graph with TensorBoard. Top left: Graph Dashboard - showing visual diagram of the CNN architecture. Top right: Scalars dashboard - illustrates the changes in the Accuracy and F1 score. Bottom left: Scalars dashboard - shows the changes in the Loss and Precision score. Bottom right: Scalars dashboard - screenshot of Precision and Recall score.
     </div>
 </div>
 
-#### Saving and Loading Models
+### Save and Restore TensorFlow Graph Variables 
+TensorFlow provides a mechanism to save and restore the state of trained Variables for an already constructed Graph without having to run the code to re-train the Variables each time the program listing is revisited. Let's see an example of this using this simple TensorFlow programme.
 
-#### Recurrent Neural Networks
+```python
+import tensorflow as tf
+tf.reset_default_graph()    
 
+# create variables
+a = tf.get_variable(name = "a", initializer = tf.constant(3.0, dtype=tf.float32))
+b = tf.get_variable(name = "b", initializer = tf.constant(4.0, dtype=tf.float32))
+c = tf.sqrt(tf.pow(a,2) + tf.pow(b,2))
 
-#### Autoencoders
+# initialize variables
+init_op = tf.global_variables_initializer()
+
+# ops to save variables
+saver = tf.train.Saver()
+
+with tf.Session() as sess:
+    sess.run(init_op)
+    sess.run(c)
+    save_path = saver.save(sess, './pythagoras/model.ckpt')
+    print("Model saved in file: %s" % save_path)
+
+# restore the variables
+with tf.Session() as sess:
+    sess.run(init_op)
+    # Restore variables from disk.
+    saver.restore(sess, './pythagoras/model.ckpt')
+    print("a: %s" % a.eval())
+    print("b: %s" % b.eval())
+    print("c: %s" % c.eval())
+  
+    print("Variable restored.")
+
+'Output':
+INFO:tensorflow:Restoring parameters from ./pythagoras/model.ckpt
+a: 3.0
+b: 4.0
+c: 5.0
+Variable restored.
+```
+
+From the preceding code listing, take note of the following steps and functions:
+- The object `tf.train.Saver()` initialized in the variable `saver` contains the methods `save` and `restore` for saving and restoring Graph variables.
+- After running the Session instance to save the variables; the variables are saved in a folder called `pythagoras`. Within the folder, the name `model.ckpt`, is used as a prefix to store the checkpoint files.
+- To restore the Graphs variables, build the graph and run the Session instance containing `saver.restore`.
+
+### Recurrent Neural Networks
+This section goes through brief examples of using Recurrent Neural Networks to predict the target of a univariate and multivariate timeseries dataset using TensorFlow.
+
+#### Univariate Timeseries with RNN
+The dataset for this example is the Nigeria power consumption data from January 1 - March 11 by Hipel and McLeod (1994). Retrieved from DataMarket.
+
+```python
+import tensorflow as tf
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import MinMaxScaler
+
+# data url
+url = "https://raw.githubusercontent.com/dvdbisong/gcp-learningmodels-book/master/Chapter_12/nigeria-power-consumption.csv"
+
+# load data
+parse_date = lambda dates: pd.datetime.strptime(dates, '%d-%m')
+data = pd.read_csv(url, parse_dates=['Month'], index_col='Month',
+                   date_parser=parse_date,
+                   engine='python', skipfooter=2)
+
+# print column name
+data.columns
+
+# change column names
+data.rename(columns={'Nigeria power consumption': 'power-consumption'},
+            inplace=True)
+
+# split in training and evaluation set
+data_train, data_eval = train_test_split(data, test_size=0.2, shuffle=False)
+
+# MinMaxScaler - center ans scale the dataset
+scaler = MinMaxScaler(feature_range=(0, 1))
+data_train = scaler.fit_transform(data_train)
+data_eval = scaler.fit_transform(data_eval)
+
+# adjust univariate data for timeseries prediction
+def convert_to_sequences(data, sequence, is_target=False):
+    temp_df = []
+    for i in range(len(data) - sequence):
+        if is_target:
+            temp_df.append(data[(i+1): (i+1) + sequence])
+        else:
+            temp_df.append(data[i: i + sequence])
+    return np.array(temp_df)
+
+# parameters
+time_steps = 20
+inputs = 1
+neurons = 100
+outputs = 1
+
+# create training and testing data
+train_x = convert_to_sequences(data_train, time_steps, is_target=False)
+train_y = convert_to_sequences(data_train, time_steps, is_target=True)
+
+eval_x = convert_to_sequences(data_eval, time_steps, is_target=False)
+eval_y = convert_to_sequences(data_eval, time_steps, is_target=True)
+
+# model parameters
+learning_rate = 0.001
+epochs = 2500
+batch_size = 50
+length = train_x.shape[0]
+display = 500
+
+# clear graph (if any) before running
+tf.reset_default_graph()
+
+X = tf.placeholder(tf.float32, [None, time_steps, inputs])
+y = tf.placeholder(tf.float32, [None, time_steps, outputs])
+
+# get single output value at each time step by wrapping the cell
+# in an OutputProjectionWrapper
+cell = tf.contrib.rnn.OutputProjectionWrapper(
+        tf.contrib.rnn.BasicRNNCell(num_units=neurons, activation=tf.nn.relu),
+        output_size=outputs)
+outputs, states = tf.nn.dynamic_rnn(cell, X, dtype=tf.float32)
+
+# squared error loss or cost function for linear regression
+loss = tf.losses.mean_squared_error(labels=y, predictions=outputs)
+# optimizer to minimize cost
+optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate)
+training_op = optimizer.minimize(loss)
+
+# save the model
+saver = tf.train.Saver()
+
+# execute in Session
+with tf.Session() as sess:
+    # initialize all variables
+    tf.global_variables_initializer().run()
+    
+    # Train the model
+    for steps in range(epochs):
+        mini_batch = zip(range(0, length, batch_size),
+                   range(batch_size, length+1, batch_size))
+        
+        # train data in mini-batches
+        for (start, end) in mini_batch:
+            sess.run(training_op, feed_dict = {X: train_x[start:end,:,:],
+                                               y: train_y[start:end,:,:]})
+    
+        # print training performance 
+        if (steps+1) % display == 0:
+            # evaluate loss function
+            loss_fn = loss.eval(feed_dict = {X: eval_x, y: eval_y})
+            print('Step: {}  \tTraining loss (mse): {}'.format((steps+1), loss_fn))
+             
+        saver.save(sess, "power_model_folder/ng_power_model")
+    
+    y_pred = sess.run(outputs, feed_dict={X: eval_x})
+    
+    plt.title("Model Testing", fontsize=12)
+    plt.plot(eval_x[0,:,0], "b--", markersize=10, label="training instance")
+    plt.plot(eval_y[0,:,0], "g--", markersize=10, label="targets")
+    plt.plot(y_pred[0,:,0], "r--", markersize=10, label="model prediction")
+    plt.legend(loc="upper left")
+    plt.xlabel("Time")
+    plt.savefig('rnn_ts_model_testing.png', format='png', dpi=2000)
+    
+# use model to predict sequences using training data as seed
+with tf.Session() as sess:
+    saver.restore(sess, "power_model_folder/ng_power_model")
+    rnn_data = list(data_train[:20])
+    for i in range(len(data_train) - time_steps):
+        batch = np.array(rnn_data[-time_steps:]).reshape(1, time_steps, 1)
+        y_pred = sess.run(outputs, feed_dict={X: batch})
+        rnn_data.append(y_pred[0, -1, 0])
+    
+    plt.title("RNN vs. Original series", fontsize=12)
+    plt.plot(data_train, "b--", markersize=10, label="Original series")
+    plt.plot(rnn_data, "g--", markersize=10, label="RNN generated series")
+    plt.legend(loc="upper left")
+    plt.xlabel("Time")
+    plt.savefig('rnn_ts_vs_original.png', format='png', dpi=2000)
+    
+    # inverse to normal scale and plot
+    data_train_inverse = scaler.inverse_transform(data_train.reshape(-1, 1))
+    rnn_data_inverse = scaler.inverse_transform(np.array(rnn_data).reshape(-1, 1))
+    
+    plt.title("RNN vs. Original series with normal scale", fontsize=12)
+    plt.plot(data_train_inverse, "b--", markersize=10, label="Original series")
+    plt.plot(rnn_data_inverse, "g--", markersize=10, label="RNN generated series")
+    plt.legend(loc="upper left")
+    plt.xlabel("Time")
+    plt.savefig('rnn_ts_vs_original_normal_scale.png', format='png', dpi=2000)
+
+'Output':
+Step: 500       Training loss (mse): 0.03262907266616821
+Step: 1000      Training loss (mse): 0.03713105246424675
+Step: 1500      Training loss (mse): 0.03985978662967682
+Step: 2000      Training loss (mse): 0.041361670941114426
+Step: 2500      Training loss (mse): 0.041800327599048615
+INFO:tensorflow:Restoring parameters from power_model_folder/ng_power_model
+```
+
+From the preceding code listing, take note of the following steps and functions:
+- The dataset is pre-processed for timeseries modeling using Recurrent Neural Networks by converting the the data input and otuputs into sequences using the method `convert_to_sequences`. This method splits the dataset into rolling sequences consiting of 20 rows (or timesteps) using a window of `1`. In Figure 12, the example univariate dataset is converted into sequences of 5 time steps, where output sequence is one step ahead of the input sequence. Each sequence contains 5 rows (determined by the `time_steps` variable) and in this univariate case, 1 column.
+<div class="fig figcenter fighighlight">
+    <img src="/assets/seminar_IEEE/univariate_sequences.png">
+    <div class="figcaption" style="text-align: center;">
+        Figure 12: Converting a Univariate series into sequences for prediction with RNNs. Left: Sample univariate dataset. Center: Input sequence. Right: Output sequence.
+    </div>
+</div> 
+- When modelling using RNNs it is important to scale the dataset to have values within the same range.
+- The method `tf.contrib.rnn.BasicRNNCell` implements a vanilla RNN cell.
+- The method `tf.contrib.rnn.OutputProjectionWrapper` is used to add a Dense or fully connected layer to the RNN cell. However while this is a simple solution, this method is not the most efficient. In future examples, we will pass the outputs of the recurrent network in a Dense layer using `tf.layers.dense` after reshaping.
+- The method `tf.nn.dynamic_rnn` creates a recurrent neural network by dynamically unrolling the RNN cell.
+- The first plot is the model predictions also showing the targets and the training instance.
+<div class="fig figcenter fighighlight">
+    <img src="/assets/seminar_IEEE/rnn_ts_model_testing.png" width="70%" height="70%">
+    <div class="figcaption" style="text-align: center;">
+        Figure 13: RNN Model Testing.
+    </div>
+</div> 
+- The next two plots shows the original series and the RNN generated series in both the scaled and normal values.
+<div class="fig figcenter fighighlight">
+    <img src="/assets/seminar_IEEE/rnn_ts_vs_original.png" width="70%" height="70%">
+    <img src="/assets/seminar_IEEE/rnn_ts_vs_original_normal_scale.png" width="70%" height="70%">
+    <div class="figcaption" style="text-align: center;">
+        Figure 14: Original series vs. RNN generated series. Left: Scaled data values. Right: Normal data values
+    </div>
+</div> 
+
+#### Deep RNN
+The example in this section updates sections of the previous example and code, and modifies the RNN cell to become a Deep RNN network. This network is more powerful and can learn more complex sequences. In this example, we use another type of RNN cell called the GRU or Gated Recurrent Unit.
+
+```python
+import tensorflow as tf
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import MinMaxScaler
+
+# data url
+url = "https://raw.githubusercontent.com/dvdbisong/gcp-learningmodels-book/master/Chapter_12/nigeria-power-consumption.csv"
+
+# load data
+parse_date = lambda dates: pd.datetime.strptime(dates, '%d-%m')
+data = pd.read_csv(url, parse_dates=['Month'], index_col='Month',
+                   date_parser=parse_date,
+                   engine='python', skipfooter=2)
+
+# print column name
+data.columns
+
+# change column names
+data.rename(columns={'Nigeria power consumption': 'power-consumption'},
+            inplace=True)
+
+# split in training and evaluation set
+data_train, data_eval = train_test_split(data, test_size=0.2, shuffle=False)
+
+# MinMaxScaler - center ans scale the dataset
+scaler = MinMaxScaler(feature_range=(0, 1))
+data_train = scaler.fit_transform(data_train)
+data_eval = scaler.fit_transform(data_eval)
+
+# adjust univariate data for timeseries prediction
+def convert_to_sequences(data, sequence, is_target=False):
+    temp_df = []
+    for i in range(len(data) - sequence):
+        if is_target:
+            temp_df.append(data[(i+1): (i+1) + sequence])
+        else:
+            temp_df.append(data[i: i + sequence])
+    return np.array(temp_df)
+
+# parameters
+time_steps = 20
+inputs = 1
+neurons = 50
+outputs = 1
+
+# create training and testing data
+train_x = convert_to_sequences(data_train, time_steps, is_target=False)
+train_y = convert_to_sequences(data_train, time_steps, is_target=True)
+
+eval_x = convert_to_sequences(data_eval, time_steps, is_target=False)
+eval_y = convert_to_sequences(data_eval, time_steps, is_target=True)
+
+# model parameters
+layers_num = 3
+learning_rate = 0.001
+epochs = 2500
+batch_size = 50
+length = train_x.shape[0]
+display = 500
+
+# clear graph (if any) before running
+tf.reset_default_graph()
+
+X = tf.placeholder(tf.float32, [None, time_steps, inputs])
+y = tf.placeholder(tf.float32, [None, time_steps, outputs])
+
+# Deep RNN Cell
+layers = [tf.contrib.rnn.GRUCell(num_units=neurons,activation=tf.nn.relu) \
+          for layer in range(layers_num)]
+
+stacked_cells = tf.contrib.rnn.MultiRNNCell(layers)
+multi_output, states = tf.nn.dynamic_rnn(stacked_cells, X, dtype=tf.float32)
+
+# pass into Dense layer
+stacked_outputs = tf.reshape(multi_output, [-1, neurons])
+dense_output = tf.layers.dense(inputs=stacked_outputs, units=outputs)
+outputs = tf.reshape(dense_output, [-1, time_steps, outputs])
+
+# squared error loss or cost function for linear regression
+loss = tf.losses.mean_squared_error(labels=y, predictions=outputs)
+# optimizer to minimize cost
+optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate)
+training_op = optimizer.minimize(loss)
+
+# save the model
+saver = tf.train.Saver()
+
+# execute in Session
+with tf.Session() as sess:
+    # initialize all variables
+    tf.global_variables_initializer().run()
+    
+    # Train the model
+    for steps in range(epochs):
+        mini_batch = zip(range(0, length, batch_size),
+                   range(batch_size, length+1, batch_size))
+        
+        # train data in mini-batches
+        for (start, end) in mini_batch:
+            sess.run(training_op, feed_dict = {X: train_x[start:end,:,:],
+                                               y: train_y[start:end,:,:]})
+    
+        # print training performance 
+        if (steps+1) % display == 0:
+            # evaluate loss function
+            loss_fn = loss.eval(feed_dict = {X: eval_x, y: eval_y})
+            print('Step: {}  \tTraining loss (mse): {}'.format((steps+1), loss_fn))
+             
+        saver.save(sess, "power_model_folder_deep/deep_ng_power_model")
+    
+    y_pred = sess.run(outputs, feed_dict={X: eval_x})
+    
+    plt.figure(1)
+    plt.title("Deep GRU RNN - Model Testing", fontsize=12)
+    plt.plot(eval_x[0,:,0], "b--", markersize=10, label="training instance")
+    plt.plot(eval_y[0,:,0], "g--", markersize=10, label="targets")
+    plt.plot(y_pred[0,:,0], "r--", markersize=10, label="model prediction")
+    plt.legend()
+    plt.xlabel("Time")
+    plt.savefig('deep_GRU_rnn_ts_model_testing.png', format='png', dpi=2000)
+    
+# use model to predict sequences using training data as seed
+with tf.Session() as sess:
+    saver.restore(sess, "power_model_folder_deep/deep_ng_power_model")
+    rnn_data = list(data_train[:20])
+    for i in range(len(data_train) - time_steps):
+        batch = np.array(rnn_data[-time_steps:]).reshape(1, time_steps, 1)
+        y_pred = sess.run(outputs, feed_dict={X: batch})
+        rnn_data.append(y_pred[0, -1, 0])
+    
+    plt.figure(2)
+    plt.title("Deep GRU RNN vs. Original series", fontsize=12)
+    plt.plot(data_train, "b--", markersize=10, label="Original series")
+    plt.plot(rnn_data, "g--", markersize=10, label="Deep GRU RNN generated series")
+    plt.legend(loc="upper left")
+    plt.xlabel("Time")
+    plt.savefig('deep_GRU_rnn_ts_vs_original.png', format='png', dpi=2000)
+    
+    # inverse to normal scale and plot
+    data_train_inverse = scaler.inverse_transform(data_train.reshape(-1, 1))
+    rnn_data_inverse = scaler.inverse_transform(np.array(rnn_data).reshape(-1, 1))
+    
+    plt.figure(3)
+    plt.title("Deep GRU RNN vs. Original series with normal scale", fontsize=12)
+    plt.plot(data_train_inverse, "b--", markersize=10, label="Original series")
+    plt.plot(rnn_data_inverse, "g--", markersize=10, label="Deep GRU RNN generated series")
+    plt.legend(loc="upper left")
+    plt.xlabel("Time")    
+    plt.savefig('deep_GRU_rnn_ts_vs_original_normal_scale.png', format='png', dpi=2000)
+
+'Output':
+Step: 500       Training loss (mse): 0.13439016044139862
+Step: 1000      Training loss (mse): 0.15328247845172882
+Step: 1500      Training loss (mse): 0.1200922280550003
+Step: 2000      Training loss (mse): 0.12217740714550018
+Step: 2500      Training loss (mse): 0.12361736595630646
+INFO:tensorflow:Restoring parameters from power_model_folder_deep/deep_ng_power_model
+```
+
+From the preceding code listing, take note of the following steps and functions:
+- The method `tf.contrib.rnn.GRUCell` implements a GRU cell.
+- Observe how multiple GRU cells are created using list comprehensions in place of a for-loop.
+- The method `tf.contrib.rnn.MultiRNNCell` puts together the deep recurrent cells.
+- Also in this example, in place of the `tf.contrib.rnn.OutputProjectionWrapper` method, the outputs of the recurrent network layer are reshaped into a 1-D tensor and passed to a Dense layer using `tf.layers.dense`. The ouput of the Dense layer is then resahped back into a 3-D tensor.
+- The first plot is the model predictions which also shows the targets and the training instance.
+<div class="fig figcenter fighighlight">
+    <img src="/assets/seminar_IEEE/deep_GRU_rnn_ts_model_testing.png" width="70%" height="70%">
+    <div class="figcaption" style="text-align: center;">
+        Figure 15: Deep GRU RNN Model Testing.
+    </div>
+</div> 
+- The next two plots are the original series and the Deep GRU RNN generated series shown in both the scaled and normal values.
+<div class="fig figcenter fighighlight">
+    <img src="/assets/seminar_IEEE/deep_GRU_rnn_ts_vs_original.png" width="70%" height="70%">
+    <img src="/assets/seminar_IEEE/deep_GRU_rnn_ts_vs_original_normal_scale.png" width="70%" height="70%">
+    <div class="figcaption" style="text-align: center;">
+        Figure 16: Original series vs. Deep GRU RNN generated series. Left: Scaled data values. Right: Normal data values.
+    </div>
+</div> 
+
+#### Multivariate Timeseries with RNN
+The dataset for this example is the Dow Jones Index Data Set from the famous UCI Machine Learning Repository. In this stock dataset, each row contains the stock price record for a week including the percentage of return that stock has in the following week `percent_change_next_weeks_price`. For this example, the record for the previous week is used to predict the percent change in price for the next two weeks for Bank of America, BAC stock prices.
+
+```python
+import tensorflow as tf
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import MinMaxScaler
+
+# data url
+url = "https://raw.githubusercontent.com/dvdbisong/gcp-learningmodels-book/master/Chapter_12/dow_jones_index.data"
+
+# load data
+data = pd.read_csv(url, parse_dates=['date'], index_col='date')
+
+# print column name
+data.columns
+
+# print column datatypes
+data.dtypes
+
+# parameters
+time_steps = 1
+inputs = 10
+outputs = 1
+stock ='BAC'  # Bank of America
+
+def clean_dataset(data):
+    # strip dollar sign from `object` type columns
+    col = ['open', 'high', 'low', 'close', 'next_weeks_open', 'next_weeks_close']
+    data[col] = data[col].replace({'\$': ''}, regex=True)
+    # drop NaN
+    data.dropna(inplace=True)
+    # rearrange columns
+    columns = ['quarter', 'stock', 'open', 'high', 'low', 'close', 'volume',
+       'percent_change_price', 'percent_change_volume_over_last_wk',
+       'previous_weeks_volume', 'next_weeks_open', 'next_weeks_close',
+       'days_to_next_dividend', 'percent_return_next_dividend',
+       'percent_change_next_weeks_price']
+    data = data[columns]
+    return data
+
+def data_transform(data):
+    # select stock data belonging to Bank of America
+    data = data[data.stock == stock]
+    # adjust target(t) to depend on input (t-1)
+    data.percent_change_next_weeks_price = data.percent_change_next_weeks_price.shift(-1)
+    # remove nans as a result of the shifted values
+    data = data.iloc[:-1,:]
+    # split quarter 1 as training data and quarter 2 as testing data
+    train_df = data[data.quarter == 1]
+    test_df = data[data.quarter == 2]   
+    return (np.array(train_df), np.array(test_df))
+
+def normalize_and_scale(train_df, test_df):
+    # remove string columns and convert to float
+    train_df = train_df[:,2:].astype(float,copy=False)
+    test_df = test_df[:,2:].astype(float,copy=False)
+    # MinMaxScaler - center and scale the dataset
+    scaler = MinMaxScaler(feature_range=(0, 1))    
+    train_df_scale = scaler.fit_transform(train_df[:,2:])
+    test_df_scale = scaler.fit_transform(test_df[:,2:])  
+    return (scaler, train_df_scale, test_df_scale)
+
+# clean the dataset
+data = clean_dataset(data)
+
+# select Dow Jones stock and split into training and test sets
+train_df, test_df = data_transform(data)
+
+# scale the data
+scaler, train_df_scaled, test_df_scaled = normalize_and_scale(train_df, test_df)
+
+# split train/ test
+train_X, train_y = train_df_scaled[:, :-1], train_df_scaled[:, -1]
+test_X, test_y = test_df_scaled[:, :-1], test_df_scaled[:, -1]
+
+# reshape inputs to 3D array
+train_X = train_X[:,None,:]
+test_X = test_X[:,None,:]
+
+# reshape outputs
+train_y = np.reshape(train_y, (-1,outputs))
+test_y = np.reshape(test_y, (-1,outputs))
+
+# model parameters
+learning_rate = 0.002
+epochs = 1000
+batch_size = int(train_X.shape[0]/5)
+length = train_X.shape[0]
+display = 100
+layers_num = 3
+neurons = 150
+
+# clear graph (if any) before running
+tf.reset_default_graph()
+
+X = tf.placeholder(tf.float32, [None, time_steps, inputs])
+y = tf.placeholder(tf.float32, [None, outputs])
+
+# Deep LSTM Cell
+layers = [tf.contrib.rnn.BasicLSTMCell(num_units=neurons,activation=tf.nn.relu) \
+          for layer in range(layers_num)]
+
+stacked_cells = tf.contrib.rnn.MultiRNNCell(layers)
+multi_output, states = tf.nn.dynamic_rnn(stacked_cells, X, dtype=tf.float32)
+
+# pass into Dense layer
+stacked_outputs = tf.reshape(multi_output, [-1, neurons])
+dense_output = tf.layers.dense(inputs=stacked_outputs, units=outputs)
+
+# squared error loss or cost function for linear regression
+loss = tf.losses.mean_squared_error(labels=y, predictions=dense_output)
+
+# optimizer to minimize cost
+optimizer = tf.train.RMSPropOptimizer(learning_rate=learning_rate)
+training_op = optimizer.minimize(loss)
+
+# execute in Session
+with tf.Session() as sess:
+    # initialize all variables
+    tf.global_variables_initializer().run()
+    
+    # Train the model
+    for steps in range(epochs):
+        mini_batch = zip(range(0, length, batch_size),
+                   range(batch_size, length+1, batch_size))
+        
+        # train data in mini-batches
+        for (start, end) in mini_batch:
+            sess.run(training_op, feed_dict = {X: train_X[start:end,:,:],
+                                               y: train_y[start:end,:]})
+    
+        # print training performance 
+        if (steps+1) % display == 0:
+            # evaluate loss function
+            loss_fn = loss.eval(feed_dict = {X: test_X, y: test_y})
+            print('Step: {}  \tTraining loss (mse): {}'.format((steps+1), loss_fn))
+            
+    # Test model
+    y_pred = sess.run(dense_output, feed_dict={X: test_X})
+    
+    plt.figure(1)
+    plt.title("LSTM RNN Model Testing for '{}' stock".format(stock), fontsize=12)
+    plt.plot(test_y, "g--", markersize=10, label="targets")
+    plt.plot(y_pred, "r--", markersize=10, label="model prediction")
+    plt.legend()
+    plt.xlabel("Time")
+    plt.savefig('lstm_rnn_ts_model_testing.png', format='png', dpi=2000)
+
+'Output':
+Step: 100       Training loss (mse): 0.1169147714972496
+Step: 200       Training loss (mse): 0.10158639401197433
+Step: 300       Training loss (mse): 0.10255051404237747
+Step: 400       Training loss (mse): 0.10251575708389282
+Step: 500       Training loss (mse): 0.09951873868703842
+Step: 600       Training loss (mse): 0.09933555126190186
+Step: 700       Training loss (mse): 0.10997023433446884
+Step: 800       Training loss (mse): 0.0974557027220726
+Step: 900       Training loss (mse): 0.09203604608774185
+Step: 1000      Training loss (mse): 0.09838250279426575
+```
+
+From the preceding code listing, take note of the following steps and functions:
+- The method named `clean_dataset` carries out some rudimentary clean-up of the dataset to make it suitable for modeling. The actions taken on this particular dataset involves removing the dollar sign from certain of the data columns, removing missing values and rearranging the data columns so target attribute `percent_change_next_weeks_price` is the last column.
+- The method named `data_transform` subselects the stock records belonging to 'Bank of America', and the target attribute is adjusted so that the previous week record is used to predict the percent change in price for the next two weeks. Also, the dataset is split into training and testing sets.
+- The method named `normalize_and_scale` removes the non-numeric columns and scales the dataset attributes.
+- Observe how multiple LSTM cells `tf.contrib.rnn.BasicLSTMCell` are created using list comprehensions.
+- Also in this example, in place of the `tf.contrib.rnn.OutputProjectionWrapper` method, the outputs of the recurrent network layer are reshaped into a 1-D tensor and passed to a Dense layer using `tf.layers.dense`. Note that in this example, we did not resahpe the output back into a 3-D tensor because our original target is a 1-D value and not a sequence.
+- The output plot is the model predictions showing the targets and the training instance.
+<div class="fig figcenter fighighlight">
+    <img src="/assets/seminar_IEEE/lstm_rnn_ts_model_testing.png" width="70%" height="70%">
+    <div class="figcaption" style="text-align: center;">
+        Figure 17: LSTM RNN Model Testing for Bank of America stock.
+    </div>
+</div>
+
+### Autoencoders
+The code example in the section shows how to implement an Autoencoder network using TensorFlow. For simplicity, the MNIST handwriting dataset is used to create reconstructions of the original images. In this example, a Stacked Autoencoder is implemented. The code listing is presented below and corresponding notes on the code is shown thereafter.
+
+```python
+import tensorflow as tf
+from tensorflow.examples.tutorials.mnist import input_data
+import matplotlib.pyplot as plt
+
+# parameters
+batch_size = 128
+learning_rate = 0.002
+epoch = 1000
+display = 100
+
+# get MNIST data
+data = input_data.read_data_sets('./MNIST', one_hot=False)
+
+# split to test and train iages
+test_x = data.test.images
+test_y = data.test.labels
+
+# input placeholder
+input_X = tf.placeholder(tf.float32, [None, 784])  # 28 * 28 pixel images
+
+# encoder
+encoder_layer_1 = tf.layers.dense(input_X, 512, tf.nn.relu)
+encoder_layer_2 = tf.layers.dense(encoder_layer_1, 128, tf.nn.relu)
+encoder_layer_3 = tf.layers.dense(encoder_layer_2, 64, tf.nn.relu)
+coding_layer = tf.layers.dense(encoder_layer_3, 4)
+
+# decoder
+decoder_layer_1 = tf.layers.dense(coding_layer, 64, tf.nn.relu)
+decoder_layer_2 = tf.layers.dense(decoder_layer_1, 128, tf.nn.relu)
+decoder_layer_3 = tf.layers.dense(decoder_layer_2, 512, tf.nn.relu)
+decoded_output = tf.layers.dense(decoder_layer_3, 784)
+
+loss = tf.losses.mean_squared_error(labels=input_X, predictions=decoded_output)
+training_op = tf.train.AdamOptimizer(learning_rate).minimize(loss)
+
+# execute autoencoder graph in session
+sess = tf.Session()
+sess.run(tf.global_variables_initializer())
+
+for step in range(epoch):
+    batch_x, batch_y = data.train.next_batch(batch_size)
+    _, loss_ = sess.run([training_op, loss], {input_X: batch_x})
+    
+    # print loss
+    if step % display == 0:
+        print("loss: ", loss_)
+    
+# visualize reconstruction
+sample_size = 6
+test_image = data.test.images[:sample_size]
+# reconstruct test samples
+test_reconstruction = sess.run(decoded_output, feed_dict={input_X: test_image})
+
+plt.figure(figsize = (8,25))
+plt.suptitle('Stacked Autoencoder Reconstruction', fontsize=16)
+for i in range(sample_size):
+    plt.subplot(sample_size, 2, i*2+1)
+    plt.title('Original image')
+    plt.imshow(test_image[i].reshape((28, 28)), cmap="Greys", interpolation="nearest", aspect='auto')
+    plt.subplot(sample_size, 2, i*2+2)
+    plt.title('Reconstructed image')
+    plt.imshow(test_reconstruction[i].reshape((28, 28)), cmap="Greys", interpolation="nearest", aspect='auto')
+plt.savefig('stacked_autoencoder.png', format='png', dpi=1000)
+
+# close Session
+sess.close()
+
+'Output':
+loss:  0.11387876
+loss:  0.047890253
+loss:  0.037955094
+loss:  0.03574044
+loss:  0.035101265
+loss:  0.032688208
+loss:  0.031728305
+loss:  0.03372544
+loss:  0.029142274
+loss:  0.031097852
+```
+
+From the preceding code listing, take note of the following steps and functions:
+- Observe closely the arrangement of the encoder layers, the network "codings" and the decoder layers of the Stacked Autoencoder. Specifically note how the corresponding layer arrangement of the encoder and the decoder have the same number of neurons.
+- The loss error measures the squared difference between the inputs into the Autoencoder network and the decoder output.
+- The plot constrasts the reconstructed images from the Autoencoder network with the original images in the dataset
+<div class="fig figcenter fighighlight">
+    <img src="/assets/seminar_IEEE/stacked_autoencoder.png" width="50%" height="50%">
+    <div class="figcaption" style="text-align: center;">
+        Figure 18: Stacked Autoencoder Reconstruction. Left: Original image. Right: Reconstructed image
+    </div>
+</div>
+
+### Building Efficient Input Pipelines with the Dataset API
+The Dataset API `tf.Data` offers an efficient mechanism for building robust input pipelines for passing data into a TensorFlow programme. The process includes:
+- Using the Dataset package `tf.data.Dataset` to create a data instance.
+- Using the Iterator package `tf.data.Iterator` to define how the records or elements are retrieved from the dataset.
+
+This section will use the popular Iris dataset to illustrate working with the Dataset API methods for building data input pipelines in a TensorFlow graph.
+
+```python
+# import packages
+import tensorflow as tf
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import OneHotEncoder
+
+# clear graph (if any) before running
+tf.reset_default_graph()
+
+# load dataset
+data = datasets.load_iris()
+
+# separate features and target
+X = data.data
+y = data.target
+
+# apply one-hot encoding to targets
+one_hot_encoder = OneHotEncoder()
+encode_categorical = y.reshape(len(y), 1)
+y = one_hot_encoder.fit_transform(encode_categorical).toarray()
+
+# split in train and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, shuffle=True)
+
+# call method to clear existing flags
+learning_rate = 0.003
+epochs = 1000
+display = 100
+batch_size = 30
+
+# construct the data place-holders
+input_X = tf.placeholder(name='input_X', dtype=X_train.dtype, shape=[None, X_train.shape[1]])
+input_y = tf.placeholder(name='input_y', dtype=y_train.dtype, shape=[None, y_train.shape[1]])
+
+# construct data input pipelines
+dataset = tf.data.Dataset.from_tensor_slices((input_X, input_y))
+dataset = dataset.shuffle(buffer_size=1000)
+dataset = dataset.batch(batch_size)
+dataset = dataset.repeat()
+iterator = dataset.make_initializable_iterator()
+
+# build the model
+batch_x, batch_y = iterator.get_next()
+hidden = tf.layers.dense(inputs=batch_x, units=20, activation=tf.nn.relu)
+prediction = tf.layers.dense(inputs=hidden, units=y_train.shape[1])
+
+# softmax cross entropy loss or cost function for logistic regression
+loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(
+        labels=batch_y, logits=prediction))
+
+# optimizer to minimize cost
+optimizer = tf.train.GradientDescentOptimizer(learning_rate=learning_rate)
+training_op = optimizer.minimize(loss)
+
+# define accuracy metric
+accuracy = tf.metrics.accuracy(labels=tf.argmax(batch_y, 1),
+                               predictions=tf.argmax(prediction, 1),
+                               name="accuracy")
+
+# execute in Session
+with tf.Session() as sess:
+    # initialize all variables
+    sess.run([tf.global_variables_initializer(), tf.local_variables_initializer()])
+    
+    # initialize the data pipeline
+    sess.run(iterator.initializer, feed_dict = {input_X: X_train, input_y: y_train})
+     
+    for steps in range(epochs):
+        # train the model
+        sess.run(training_op)
+        
+        if steps % display == 0:
+            # evaluate the loss
+            train_loss = loss.eval(feed_dict = {input_X: X_train, input_y: y_train})
+            test_loss = loss.eval(feed_dict = {input_X: X_test, input_y: y_test})
+            print('Step: {} - Train loss: {:.2f} \t Test loss: {:.2f}'.format(
+                    steps, train_loss, test_loss))
+    
+    # report accuracy for training and test data
+    print('\nTraining set (accuracy): {}'.format(sess.run(accuracy,
+           feed_dict = {input_y: y_train})[1]))
+    print('Test set (accuracy): {}'.format(sess.run(accuracy,
+           feed_dict = {input_y: y_test})[1]))
+
+'Output':
+Step: 0 - Train loss: 1.01       Test loss: 1.18
+Step: 100 - Train loss: 0.67     Test loss: 0.62
+Step: 200 - Train loss: 0.58     Test loss: 0.53
+Step: 300 - Train loss: 0.49     Test loss: 0.52
+Step: 400 - Train loss: 0.45     Test loss: 0.50
+Step: 500 - Train loss: 0.40     Test loss: 0.46
+Step: 600 - Train loss: 0.47     Test loss: 0.37
+Step: 700 - Train loss: 0.33     Test loss: 0.36
+Step: 800 - Train loss: 0.40     Test loss: 0.34
+Step: 900 - Train loss: 0.30     Test loss: 0.34
+
+Training set (accuracy): 1.0
+Test set (accuracy): 1.0
+```
+
+From the preceding code listing, take note of the following steps and functions:
+- Observe the code for creating a pipeline using the Dataset API. The method `tf.data.Dataset.from_tensor_slices()` is used to create a Dataset from Tensor elements.
+- The Dataset method `shuffle()` shuffles the Dataset at each epoch.
+- The Dataset mehtod `batch()` feeds the Data elements in mini-batches.
+- The Dataset mehtod `repeat()` set the number of times or epochs to iterate over the entire dataset. It is best to leave this method empty and control the epochs using the for-loop within the Session.
 
 ### TensorFlow High-Level APIs: Using Estimators
-#### ...
+This section will provide examples of using the High-Level TensorFlow Estimator API both with the premade Estimators as well as writing a custom Estimator. Estimators are the preffered means for building a TensorFlow model primarily because the code can easily run on CPUs, GPUs or TPUs without any model modification. In working with Estimators, the data input pipeline is separated from the model architecture, this way it is easier to carry out experimentation on the dataset input.
 
+#### Using the Pre-Made or Canned Estimator
+The following steps are typically followed when working with a Premade Estimators:
+1. Write the `input_fn` to handle the data pipeline.
+2. Define the type of data attributes into the model using feature columns `tf.feature_column`.
+3. Instantiate one of the pre-made Estimators by passing in the feature columns and other relevant attributes.
+4. Use the `train()`, `evaluate()` and `predict()` methods to train, evaluate the model on evaluation dataset and use the model to make prediction/ inference.
 
+Let's see a simple example of working with a TensorFlow premade Estimator again using the Iris dataset as in the previous example.
 
-### TF Serving
+```python
+# import packages
+import tensorflow as tf
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+
+# load dataset
+data = datasets.load_iris()
+
+# separate features and target
+X = data.data
+y = data.target
+
+# split in train and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, shuffle=True)
+
+# create an input_fn
+def input_fn(X, y, batch_size=30, training=True):
+    # convert to dictionary
+    X = {'sepal_length': X[:,0],
+         'sepal_width':  X[:,1],
+         'petal_length': X[:,2],
+         'petal_width':  X[:,3]}
+    dataset = tf.data.Dataset.from_tensor_slices((X, y))
+    if training:
+        dataset = dataset.shuffle(buffer_size=1000)
+        dataset = dataset.repeat()
+    dataset = dataset.batch(batch_size)
+    iterator = dataset.make_one_shot_iterator()
+    features, labels = iterator.get_next()    
+    return features, labels
+
+# use feature columns to define the attributes to the model
+sepal_length = tf.feature_column.numeric_column('sepal_length')
+sepal_width = tf.feature_column.numeric_column('sepal_width')
+petal_length = tf.feature_column.numeric_column('petal_length')
+petal_width = tf.feature_column.numeric_column('petal_width')
+
+feature_columns = [sepal_length, sepal_width, petal_length, petal_width]
+
+# instantiate a DNNLinearCombinedClassifier Estimator
+estimator = tf.estimator.DNNLinearCombinedClassifier(
+        dnn_feature_columns=feature_columns,
+        dnn_optimizer='Adam',
+        dnn_hidden_units=[20],
+        dnn_activation_fn=tf.nn.relu,
+        n_classes=3
+    )
+
+# train model
+estimator.train(input_fn=lambda:input_fn(X_train, y_train), steps=2000)
+# evaluate model
+metrics = estimator.evaluate(input_fn=lambda:input_fn(X_test, y_test, training=False))
+
+print('\nTest set accuracy: {accuracy:0.3f}\n'.format(**metrics))
+
+'Output':
+INFO:tensorflow:Calling model_fn.
+INFO:tensorflow:Done calling model_fn.
+INFO:tensorflow:Create CheckpointSaverHook.
+INFO:tensorflow:Graph was finalized.
+INFO:tensorflow:Running local_init_op.
+INFO:tensorflow:Done running local_init_op.
+INFO:tensorflow:Saving checkpoints for 0 into /var/folders/gh/mqsbbqy55bb4z763xxgddw780000gn/T/tmpop_v6qgk/model.ckpt.
+INFO:tensorflow:loss = 46.064186, step = 1
+INFO:tensorflow:global_step/sec: 605.83
+INFO:tensorflow:loss = 26.527525, step = 101 (0.166 sec)
+INFO:tensorflow:global_step/sec: 968.946
+INFO:tensorflow:loss = 20.685375, step = 201 (0.103 sec)
+INFO:tensorflow:global_step/sec: 1039.1
+INFO:tensorflow:loss = 16.046446, step = 301 (0.096 sec)
+...
+INFO:tensorflow:global_step/sec: 1083.04
+INFO:tensorflow:loss = 3.4552207, step = 1801 (0.092 sec)
+INFO:tensorflow:global_step/sec: 1062.24
+INFO:tensorflow:loss = 4.109541, step = 1901 (0.094 sec)
+INFO:tensorflow:Saving checkpoints for 2000 into /var/folders/gh/mqsbbqy55bb4z763xxgddw780000gn/T/tmpop_v6qgk/model.ckpt.
+INFO:tensorflow:Loss for final step: 2.134757.
+INFO:tensorflow:Calling model_fn.
+INFO:tensorflow:Done calling model_fn.
+INFO:tensorflow:Starting evaluation at 2018-08-13-11:49:42
+INFO:tensorflow:Graph was finalized.
+INFO:tensorflow:Restoring parameters from /var/folders/gh/mqsbbqy55bb4z763xxgddw780000gn/T/tmpop_v6qgk/model.ckpt-2000
+INFO:tensorflow:Running local_init_op.
+INFO:tensorflow:Done running local_init_op.
+INFO:tensorflow:Finished evaluation at 2018-08-13-11:49:42
+INFO:tensorflow:Saving dict for global step 2000: accuracy = 1.0, average_loss = 0.07314519, global_step = 2000, loss = 1.3897586
+INFO:tensorflow:Saving 'checkpoint_path' summary for global step 2000: /var/folders/gh/mqsbbqy55bb4z763xxgddw780000gn/T/tmpop_v6qgk/model.ckpt-2000
+
+Test set accuracy: 1.000
+```
+
+#### Building a Custom Estimator
+The difference between the premade Estimator and the custom Estimator is that in the former, the `model_fn` that encapsulates methods for constructing the training/ inference graphs have already been created whereas in the latter the `model_fn` will have to be written. To work with Custom Estimators we provide:
+1. An input data pipeline `input_fn`, and
+2. A model function `model_fn` with modes to implement the:
+   - train(),
+   - evaluate(), and
+   - predict() methods
+
+Let's see an example of a Custom Estimator. The MLP MNIST example provided earlier in this text is converted to work with the Estimator API.
+
+```python
+import tensorflow as tf
+from tensorflow.examples.tutorials.mnist import input_data
+
+# clear graph (if any) before running
+tf.reset_default_graph()
+
+# download data into current directory
+data = input_data.read_data_sets('./tmp/mnist_data', one_hot=True)
+
+# split data int training and evaluation sets
+trainX = data.train.images
+trainY = data.train.labels
+testX = data.test.images
+testY = data.test.labels
+
+# create an input_fn
+def input_fn(X, y, batch_size=100, training=True):
+    dataset = tf.data.Dataset.from_tensor_slices((X, y))
+    if training:
+        dataset = dataset.shuffle(buffer_size=1000)
+        dataset = dataset.repeat()
+    dataset = dataset.batch(batch_size)
+    iterator = dataset.make_one_shot_iterator()
+    features, labels = iterator.get_next()    
+    return features, labels
+
+# create model_fn
+def _mlp_model(features, labels, mode, params):
+    # hidden layer
+    hidden1 = tf.layers.dense(inputs=features, units=params['hidden_unit'],
+                              activation=tf.nn.relu, name='hidden1')
+    # dropout layer
+    if mode == tf.estimator.ModeKeys.TRAIN:
+        dropout1 = tf.layers.dropout(inputs=hidden1, rate=params['dropout_rate'])
+    else:
+        dropout1 = tf.layers.dropout(inputs=hidden1, rate=1.0)
+    # output layer
+    logits = tf.layers.dense(inputs=dropout1, units=10,
+                             activation=tf.nn.relu, name='output')    
+    return logits
+
+def mlp_custom_estimator(features, labels, mode, params):
+    logits = _mlp_model(features, labels, mode, params)
+    
+    predictions = {
+      "classes": tf.argmax(input=logits, axis=1), # result classes
+      "probabilities": tf.nn.softmax(logits, name="softmax_tensor") # class probabilities
+    }
+    
+    # Prediction Mode
+    if mode == tf.estimator.ModeKeys.PREDICT:
+        return tf.estimator.EstimatorSpec(mode=mode, predictions=predictions)
+
+    # Loss Function
+    loss = tf.losses.softmax_cross_entropy(onehot_labels=labels,
+                                           logits=logits)
+    
+    # Learning Rate Decay (Exponential)
+    learning_rate = tf.train.exponential_decay(learning_rate=1e-04,
+                                               global_step=tf.train.get_global_step(),
+                                               decay_steps=10000, 
+                                               decay_rate=0.96, 
+                                               staircase=True,
+                                               name='lr_exp_decay')
+    
+    optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate)
+    train_op = optimizer.minimize(loss=loss, global_step=tf.train.get_global_step())
+    
+    # Training mode
+    if mode == tf.estimator.ModeKeys.TRAIN:
+        return tf.estimator.EstimatorSpec(mode=mode, loss=loss, train_op=train_op)
+    
+    # Evaluation mode
+    accuracy = tf.metrics.accuracy(labels=tf.argmax(labels,1),
+                                   predictions=predictions['classes'])
+    precision = tf.metrics.precision(labels=tf.argmax(labels,1),
+                                     predictions=predictions['classes'])
+    recall = tf.metrics.recall(labels=tf.argmax(labels,1),
+                               predictions=predictions['classes'])
+    
+    eval_metric_ops = {
+        "Accuracy": accuracy,
+        "Precision": precision,
+        "Recall": recall
+    }
+    
+    # TensorBoard Summary
+    tf.summary.scalar('Accuracy', accuracy[1])
+    tf.summary.scalar('Precision', precision[1])
+    tf.summary.scalar('Recall', recall[1])
+    tf.summary.histogram('Probabilities', predictions['probabilities'])
+    tf.summary.histogram('Classes', predictions['classes'])
+    
+    summary_hook = tf.train.SummarySaverHook(summary_op=tf.summary.merge_all(),
+                                             save_steps=1)
+    
+    return tf.estimator.EstimatorSpec(mode=mode,
+                                      predictions=predictions['classes'],
+                                      train_op = train_op,
+                                      loss = loss, 
+                                      eval_metric_ops = eval_metric_ops,
+                                      training_hooks=[summary_hook])
+
+# build model    
+estimator = tf.estimator.Estimator(mlp_custom_estimator,
+                            model_dir='./mlp_custom_estimator',
+                            config=tf.estimator.RunConfig(save_summary_steps=1),
+                            params = {'hidden_unit': 256,
+                                      'dropout_rate': 0.5}
+                            )
+
+# train model
+estimator.train(input_fn=lambda:input_fn(trainX, trainY), steps=2000)
+
+# evaluate model
+metrics = estimator.evaluate(input_fn=lambda:input_fn(testX, testY, training=False))
+
+print('\nTest set Accuracy score: {Accuracy:0.3f}'.format(**metrics))
+print('Precision score: {Precision:0.3f}'.format(**metrics))
+print('Recall score: {Recall:0.3f}'.format(**metrics))
+
+'Output':
+INFO:tensorflow:Using config: {'_model_dir': './mlp_custom_estimator', '_tf_random_seed': None, '_save_summary_steps': 1, '_save_checkpoints_steps': None, '_save_checkpoints_secs': 600, '_session_config': None, '_keep_checkpoint_max': 5, '_keep_checkpoint_every_n_hours': 10000, '_log_step_count_steps': 100, '_train_distribute': None, '_device_fn': None, '_service': None, '_cluster_spec': <tensorflow.python.training.server_lib.ClusterSpec object at 0x1c2c411dd8>, '_task_type': 'worker', '_task_id': 0, '_global_id_in_cluster': 0, '_master': '', '_evaluation_master': '', '_is_chief': True, '_num_ps_replicas': 0, '_num_worker_replicas': 1}
+INFO:tensorflow:Calling model_fn.
+INFO:tensorflow:Done calling model_fn.
+INFO:tensorflow:Create CheckpointSaverHook.
+INFO:tensorflow:Graph was finalized.
+INFO:tensorflow:Running local_init_op.
+INFO:tensorflow:Done running local_init_op.
+INFO:tensorflow:Saving checkpoints for 0 into ./mlp_custom_estimator/model.ckpt.
+INFO:tensorflow:loss = 2.3436866, step = 1
+INFO:tensorflow:global_step/sec: 7.27846
+INFO:tensorflow:loss = 1.3396419, step = 101 (13.743 sec)
+INFO:tensorflow:global_step/sec: 318.577
+INFO:tensorflow:loss = 0.76794, step = 201 (0.307 sec)
+INFO:tensorflow:global_step/sec: 334.916
+...
+INFO:tensorflow:global_step/sec: 356.958
+INFO:tensorflow:loss = 0.24392787, step = 1901 (0.280 sec)
+INFO:tensorflow:Saving checkpoints for 2000 into ./mlp_custom_estimator/model.ckpt.
+INFO:tensorflow:Loss for final step: 0.24159643.
+INFO:tensorflow:Calling model_fn.
+INFO:tensorflow:Done calling model_fn.
+INFO:tensorflow:Starting evaluation at 2018-08-14-15:59:41
+INFO:tensorflow:Graph was finalized.
+INFO:tensorflow:Restoring parameters from ./mlp_custom_estimator/model.ckpt-2000
+INFO:tensorflow:Running local_init_op.
+INFO:tensorflow:Done running local_init_op.
+INFO:tensorflow:Finished evaluation at 2018-08-14-15:59:43
+INFO:tensorflow:Saving dict for global step 2000: Accuracy = 0.9362, Precision = 0.99821746, Recall = 0.9933481, global_step = 2000, loss = 0.22996733
+INFO:tensorflow:Saving 'checkpoint_path' summary for global step 2000: ./mlp_custom_estimator/model.ckpt-2000
+
+Test set Accuracy score: 0.936
+Precision score: 0.998
+Recall score: 0.993
+```
 
 ### Eager Execution
+Eager Execution enables instant evaluation of TensorFlow operations as opposed to first constructing a computational graph and executing it in a Session. This feature allows for rapid development, experimentation and debugging of TensorFlow models. To enable Eager execution, run the following code at the beginning of the program or console session:
 
-### TensorFlow Keras
+```python
+import tensorflow as tf
+
+# enable eager execution
+tf.enable_eager_execution()
+
+a = tf.constant(6, name='a')
+b = tf.constant(3, name='b')
+
+print('Addition: a + b = {}'.format(tf.add(a, b)))
+'Output': Addition: a + b = 9
+
+print('Multiply: a x b = {}'.format(tf.multiply(a, b)))
+'Output': Multiply: a x b = 18
+
+print('Divide: a / b = {}'.format(tf.divide(a, b)))
+'Output': Divide: a / b = 2.0
+```
+
+It is important to note that once Eager execution is enabled, it cannot be disabled except the terminal or session is restarted. More about modeling with Eager Execution will be discussed in the Keras Chapter.
