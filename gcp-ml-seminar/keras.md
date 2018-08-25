@@ -24,7 +24,17 @@ In summary, when working with the `keras` package, the backend can run with eith
 In this Chapter, we will work exclusively with the `tf.keras` TensorFlow package.
 
 ### The Anatomy of a Keras Program
-ABCD
+The Keras `Model` forms the core of a Keras programme. A `Model` is first constructed, then it is compiled. Next, the compiled model is trained and evaluated using their respective training and evaluation datasets. Upon successful evaluation using the relevant metrics, the model is then used for making predictions on previously unseen data samples. Figure 1 shows the program flow for modeling with Keras.
+
+<div class="fig figcenter fighighlight">
+    <img src="/assets/seminar_IEEE/keras-program.png"> <!--width="50%" height="50%"-->
+    <div class="figcaption" style="text-align: center;">
+        Figure 1: The Anatomy of a Keras Program
+    </div>
+</div>
+
+As shown in Figure 1, the Keras `Model` can be constructued using the Sequential API or the Keras Functional API. The Sequential model is the simplest method for creating a linear stack of Neural Networks layers. The Functional model is used if a more complex graph is desired.
+
 
 ### Multilayer Perceptron (MLP) with Keras
 ABCD
