@@ -2033,38 +2033,40 @@ y = one_hot_encoder.fit_transform(encode_categorical).toarray()
 # split in train and test sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, shuffle=True)
 
-# call method to clear existing flags
+# parameters
 learning_rate = 0.003
 epochs = 1000
 display = 100
-batch_size = 30
+train_batch_size = 30
+tain_dataset_size = X_train.shape[0]
+test_dataset_size = X_test.shape[0]
 
 # construct the data place-holders
 input_X = tf.placeholder(name='input_X', dtype=X_train.dtype, shape=[None, X_train.shape[1]])
 input_y = tf.placeholder(name='input_y', dtype=y_train.dtype, shape=[None, y_train.shape[1]])
+batch_size = tf.placeholder(name='batch_size', dtype=tf.int64)
 
 # construct data input pipelines
 dataset = tf.data.Dataset.from_tensor_slices((input_X, input_y))
 dataset = dataset.shuffle(buffer_size=1000)
 dataset = dataset.batch(batch_size)
-dataset = dataset.repeat()
 iterator = dataset.make_initializable_iterator()
 
 # build the model
-batch_x, batch_y = iterator.get_next()
-hidden = tf.layers.dense(inputs=batch_x, units=20, activation=tf.nn.relu)
+features, labels = iterator.get_next()
+hidden = tf.layers.dense(inputs=features, units=20, activation=tf.nn.relu)
 prediction = tf.layers.dense(inputs=hidden, units=y_train.shape[1])
 
 # softmax cross entropy loss or cost function for logistic regression
 loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(
-        labels=batch_y, logits=prediction))
+        labels=labels, logits=prediction))
 
 # optimizer to minimize cost
 optimizer = tf.train.GradientDescentOptimizer(learning_rate=learning_rate)
 training_op = optimizer.minimize(loss)
 
 # define accuracy metric
-accuracy = tf.metrics.accuracy(labels=tf.argmax(batch_y, 1),
+accuracy = tf.metrics.accuracy(labels=tf.argmax(labels, 1),
                                predictions=tf.argmax(prediction, 1),
                                name="accuracy")
 
@@ -2072,48 +2074,79 @@ accuracy = tf.metrics.accuracy(labels=tf.argmax(batch_y, 1),
 with tf.Session() as sess:
     # initialize all variables
     sess.run([tf.global_variables_initializer(), tf.local_variables_initializer()])
-    
-    # initialize the data pipeline
-    sess.run(iterator.initializer, feed_dict = {input_X: X_train, input_y: y_train})
      
     for steps in range(epochs):
+        # initialize the data pipeline with train data
+        sess.run(iterator.initializer, feed_dict = {input_X: X_train,
+                                                    input_y: y_train,
+                                                    batch_size: train_batch_size})
+        
         # train the model
-        sess.run(training_op)
+        train_loss = 0
+        n_batches = 0
+        while True:
+            try:
+                _, loss_op, fea = sess.run((training_op, loss, features))
+                train_loss += loss_op
+                n_batches += 1
+            except tf.errors.OutOfRangeError:
+                break
         
         if steps % display == 0:
             # evaluate the loss
-            train_loss = loss.eval(feed_dict = {input_X: X_train, input_y: y_train})
-            test_loss = loss.eval(feed_dict = {input_X: X_test, input_y: y_test})
+            train_loss = train_loss/n_batches            
+            
+            # initialize the data pipeline with test data
+            sess.run(iterator.initializer, feed_dict = {input_X: X_test,
+                                                        input_y: y_test,
+                                                        batch_size: test_dataset_size})
+            test_loss, fea_test = sess.run((loss, features))
+            
             print('Step: {} - Train loss: {:.2f} \t Test loss: {:.2f}'.format(
                     steps, train_loss, test_loss))
     
     # report accuracy for training and test data
-    print('\nTraining set (accuracy): {}'.format(sess.run(accuracy,
-           feed_dict = {input_y: y_train})[1]))
-    print('Test set (accuracy): {}'.format(sess.run(accuracy,
-           feed_dict = {input_y: y_test})[1]))
+    
+    ## initialize the data pipeline with train data
+    sess.run(iterator.initializer, feed_dict = {input_X: X_train,
+                                                input_y: y_train,
+                                                batch_size: tain_dataset_size})
+    acc, train_fea = sess.run((accuracy, features))
+    print('\nTraining set (accuracy): {}'.format(acc[1]))
+    print(train_fea.shape)
+    
+    ## initialize the data pipeline with test data
+    sess.run(iterator.initializer, feed_dict = {input_X: X_test,
+                                                input_y: y_test,
+                                                batch_size: test_dataset_size})
+    acc, test_fea = sess.run((accuracy, features))
+    print('Test set (accuracy): {}'.format(acc[1]))
+    print(test_fea.shape)
 
 'Output':
-Step: 0 - Train loss: 1.01       Test loss: 1.18
-Step: 100 - Train loss: 0.67     Test loss: 0.62
-Step: 200 - Train loss: 0.58     Test loss: 0.53
-Step: 300 - Train loss: 0.49     Test loss: 0.52
-Step: 400 - Train loss: 0.45     Test loss: 0.50
-Step: 500 - Train loss: 0.40     Test loss: 0.46
-Step: 600 - Train loss: 0.47     Test loss: 0.37
-Step: 700 - Train loss: 0.33     Test loss: 0.36
-Step: 800 - Train loss: 0.40     Test loss: 0.34
-Step: 900 - Train loss: 0.30     Test loss: 0.34
+Step: 0 - Train loss: 2.30       Test loss: 1.75
+Step: 100 - Train loss: 0.47     Test loss: 0.50
+Step: 200 - Train loss: 0.37     Test loss: 0.39
+Step: 300 - Train loss: 0.31     Test loss: 0.33
+Step: 400 - Train loss: 0.26     Test loss: 0.27
+Step: 500 - Train loss: 0.23     Test loss: 0.23
+Step: 600 - Train loss: 0.21     Test loss: 0.21
+Step: 700 - Train loss: 0.18     Test loss: 0.18
+Step: 800 - Train loss: 0.17     Test loss: 0.16
+Step: 900 - Train loss: 0.15     Test loss: 0.15
 
-Training set (accuracy): 1.0
-Test set (accuracy): 1.0
+Training set (accuracy): 0.9910714030265808
+(112, 4)
+Test set (accuracy): 0.9866666793823242
+(38, 4)
 ```
 
 From the preceding code listing, take note of the following steps and functions:
 - Observe the code for creating a pipeline using the Dataset API. The method `tf.data.Dataset.from_tensor_slices()` is used to create a Dataset from Tensor elements.
 - The Dataset method `shuffle()` shuffles the Dataset at each epoch.
 - The Dataset mehtod `batch()` feeds the Data elements in mini-batches.
-- The Dataset mehtod `repeat()` set the number of times or epochs to iterate over the entire dataset. It is best to leave this method empty and control the epochs using the for-loop within the Session.
+- The batch size of the Dataset pipeline is controlled by the `batch_size` placeholder which is modified at runtime through the `feed_dict` attribute.
+- This example of working with the Dataset API makes use of an initializable iterator `make_initializable_iterator()` to dynamically change the source of the Dataset at runtime. Hence, when running in Session we can initialize the iterator to create a Dataset pipeline off the training or evaluation dataset.
 
 ### TensorFlow High-Level APIs: Using Estimators
 This section will provide examples of using the High-Level TensorFlow Estimator API both with the premade Estimators as well as writing a custom Estimator. Estimators are the preffered means for building a TensorFlow model primarily because the code can easily run on CPUs, GPUs or TPUs without any model modification. In working with Estimators, the data input pipeline is separated from the model architecture, this way it is easier to carry out experimentation on the dataset input.
