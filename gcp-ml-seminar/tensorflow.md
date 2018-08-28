@@ -1454,6 +1454,7 @@ saver = tf.train.Saver()
 with tf.Session() as sess:
     # initialize all variables
     tf.global_variables_initializer().run()
+    tf.local_variables_initializer().run()
     
     # Train the model
     for steps in range(epochs):
