@@ -1488,7 +1488,6 @@ with tf.Session() as sess:
     plt.plot(y_pred[0,:,0], "r--", markersize=10, label="model prediction")
     plt.legend(loc="upper left")
     plt.xlabel("Time")
-    plt.savefig('rnn_ts_model_testing.png', format='png', dpi=2000)
     
 # use model to predict sequences using training data as seed
 with tf.Session() as sess:
@@ -1504,7 +1503,6 @@ with tf.Session() as sess:
     plt.plot(rnn_data, "g--", markersize=10, label="RNN generated series")
     plt.legend(loc="upper left")
     plt.xlabel("Time")
-    plt.savefig('rnn_ts_vs_original.png', format='png', dpi=2000)
     
     # inverse to normal scale and plot
     data_train_inverse = scaler.inverse_transform(data_train.reshape(-1, 1))
@@ -1515,7 +1513,6 @@ with tf.Session() as sess:
     plt.plot(rnn_data_inverse, "g--", markersize=10, label="RNN generated series")
     plt.legend(loc="upper left")
     plt.xlabel("Time")
-    plt.savefig('rnn_ts_vs_original_normal_scale.png', format='png', dpi=2000)
 ```
 ```bash
 'Output':
@@ -1683,7 +1680,6 @@ with tf.Session() as sess:
     plt.plot(y_pred[0,:,0], "r--", markersize=10, label="model prediction")
     plt.legend()
     plt.xlabel("Time")
-    plt.savefig('deep_GRU_rnn_ts_model_testing.png', format='png', dpi=2000)
     
 # use model to predict sequences using training data as seed
 with tf.Session() as sess:
@@ -1700,7 +1696,6 @@ with tf.Session() as sess:
     plt.plot(rnn_data, "g--", markersize=10, label="Deep GRU RNN generated series")
     plt.legend(loc="upper left")
     plt.xlabel("Time")
-    plt.savefig('deep_GRU_rnn_ts_vs_original.png', format='png', dpi=2000)
     
     # inverse to normal scale and plot
     data_train_inverse = scaler.inverse_transform(data_train.reshape(-1, 1))
@@ -1712,7 +1707,6 @@ with tf.Session() as sess:
     plt.plot(rnn_data_inverse, "g--", markersize=10, label="Deep GRU RNN generated series")
     plt.legend(loc="upper left")
     plt.xlabel("Time")    
-    plt.savefig('deep_GRU_rnn_ts_vs_original_normal_scale.png', format='png', dpi=2000)
 
 'Output':
 Step: 500       Training loss (mse): 0.13439016044139862
@@ -1893,7 +1887,6 @@ with tf.Session() as sess:
     plt.plot(y_pred, "r--", markersize=10, label="model prediction")
     plt.legend()
     plt.xlabel("Time")
-    plt.savefig('lstm_rnn_ts_model_testing.png', format='png', dpi=2000)
 
 'Output':
 Step: 100       Training loss (mse): 0.1169147714972496
@@ -1988,7 +1981,6 @@ for i in range(sample_size):
     plt.subplot(sample_size, 2, i*2+2)
     plt.title('Reconstructed image')
     plt.imshow(test_reconstruction[i].reshape((28, 28)), cmap="Greys", interpolation="nearest", aspect='auto')
-plt.savefig('stacked_autoencoder.png', format='png', dpi=1000)
 
 # close Session
 sess.close()
