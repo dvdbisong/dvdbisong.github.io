@@ -1442,6 +1442,11 @@ loss = tf.losses.mean_squared_error(labels=y, predictions=outputs)
 optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate)
 training_op = optimizer.minimize(loss)
 
+# define root-mean-square-error (rmse) metric
+rmse = tf.metrics.root_mean_squared_error(labels = y,
+                                          predictions = outputs,
+                                          name = "rmse")
+
 # save the model
 saver = tf.train.Saver()
 
@@ -1467,6 +1472,12 @@ with tf.Session() as sess:
             print('Step: {}  \tTraining loss (mse): {}'.format((steps+1), loss_fn))
              
         saver.save(sess, "power_model_folder/ng_power_model")
+    
+    # report rmse for training and test data
+    print('\nTraining set (rmse): {:.2f}'.format(sess.run(rmse,
+          feed_dict = {X: train_x, y: train_y})[1]))
+    print('Test set (rmse): {:.2f}'.format(sess.run(rmse,
+          feed_dict = {X: eval_x, y: eval_y})[1]))
     
     y_pred = sess.run(outputs, feed_dict={X: eval_x})
     
@@ -1504,7 +1515,8 @@ with tf.Session() as sess:
     plt.legend(loc="upper left")
     plt.xlabel("Time")
     plt.savefig('rnn_ts_vs_original_normal_scale.png', format='png', dpi=2000)
-
+```
+```bash
 'Output':
 Step: 500       Training loss (mse): 0.03262907266616821
 Step: 1000      Training loss (mse): 0.03713105246424675
@@ -1512,6 +1524,9 @@ Step: 1500      Training loss (mse): 0.03985978662967682
 Step: 2000      Training loss (mse): 0.041361670941114426
 Step: 2500      Training loss (mse): 0.041800327599048615
 INFO:tensorflow:Restoring parameters from power_model_folder/ng_power_model
+
+Training set (rmse): 0.08
+Test set (rmse): 0.10
 ```
 
 From the preceding code listing, take note of the following steps and functions:
