@@ -8,9 +8,9 @@ Table of contents:
 
 - [The Anatomy of a Keras Program](#the-anatomy-of-a-keras-program)
 - [Multilayer Perceptron (MLP) with Keras](#multilayer-perceptron-mlp-with-keras)
-    - [Create a Dataset pipeline](#create-a-dataset-pipeline)
+- [Using the Dataset API with tf.keras](#using-the-dataset-api-with-tfkeras)
 - [Model Visualization with Keras](#model-visualization-with-keras)
-- [Saving and Loading Models with Keras](#saving-and-loading-models-with-keras)
+- [TensorBoard with Keras](#tensorboard-with-keras)
 - [Checkpointing to Select Best Models](#checkpointing-to-select-best-models)
 - [Convolutional Neural Networks (CNNs) with Keras](#convolutional-neural-networks-cnns-with-keras)
 - [Recurrent Neural Networks (RNNs) with Keras](#recurrent-neural-networks-rnns-with-keras)
@@ -65,7 +65,6 @@ The dataset used for this example is the Fashion-MNIST database of fashion artic
 
 ```python
 import tensorflow as tf
-import tensorflow.keras as keras
 import numpy as np
 
 # import dataset
@@ -85,15 +84,15 @@ y_test = tf.keras.utils.to_categorical(y_test)
  
 # create the model
 def model_fn():
-    model = keras.Sequential()
+    model = tf.keras.Sequential()
     # Adds a densely-connected layer with 256 units to the model:
-    model.add(keras.layers.Dense(256, activation='relu', input_dim=784))
+    model.add(tf.keras.layers.Dense(256, activation='relu', input_dim=784))
     # Add Dropout layer
-    model.add(keras.layers.Dropout(0.2))
+    model.add(tf.keras.layers.Dropout(0.2))
     # Add another densely-connected layer with 64 units:
-    model.add(keras.layers.Dense(64, activation='relu'))
+    model.add(tf.keras.layers.Dense(64, activation='relu'))
     # Add a softmax layer with 10 output units:
-    model.add(keras.layers.Dense(10, activation='softmax'))
+    model.add(tf.keras.layers.Dense(10, activation='softmax'))
     
     # compile the model
     model.compile(optimizer=tf.train.AdamOptimizer(0.001),
@@ -141,23 +140,800 @@ Test loss: 0.33
 Test accuracy: 88.35%
 ```
 
-#### Create a Dataset pipeline
+From the code above, observe the following key methods:
+- A Keras Sequential Model is built by calling the `tf.keras.Sequential()` method from which layers are then added to the model.
+- After constructing the model layers, the model is compiled by calling the method `.compile()`.
+- The model is trained by calling the `.fit()` method which receives the training features `x_train` and corresponding labels `y_train` dataset. The attribute `validation_data` used the evaluation training and test split to show the performance of the training algorithm at every training epoch.
+- The method `.evaluate()` is used to get the final metric estimate and the loss score of the model after training.
+- The optimizer `tf.train.AdamOptimizer()` is an example of using a TensorFlow optimizer and frankly other TensorFlow functions with Keras.
 
+### Using the Dataset API with tf.keras
+In this section will use the TensorFlow Dataset API to build a data pipline for feeding data into a Keras Model. Using the Dataset API is the preferred mechanism for feeding data as it can easily scale to handle very large datasets and better utilize the machine resources. Again, here, we use the Fashion MNIST dataset as an example, but this time a data pipeline is constructued using the Dataset API and the Model is constructed using the Keras Functional API.
+
+```python
+import tensorflow as tf
+import numpy as np
+
+# import dataset
+(x_train, y_train), (x_test, y_test) = tf.keras.datasets.fashion_mnist.load_data()
+
+# flatten the 28*28 pixel images into one long 784 pixel vector
+x_train = np.reshape(x_train, (-1, 784)).astype('float32')
+x_test = np.reshape(x_test, (-1, 784)).astype('float32')
+
+# scale dataset from 0 -> 255 to 0 -> 1
+x_train /= 255
+x_test /= 255
+
+# one-hot encode targets
+y_train = tf.keras.utils.to_categorical(y_train)
+y_test = tf.keras.utils.to_categorical(y_test)
+
+# create dataset pipeline
+def input_fn(features, labels, batch_size, training=True):
+    dataset = tf.data.Dataset.from_tensor_slices((features, labels))
+    if training:
+        dataset = dataset.shuffle(buffer_size=1000)
+        dataset = dataset.repeat()
+    dataset = dataset.batch(batch_size)
+    iterator = dataset.make_one_shot_iterator()
+    features, labels = iterator.get_next()    
+    return features, labels
+
+# parameters
+batch_size = 100
+training_steps_per_epoch = int(np.ceil(x_train.shape[0] / float(batch_size)))  # ==> 600
+eval_steps_per_epoch = int(np.ceil(x_test.shape[0] / float(batch_size)))  # ==> 100
+epochs = 10
+
+# create the model
+def model_fn(input_fn):
+    
+    (features, labels) = input_fn
+    
+    # Model input
+    model_input = tf.keras.layers.Input(tensor=features)
+    # Adds a densely-connected layer with 256 units to the model:
+    x = tf.keras.layers.Dense(256, activation='relu', input_dim=784)(model_input)
+    # Add Dropout layer:
+    x = tf.keras.layers.Dropout(0.2)(x)
+    # Add another densely-connected layer with 64 units:
+    x = tf.keras.layers.Dense(64, activation='relu')(x)
+    # Add a softmax layer with 10 output units:
+    predictions = tf.keras.layers.Dense(10, activation='softmax')(x)
+    
+    # the model
+    model = tf.keras.Model(inputs=model_input, outputs=predictions)
+    
+    # compile the model
+    model.compile(optimizer='adam',
+                  loss='categorical_crossentropy',
+                  metrics=['accuracy'],
+                  target_tensors=[tf.cast(labels,tf.float32)])
+    return model
+
+# build train model
+model = model_fn(input_fn(x_train, y_train, batch_size=batch_size, training=True))
+
+# print train model summary
+model.summary()
+```
+```bash
+'Output':
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input_1 (InputLayer)         (None, 784)               0         
+_________________________________________________________________
+dense_3 (Dense)              (None, 256)               200960    
+_________________________________________________________________
+dropout_1 (Dropout)          (None, 256)               0         
+_________________________________________________________________
+dense_4 (Dense)              (None, 64)                16448     
+_________________________________________________________________
+dense_5 (Dense)              (None, 10)                650       
+=================================================================
+Total params: 218,058
+Trainable params: 218,058
+Non-trainable params: 0
+_________________________________________________________________
+```
+```python
+# train the model
+history = model.fit(epochs=epochs,
+                    steps_per_epoch=training_steps_per_epoch)
+```
+```bash
+'Output':
+Epoch 1/10
+600/600 [==============================] - 3s 5ms/step - loss: 0.2634 - acc: 0.9005
+Epoch 2/10
+600/600 [==============================] - 4s 6ms/step - loss: 0.2522 - acc: 0.9050
+Epoch 3/10
+600/600 [==============================] - 4s 7ms/step - loss: 0.2471 - acc: 0.9070
+Epoch 4/10
+600/600 [==============================] - 4s 6ms/step - loss: 0.2439 - acc: 0.9082
+Epoch 5/10
+600/600 [==============================] - 4s 7ms/step - loss: 0.2388 - acc: 0.9090
+Epoch 6/10
+600/600 [==============================] - 4s 6ms/step - loss: 0.2330 - acc: 0.9112
+Epoch 7/10
+600/600 [==============================] - 3s 6ms/step - loss: 0.2253 - acc: 0.9140
+Epoch 8/10
+600/600 [==============================] - 3s 6ms/step - loss: 0.2252 - acc: 0.9157
+Epoch 9/10
+600/600 [==============================] - 3s 6ms/step - loss: 0.2209 - acc: 0.9166
+Epoch 10/10
+600/600 [==============================] - 3s 5ms/step - loss: 0.2146 - acc: 0.9177
+```
+```python
+# store trained model weights
+model.save_weights('/tmp/mlp_weight.h5')
+
+# build evaluation model
+eval_model = model_fn(input_fn(x_test, y_test, batch_size=batch_size, training=False))
+# load saved weights to evaluation model
+eval_model.load_weights('/tmp/mlp_weight.h5')
+
+# evaluate the model
+score = eval_model.evaluate(steps=eval_steps_per_epoch)
+print('Test loss: {:.2f} \nTest accuracy: {:.2f}%'.format(score[0], score[1]*100))
+```
+```bash
+'Output':
+Test loss: 0.32 
+Test accuracy: 89.30%
+```
+
+From the code block above, observe the following steps:
+- The Keras Functional API is used to construct the model in the custon `model_fn` function. Note how the layers are constructuted from the Input `tf.keras.layers.Input` to the output. Also observe how the model is built using `tf.keras.Model`.
+- After training the model using `model.fit()`, the weights of the model are saved to a Hierarchical Data Format (HDF5) file with the extension `.h5` by calling `model.save_weights(/save_path)`.
+- Using the model function `model_fn`, we create a new model instance, this time using the evaluation dataset. The weights of the trained model and loaded into the evaluation model by calling `eval_model.load_weights(/save_path)`.
+- The variable `history` stores the metrics for the model at each time epoch returned by the callback function of the method `.fit()`.
 
 ### Model Visualization with Keras
-ABCD
+With Keras, it is quite easy and straightforward to plot the metrics of the model to have a better graphical perspective as to how the model is performing for every training epoch. This view is also useful for dealing with issues of bias or variance of the model.
 
-### Saving and Loading Models with Keras
-ABCD
+A callback function of the `model.fit()` method returns the loss and evaluation score for each epoch. This information is stored in a variable and plotted.
+
+In this examle, to illustrate model visualization with Keras, we build an MLP network using the Keras Functional API to classify the MNIST handwriting dataset.
+
+```python
+import tensorflow as tf
+import numpy as np
+import matplotlib.pyplot as plt
+
+# import dataset
+(x_train, y_train), (x_test, y_test) = tf.keras.datasets.mnist.load_data()
+
+# flatten the 28*28 pixel images into one long 784 pixel vector
+x_train = np.reshape(x_train, (-1, 784)).astype('float32')
+x_test = np.reshape(x_test, (-1, 784)).astype('float32')
+
+# scale dataset from 0 -> 255 to 0 -> 1
+x_train /= 255
+x_test /= 255
+
+# one-hot encode targets
+y_train = tf.keras.utils.to_categorical(y_train)
+y_test = tf.keras.utils.to_categorical(y_test)
+ 
+# create the model
+def model_fn():
+    inputs = tf.keras.Input(shape=(784,))
+    x = tf.keras.layers.Dense(128, activation='relu', input_dim=784)(inputs)
+    x = tf.keras.layers.Dropout(0.2)(x)
+    x = tf.keras.layers.Dense(64, activation='relu')(x)
+    prediction = tf.keras.layers.Dense(10, activation='softmax')(x)
+    
+    model = tf.keras.Model(inputs=inputs, outputs=prediction)
+    
+    # compile the model
+    model.compile(optimizer='adam',
+                  loss='categorical_crossentropy',
+                  metrics=['accuracy'])
+    return model
+
+# build model
+model = model_fn()
+
+# train the model
+history = model.fit(x_train, y_train, epochs=10,
+                    batch_size=100, verbose=1,
+                    validation_data=(x_test, y_test))
+
+# evaluate the model
+score = model.evaluate(x_test, y_test, batch_size=100)
+print('Test loss: {:.2f} \nTest accuracy: {:.2f}%'.format(score[0], score[1]*100))
+```
+```bash
+'Output':
+Train on 60000 samples, validate on 10000 samples
+Epoch 1/10
+60000/60000 [==============================] - 36s 599us/step - loss: 0.3669 - acc: 0.8934 - val_loss: 0.1498 - val_acc: 0.9561
+Epoch 2/10
+60000/60000 [==============================] - 2s 27us/step - loss: 0.1572 - acc: 0.9532 - val_loss: 0.1071 - val_acc: 0.9661
+Epoch 3/10
+60000/60000 [==============================] - 1s 24us/step - loss: 0.1154 - acc: 0.9648 - val_loss: 0.0852 - val_acc: 0.9744
+Epoch 4/10
+60000/60000 [==============================] - 1s 24us/step - loss: 0.0949 - acc: 0.9707 - val_loss: 0.0838 - val_acc: 0.9724
+Epoch 5/10
+60000/60000 [==============================] - 1s 22us/step - loss: 0.0807 - acc: 0.9752 - val_loss: 0.0754 - val_acc: 0.9772
+Epoch 6/10
+60000/60000 [==============================] - 1s 22us/step - loss: 0.0721 - acc: 0.9766 - val_loss: 0.0712 - val_acc: 0.9774
+Epoch 7/10
+60000/60000 [==============================] - 1s 22us/step - loss: 0.0625 - acc: 0.9798 - val_loss: 0.0694 - val_acc: 0.9776
+Epoch 8/10
+60000/60000 [==============================] - 1s 23us/step - loss: 0.0575 - acc: 0.9808 - val_loss: 0.0692 - val_acc: 0.9782
+Epoch 9/10
+60000/60000 [==============================] - 1s 24us/step - loss: 0.0508 - acc: 0.9832 - val_loss: 0.0687 - val_acc: 0.9785
+Epoch 10/10
+60000/60000 [==============================] - 1s 23us/step - loss: 0.0467 - acc: 0.9844 - val_loss: 0.0716 - val_acc: 0.9786
+10000/10000 [==============================] - 0s 9us/step
+Test loss: 0.07 
+Test accuracy: 97.86%
+```
+```python
+# list metrics returned from callback function
+history.history.keys()
+```
+```bash
+'Output':
+dict_keys(['val_loss', 'val_acc', 'loss', 'acc'])
+```
+```python
+# plot loss metric
+plt.figure(1)
+plt.plot(history.history['loss'], '--')
+plt.plot(history.history['val_loss'], '--')
+plt.title('Model loss per epoch')
+plt.ylabel('loss')
+plt.xlabel('epoch')
+plt.legend(['train', 'evaluation'])
+```
+<div class="fig figcenter fighighlight">
+    <img src="/assets/seminar_IEEE/keras_visualize_loss_metric.png" width="70%" height="70%">
+    <div class="figcaption" style="text-align: center;">
+        Figure ??: Model loss per epoch.
+    </div>
+</div>
+
+```python
+# plot accuracy metric
+plt.figure(2)
+plt.plot(history.history['acc'], '--')
+plt.plot(history.history['val_acc'], '--')
+plt.title('Model accuracy per epoch')
+plt.ylabel('loss')
+plt.xlabel('epoch')
+plt.legend(['train', 'evaluation'])
+```
+<div class="fig figcenter fighighlight">
+    <img src="/assets/seminar_IEEE/keras_visualize_accuracy_metric.png" width="70%" height="70%">
+    <div class="figcaption" style="text-align: center;">
+        Figure ??: Model accuracy per epoch.
+    </div>
+</div>
+
+### TensorBoard with Keras
+To visualize models with TensorBoard, attach a TensorBoard callback `tf.keras.callbacks.TensorBoard()` to the `model.fit()` method before training the model. The model graph, scalars, histograms, and other metrics are stored as event files in the log directory.
+
+For this example, we modify the MLP MNIST model to use TensorBoard.
+```python
+import tensorflow as tf
+import numpy as np
+
+# import dataset
+(x_train, y_train), (x_test, y_test) = tf.keras.datasets.mnist.load_data()
+
+# flatten the 28*28 pixel images into one long 784 pixel vector
+x_train = np.reshape(x_train, (-1, 784)).astype('float32')
+x_test = np.reshape(x_test, (-1, 784)).astype('float32')
+
+# scale dataset from 0 -> 255 to 0 -> 1
+x_train /= 255
+x_test /= 255
+
+# one-hot encode targets
+y_train = tf.keras.utils.to_categorical(y_train)
+y_test = tf.keras.utils.to_categorical(y_test)
+ 
+# create the model
+def model_fn():
+    inputs = tf.keras.Input(shape=(784,))
+    x = tf.keras.layers.Dense(128, activation='relu', input_dim=784)(inputs)
+    x = tf.keras.layers.Dropout(0.2)(x)
+    x = tf.keras.layers.Dense(64, activation='relu')(x)
+    prediction = tf.keras.layers.Dense(10, activation='softmax')(x)
+    
+    model = tf.keras.Model(inputs=inputs, outputs=prediction)
+    
+    # compile the model
+    model.compile(optimizer='adam',
+                  loss='categorical_crossentropy',
+                  metrics=['accuracy'])
+    return model
+
+# build model
+model = model_fn()
+
+# checkpointing
+best_model = tf.keras.callbacks.ModelCheckpoint('./tmp/mnist_weights.h5', monitor='val_acc',
+                                                verbose=1, save_best_only=True, mode='max')
+
+# tensorboard
+tensorboard = tf.keras.callbacks.TensorBoard(log_dir='./tmp/logs_mnist_keras',
+                                             histogram_freq=0, write_graph=True,
+                                             write_images=True)
+
+callbacks = [best_model, tensorboard]
+
+# train the model
+history = model.fit(x_train, y_train, epochs=10,
+                    batch_size=100, verbose=1,
+                    validation_data=(x_test, y_test),
+                    callbacks=callbacks)
+
+# evaluate the model
+score = model.evaluate(x_test, y_test, batch_size=100)
+print('Test loss: {:.2f} \nTest accuracy: {:.2f}%'.format(score[0], score[1]*100))
+```
+
+Execute the command to run TensorBoard.
+```bash
+# via terminal
+tensorboard --logdir tmp/logs_mnist_keras
+```
+```python
+# via Datalab cell
+tensorboard_pid = ml.TensorBoard.start('tmp/logs_mnist_keras')
+
+# After use, close the TensorBoard instance by running:
+ml.TensorBoard.stop(tensorboard_pid)
+```
+
+<div class="fig figcenter fighighlight">
+    <img src="/assets/seminar_IEEE/keras_tensorboard.png">
+    <div class="figcaption" style="text-align: center;">
+        Figure ??: TensorBoard with Keras.
+    </div>
+</div>
 
 ### Checkpointing to Select Best Models
-ABCD
+Checkpointing makes it possible to save the weights of the neural network model when there is an increase in the validation accuracy metric. This is achieved in Keras using the method `tf.keras.callbacks.ModelCheckpoint()`. The saved weights can then be loaded back into the model and used to make predictions. Using the MNIST dataset, we'll build a model that saves the weights to file only when there is an improvement in the validation set performance.
+
+```python
+import tensorflow as tf
+import numpy as np
+
+# import dataset
+(x_train, y_train), (x_test, y_test) = tf.keras.datasets.mnist.load_data()
+
+# flatten the 28*28 pixel images into one long 784 pixel vector
+x_train = np.reshape(x_train, (-1, 784)).astype('float32')
+x_test = np.reshape(x_test, (-1, 784)).astype('float32')
+
+# scale dataset from 0 -> 255 to 0 -> 1
+x_train /= 255
+x_test /= 255
+
+# one-hot encode targets
+y_train = tf.keras.utils.to_categorical(y_train)
+y_test = tf.keras.utils.to_categorical(y_test)
+ 
+# create the model
+def model_fn():
+    inputs = tf.keras.Input(shape=(784,))
+    x = tf.keras.layers.Dense(128, activation='relu', input_dim=784)(inputs)
+    x = tf.keras.layers.Dropout(0.2)(x)
+    x = tf.keras.layers.Dense(64, activation='relu')(x)
+    prediction = tf.keras.layers.Dense(10, activation='softmax')(x)
+    
+    model = tf.keras.Model(inputs=inputs, outputs=prediction)
+    
+    # compile the model
+    model.compile(optimizer='adam',
+                  loss='categorical_crossentropy',
+                  metrics=['accuracy'])
+    return model
+
+# build model
+model = model_fn()
+
+# checkpointing
+checkpoint = tf.keras.callbacks.ModelCheckpoint('mnist_weights.h5', monitor='val_acc',
+                                                verbose=1, save_best_only=True, mode='max')
+callbacks = [checkpoint]
+
+# train the model
+history = model.fit(x_train, y_train, epochs=10,
+                    batch_size=100, verbose=1,
+                    validation_data=(x_test, y_test),
+                    callbacks=callbacks)
+
+# evaluate the model
+score = model.evaluate(x_test, y_test, batch_size=100)
+print('Test loss: {:.2f} \nTest accuracy: {:.2f}%'.format(score[0], score[1]*100))
+```
+```bash
+Train on 60000 samples, validate on 10000 samples
+Epoch 1/10
+60000/60000 [==============================] - 39s 653us/step - loss: 0.3605 - acc: 0.8947 - val_loss: 0.1444 - val_acc: 0.9565
+
+Epoch 00001: val_acc improved from -inf to 0.95650, saving model to mnist_weights.h5
+Epoch 2/10
+60000/60000 [==============================] - 2s 38us/step - loss: 0.1549 - acc: 0.9533 - val_loss: 0.1124 - val_acc: 0.9668
+
+Epoch 00002: val_acc improved from 0.95650 to 0.96680, saving model to mnist_weights.h5
+Epoch 3/10
+60000/60000 [==============================] - 2s 40us/step - loss: 0.1178 - acc: 0.9639 - val_loss: 0.0866 - val_acc: 0.9721
+
+Epoch 00003: val_acc improved from 0.96680 to 0.97210, saving model to mnist_weights.h5
+Epoch 4/10
+60000/60000 [==============================] - 2s 33us/step - loss: 0.0925 - acc: 0.9720 - val_loss: 0.0837 - val_acc: 0.9748
+
+Epoch 00004: val_acc improved from 0.97210 to 0.97480, saving model to mnist_weights.h5
+Epoch 5/10
+60000/60000 [==============================] - 2s 35us/step - loss: 0.0825 - acc: 0.9744 - val_loss: 0.0751 - val_acc: 0.9765
+
+Epoch 00005: val_acc improved from 0.97480 to 0.97650, saving model to mnist_weights.h5
+Epoch 6/10
+60000/60000 [==============================] - 2s 31us/step - loss: 0.0711 - acc: 0.9775 - val_loss: 0.0707 - val_acc: 0.9765
+
+Epoch 00006: val_acc did not improve from 0.97650
+Epoch 7/10
+60000/60000 [==============================] - 2s 34us/step - loss: 0.0621 - acc: 0.9804 - val_loss: 0.0705 - val_acc: 0.9781
+
+Epoch 00007: val_acc improved from 0.97650 to 0.97810, saving model to mnist_weights.h5
+Epoch 8/10
+60000/60000 [==============================] - 2s 31us/step - loss: 0.0570 - acc: 0.9810 - val_loss: 0.0709 - val_acc: 0.9781
+
+Epoch 00008: val_acc improved from 0.97810 to 0.97810, saving model to mnist_weights.h5
+Epoch 9/10
+60000/60000 [==============================] - 2s 32us/step - loss: 0.0516 - acc: 0.9835 - val_loss: 0.0719 - val_acc: 0.9779
+
+Epoch 00009: val_acc did not improve from 0.97810
+Epoch 10/10
+60000/60000 [==============================] - 2s 32us/step - loss: 0.0467 - acc: 0.9851 - val_loss: 0.0730 - val_acc: 0.9784
+
+Epoch 00010: val_acc improved from 0.97810 to 0.97840, saving model to mnist_weights.h5
+10000/10000 [==============================] - 0s 11us/step
+Test loss: 0.07 
+Test accuracy: 97.84%
+```
 
 ### Convolutional Neural Networks (CNNs) with Keras
-ABCD
+```python
+# import dataset
+(x_train, y_train), (x_test, y_test) = tf.keras.datasets.cifar10.load_data()
+
+# change datatype to float
+x_train = x_train.astype('float32')
+x_test = x_test.astype('float32')
+
+# scale the dataset from 0 -> 255 to 0 -> 1
+x_train /= 255
+x_test /= 255
+
+# one-hot encode targets
+y_train = tf.keras.utils.to_categorical(y_train)
+y_test = tf.keras.utils.to_categorical(y_test)
+
+# create dataset pipeline
+def input_fn(features, labels, batch_size, training=True):
+    dataset = tf.data.Dataset.from_tensor_slices((features, labels))
+    if training:
+        dataset = dataset.shuffle(buffer_size=1000)
+        dataset = dataset.repeat()
+    dataset = dataset.batch(batch_size)
+    iterator = dataset.make_one_shot_iterator()
+    features, labels = iterator.get_next()    
+    return features, labels
+
+# parameters
+batch_size = 100
+training_steps_per_epoch = int(np.ceil(x_train.shape[0] / float(batch_size)))  # ==> 600
+eval_steps_per_epoch = int(np.ceil(x_test.shape[0] / float(batch_size)))  # ==> 100
+epochs = 10
+
+# create the model
+def model_fn(input_fn):
+    
+    (features, labels) = input_fn
+    
+    # Model input
+    model_input = tf.keras.layers.Input(tensor=features)
+    x = tf.keras.layers.Conv2D(64, (5, 5), padding='same', activation='relu')(model_input)
+    x = tf.keras.layers.Conv2D(64, (5, 5), padding='same', activation='relu')(x)
+    x = tf.keras.layers.BatchNormalization()(x)
+    x = tf.keras.layers.Conv2D(64, (5, 5), padding='same', activation='relu')(x)
+    x = tf.keras.layers.MaxPooling2D(pool_size=(2, 2), strides=2, padding='same')(x)
+    x = tf.keras.layers.Conv2D(64, (5, 5), padding='same', activation='relu')(x)
+    x = tf.keras.layers.Conv2D(64, (5, 5), padding='same', activation='relu')(x)
+    x = tf.keras.layers.BatchNormalization()(x)
+    x = tf.keras.layers.MaxPooling2D(pool_size=(2, 2), strides=2, padding='same')(x)
+    x = tf.keras.layers.Conv2D(32, (3, 3), padding='same', activation='relu')(x)
+    x = tf.keras.layers.Conv2D(32, (3, 3), padding='same', activation='relu')(x)
+    x = tf.keras.layers.Conv2D(32, (3, 3), padding='same', activation='relu')(x)
+    x = tf.keras.layers.MaxPooling2D(pool_size=(2, 2), strides=2, padding='same')(x)
+    x = tf.keras.layers.Dropout(0.3)(x)
+    x = tf.keras.layers.Flatten()(x)
+    x = tf.keras.layers.Dense(512, activation='relu')(x)
+    x = tf.keras.layers.Dense(256, activation='relu')(x)
+    x = tf.keras.layers.Dropout(0.5)(x)
+    output = tf.keras.layers.Dense(10, activation='softmax')(x)
+    
+    # the model
+    model = tf.keras.Model(inputs=model_input, outputs=output)
+    
+    # compile the model
+    model.compile(optimizer=tf.keras.optimizers.Nadam(),
+                  loss='categorical_crossentropy',
+                  metrics=['accuracy'],
+                  target_tensors=[tf.cast(labels,tf.float32)])
+    return model
+
+# build train model
+model = model_fn(input_fn(x_train, y_train, batch_size=batch_size, training=True))
+
+# print train model summary
+model.summary()
+```
+```bash
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input_1 (InputLayer)         (None, 32, 32, 3)         0         
+_________________________________________________________________
+conv2d (Conv2D)              (None, 32, 32, 64)        4864      
+_________________________________________________________________
+conv2d_1 (Conv2D)            (None, 32, 32, 64)        102464    
+_________________________________________________________________
+batch_normalization (BatchNo (None, 32, 32, 64)        256       
+_________________________________________________________________
+conv2d_2 (Conv2D)            (None, 32, 32, 64)        102464    
+_________________________________________________________________
+max_pooling2d (MaxPooling2D) (None, 16, 16, 64)        0         
+_________________________________________________________________
+conv2d_3 (Conv2D)            (None, 16, 16, 64)        102464    
+_________________________________________________________________
+conv2d_4 (Conv2D)            (None, 16, 16, 64)        102464    
+_________________________________________________________________
+batch_normalization_1 (Batch (None, 16, 16, 64)        256       
+_________________________________________________________________
+max_pooling2d_1 (MaxPooling2 (None, 8, 8, 64)          0         
+_________________________________________________________________
+conv2d_5 (Conv2D)            (None, 8, 8, 32)          18464     
+_________________________________________________________________
+conv2d_6 (Conv2D)            (None, 8, 8, 32)          9248      
+_________________________________________________________________
+conv2d_7 (Conv2D)            (None, 8, 8, 32)          9248      
+_________________________________________________________________
+max_pooling2d_2 (MaxPooling2 (None, 4, 4, 32)          0         
+_________________________________________________________________
+dropout (Dropout)            (None, 4, 4, 32)          0         
+_________________________________________________________________
+flatten (Flatten)            (None, 512)               0         
+_________________________________________________________________
+dense (Dense)                (None, 512)               262656    
+_________________________________________________________________
+dense_1 (Dense)              (None, 256)               131328    
+_________________________________________________________________
+dropout_1 (Dropout)          (None, 256)               0         
+_________________________________________________________________
+dense_2 (Dense)              (None, 10)                2570      
+=================================================================
+Total params: 848,746
+Trainable params: 848,490
+Non-trainable params: 256
+_________________________________________________________________
+```
+```python
+# train the model
+history = model.fit(epochs=epochs,
+                    steps_per_epoch=training_steps_per_epoch)
+```
+```bash
+'Output':
+Epoch 1/10
+500/500 [==============================] - 485s 970ms/step - loss: 1.6918 - acc: 0.3785
+Epoch 2/10
+500/500 [==============================] - 473s 945ms/step - loss: 1.3357 - acc: 0.5217
+Epoch 3/10
+500/500 [==============================] - 480s 960ms/step - loss: 1.1156 - acc: 0.6092
+Epoch 4/10
+500/500 [==============================] - 491s 981ms/step - loss: 0.9740 - acc: 0.6623
+Epoch 5/10
+500/500 [==============================] - 482s 963ms/step - loss: 0.8796 - acc: 0.6977
+Epoch 6/10
+500/500 [==============================] - 482s 964ms/step - loss: 0.8153 - acc: 0.7187
+Epoch 7/10
+500/500 [==============================] - 469s 939ms/step - loss: 0.7583 - acc: 0.7409
+Epoch 8/10
+500/500 [==============================] - 466s 932ms/step - loss: 0.7126 - acc: 0.7576
+Epoch 9/10
+500/500 [==============================] - 473s 946ms/step - loss: 0.6749 - acc: 0.7699
+Epoch 10/10
+500/500 [==============================] - 472s 944ms/step - loss: 0.6459 - acc: 0.7798
+```
+```python
+# store trained model weights
+model.save_weights('./tmp/cnn_weight.h5')
+
+# build evaluation model
+eval_model = model_fn(input_fn(x_test, y_test, batch_size=batch_size, training=False))
+eval_model.load_weights('./tmp/cnn_weight.h5')
+
+# evaluate the model
+score = eval_model.evaluate(steps=eval_steps_per_epoch)
+print('Test loss: {:.2f} \nTest accuracy: {:.2f}%'.format(score[0], score[1]*100))
+```
+```bash
+'Output':
+100/100 [==============================] - 35s 349ms/step
+Test loss: 0.83 
+Test accuracy: 73.53%
+```
 
 ### Recurrent Neural Networks (RNNs) with Keras
 ABCD
+```python
+import tensorflow as tf
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import MinMaxScaler
+
+# data url
+url = "https://raw.githubusercontent.com/dvdbisong/gcp-learningmodels-book/master/Chapter_12/nigeria-power-consumption.csv"
+
+# load data
+parse_date = lambda dates: pd.datetime.strptime(dates, '%d-%m')
+data = pd.read_csv(url, parse_dates=['Month'], index_col='Month',
+                   date_parser=parse_date,
+                   engine='python', skipfooter=2)
+
+# print column name
+data.columns
+
+# change column names
+data.rename(columns={'Nigeria power consumption': 'power-consumption'},
+            inplace=True)
+
+# split in training and evaluation set
+data_train, data_eval = train_test_split(data, test_size=0.2, shuffle=False)
+
+# MinMaxScaler - center ans scale the dataset
+scaler = MinMaxScaler(feature_range=(0, 1))
+data_train = scaler.fit_transform(data_train)
+data_eval = scaler.fit_transform(data_eval)
+
+# adjust univariate data for timeseries prediction
+def convert_to_sequences(data, sequence, is_target=False):
+    temp_df = []
+    for i in range(len(data) - sequence):
+        if is_target:
+            temp_df.append(data[(i+1): (i+1) + sequence])
+        else:
+            temp_df.append(data[i: i + sequence])
+    return np.array(temp_df)
+
+# parameters
+time_steps = 20
+inputs = 1
+neurons = 100
+outputs = 1
+batch_size = 32
+
+# create training and testing data
+train_x = convert_to_sequences(data_train, time_steps, is_target=False)
+train_y = convert_to_sequences(data_train, time_steps, is_target=True)
+
+eval_x = convert_to_sequences(data_eval, time_steps, is_target=False)
+eval_y = convert_to_sequences(data_eval, time_steps, is_target=True)
+
+# Build model
+model = tf.keras.Sequential()
+model.add(tf.keras.layers.LSTM(128, dropout=0.2, recurrent_dropout=0.2,
+                               input_shape=train_x.shape[1:],
+                               return_sequences=True))
+model.add(tf.keras.layers.Dense(1))
+
+# Compile the model
+model.compile(loss='mean_squared_error',
+              optimizer='adam',
+              metrics=['mse'])
+
+# print model summary
+model.summary()
+```
+```bash
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+lstm_2 (LSTM)                (None, 20, 128)           66560     
+_________________________________________________________________
+dense_2 (Dense)              (None, 20, 1)             129       
+=================================================================
+Total params: 66,689
+Trainable params: 66,689
+Non-trainable params: 0
+_________________________________________________________________
+```
+```python
+# Train the model
+history = model.fit(train_x, train_y,
+                    batch_size=batch_size,
+                    epochs=20, shuffle=False,
+                    validation_data=(eval_x, eval_y))
+```
+```bash
+'Output':
+Train on 78 samples, validate on 5 samples
+Epoch 1/20
+78/78 [==============================] - 2s 29ms/step - loss: 0.1068 - mean_squared_error: 0.1068 - val_loss: 0.1121 - val_mean_squared_error: 0.1121
+Epoch 2/20
+78/78 [==============================] - 0s 1ms/step - loss: 0.0522 - mean_squared_error: 0.0522 - val_loss: 0.0596 - val_mean_squared_error: 0.0596
+Epoch 3/20
+78/78 [==============================] - 0s 1ms/step - loss: 0.0264 - mean_squared_error: 0.0264 - val_loss: 0.0277 - val_mean_squared_error: 0.0277
+Epoch 4/20
+78/78 [==============================] - 0s 1ms/step - loss: 0.0350 - mean_squared_error: 0.0350 - val_loss: 0.0201 - val_mean_squared_error: 0.0201
+Epoch 5/20
+78/78 [==============================] - 0s 2ms/step - loss: 0.0366 - mean_squared_error: 0.0366 - val_loss: 0.0219 - val_mean_squared_error: 0.0219
+Epoch 6/20
+78/78 [==============================] - 0s 2ms/step - loss: 0.0292 - mean_squared_error: 0.0292 - val_loss: 0.0275 - val_mean_squared_error: 0.0275
+Epoch 7/20
+78/78 [==============================] - 0s 2ms/step - loss: 0.0300 - mean_squared_error: 0.0300 - val_loss: 0.0325 - val_mean_squared_error: 0.0325
+Epoch 8/20
+78/78 [==============================] - 0s 2ms/step - loss: 0.0200 - mean_squared_error: 0.0200 - val_loss: 0.0344 - val_mean_squared_error: 0.0344
+Epoch 9/20
+78/78 [==============================] - 0s 2ms/step - loss: 0.0259 - mean_squared_error: 0.0259 - val_loss: 0.0329 - val_mean_squared_error: 0.0329
+Epoch 10/20
+78/78 [==============================] - 0s 2ms/step - loss: 0.0283 - mean_squared_error: 0.0283 - val_loss: 0.0296 - val_mean_squared_error: 0.0296
+Epoch 11/20
+78/78 [==============================] - 0s 2ms/step - loss: 0.0211 - mean_squared_error: 0.0211 - val_loss: 0.0263 - val_mean_squared_error: 0.0263
+Epoch 12/20
+78/78 [==============================] - 0s 2ms/step - loss: 0.0238 - mean_squared_error: 0.0238 - val_loss: 0.0239 - val_mean_squared_error: 0.0239
+Epoch 13/20
+78/78 [==============================] - 0s 2ms/step - loss: 0.0192 - mean_squared_error: 0.0192 - val_loss: 0.0231 - val_mean_squared_error: 0.0231
+Epoch 14/20
+78/78 [==============================] - 0s 2ms/step - loss: 0.0347 - mean_squared_error: 0.0347 - val_loss: 0.0234 - val_mean_squared_error: 0.0234
+Epoch 15/20
+78/78 [==============================] - 0s 2ms/step - loss: 0.0321 - mean_squared_error: 0.0321 - val_loss: 0.0239 - val_mean_squared_error: 0.0239
+Epoch 16/20
+78/78 [==============================] - 0s 2ms/step - loss: 0.0243 - mean_squared_error: 0.0243 - val_loss: 0.0244 - val_mean_squared_error: 0.0244
+Epoch 17/20
+78/78 [==============================] - 0s 2ms/step - loss: 0.0273 - mean_squared_error: 0.0273 - val_loss: 0.0245 - val_mean_squared_error: 0.0245
+Epoch 18/20
+78/78 [==============================] - 0s 2ms/step - loss: 0.0259 - mean_squared_error: 0.0259 - val_loss: 0.0243 - val_mean_squared_error: 0.0243
+Epoch 19/20
+78/78 [==============================] - 0s 2ms/step - loss: 0.0296 - mean_squared_error: 0.0296 - val_loss: 0.0241 - val_mean_squared_error: 0.0241
+Epoch 20/20
+78/78 [==============================] - 0s 2ms/step - loss: 0.0156 - mean_squared_error: 0.0156 - val_loss: 0.0241 - val_mean_squared_error: 0.0241
+```
+```python
+loss, mse = model.evaluate(eval_x, eval_y, batch_size=batch_size)
+print('Test loss: {:.4f}'.format(loss))
+print('Test mse: {:.4f}'.format(mse))
+
+# predict
+y_pred = model.predict(eval_x)
+
+# plot predicted sequence
+plt.title("Model Testing", fontsize=12)
+plt.plot(eval_x[0,:,0], "b--", markersize=10, label="training instance")
+plt.plot(eval_y[0,:,0], "g--", markersize=10, label="targets")
+plt.plot(y_pred[0,:,0], "r--", markersize=10, label="model prediction")
+plt.legend(loc="upper left")
+plt.xlabel("Time")
+```
+
+<div class="fig figcenter fighighlight">
+    <img src="/assets/seminar_IEEE/keras_rnn_ts_model_testing.png" width="70%" height="70%">
+    <div class="figcaption" style="text-align: center;">
+        Figure ??: Keras LSTM Model.
+    </div>
+</div>
 
 #### Stacked LSTM
 ABCD
