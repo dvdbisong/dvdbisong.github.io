@@ -15,7 +15,7 @@ Table of contents:
 - [Convolutional Neural Networks (CNNs) with Keras](#convolutional-neural-networks-cnns-with-keras)
 - [Recurrent Neural Networks (RNNs) with Keras](#recurrent-neural-networks-rnns-with-keras)
     - [Stacked LSTM](#stacked-lstm)
-    - [CNN LSTM](#cnn-lstm)
+- [Long-term Recurrent Convolutional Network (CNN LSTM)](#long-term-recurrent-convolutional-network-cnn-lstm)
     - [Encoder-Decoder LSTM](#encoder-decoder-lstm)
     - [Bidirectional LSTM](#bidirectional-lstm)
 
@@ -603,6 +603,28 @@ Test accuracy: 97.84%
 ```
 
 ### Convolutional Neural Networks (CNNs) with Keras
+In this section, we use Keras to implement a Convolutional Neural Network. The network architecture is similar to the Krizhevsky architecture implemented in the TensorFlow chapter and consists of the following layers:
+- Convolution layer: kernel_size => [5 x 5]
+- Convolution layer: kernel_size => [5 x 5]
+- Batch Normalization layer
+- Convolution layer: kernel_size => [5 x 5]
+- Max pooling: pool size => [2 x 2]
+- Convolution layer: kernel_size => [5 x 5]
+- Convolution layer: kernel_size => [5 x 5]
+- Batch Normalization layer
+- Max pooling: pool size => [2 x 2]
+- Convolution layer: kernel_size => [5 x 5]
+- Convolution layer: kernel_size => [5 x 5]
+- Convolution layer: kernel_size => [5 x 5]
+- Max pooling: pool size => [2 x 2]
+- Dropout layer
+- Dense Layer: units => [512]
+- Dense Layer: units => [256]
+- Dropout layer
+- Dense Layer: units => [10]
+
+The code listing is provided below.
+
 ```python
 # import dataset
 (x_train, y_train), (x_test, y_test) = tf.keras.datasets.cifar10.load_data()
@@ -775,8 +797,17 @@ Test loss: 0.83
 Test accuracy: 73.53%
 ```
 
+From the code block above, observe how the network layers are implemented in Keras:
+- Convolutional layer - `tf.keras.layers.Conv2D()`
+- Batch Normalization - `tf.keras.layers.BatchNormalization()`
+- Max Pooling layer - `tf.keras.layers.MaxPooling2D()`
+- Dropout layer - `tf.keras.layers.Dropout()`
+- Fully connected or Dense layer - `tf.keras.layers.Dense()`
+
+
 ### Recurrent Neural Networks (RNNs) with Keras
-ABCD
+This section makes use of the Nigeria power consumption univariate timeseries dataset to implement a LSTM Recurrent Neural Network.
+
 ```python
 import tensorflow as tf
 import pandas as pd
@@ -876,34 +907,7 @@ Epoch 2/20
 78/78 [==============================] - 0s 1ms/step - loss: 0.0522 - mean_squared_error: 0.0522 - val_loss: 0.0596 - val_mean_squared_error: 0.0596
 Epoch 3/20
 78/78 [==============================] - 0s 1ms/step - loss: 0.0264 - mean_squared_error: 0.0264 - val_loss: 0.0277 - val_mean_squared_error: 0.0277
-Epoch 4/20
-78/78 [==============================] - 0s 1ms/step - loss: 0.0350 - mean_squared_error: 0.0350 - val_loss: 0.0201 - val_mean_squared_error: 0.0201
-Epoch 5/20
-78/78 [==============================] - 0s 2ms/step - loss: 0.0366 - mean_squared_error: 0.0366 - val_loss: 0.0219 - val_mean_squared_error: 0.0219
-Epoch 6/20
-78/78 [==============================] - 0s 2ms/step - loss: 0.0292 - mean_squared_error: 0.0292 - val_loss: 0.0275 - val_mean_squared_error: 0.0275
-Epoch 7/20
-78/78 [==============================] - 0s 2ms/step - loss: 0.0300 - mean_squared_error: 0.0300 - val_loss: 0.0325 - val_mean_squared_error: 0.0325
-Epoch 8/20
-78/78 [==============================] - 0s 2ms/step - loss: 0.0200 - mean_squared_error: 0.0200 - val_loss: 0.0344 - val_mean_squared_error: 0.0344
-Epoch 9/20
-78/78 [==============================] - 0s 2ms/step - loss: 0.0259 - mean_squared_error: 0.0259 - val_loss: 0.0329 - val_mean_squared_error: 0.0329
-Epoch 10/20
-78/78 [==============================] - 0s 2ms/step - loss: 0.0283 - mean_squared_error: 0.0283 - val_loss: 0.0296 - val_mean_squared_error: 0.0296
-Epoch 11/20
-78/78 [==============================] - 0s 2ms/step - loss: 0.0211 - mean_squared_error: 0.0211 - val_loss: 0.0263 - val_mean_squared_error: 0.0263
-Epoch 12/20
-78/78 [==============================] - 0s 2ms/step - loss: 0.0238 - mean_squared_error: 0.0238 - val_loss: 0.0239 - val_mean_squared_error: 0.0239
-Epoch 13/20
-78/78 [==============================] - 0s 2ms/step - loss: 0.0192 - mean_squared_error: 0.0192 - val_loss: 0.0231 - val_mean_squared_error: 0.0231
-Epoch 14/20
-78/78 [==============================] - 0s 2ms/step - loss: 0.0347 - mean_squared_error: 0.0347 - val_loss: 0.0234 - val_mean_squared_error: 0.0234
-Epoch 15/20
-78/78 [==============================] - 0s 2ms/step - loss: 0.0321 - mean_squared_error: 0.0321 - val_loss: 0.0239 - val_mean_squared_error: 0.0239
-Epoch 16/20
-78/78 [==============================] - 0s 2ms/step - loss: 0.0243 - mean_squared_error: 0.0243 - val_loss: 0.0244 - val_mean_squared_error: 0.0244
-Epoch 17/20
-78/78 [==============================] - 0s 2ms/step - loss: 0.0273 - mean_squared_error: 0.0273 - val_loss: 0.0245 - val_mean_squared_error: 0.0245
+...
 Epoch 18/20
 78/78 [==============================] - 0s 2ms/step - loss: 0.0259 - mean_squared_error: 0.0259 - val_loss: 0.0243 - val_mean_squared_error: 0.0243
 Epoch 19/20
@@ -935,11 +939,190 @@ plt.xlabel("Time")
     </div>
 </div>
 
+From the Keras LSTM code listing, the method `tf.keras.layers.LSTM()` is used to implement the LSTM recurrent layer. The attribute `return_sequences` is set to `True` to return the full sequence in the output sequence.
+
 #### Stacked LSTM
 ABCD
 
-#### CNN LSTM
-ABCD
+```python
+import tensorflow as tf
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import MinMaxScaler
+
+# data url
+url = "https://raw.githubusercontent.com/dvdbisong/gcp-learningmodels-book/master/Chapter_12/dow_jones_index.data"
+
+# load data
+data = pd.read_csv(url, parse_dates=['date'], index_col='date')
+
+# print column name
+data.columns
+
+# print column datatypes
+data.dtypes
+
+# parameters
+outputs = 1
+stock ='BAC'  # Bank of America
+
+def clean_dataset(data):
+    # strip dollar sign from `object` type columns
+    col = ['open', 'high', 'low', 'close', 'next_weeks_open', 'next_weeks_close']
+    data[col] = data[col].replace({'\$': ''}, regex=True)
+    # drop NaN
+    data.dropna(inplace=True)
+    # rearrange columns
+    columns = ['quarter', 'stock', 'open', 'high', 'low', 'close', 'volume',
+       'percent_change_price', 'percent_change_volume_over_last_wk',
+       'previous_weeks_volume', 'next_weeks_open', 'next_weeks_close',
+       'days_to_next_dividend', 'percent_return_next_dividend',
+       'percent_change_next_weeks_price']
+    data = data[columns]
+    return data
+
+def data_transform(data):
+    # select stock data belonging to Bank of America
+    data = data[data.stock == stock]
+    # adjust target(t) to depend on input (t-1)
+    data.percent_change_next_weeks_price = data.percent_change_next_weeks_price.shift(-1)
+    # remove nans as a result of the shifted values
+    data = data.iloc[:-1,:]
+    # split quarter 1 as training data and quarter 2 as testing data
+    train_df = data[data.quarter == 1]
+    test_df = data[data.quarter == 2]   
+    return (np.array(train_df), np.array(test_df))
+
+def normalize_and_scale(train_df, test_df):
+    # remove string columns and convert to float
+    train_df = train_df[:,2:].astype(float,copy=False)
+    test_df = test_df[:,2:].astype(float,copy=False)
+    # MinMaxScaler - center and scale the dataset
+    scaler = MinMaxScaler(feature_range=(0, 1))    
+    train_df_scale = scaler.fit_transform(train_df[:,2:])
+    test_df_scale = scaler.fit_transform(test_df[:,2:])  
+    return (scaler, train_df_scale, test_df_scale)
+
+# clean the dataset
+data = clean_dataset(data)
+
+# select Dow Jones stock and split into training and test sets
+train_df, test_df = data_transform(data)
+
+# scale the data
+scaler, train_df_scaled, test_df_scaled = normalize_and_scale(train_df, test_df)
+
+# split train/ test
+train_X, train_y = train_df_scaled[:, :-1], train_df_scaled[:, -1]
+test_X, test_y = test_df_scaled[:, :-1], test_df_scaled[:, -1]
+
+# reshape inputs to 3D array
+train_X = train_X[:,None,:]
+test_X = test_X[:,None,:]
+
+# reshape outputs
+train_y = np.reshape(train_y, (-1,outputs))
+test_y = np.reshape(test_y, (-1,outputs))
+
+# model parameters
+batch_size = int(train_X.shape[0]/5)
+length = train_X.shape[0]
+
+# Build model
+model = tf.keras.Sequential()
+model.add(tf.keras.layers.LSTM(128, dropout=0.2, recurrent_dropout=0.2,
+                               input_shape=train_X.shape[1:],
+                               return_sequences=True))
+model.add(tf.keras.layers.LSTM(100, return_sequences=True))
+model.add(tf.keras.layers.LSTM(64))
+model.add(tf.keras.layers.Dense(1))
+
+# Compile the model
+model.compile(loss='mean_squared_error',
+              optimizer='adam',
+              metrics=['mse'])
+
+# print model summary
+model.summary()
+```
+```bash
+Layer (type)                 Output Shape              Param #   
+=================================================================
+lstm_50 (LSTM)               (None, 1, 128)            71168     
+_________________________________________________________________
+lstm_51 (LSTM)               (None, 1, 100)            91600     
+_________________________________________________________________
+lstm_52 (LSTM)               (None, 64)                42240     
+_________________________________________________________________
+dense_19 (Dense)             (None, 1)                 65        
+=================================================================
+Total params: 205,073
+Trainable params: 205,073
+Non-trainable params: 0
+```
+```python
+# Train the model
+history = model.fit(train_X, train_y,
+                    batch_size=batch_size,
+                    epochs=20, shuffle=False,
+                    validation_data=(test_X, test_y))
+```
+```bash
+Train on 11 samples, validate on 12 samples
+Epoch 1/20
+11/11 [==============================] - 10s 926ms/step - loss: 0.3354 - mean_squared_error: 0.3354 - val_loss: 0.1669 - val_mean_squared_error: 0.1669
+Epoch 2/20
+11/11 [==============================] - 0s 5ms/step - loss: 0.2917 - mean_squared_error: 0.2917 - val_loss: 0.1359 - val_mean_squared_error: 0.1359
+Epoch 3/20
+11/11 [==============================] - 0s 4ms/step - loss: 0.2355 - mean_squared_error: 0.2355 - val_loss: 0.0977 - val_mean_squared_error: 0.0977
+...
+Epoch 18/20
+11/11 [==============================] - 0s 4ms/step - loss: 0.0436 - mean_squared_error: 0.0436 - val_loss: 0.0771 - val_mean_squared_error: 0.0771
+Epoch 19/20
+11/11 [==============================] - 0s 4ms/step - loss: 0.0378 - mean_squared_error: 0.0378 - val_loss: 0.0746 - val_mean_squared_error: 0.0746
+Epoch 20/20
+11/11 [==============================] - 0s 5ms/step - loss: 0.0405 - mean_squared_error: 0.0405 - val_loss: 0.0696 - val_mean_squared_error: 0.0696
+12/12 [==============================] - 0s 933us/step
+Test loss: 0.0696
+Test mse: 0.0696
+```
+```python
+loss, mse = model.evaluate(test_X, test_y, batch_size=batch_size)
+print('Test loss: {:.4f}'.format(loss))
+print('Test mse: {:.4f}'.format(mse))
+
+# predict
+y_pred = model.predict(test_X)
+
+plt.figure(1)
+plt.title("Keras - LSTM RNN Model Testing for '{}' stock".format(stock), fontsize=12)
+plt.plot(test_y, "g--", markersize=10, label="targets")
+plt.plot(y_pred, "r--", markersize=10, label="model prediction")
+plt.legend()
+plt.xlabel("Time")
+```
+
+<div class="fig figcenter fighighlight">
+    <img src="/assets/seminar_IEEE/keras_lstm_rnn_ts_model_testing.png" width="70%" height="70%">
+    <div class="figcaption" style="text-align: center;">
+        Figure ??: Keras LSTM Model.
+    </div>
+</div>
+
+### Long-term Recurrent Convolutional Network (CNN LSTM)
+
+<!-- The CNN LSTM architecture involves using Convolutional Neural Network (CNN) layers for feature extraction on input data combined with LSTMs to support sequence prediction.
+
+CNN LSTMs were developed for visual time series prediction problems and the application of generating textual descriptions from sequences of images (e.g. videos).
+
+This architecture was originally referred to as a Long-term Recurrent Convolutional Network or LRCN model, although we will use the more generic name CNN LSTM to refer to LSTMs that use a CNN as a front end in this lesson.
+
+This architecture is used for the task of generating textual descriptions of images. Key is the use of a CNN that is pre-trained on a challenging image classification task that is re-purposed as a feature extractor for the caption generating problem.
+
+CNNs are used as feature extractors for the LSTMs on audio and textual input data.
+
+We can define a CNN LSTM model to be trained jointly in Keras. A CNN LSTM can be defined by adding CNN layers on the front end followed by LSTM layers with a Dense layer on the output. -->
 
 #### Encoder-Decoder LSTM
 ABCD
