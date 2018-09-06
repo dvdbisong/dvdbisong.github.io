@@ -6,14 +6,14 @@ permalink: gcp-ml-seminar/gcp-services/
 
 Table of contents:
 
-- [Cloud Compute](#cloud_compute)
-- [Cloud Storage](#cloud_storage)
-- [Big Data/ Analytics](#big_data_analytics)
-- [Cloud AI](#cloud_ai)
-- [Skinny Data Migration Pipeline](#data_migration)
+- [Cloud Compute](#cloud-compute)
+- [Cloud Storage](#cloud-storage)
+- [Big Data/ Analytics](#big-data-analytics)
+- [Cloud AI](#cloud-ai)
+- [Skinny Data Migration Pipeline](#skinny-data-migration-pipeline)
 
 
-Google Cloud Platform offers a wide range of services for securing, storing, serving and analyzing data. These cloud services form a secure cloud perimeter for data, where different operations and transformations can be carried out on the data without it ever leaving the cloud perimeter. This data hub is sometimes referred to as a data lake.
+Google Cloud Platform offers a wide range of services for securing, storing, serving and analyzing data. These cloud services form a secure cloud perimeter for data, where different operations and transformations can be carried out on the data without it ever leaving the cloud ecosystem. <!-- This data hub is sometimes referred to as a data lake. -->
 
 The services offered by Google Cloud include Compute, Storage, Big Data/ Analytics, Artificial Intelligence (AI), and other networking, developer, and management services. Let's briefly review some of the features of the Google Cloud ecosystem.
 
@@ -27,7 +27,7 @@ For our purposes of machine learning modeling, the cloud compute engine is most 
 <div class="fig figcenter fighighlight">
     <img src="/assets/seminar_IEEE/cloud-compute.png"> <!--width="50%" height="50%"-->
     <div class="figcaption" style="text-align: center;">
-        <span style="font-style: italic">Figure 1: </span>Cloud Compute Services
+        Figure 1: Cloud Compute Services.
     </div>
 </div>
 
@@ -41,7 +41,7 @@ The cloud storage products include cloud storage (general purpose storage platfo
 <div class="fig figcenter fighighlight">
     <img src="/assets/seminar_IEEE/cloud-storage.png">
     <div class="figcaption" style="text-align: center;">
-        <span style="font-style: italic">Figure 2: </span>Cloud Storage Products
+        Figure 2: Cloud Storage Products
     </div>
 </div>
 
@@ -57,7 +57,7 @@ Cloud Datalab is our point of emphasis among the suite of services under the ana
 <div class="fig figcenter fighighlight">
     <img src="/assets/seminar_IEEE/big-data-analytics.png">
     <div class="figcaption" style="text-align: center;">
-        <span style="font-style: italic">Figure 3: </span>Big Data/ Analytics serverless platforms
+        Figure 3: Big Data/ Analytics serverless platforms
     </div>
 </div>
 
@@ -73,7 +73,7 @@ Cloud Machine Learning is often used in conjunction with Datalab to train Tensor
 <div class="fig figcenter fighighlight">
     <img src="/assets/seminar_IEEE/cloud-ai.png">
     <div class="figcaption" style="text-align: center;">
-        <span style="font-style: italic">Figure 4: </span>Cloud AI services
+        Figure 4: Cloud AI services
     </div>
 </div>
 
@@ -85,6 +85,6 @@ The critical pieces of the cloud platform under consideration with respect to de
 <div class="fig figcenter fighighlight">
     <img src="/assets/seminar_IEEE/ml-process.png" width="60%" height="60%">
     <div class="figcaption" style="text-align: center;">
-        <span style="font-style: italic">Figure 5: </span>ML process
+        Figure 5: ML process
     </div>
 </div>
