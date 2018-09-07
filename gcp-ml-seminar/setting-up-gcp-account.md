@@ -6,11 +6,11 @@ permalink: gcp-ml-seminar/setting-up-gcp-account/
 
 Table of contents:
 
-- [Creating an Account](#create_account)
-- [GCP Resources: Projects](#gcp_projects)
-- [Accessing Cloud Platform Services](#platform_services)
-- [Account Users and Permissions](#users_permissions)
-- [The Cloud Shell](#cloud_shell)
+- [Creating an Account](#creating-an-account)
+- [GCP Resources: Projects](#gcp-resources-projects)
+- [Accessing Cloud Platform Services](#accessing-cloud-platform-services)
+- [Account Users and Permissions](#account-users-and-permissions)
+- [The Cloud Shell](#the-cloud-shell)
 
 This post walks through setting up a Google Cloud Platform account. A GCP account gives access to all of the platform's infrastructure and services. For a new account, a $300 credit is awarded, to be spent over a period of 12 months. This offer is great as it gives ample time to explore the different features and services of Google's cloud offering.
 
@@ -22,7 +22,7 @@ Note that to register an account requires a valid credit card to validate that i
    <div class="fig figcenter fighighlight">
      <img src="/assets/seminar_IEEE/GCP-login-page.png">
      <div class="figcaption" style="text-align: center;">
-        <span style="font-style: italic">Figure 1: </span>Google Cloud Platform Login Page
+        Figure 1: Google Cloud Platform Login Page.
      </div>
     </div>
 
@@ -32,7 +32,7 @@ Note that to register an account requires a valid credit card to validate that i
     <div class="fig figcenter fighighlight">
      <img src="/assets/seminar_IEEE/creating-account.png">
      <div class="figcaption" style="text-align: center;">
-        <span style="font-style: italic">Figure 2: </span>Creating Account
+        Figure 2: Creating Account.
      </div>
     </div>
 
@@ -41,7 +41,7 @@ Note that to register an account requires a valid credit card to validate that i
     <div class="fig figcenter fighighlight">
      <img src="/assets/seminar_IEEE/welcome-to-GCP.png">
      <div class="figcaption" style="text-align: center;">
-        <span style="font-style: italic">Figure 3: </span>Welcome to GCP
+        Figure 3: Welcome to GCP.
      </div>
     </div>
 
@@ -50,7 +50,7 @@ Note that to register an account requires a valid credit card to validate that i
     <div class="fig figcenter fighighlight">
      <img src="/assets/seminar_IEEE/GCP-dashboard.png">
      <div class="figcaption" style="text-align: center;">
-        <span style="font-style: italic">Figure 4: </span>GCP Dashboard
+        Figure 4: GCP Dashboard
      </div>
     </div>
 
@@ -64,11 +64,11 @@ To view the projects in the account, click on the <span style="color:green">scop
 <div class="fig figcenter fighighlight">
      <img src="/assets/seminar_IEEE/project-scope-picker.png">
      <div class="figcaption" style="text-align: center;">
-        <span style="font-style: italic">Figure 5: </span>Scope Picker to select projects
+        Figure 5: Scope Picker to select projects
      </div>
      <img src="/assets/seminar_IEEE/select-projects.png">
      <div class="figcaption" style="text-align: center;">
-        <span style="font-style: italic">Figure 6: </span>Select projects
+        Figure 6: Select projects
      </div>
 </div>
 
@@ -78,7 +78,7 @@ To access the resources on the cloud platform, click the triple-dash in the top-
 <div class="fig figcenter fighighlight">
      <img src="/assets/seminar_IEEE/accessing-resources.png">
      <div class="figcaption" style="text-align: center;">
-        <span style="font-style: italic">Figure 7: </span>Google Cloud Platform Services
+        Figure 7: Google Cloud Platform Services
      </div>
 </div>
 
@@ -88,11 +88,11 @@ GCP allows you to define security roles and permission for every resource in a s
 <div class="fig figcenter fighighlight">
      <img src="/assets/seminar_IEEE/open-IAM.png">
      <div class="figcaption" style="text-align: center;">
-        <span style="font-style: italic">Figure 8: </span>Open IAM & Admin
+        Figure 8: Open IAM & Admin
      </div>
      <img src="/assets/seminar_IEEE/IAM-console.png">
      <div class="figcaption" style="text-align: center;">
-        <span style="font-style: italic">Figure 9: </span>IAM & Admin Console
+        Figure 9: IAM & Admin Console
      </div>
 </div>
 
@@ -104,14 +104,14 @@ The cloud shell is accessed by clicking on the <span style="color:green">prompt 
 <div class="fig figcenter fighighlight">
      <img src="/assets/seminar_IEEE/activate-cloud-shell.png" width="60%" height="60%">
      <div class="figcaption" style="text-align: center;">
-        <span style="font-style: italic">Figure 10: </span>Activate Cloud Shell
+        Figure 10: Activate Cloud Shell
      </div>
      <img src="/assets/seminar_IEEE/start-cloud-shell.png">
      <div class="figcaption" style="text-align: center;">
-        <span style="font-style: italic">Figure 11: </span>Start Cloud Shell
+        Figure 11: Start Cloud Shell
      </div>
      <img src="/assets/seminar_IEEE/cloud-shell-interface.png">
      <div class="figcaption" style="text-align: center;">
-        <span style="font-style: italic">Figure 12: </span>Cloud Shell Interface
+        Figure 12: Cloud Shell Interface
      </div>
 </div>
