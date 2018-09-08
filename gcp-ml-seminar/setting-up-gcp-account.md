@@ -50,7 +50,7 @@ Note that to register an account requires a valid credit card to validate that i
     <div class="fig figcenter fighighlight">
      <img src="/assets/seminar_IEEE/GCP-dashboard.png">
      <div class="figcaption" style="text-align: center;">
-        Figure 4: GCP Dashboard
+        Figure 4: GCP Dashboard.
      </div>
     </div>
 
@@ -64,11 +64,11 @@ To view the projects in the account, click on the <span style="color:green">scop
 <div class="fig figcenter fighighlight">
      <img src="/assets/seminar_IEEE/project-scope-picker.png">
      <div class="figcaption" style="text-align: center;">
-        Figure 5: Scope Picker to select projects
+        Figure 5: Scope Picker to select projects.
      </div>
      <img src="/assets/seminar_IEEE/select-projects.png">
      <div class="figcaption" style="text-align: center;">
-        Figure 6: Select projects
+        Figure 6: Select projects.
      </div>
 </div>
 
@@ -78,7 +78,7 @@ To access the resources on the cloud platform, click the triple-dash in the top-
 <div class="fig figcenter fighighlight">
      <img src="/assets/seminar_IEEE/accessing-resources.png">
      <div class="figcaption" style="text-align: center;">
-        Figure 7: Google Cloud Platform Services
+        Figure 7: Google Cloud Platform Services.
      </div>
 </div>
 
