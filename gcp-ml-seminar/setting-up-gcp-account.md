@@ -83,16 +83,16 @@ To access the resources on the cloud platform, click the triple-dash in the top-
 </div>
 
 ### Account Users and Permissions
-GCP allows you to define security roles and permission for every resource in a specific project. This feature is particularly useful when a project scales beyond one user. New roles and permissions are created for a user through the IAM & Admin tab
+GCP allows you to define security roles and permission for every resource in a specific project. This feature is particularly useful when a project scales beyond one user. New roles and permissions are created for a user through the IAM & Admin tab.
 
 <div class="fig figcenter fighighlight">
      <img src="/assets/seminar_IEEE/open-IAM.png">
      <div class="figcaption" style="text-align: center;">
-        Figure 8: Open IAM & Admin
+        Figure 8: Open IAM & Admin.
      </div>
      <img src="/assets/seminar_IEEE/IAM-console.png">
      <div class="figcaption" style="text-align: center;">
-        Figure 9: IAM & Admin Console
+        Figure 9: IAM & Admin Console.
      </div>
 </div>
 
@@ -104,14 +104,14 @@ The cloud shell is accessed by clicking on the <span style="color:green">prompt 
 <div class="fig figcenter fighighlight">
      <img src="/assets/seminar_IEEE/activate-cloud-shell.png" width="60%" height="60%">
      <div class="figcaption" style="text-align: center;">
-        Figure 10: Activate Cloud Shell
+        Figure 10: Activate Cloud Shell.
      </div>
      <img src="/assets/seminar_IEEE/start-cloud-shell.png">
      <div class="figcaption" style="text-align: center;">
-        Figure 11: Start Cloud Shell
+        Figure 11: Start Cloud Shell.
      </div>
      <img src="/assets/seminar_IEEE/cloud-shell-interface.png">
      <div class="figcaption" style="text-align: center;">
-        Figure 12: Cloud Shell Interface
+        Figure 12: Cloud Shell Interface.
      </div>
 </div>
