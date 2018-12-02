@@ -9,34 +9,34 @@ Table of contents:
 - [Loading Sample datasets from Scikit-learn](#loading-sample-datasets-from-scikit-learn)
 - [Splitting the Dataset into training and test sets](#splitting-the-dataset-into-training-and-test-sets)
 - [Preprocessing the Data for model fitting](#preprocessing-the-data-for-model-fitting)
-  - [Data Rescaling](#data-rescaling)
-  - [Standardization](#standardization)
-  - [Normalization](#normalization)
-  - [Binarization](#binarization)
-  - [Encoding Categorical Variables](#encoding-categorical-variables)
-  - [Input Missing Data](#input-missing-data)
-  - [Generating Higer Order Polynomial Features](#generating-higer-order-polynomial-features)
+    - [Data Rescaling](#data-rescaling)
+    - [Standardization](#standardization)
+    - [Normalization](#normalization)
+    - [Binarization](#binarization)
+    - [Encoding Categorical Variables](#encoding-categorical-variables)
+    - [Input Missing Data](#input-missing-data)
+    - [Generating Higer Order Polynomial Features](#generating-higer-order-polynomial-features)
 - [Machine learning algorithms](#machine-learning-algorithms)
-  - [Supervised learning](#supervised-learning)
-  - [Unsupervised learning](#unsupervised-learning)
-  - [Ensemble Algorithms](#ensemble-algorithms)
+    - [Supervised learning](#supervised-learning)
+    - [Unsupervised learning](#unsupervised-learning)
+    - [Ensemble Algorithms](#ensemble-algorithms)
 - [Feature Engineering](#feature-engineering)
-  - [Statistical tests to select the best $k$ features using the `SelectKBest` module](#statistical-tests-to-select-the-best-k-features-using-the-selectkbest-module)
-  - [Recursive Feature Elimination (RFE)](#recursive-feature-elimination-rfe)
-  - [Principal Component Analysis](#principal-component-analysis)
-  - [Feature Imporances](#feature-imporances)
+    - [Statistical tests to select the best $k$ features using the `SelectKBest` module](#statistical-tests-to-select-the-best-k-features-using-the-selectkbest-module)
+    - [Recursive Feature Elimination (RFE)](#recursive-feature-elimination-rfe)
+    - [Principal Component Analysis](#principal-component-analysis)
+    - [Feature Imporances](#feature-imporances)
 - [Resampling Methods](#resampling-methods)
-  - [k-Fold cross validation](#k-fold-cross-validation)
-  - [Leave-One-Out cross validation (LOOCV)](#leave-one-out-cross-validation-loocv)
+    - [k-Fold cross validation](#k-fold-cross-validation)
+    - [Leave-One-Out cross validation (LOOCV)](#leave-one-out-cross-validation-loocv)
 - [Model evaluation](#model-evaluation)
-  - [Regression evaluation metrics](#regression-evaluation-metrics)
-  - [Classification evaluation metrics](#classification-evaluation-metrics)
+    - [Regression evaluation metrics](#regression-evaluation-metrics)
+    - [Classification evaluation metrics](#classification-evaluation-metrics)
 - [Pipelines: Streamlining Machine Learning Workflows](#pipelines-streamlining-machine-learning-workflows)
-  - [Pipelines using `make_pipeline`](#pipelines-using-makepipeline)
-  - [Pipelines using FeatureUnion](#pipelines-using-featureunion)
+    - [Pipelines using `make_pipeline`](#pipelines-using-makepipeline)
+    - [Pipelines using FeatureUnion](#pipelines-using-featureunion)
 - [Model tuning](#model-tuning)
-  - [Grid Search](#grid-search)
-  - [Randomized Search](#randomized-search)
+    - [Grid Search](#grid-search)
+    - [Randomized Search](#randomized-search)
 
 Scikit-learn is a Python library that provides a standard interface for implementing Machine Learning algorithms. It includes other ancillary functions that are integral to the machine learning pipeline such as data pre-processing steps, data resampling techniques, evaluation parameters and search interfaces for tuning/ optimizing an algorithms performance.
 
@@ -166,7 +166,7 @@ y_test.shape
 ### Preprocessing the Data for model fitting
 Before a dataset is trained or fitted with a machine learning model, it necessarily undergoes some vital transformations. These transformation have a huge effect on the performance of the learning model. Transformations in Scikit-learn have a `fit()` and `transform()` method, or a `fit_transform()` method.
 
-Depending on the use-case, the `fit()` method can be used to learn the parameters of the dataset, while the `transform()` method applies the data transform based on the learned parameters to the same dataset and also to the test or validation datasets before modelung. Also, the `fit_transform()` method can be used to learn and apply the transformation to the same dataset in a one-off fashion. Data transformation packages are found in the `sklearn.preprocessing` package.
+Depending on the use-case, the `fit()` method can be used to learn the parameters of the dataset, while the `transform()` method applies the data transform based on the learned parameters to the same dataset and also to the test or validation datasets before modeling. Also, the `fit_transform()` method can be used to learn and apply the transformation to the same dataset in a one-off fashion. Data transformation packages are found in the `sklearn.preprocessing` package.
 
 This section will cover some critical transformation for numeric and categorical variables. They include:
  - Data Rescaling

@@ -48,7 +48,7 @@ The Keras `Model` forms the core of a Keras programme. A `Model` is first constr
     </div>
 </div>
 
-As shown in Figure 1, the Keras `Model` can be constructued using the Sequential API `tf.keras.Sequential` or the Keras Functional API which defines a model instance `tf.keras.Model`. The Sequential model is the simplest method for creating a linear stack of Neural Networks layers. The Functional model is used if a more complex graph is desired.
+As shown in Figure 1, the Keras `Model` can be constructed using the Sequential API `tf.keras.Sequential` or the Keras Functional API which defines a model instance `tf.keras.Model`. The Sequential model is the simplest method for creating a linear stack of Neural Networks layers. The Functional model is used if a more complex graph is desired.
 
 
 ### Multilayer Perceptron (MLP) with Keras
@@ -148,7 +148,7 @@ From the code above, observe the following key methods:
 - The optimizer `tf.train.AdamOptimizer()` is an example of using a TensorFlow optimizer and frankly other TensorFlow functions with Keras.
 
 ### Using the Dataset API with tf.keras
-In this section will use the TensorFlow Dataset API to build a data pipline for feeding data into a Keras Model. Using the Dataset API is the preferred mechanism for feeding data as it can easily scale to handle very large datasets and better utilize the machine resources. Again, here, we use the Fashion MNIST dataset as an example, but this time a data pipeline is constructued using the Dataset API and the Model is constructed using the Keras Functional API.
+In this section will use the TensorFlow Dataset API to build a data pipeline for feeding data into a Keras Model. Using the Dataset API is the preferred mechanism for feeding data as it can easily scale to handle very large datasets and better utilize the machine resources. Again, here, we use the Fashion MNIST dataset as an example, but this time a data pipeline is constructed using the Dataset API and the Model is constructed using the Keras Functional API.
 
 ```python
 import tensorflow as tf
@@ -286,7 +286,7 @@ Test accuracy: 89.30%
 ```
 
 From the code block above, observe the following steps:
-- The Keras Functional API is used to construct the model in the custon `model_fn` function. Note how the layers are constructuted from the Input `tf.keras.layers.Input` to the output. Also observe how the model is built using `tf.keras.Model`.
+- The Keras Functional API is used to construct the model in the custom `model_fn` function. Note how the layers are constructed from the Input `tf.keras.layers.Input` to the output. Also observe how the model is built using `tf.keras.Model`.
 - After training the model using `model.fit()`, the weights of the model are saved to a Hierarchical Data Format (HDF5) file with the extension `.h5` by calling `model.save_weights(/save_path)`.
 - Using the model function `model_fn`, we create a new model instance, this time using the evaluation dataset. The weights of the trained model and loaded into the evaluation model by calling `eval_model.load_weights(/save_path)`.
 - The variable `history` stores the metrics for the model at each time epoch returned by the callback function of the method `.fit()`.
@@ -296,7 +296,7 @@ With Keras, it is quite easy and straightforward to plot the metrics of the mode
 
 A callback function of the `model.fit()` method returns the loss and evaluation score for each epoch. This information is stored in a variable and plotted.
 
-In this examle, to illustrate model visualization with Keras, we build an MLP network using the Keras Functional API to classify the MNIST handwriting dataset.
+In this example, to illustrate model visualization with Keras, we build an MLP network using the Keras Functional API to classify the MNIST handwriting dataset.
 
 ```python
 import tensorflow as tf
@@ -346,6 +346,7 @@ history = model.fit(x_train, y_train, epochs=10,
 score = model.evaluate(x_test, y_test, batch_size=100)
 print('Test loss: {:.2f} \nTest accuracy: {:.2f}%'.format(score[0], score[1]*100))
 ```
+
 ```bash
 'Output':
 Train on 60000 samples, validate on 10000 samples
@@ -394,7 +395,7 @@ plt.legend(['train', 'evaluation'])
 <div class="fig figcenter fighighlight">
     <img src="/assets/seminar_IEEE/keras_visualize_loss_metric.png" width="70%" height="70%">
     <div class="figcaption" style="text-align: center;">
-        Figure ??: Model loss per epoch.
+        Figure 2: Model loss per epoch.
     </div>
 </div>
 
@@ -411,7 +412,7 @@ plt.legend(['train', 'evaluation'])
 <div class="fig figcenter fighighlight">
     <img src="/assets/seminar_IEEE/keras_visualize_accuracy_metric.png" width="70%" height="70%">
     <div class="figcaption" style="text-align: center;">
-        Figure ??: Model accuracy per epoch.
+        Figure 3 Model accuracy per epoch.
     </div>
 </div>
 
@@ -495,7 +496,7 @@ ml.TensorBoard.stop(tensorboard_pid)
 <div class="fig figcenter fighighlight">
     <img src="/assets/seminar_IEEE/keras_tensorboard.png">
     <div class="figcaption" style="text-align: center;">
-        Figure ??: TensorBoard with Keras.
+        Figure 4: TensorBoard with Keras.
     </div>
 </div>
 
@@ -935,14 +936,14 @@ plt.xlabel("Time")
 <div class="fig figcenter fighighlight">
     <img src="/assets/seminar_IEEE/keras_rnn_ts_model_testing.png" width="70%" height="70%">
     <div class="figcaption" style="text-align: center;">
-        Figure ??: Keras LSTM Model.
+        Figure 5: Keras LSTM Model.
     </div>
 </div>
 
 From the Keras LSTM code listing, the method `tf.keras.layers.LSTM()` is used to implement the LSTM recurrent layer. The attribute `return_sequences` is set to `True` to return the full sequence in the output sequence.
 
 #### Stacked LSTM
-ABCD
+A Stacked LSTM is a deep RNN with multiple LSTM layers. This stacking of LSTM layers with memory cells makes the network more expressive, and can learn more complex long-running sequences. In this section, we use the Dow Jones Index dataset to show an example of building a deep LSTM network with Keras.
 
 ```python
 import tensorflow as tf
@@ -1106,7 +1107,7 @@ plt.xlabel("Time")
 <div class="fig figcenter fighighlight">
     <img src="/assets/seminar_IEEE/keras_lstm_rnn_ts_model_testing.png" width="70%" height="70%">
     <div class="figcaption" style="text-align: center;">
-        Figure ??: Keras LSTM Model.
+        Figure 6 Keras Stacked LSTM Model.
     </div>
 </div>
 
