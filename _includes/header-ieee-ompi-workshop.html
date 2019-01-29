@@ -1,0 +1,11 @@
+<header class="site-header-ieee-ompi">
+
+  <div class="wrap title-wrap">
+    {% if page.permalink == '/ieee-ompi-workshop/' %}
+      <a class="site-title" href="/">{{ page.title }}</a>
+    {% else %}
+      <a class="site-title" href="{{ "/ieee-ompi-workshop/" | prepend: site.baseurl }}">{{ page.title }}</a>
+    {% endif %}
+  </div>
+
+</header>
