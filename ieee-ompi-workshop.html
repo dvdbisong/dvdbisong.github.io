@@ -4,48 +4,169 @@ layout: default-ieee-ompi-workshop
 permalink: /ieee-ompi-workshop/
 ---
 
-<div>
-    Welcome to the workshop on <span style="color:green">Data Science and Machine Learning using Google Cloud Computing</span>. <!--This goal of this seminar is to inform, educate and generate interest in the field of analytics, machine learning and deep learning which is termed data science from an industry perspective.
-    <br><br>
-    This seminar is divided into four parts, covering:
-    <ul style="margin-left: 5%;">
-        <li>An Introduction to Google Cloud Platform Infrastructure and Services</li>
-        <li>An Introduction to Programming for Data Science</li>
-        <li>An Introduction to Machine Learning</li>
-        <li>An Introduction to Deep Learning</li>
-    </ul>
-    <br>
-    This seminar is by no means exhaustive. However, it presents just enough to give a solid conceptual understanding of what these technologies are all about, and how they are currently revolutionizing various sectors. After going through this seminar series, a complete beginner can have a good background to delve deeper and understand more.
-    <br>
-    <br>
-    Moreso, the contents of this material forms part of my upcoming book with Apress with the same title.
-    <br>
-    <br>
-    <div class="fig figcenter fighighlight">
-      <img src="/assets/books/BisongHiRes.jpg" width="50%" height="50%">
-  </div>
+<div class="fig figcenter">
+    <img src="/assets/ieee_ompi/poster-ieee_ompi.png">
 </div>
 
--->
+<br>
+
+The goal of this workshop is to survey the field of machine learning and deep learning. It includes the steps for architecting and deploying a large-scale learning pipeline on Google Cloud Platform. The workshop contains the following sections:
 
 <div class="home">
   <div class="materials-wrap">
-    <div class="module-header">Part 1: Google Cloud Platform Infrastructure and Services</div>
+    <div class="module-header">
+      1: <a href="{{ site.baseurl }}{% link ieee-ompi-workshop/intro-gcp.md %}">
+        An Introduction to Google Cloud Platform (GCP)
+      </a>
+    </div>
 
     <div class="materials-item">
-      <a href="{{ site.baseurl }}{% link ieee-ompi-workshop/ml-overview.md %}">
-        Machine Learning: An Overview
-      </a>
       <div class="kw">
-          Why Machine Learning?, How do we assess learning?, Types of Learning, Foundations of Machine Learning
+          The Computational Cost of Building ML Products, Why GCP, GCP Product and Service Offerings, Cloud Compute, Cloud Storage, Big Data/ Analytics, Cloud AI
       </div>
     </div>
-	  
-    <div class="module-header">Part 2: ....</div>
 
-    <div class="module-header">Part 3: Machine Learning</div>
+    {% comment %} 2: {% endcomment %}
 
-    <div class="module-header">Part 4: Deep Learning</div>
+    <div class="module-header">
+      2: <a href="{{ site.baseurl }}{% link ieee-ompi-workshop/setting-up-gcp.md %}">
+        Steps to set-up an account on GCP
+      </a>
+    </div>
+
+    <div class="materials-item">
+      <div class="kw">
+      </div>
+    </div>
+
+    {% comment %} 3: {% endcomment %}
+
+    <div class="module-header">
+      3: <a href="{{ site.baseurl }}{% link ieee-ompi-workshop/datalab.md %}">
+        Working with Google Cloud Datalab
+      </a>
+    </div>
+
+    <div class="materials-item">
+      <div class="kw">
+          Enable Google Compute Engine and Cloud Source Repositories APIs, Launch a Datalab Instance from gcloud, Retrieving Code from Github into Datalab VM, Shutting down/ Deleting the instance
+      </div>
+    </div>
+
+    {% comment %} 4: {% endcomment %}
+
+    <div class="module-header">
+      4: <a href="{{ site.baseurl }}{% link ieee-ompi-workshop/google-colab.md %}">
+        Using Google Colaboratory
+      </a>
+    </div>
+
+    <div class="materials-item">
+      <div class="kw">
+          Starting out with Colab, Change Runtime Settings, Storing Notebooks, Uploading Notebooks
+      </div>
+    </div>
+
+    {% comment %} 5: {% endcomment %}
+
+    <div class="module-header">
+      5: <a href="{{ site.baseurl }}{% link ieee-ompi-workshop/ml-overview.md %}">
+        An Overview of Machine Learning
+      </a>
+    </div>
+
+    <div class="materials-item">
+      <div class="kw">
+          Why Machine Learning?, Types of Learning, Foundations of Machine Learning, A Formal Model for Machine Learning Theory, How do we assess learning?, Training and Validation data, The Bias/ Variance tradeoff, Evaluation metrics
+      </div>
+    </div>
+
+    {% comment %} 6: {% endcomment %}
+
+    <div class="module-header">
+      6: <a href="{{ site.baseurl }}{% link ieee-ompi-workshop/linear_regression.md %}">
+        Linear Regression
+      </a>
+    </div>
+
+    <div class="materials-item">
+      <div class="kw">
+          Linear Regression Model, Gradient Descent, Building a Linear Regression Model with TensorFlow, Importing the dataset, Prepare the dataset for modeling, The Regression Model, Plot model statistics
+      </div>
+    </div>
+
+    {% comment %} 7: {% endcomment %}
+
+    <div class="module-header">
+      7: <a href="{{ site.baseurl }}{% link ieee-ompi-workshop/logistic_regression.md %}">
+        Logistic Regression
+      </a>
+    </div>
+
+    <div class="materials-item">
+      <div class="kw">
+          The Logit or Sigmoid Model, Logistic Regression Cost Function, Logistic Regression Model with TensorFlow Canned Estimators, Tensorflow Datasets (tf.data), FeatureColumns, Estimators
+      </div>
+    </div>
+
+    {% comment %} 8: {% endcomment %}
     
+    <div class="module-header">
+      8: <a href="{{ site.baseurl }}{% link ieee-ompi-workshop/deep_learning.md %}">
+        Introducting Deep Learning
+      </a>
+    </div>
+
+    <div class="materials-item">
+      <div class="kw">
+          The representation challenge, An Inspiration from the Brain, The Neural Network Architecture, Training the Network, Cost Function or Loss Function, The Backpropagation Algorithm, Activation Functions, MultiLayer Perceptron (MLP) with Tensorflow Estimator API
+      </div>
+    </div>
+
+    {% comment %} 9: {% endcomment %}
+
+    <div class="module-header">
+      9: <a href="{{ site.baseurl }}{% link ieee-ompi-workshop/dataflow.md %}">
+        Large Scale Data transformation with Google Cloud Dataflow
+      </a>
+    </div>
+
+    <div class="materials-item">
+      <div class="kw">
+          Beam Programming, Enable Dataflow API, Building a Simple Data Transformation Pipeline
+      </div>
+    </div>
+
+    {% comment %} 10: {% endcomment %}
+
+    <div class="module-header">
+      10: <a href="{{ site.baseurl }}{% link ieee-ompi-workshop/dataflow.md %}">
+        Training and Inference at scale with Google Cloud Machine Learning Engine
+      </a>
+    </div>
+
+    <div class="materials-item">
+      <div class="kw">
+          
+      </div>
+    </div>
+
   </div>
 </div>
+
+<br>
+<br>
+<h1 style="font-size: 150%;">Book reference:</h1>
+<p>The contents of this workshop are excepts from the book <span style="color:green">Building Machine Learning and Deep Learning Models on Google Cloud Platform: A Comprehensive Guide for Beginners</span> published by Apress (Springer Nature). <em>To be released July 2019.</em></p>
+<br>
+<p align="left">
+<img src="https://ekababisong.org/assets/books/BisongHiRes.jpg" alt="gcp-ml-dl-book" width="50%" height="50%">
+</p>
+
+<br>
+<br>
+<h1 style="font-size: 150%;">Organizers:</h1>
+<p align="left">
+    <img src="/assets/ieee_ompi/ieee_carleton.png" align="middle" alt="IEEE Carleton." height=45% width=45%/>
+    <img src="/assets/ieee_ompi/ompi.png" align="middle" alt="Ottawa Medical Physics Institute." height=45% width=45%/>
+</p>
