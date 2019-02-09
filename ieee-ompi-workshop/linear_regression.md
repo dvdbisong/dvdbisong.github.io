@@ -244,9 +244,9 @@ y = tf.placeholder(shape=[None, 1], dtype=tf.float64)
 
 ```python
 # weight
-W = tf.Variable(tf.random.normal(shape=[4,1], dtype=tf.float64))
+W = tf.Variable(tf.random_normal(shape=[4,1], dtype=tf.float64))
 # bias term
-b = tf.Variable(tf.random.normal(shape=[1,1], dtype=tf.float64))
+b = tf.Variable(tf.random_normal(shape=[1,1], dtype=tf.float64))
 ```
 
 
