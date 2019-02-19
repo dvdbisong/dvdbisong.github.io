@@ -95,6 +95,7 @@ curl https://raw.githubusercontent.com/dvdbisong/IEEE-Carleton-and-OMPI-Machine-
 ```bash
 %%bash
 source activate py2env
+pip install google-cloud-dataflow
 pip uninstall -y google-cloud-dataflow
 conda install -y pytz==2018.4
 pip install apache-beam[gcp]
