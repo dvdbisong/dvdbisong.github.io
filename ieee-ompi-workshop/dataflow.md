@@ -15,8 +15,8 @@ Table of contents:
   - [Transformed Dataset in Bucket](#transformed-dataset-in-bucket)
 
 
-Google Cloud Dataflow provides a serverless, parallel and distributed infrastructure for running jobs for batch and stream data processing.
-One of the core strengths of Dataflow is its ability to almost seamlessly handle the switch from processing of batch historical data to streaming datasets while elegantly taking into consideration the perks of streaming processing such as windowing.
+Google Cloud Dataflow provides a serverless infrastructure for processing batch and streaming data jobs.
+One of the core strengths of Dataflow is its ability to readily handle the switch from the processing of batch historical data to streaming datasets while elegantly taking into consideration the perks of streaming processing such as windowing.
 Dataflow is a major component for building an end-to-end ML production pipeline on GCP.
 
 <a id="beam-programming"></a>
