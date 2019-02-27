@@ -199,22 +199,31 @@ permalink: /
 <div class="container">
   <h2>Thesis</h2>
   <div id="pubs">
-	 
     <!--div class="pubwrap"-->
 		<div class="ctr">
       <a href="./assets/pdf/EkabaDefence.pdf">
 			<img src="../assets/thesis/thesis.svg" style="max-width:100%;">
       </a>
-      <div class="pubd" style="display:inline-block"><a href="https://github.com/dvdbisong/Adaptive-Data-Structures-SLLs-on-SLLs">[GitHub]</a>&nbsp;&nbsp;<div class="pubd" style="display:inline-block"><a href="./assets/pdf/EkabaDefence.pdf">[PDF]</a> On Designing Adaptive Data Structures 
-        with Adaptive Data "Sub"-Structures</div><br>
+      <div class="publ" style="display:inline-block">
+        <ul>
+          <li><a href="https://github.com/dvdbisong/Adaptive-Data-Structures-SLLs-on-SLLs">GitHub</a></li>
+          <li><a href="./assets/pdf/EkabaDefence.pdf">PDF</a></li>
+        </ul>
+      </div>
+      <div class="pubd">On Designing Adaptive Data Structures with Adaptive Data "Sub"-Structures</div>
+      <div class="puba" style="display:inline-block">Ekaba Bisong, </div>
+      <div class="pubv" style="display:inline-block">M.Sc. Thesis, 2018</div>
+      
+      <!--
+      <div class="pubd" style="display:inline-block">
+      <a href="https://github.com/dvdbisong/Adaptive-Data-Structures-SLLs-on-SLLs">[GitHub]</a>&nbsp;&nbsp;<div class="pubd" style="display:inline-block"><a href="./assets/pdf/EkabaDefence.pdf">[PDF]</a> On Designing Adaptive Data Structures 
+        with Adaptive Data "Sub"-Structures</div>
+        <br>
 			<div class="puba" style="display:inline-block">Ekaba Bisong, </div>
       <div class="pubv" style="display:inline-block">M.Sc. Thesis, 2018</div>
-		</div>    
-
-  <!--/div-->
+      -->
+		</div>
   </div>
-  <br>
-  <!--/div-->
 </div>  
 
 <!--<br><br>-->
@@ -222,34 +231,59 @@ permalink: /
   
 <!--Research-->
 <div class="container">
-  <h2>Research</h2>
+  <h2>Papers</h2>
   <div id="pubs">
 
-      <!--div class="pubwrap">
+      <div class="pubwrap">
           <div class="row">
             <div class="col-md-6">
               <div class="pubimg">
-                <img src="./assets/research/benchmarking-DNI.png">
+                <img src="./assets/research/peoma.svg">
               </div>
             </div>
             <div class="col-md-6">
               <div class="pub">
-                <div class="pubt">Benchmarking Decoupled Neural Interfaces with Synthetic Gradients</div>
-                <div class="pubd">Artificial neural networks have a close and stringent coupling between the modules of neurons in the network. To solve this problem, synthetic gradients (SG) with decoupled neural interfaces (DNI) <a href="https://arxiv.org/abs/1608.05343">(Jaderberg, et al 2016)</a> are introduced as a viable alternative to the backpropagation algorithm. This paper performs a speed benchmark to compare the speed and accuracy capabilities of SG-DNI as opposed to a standard neural interface using multilayer perceptron MLP.</div>
-                <div class="puba">Bisong, Ekaba</div>
+                <div class="pubt">Optimizing Self-Organizing Lists-on-Lists using Pursuit-Oriented Enhanced Object Partitioning</div>
+                <div class="pubd">Recently, researchers have proposed the concept of hierarchical Singly-Linked-Lists on Singly-Linked-Lists (SLLs-on-SLLs), where the primitive elements of the primary list are, in and of themselves, sub-lists. In this paper, we propose that the PEOMA reinforcement scheme can be powerful in learning the probabilistic distribution of the Environment to capture dependent elements within the sub-groups. The research shows that the PEOMA-enhanced SLLs-on-SLLs provide results that are an order of magnitude superior to the "de-facto" MTF and TR schemes used in such Environments with so-called "locality of reference".</div>
+                <div class="puba">O. Ekaba Bisong and B. John Oommen</div>
                 <div class="pubv"></div>
                 <div class="publ">
-                  <ul>
+                  <!--ul>
                     <li><a href="https://arxiv.org/abs/1712.08314">arXiv</a></li>
                     <li><a href="">GitHub</a></li>
                     <li><a href="">Blog post</a></li>
-                  </ul>
+                  </ul-->
                 </div>
               </div>
             </div>
           </div>
-      </div-->
-  
+      </div>
+
+      <div class="pubwrap">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="pubimg">
+                <img src="./assets/research/eoma.png">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="pub">
+                <div class="pubt">Optimizing Self-Organizing Lists-on-Lists using Enhanced Object Partitioning</div>
+                <div class="pubd">This paper considers the problem of minimizing the cost of data retrieval from the most fundamental data structure, i.e., a Singly-Linked List (SLL) in Non-stationary Environments (NSE) exhibiting so-called "Locality of Reference". We show that SLLs-on-SLLs augmented with the Enhanced Object Migration Automaton (EOMA) minimizes the retrieval cost for elements in NSEs and are superior to the stand-alone MTF and TR schemes, and also superior to the OMA-augmented SLLs-on-SLLs operating in such Environments.</div>
+                <div class="puba">O. Ekaba Bisong and B. John Oommen</div>
+                <div class="pubv"></div>
+                <div class="publ">
+                  <!--ul>
+                    <li><a href="https://arxiv.org/abs/1712.08314">arXiv</a></li>
+                    <li><a href="">GitHub</a></li>
+                    <li><a href="">Blog post</a></li>
+                  </ul-->
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+
       <!--div class="pubwrap"-->
         <div class="row">
             <div class="col-md-6">
@@ -276,7 +310,7 @@ permalink: /
       </div>
 </div>
 
-<br><br><br>  
+<br><br>
 <hr class="soft">
 
 <!--Seminar :-: OLD-->
@@ -306,6 +340,47 @@ permalink: /
     
 </div> {% endcomment %}
 
+{% comment %} Writing Series {% endcomment %}
+
+<div class="container">
+  <h2>Writing Series</h2>
+  <div id="pubs">
+    <!---div class="pubwrap"-->
+          <div class="row">
+            <div class="col-md-6">
+              <div class="pubimg">
+                <a href="/gcp-ml-seminar/">
+                <img src="../assets/kubeflow_poets/kubeflow_poets_homepage.png">
+                </a>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="pub">
+                <div class="pubt"><span class="thigh">Kubeflow for Poets:</span> A Guide to Containerization of the Machine Learning Production Pipeline</a></div><br>
+                <div class="pubd">Contents:<br>
+                  <span class="puba">1:</span> <a href="https://github.com/dvdbisong/kubeflow-for-poets">Series Introduction</a><br>
+                  <span class="puba">2:</span> <a href="https://github.com/dvdbisong/kubeflow-for-poets">Microservices</a><br>
+                  <span class="puba">3:</span> <a href="https://github.com/dvdbisong/kubeflow-for-poets">Docker</a><br>
+                  <span class="puba">4:</span> <a href="https://github.com/dvdbisong/kubeflow-for-poets">Kubernetes</a><br>
+                  <span class="puba">5:</span> <a href="https://github.com/dvdbisong/kubeflow-for-poets">Kubeflow</a><br>
+                  <span class="puba">6:</span> <a href="https://github.com/dvdbisong/kubeflow-for-poets">Kubeflow Pipelines</a><br>
+                  <span class="puba">7:</span> <a href="https://github.com/dvdbisong/kubeflow-for-poets">Machine Learning Production with Kubeflow Pipelines</a>
+                </div>
+                <div class="publ">
+                  <ul>
+                    <li><a href="https://github.com/dvdbisong/kubeflow-for-poets">Github</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+    <!--/div-->
+  </div>
+</div>
+
+<br><br>
+<hr class="soft">
+
 
 {% comment %} Seminar/ Workshop (NEW) {% endcomment %}
 
@@ -315,30 +390,6 @@ permalink: /
 
     <div class="pubwrap">
           <div class="row">
-            <div class="col-md-6">
-              <div class="pubimg">
-                <a href="/gcp-ml-seminar/">
-                <img src="../assets/seminar_IEEE/Machine-Learning-Workshop-Banner.png">
-                </a>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="pub">
-                <div class="pubt"><span class="thigh">Winter 2018:</span> A 3-Day Workshop to Carleton University IEEE Chapter on <a href="/gcp-ml-seminar/">Building Machine Learning and Deep Learning Models on Google Cloud Platform</a></div><br>
-                <div class="pubd">The workshop contains the following parts:<br>
-                  - <span class="puba">Part 1:</span> <a href="/gcp-ml-seminar">An Introduction to Google Cloud Platform (GCP)</a><br>
-                  - <span class="puba">Part 2:</span> <a href="/gcp-ml-seminar">Steps to set-up an account on GCP</a><br>
-                  - <span class="puba">Part 3:</span> <a href="/gcp-ml-seminar">Working with Google Cloud Datalab</a><br>
-                  - <span class="puba">Part 4:</span> <a href="/gcp-ml-seminar">Using Google Colaboratory</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <br><br>
-    </div>
-  
-    {% comment %} <div class="pubwrap"> {% endcomment %}
-        <div class="row">
             <div class="col-md-6">
               <div class="pubimg">
                 <a href="/ieee-ompi-workshop/">
@@ -360,7 +411,30 @@ permalink: /
                   - <a href="/ieee-ompi-workshop/deep_learning">Introducting Deep Learning</a><br>
                   - <a href="/ieee-ompi-workshop/dataflow">Large Scale Data transformation with Google Cloud Dataflow</a><br>
                   - <a href="/ieee-ompi-workshop/cloud-mle">Training/ Inference with Google Cloud Machine Learning Engine</a>
-
+                </div>
+              </div>
+            </div>
+        </div>          
+        <br>
+    </div>
+  
+    {% comment %} <div class="pubwrap"> {% endcomment %}
+        <div class="row">
+            <div class="col-md-6">
+              <div class="pubimg">
+                <a href="/gcp-ml-seminar/">
+                <img src="../assets/seminar_IEEE/Machine-Learning-Workshop-Banner.png">
+                </a>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="pub">
+                <div class="pubt"><span class="thigh">Winter 2018:</span> A 3-Day Workshop to Carleton University IEEE Chapter on <a href="/gcp-ml-seminar/">Building Machine Learning and Deep Learning Models on Google Cloud Platform</a></div><br>
+                <div class="pubd">The workshop contains the following parts:<br>
+                  - <span class="puba">Part 1:</span> <a href="/gcp-ml-seminar">An Introduction to Google Cloud Platform (GCP)</a><br>
+                  - <span class="puba">Part 2:</span> <a href="/gcp-ml-seminar">Steps to set-up an account on GCP</a><br>
+                  - <span class="puba">Part 3:</span> <a href="/gcp-ml-seminar">Working with Google Cloud Datalab</a><br>
+                  - <span class="puba">Part 4:</span> <a href="/gcp-ml-seminar">Using Google Colaboratory</a>
                 </div>
               </div>
             </div>
