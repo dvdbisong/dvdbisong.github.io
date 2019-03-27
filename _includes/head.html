@@ -8,6 +8,11 @@
     <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="{{ site.title }} posts" />
     <link rel="shortcut icon" type="image/png" href="/favicon.png">
 
+    <!-- Featured Image -->
+    {% if page.image %}
+      <meta property="og:image" content="{{ site.url }}/{{ page.image }}" />
+    {% endif %}
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}">
 

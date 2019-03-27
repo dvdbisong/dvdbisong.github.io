@@ -6,12 +6,13 @@ category: Writings
 comments: false
 excerpt: "This writing series provides a systematic approach to productionalizing machine learning pipelines with Kubeflow on Kubernetes. Building machine learning models is just one piece of a more extensive system of tasks and processes that come together to deliver a Machine Learning product. Kubeflow makes it possible to leverage the microservices paradigm of containerization to separate modular components of an application orchestrated on Kubernetes."
 permalink: /kubeflow-for-poets/
+image: '../assets/kubeflow_poets/kubeflow.jpg'
 ---
 
 <p align="left">
-<img src="../assets/kubeflow_poets/kubeflow.jpg" align="middle" alt="Kubeflow." height="20%" width="20%"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <img src="../assets/kubeflow_poets/docker.png" align="middle" alt="Docker." height="20%" width="20%"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <img src="../assets/kubeflow_poets/kubernetes.jpg" align="middle" alt="Kubernetes." height="20%" width="20%"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="../assets/kubeflow_poets/kubeflow.jpg" align="middle" alt="Kubeflow." height="20%" width="20%"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <img src="../assets/kubeflow_poets/gcp.png" align="middle" alt="Google Cloud Platform." height="20%" width="20%"/>
 </p>
 
