@@ -9,9 +9,9 @@ permalink: /kubeflow-for-poets/
 ---
 
 <p align="left">
+<img src="../assets/kubeflow_poets/kubeflow.jpg" align="middle" alt="Kubeflow." height="20%" width="20%"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <img src="../assets/kubeflow_poets/docker.png" align="middle" alt="Docker." height="20%" width="20%"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <img src="../assets/kubeflow_poets/kubernetes.jpg" align="middle" alt="Kubernetes." height="20%" width="20%"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<img src="../assets/kubeflow_poets/kubeflow.jpg" align="middle" alt="Kubeflow." height="20%" width="20%"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <img src="../assets/kubeflow_poets/gcp.png" align="middle" alt="Google Cloud Platform." height="20%" width="20%"/>
 </p>
 
