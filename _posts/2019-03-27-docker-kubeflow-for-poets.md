@@ -6,6 +6,7 @@ category: Writings
 comments: false
 excerpt: "Docker is a virtualization application that abstracts applications into isolated environments known as containers. The idea behind a container is to provide a unified platform that includes the software tools and dependencies for developing and deploying an application."
 permalink: /docker-kubeflow-for-poets/
+image: '../assets/kubeflow_poets/docker.png'
 ---
 
 Docker is a virtualization application that abstracts applications into isolated environments known as *containers*. The idea behind a container is to provide a unified platform that includes the software tools and dependencies for developing and deploying an application.

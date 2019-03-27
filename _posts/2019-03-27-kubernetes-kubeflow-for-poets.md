@@ -6,6 +6,7 @@ category: Writings
 comments: false
 excerpt: "When a microservice application is deployed in production, it usually has many running containers that need to be allocated the right amount of resources in response to user demands. Also, there is a need to ensure that the containers are online, running and are communicating with one another. The need to efficiently manage and coordinate clusters of containerized applications gave rise to Kubernetes."
 permalink: /kubernetes-kubeflow-for-poets/
+image: '../assets/kubeflow_poets/kubernetes.jpg'
 ---
 
 When a microservice application is deployed in production, it usually has many running containers that need to be allocated the right amount of resources in response to user demands. Also, there is a need to ensure that the containers are online, running and are communicating with one another. The need to efficiently manage and coordinate clusters of containerized applications gave rise to Kubernetes.
