@@ -335,7 +335,7 @@ Status: Downloaded newer image for jupyter/tensorflow-notebook:latest
 ```
 
 ### Run the Container
-This command starts an *ephemeral* container running a Jupyter Notebook server and exposes the server on host port 8888. The server logs appear in the terminal. Visiting http://<hostname>:8888/?token=<token> in a browser loads the Jupyter Notebook dashboard page. It is *ephemeral*, because Docker destroys the container after notebook server exit. This is because of the `--rm` label in the `docker run` command.
+This command starts an *ephemeral* container running a Jupyter Notebook server and exposes the server on host port 8888. The server logs appear in the terminal. Visiting http://`<hostname>`:8888/?token=`<token>` in a browser loads the Jupyter Notebook dashboard page. It is *ephemeral*, because Docker destroys the container after notebook server exit. This is because of the `--rm` label in the `docker run` command.
 
 ```bash
 # run the image

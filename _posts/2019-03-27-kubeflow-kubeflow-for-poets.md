@@ -13,7 +13,7 @@ Kubeflow is a platform that is created to enhance and simplify the process of de
 The goal of Kubeflow is to abstract away the technicalities of managing a Kubernetes cluster so that a machine learning practitioner can quickly leverage the power of Kubernetes and the benefits of deploying products within a microservices framework. Kubeflow has its history as an internal Google framework for implementing machine learning pipelines on Kubernetes before being open-sourced late 2017.
 
 ## Working with Kubeflow
-Here are some of the components than can run on Kubeflow:
+Here are some of the components that run on Kubeflow:
 
 <div class="imgcap">
 <img src="../assets/kubeflow_poets/kubeflow-components.png" alt="Kubeflow components." height="90%" width="90%" />
@@ -74,8 +74,8 @@ Kubeflow uses Cloud Identity-Aware Proxy (Cloud IAP) to connect to Jupyter and o
     ```
     https://<deployment_name>.endpoints.<project>.cloud.goog/_gcp_gatekeeper/authenticate
     ```
-  - <deployment_name> must be the name of the Kubeflow deployment.
-  - <project> is the GCP project ID.
+  - `<deployment_name>` must be the name of the Kubeflow deployment.
+  - `<project>` is the GCP project ID.
   - In this case, it will be:
   ```
   https://ekaba-kubeflow-app.endpoints.oceanic-sky-230504.cloud.goog/_gcp_gatekeeper/authenticate
@@ -179,6 +179,7 @@ kubectl -n kubeflow get  all
 ```
 
 Kubeflow is available at the url: https://ekaba-kubeflow-app.endpoints.oceanic-sky-230504.cloud.goog/
+  
 **Note:** It can take 10-15 minutes for the URI to become available. Kubeflow needs to provision a signed SSL certificate and register a DNS name.
 
 **The Kubeflow Homescreen**

@@ -27,7 +27,7 @@ The pipeline consists of the following components:
 5. Deploy the model for serving on Cloud MLE.
 
 ## Create a container image for each component
-First, we'll package the client and runtime code into a Docker image. This image also contains the secure service account key to authenticate against GCP. For example, the component to transform the dataset using Dataflow has the following files built into ints image:
+First, we'll package the client and runtime code into a Docker image. This image also contains the secure service account key to authenticate against GCP. For example, the component to transform the dataset using Dataflow has the following files built into its image:
 
 |__ `DataflowTransform`  
 |______ `Dockerfile` : Dockerfile to build the Docker image.  
@@ -64,28 +64,28 @@ python3 crypto_pipeline.py crypto_pipeline.tar.gz
 ```
 
 ## Upload and execute the Pipeline to Kubeflow Pipelines
-1. Upload the pipeline to Kubeflow Pipelines.
+1 Upload the pipeline to Kubeflow Pipelines.
 
 <div class="imgcap">
 <img src="../assets/kubeflow_poets/upload-kubeflow-pipeline.png" alt="Upload Kubeflow Pipeline." height="90%" width="90%" />
 <div>.</div>
 </div>
 
-2. Click on the pipeline to see the static graph of the flow.
+2 Click on the pipeline to see the static graph of the flow.
 
 <div class="imgcap">
 <img src="../assets/kubeflow_poets/pipeline-static-summary.png" alt="Pipeline Static Summary." height="90%" width="90%" />
 <div>.</div>
 </div>
 
-3. Create an `Experiment` and `Run` to execute the pipeline.
+3 Create an `Experiment` and `Run` to execute the pipeline.
 
 <div class="imgcap">
 <img src="../assets/kubeflow_poets/create-experiment-and-run.png" alt="Pipeline Static Summary." height="90%" width="90%" />
 <div>.</div>
 </div>
 
-4. Completed Pipeline Run.
+4 Completed Pipeline Run.
 
 <div class="imgcap">
 <img src="../assets/kubeflow_poets/completed-pipeline-run.png" alt="Completed Pipeline Run." height="90%" width="90%" />

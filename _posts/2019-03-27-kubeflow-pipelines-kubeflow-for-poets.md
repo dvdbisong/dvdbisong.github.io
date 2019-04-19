@@ -29,35 +29,35 @@ The Kubeflow Pipelines platform consists of:
 
 ## Executing a Sample Pipeline
 
-1. Click on the name **[Sample] Basic - Condition**.
+1 Click on the name **[Sample] Basic - Condition**.
 
 <div class="imgcap">
 <img src="../assets/kubeflow_poets/select-a-simple-pipeline.png" alt="Select a simple pipeline." height="90%" width="90%" />
 <div>.</div>
 </div>
 
-2. Click **Start an experiment**.
+2 Click **Start an experiment**.
 
 <div class="imgcap">
 <img src="../assets/kubeflow_poets/create-an-experiment.png" alt="Create an experiment." height="90%" width="90%" />
 <div>.</div>
 </div>
 
-3. Give the Experiment a Name.
+3 Give the Experiment a Name.
 
 <div class="imgcap">
 <img src="../assets/kubeflow_poets/name-experiment.png" alt="Name the experiment." height="90%" width="90%" />
 <div>.</div>
 </div>
 
-4. Give the Run Name.
+4 Give the Run Name.
 
 <div class="imgcap">
 <img src="../assets/kubeflow_poets/run-experiment.png" alt="Name the run." height="90%" width="90%" />
 <div>.</div>
 </div>
 
-5. Click on the **Run Name** to start the Run.
+5 Click on the **Run Name** to start the Run.
 
 <div class="imgcap">
 <img src="../assets/kubeflow_poets/running-pipeline.png" alt="Running pipeline." height="90%" width="90%" />
