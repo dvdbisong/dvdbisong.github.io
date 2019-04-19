@@ -165,6 +165,7 @@ Todays date is Sun Feb 24 04:45:08 UTC 2019
 
 ## Important Docker Commands
 ### Commands for Managing Images
+  
 |**Command**|**Description**|
 |-|-|
 |`docker images`| List all images on the machine.
@@ -172,6 +173,7 @@ Todays date is Sun Feb 24 04:45:08 UTC 2019
 |`docker rmi $(docker images -q)`| Remove all images from the machine.
 
 ### Commands for Managing Containers
+  
 |**Command**|**Description**|
 |-|-|
 |`docker ps`| List all containers. Append `-a` to also list containers not running.
