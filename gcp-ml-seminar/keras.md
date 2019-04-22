@@ -14,10 +14,10 @@ Table of contents:
 - [Checkpointing to Select Best Models](#checkpointing-to-select-best-models)
 - [Convolutional Neural Networks (CNNs) with Keras](#convolutional-neural-networks-cnns-with-keras)
 - [Recurrent Neural Networks (RNNs) with Keras](#recurrent-neural-networks-rnns-with-keras)
-    - [Stacked LSTM](#stacked-lstm)
+  - [Stacked LSTM](#stacked-lstm)
 - [Long-term Recurrent Convolutional Network (CNN LSTM)](#long-term-recurrent-convolutional-network-cnn-lstm)
-    - [Encoder-Decoder LSTM](#encoder-decoder-lstm)
-    - [Bidirectional LSTM](#bidirectional-lstm)
+  - [Encoder-Decoder LSTM](#encoder-decoder-lstm)
+  - [Bidirectional LSTM](#bidirectional-lstm)
 
 Keras provides a high-level API abstraction for developing deep neural network models. It uses as of this time of writing, TensorFlow, CNTK and Theano at the backend. The API was initially separate from TensorFlow and only provided a simple interface for model building with TensorFlow as one of the frameworks running at the backend. However, from TensorFlow 1.2, Keras is now an integral part of the TensorFlow codebase as a high-level API.
 
@@ -288,7 +288,7 @@ Test accuracy: 89.30%
 From the code block above, observe the following steps:
 - The Keras Functional API is used to construct the model in the custom `model_fn` function. Note how the layers are constructed from the Input `tf.keras.layers.Input` to the output. Also observe how the model is built using `tf.keras.Model`.
 - After training the model using `model.fit()`, the weights of the model are saved to a Hierarchical Data Format (HDF5) file with the extension `.h5` by calling `model.save_weights(/save_path)`.
-- Using the model function `model_fn`, we create a new model instance, this time using the evaluation dataset. The weights of the trained model and loaded into the evaluation model by calling `eval_model.load_weights(/save_path)`.
+- Using the model function `model_fn`, we create a new model instance, this time using the evaluation dataset. The weights of the trained model are loaded into the evaluation model by calling `eval_model.load_weights(/save_path)`.
 - The variable `history` stores the metrics for the model at each time epoch returned by the callback function of the method `.fit()`.
 
 ### Model Visualization with Keras
