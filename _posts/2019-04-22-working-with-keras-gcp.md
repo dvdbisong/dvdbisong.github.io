@@ -10,6 +10,9 @@ permalink: /working-with-keras-gcp/
 
 <a name="#notebook-instance"></a>
 
+## Source Code and Contribution:
+The entire source code is available on Github at: <a href="https://github.com/dvdbisong/Working-with-Keras">https://github.com/dvdbisong/Working-with-Keras</a>
+
 ## Notebook Instance on GCP AI Platform
 
 **Open Notebook Instance**
