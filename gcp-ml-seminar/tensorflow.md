@@ -8,13 +8,13 @@ Table of contents:
 
 - [The case for Computational Graphs](#the-case-for-computational-graphs)
 - [Navigating through the TensorFlow API](#navigating-through-the-tensorflow-api)
-    - [The Low-Level TensorFlow API](#the-low-level-tensorflow-api)
-    - [The Mid-Level TensorFlow API](#the-mid-level-tensorflow-api)
-    - [Layers](#layers)
-    - [Datasets](#datasets)
-    - [The High-Level TensorFlow API](#the-high-level-tensorflow-api)
-    - [FeatureColumns](#featurecolumns)
-    - [Estimator API](#estimator-api)
+  - [The Low-Level TensorFlow API](#the-low-level-tensorflow-api)
+  - [The Mid-Level TensorFlow API](#the-mid-level-tensorflow-api)
+  - [Layers](#layers)
+  - [Datasets](#datasets)
+  - [The High-Level TensorFlow API](#the-high-level-tensorflow-api)
+  - [FeatureColumns](#featurecolumns)
+  - [Estimator API](#estimator-api)
 - [TensorBoard](#tensorboard)
 - [The Low/Mid-Level API: Building Computational Graphs and Sessions](#the-lowmid-level-api-building-computational-graphs-and-sessions)
 - [A Simple TensorFlow Programme](#a-simple-tensorflow-programme)
@@ -30,21 +30,21 @@ Table of contents:
 - [Convolutional Neural Networks](#convolutional-neural-networks)
 - [Save and Restore TensorFlow Graph Variables](#save-and-restore-tensorflow-graph-variables)
 - [Recurrent Neural Networks](#recurrent-neural-networks)
-    - [Univariate Timeseries with RNN](#univariate-timeseries-with-rnn)
-    - [Deep RNN](#deep-rnn)
-    - [Multivariate Timeseries with RNN](#multivariate-timeseries-with-rnn)
+  - [Univariate Timeseries with RNN](#univariate-timeseries-with-rnn)
+  - [Deep RNN](#deep-rnn)
+  - [Multivariate Timeseries with RNN](#multivariate-timeseries-with-rnn)
 - [Autoencoders](#autoencoders)
 - [Building Efficient Input Pipelines with the Dataset API](#building-efficient-input-pipelines-with-the-dataset-api)
 - [TensorFlow High-Level APIs: Using Estimators](#tensorflow-high-level-apis-using-estimators)
-    - [Using the Pre-Made or Canned Estimator](#using-the-pre-made-or-canned-estimator)
-    - [Building a Custom Estimator](#building-a-custom-estimator)
+  - [Using the Pre-Made or Canned Estimator](#using-the-pre-made-or-canned-estimator)
+  - [Building a Custom Estimator](#building-a-custom-estimator)
 - [Eager Execution](#eager-execution)
 
 TensorFlow is a specialized numerical computation library for Deep Learning. It is as of writing the preferred tool by numerous deep learning researchers and industry practitioners for developing deep learning models and architectures as well as for serving learned models into production servers and software products.
 
 They are two fundamental principles behind working with TensorFlow, one is the idea of a Tensor, and the other is the idea of building and executing a Computational Graph. 
 
-A Tensor is a mathematical name for an array with $$n$$ dimensions, so loosely speaking, a scalar is a Tensor without a dimension, an array or vector is a tensor with 1 dimension, and a matrix is a Tensor with 2 dimensions. An array with dimensions higher than 2 are simply tensors of $$n$$ dimensions. The dimension of a Tensor is also called the **rank** of a Tensor.
+A Tensor is a mathematical name for an array with $$n$$ dimensions, so loosely speaking, a scalar is a Tensor without a dimension, an array or vector is a tensor with 1 dimension, and a matrix is a Tensor with 2 dimensions. An array with dimensions higher than 2 is simply a tensor of $$n$$ dimensions. The dimension of a Tensor is also called the **rank** of a Tensor.
 
 A Computational Graph is a tree-like representation of information as it flows from one computation unit, which is a Tensor or a Node in graph terminology to another via applying different forms of mathematical operations. The operations are the edges of the graph. It is from this representation that the package derives its name Tensor - Flow.
 
