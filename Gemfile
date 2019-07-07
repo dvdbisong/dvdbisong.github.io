@@ -25,6 +25,7 @@ group :jekyll_plugins do
   gem 'jekyll-auto-image'
   gem "ffi", ">= 1.9.24"
   gem "nokogiri", ">= 1.8.5"
+  gem 'jekyll-redirect-from'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

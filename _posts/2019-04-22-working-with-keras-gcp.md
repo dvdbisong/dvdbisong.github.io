@@ -4,7 +4,7 @@ title: 'Working with Keras on GCP Notebook Instance'
 date: 2019-04-22 11:29:00 +00:00
 category: Writings
 comments: false
-excerpt: "This workshop shows how to build Keras models on GCP Notebook Instances."
+excerpt: "This workshop shows how to build Keras models on GCP Notebook Instances. The Keras Model is the core of a Keras programme. A Model is constructed, compiled, trained and evaluated using their respective training and evaluation datasets. Upon satisfactory evaluation, the model is used to make predictions on previously unseen data."
 permalink: /working-with-keras-gcp/
 ---
 
