@@ -41,7 +41,7 @@ GEM
     mini_portile2 (2.4.0)
     minima (2.1.1)
       jekyll (~> 3.3)
-    nokogiri (1.10.2)
+    nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
     pathutil (0.16.2)
       forwardable-extended (~> 2.6)
@@ -70,7 +70,7 @@ DEPENDENCIES
   jekyll-seo-tag
   jekyll-sitemap
   minima (~> 2.0)
-  nokogiri (>= 1.8.5)
+  nokogiri (>= 1.10.4)
   tzinfo-data
 
 BUNDLED WITH
