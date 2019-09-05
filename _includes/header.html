@@ -9,10 +9,10 @@
     </div>
 
     <!--a class="site-title" href="{{{ site.baseurl }}/writings">{{ page.title }}</a-->
-    {% if page.category == 'Technical Writings' %}
-      <a class="site-title" href="{{ "/writings/" | prepend: site.baseurl }}">{% if page.category %}{{ page.category }}{% else %}{{ page.title }}{% endif %}</a>
+    {% if page.category == 'Writings' %}
+      <a class="site-title" href="{{ '/writings/' | prepend: site.baseurl }}">{% if page.category %}{{ page.category }}{% else %}{{ page.title }}{% endif %}</a>
     {% else if page.category == 'Paper Reviews' %}
-      <a class="site-title" href="{{ "/papers/" | prepend: site.baseurl }}">{% if page.category %}{{ page.category }}{% else %}{{ page.title }}{% endif %}</a>
+      <a class="site-title" href="{{ '/papers/' | prepend: site.baseurl }}">{% if page.category %}{{ page.category }}{% else %}{{ page.title }}{% endif %}</a>
     {% endif %}
     <!--a class="site-title" href="{{ page.url | prepend: site.baseurl }}">{% if page.category %}{{ page.category }}{% else %}{{ page.title }}{% endif %}</a-->
     
