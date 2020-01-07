@@ -84,6 +84,13 @@ a:visited { color: #205caa; }
   display: block;
   padding: 3px;
 }
+
+.materials-item-rl a{
+  color: green;
+  display: block;
+  padding: 3px;
+}
+
 .materials-item {
   border-bottom: 1px solid #CCC;
 }
@@ -138,6 +145,12 @@ a:visited { color: #205caa; }
 .kw {
   font-size: 16px;
   color: #08A;
+  margin-left: 10px;
+}
+
+.ke {
+  font-size: 20px;
+  color: rgb(68,137,49);
   margin-left: 10px;
 }
 
