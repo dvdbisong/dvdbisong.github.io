@@ -35,5 +35,5 @@ The field of adaptive control is concerned with learning the behaviour of a cont
     <li>Sutton, R. S., & Barto, A. G. (1998). Reinforcement learning: An introduction. MIT press.</li>
     <li>Bellman, R. E. (1961). Adaptive Control Processes - A Guided Tour. Princeton: Princeton University Press.</li>
     <li>Bellman, R. E. (1957a). Dynamic Programming. Princeton: Princeton University Press.</li>
-    <li>Bellman, R. E. (1957b). A Markovian Decision Process. Journal of Mathematics and Mechanics, 6(5), 679-684. Retrieved from www.jstor.org/stable/24900506</li>
+    <li>Bellman, R. E. (1957b). A Markovian Decision Process. Journal of Mathematics and Mechanics, 6(5), 679-684. Retrieved from www.jstor.org/stable/24900506.</li>
 </ul>
