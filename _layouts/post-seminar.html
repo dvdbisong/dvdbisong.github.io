@@ -12,4 +12,8 @@ layout: default-seminar
   {{ content }}
   </article>
 
+  {% if page.use_math %}
+     {% include mathjax_support %}
+  {% endif %}
+
 </div>

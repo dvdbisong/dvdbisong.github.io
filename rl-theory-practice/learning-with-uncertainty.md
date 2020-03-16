@@ -28,11 +28,10 @@ The field of adaptive control is concerned with learning the behaviour of a cont
 
 ### Bibliography
 <ul>
-    <li>Pavlov IP (1927). Translated by Anrep GV. "Conditioned Reflexes: An Investigation of the Physiological Activity of the Cerebral Cortex". Nature. 121 (3052): 662–664. Bibcode:1928Natur.121..662D. doi:10.1038/121662a0.</li>
-    <li>Skinner, B. F. (1938). The behaviour of organisms: an experimental analysis. Appleton-Century.</li>
-    <li>Sutton, R. S., & Barto, A. G. (1998). Introduction to reinforcement learning (Vol. 2, No. 4). Cambridge: MIT Press.</li>
-    <li>Thorndike, E. L. (1898). Animal intelligence: An experimental study of the associative processes in animals. The Psychological Review: Monograph Supplements, 2(4), i–109. https://doi.org/10.1037/h0092987.</li>
+    <li>Pavlov, I.P. (1927). Translated by Anrep GV. "Conditioned Reflexes: An Investigation of the Physiological Activity of the Cerebral Cortex". Nature. 121 (3052): 662–664.</li>
+    <li>Skinner, B. F. (1938). The behaviour of organisms: an experimental analysis. BF Skinner Foundation.</li>
     <li>Sutton, R. S., & Barto, A. G. (1998). Reinforcement learning: An introduction. MIT press.</li>
+    <li>Thorndike, E. L. (1898). Animal intelligence: An experimental study of the associative processes in animals. The Psychological Review: Monograph Supplements, 2(4), i–109. https://doi.org/10.1037/h0092987.</li>
     <li>Bellman, R. E. (1961). Adaptive Control Processes - A Guided Tour. Princeton: Princeton University Press.</li>
     <li>Bellman, R. E. (1957a). Dynamic Programming. Princeton: Princeton University Press.</li>
     <li>Bellman, R. E. (1957b). A Markovian Decision Process. Journal of Mathematics and Mechanics, 6(5), 679-684. Retrieved from www.jstor.org/stable/24900506.</li>

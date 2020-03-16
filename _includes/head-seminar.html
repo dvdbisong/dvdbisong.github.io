@@ -10,6 +10,19 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ '/css/main-seminar.css' | prepend: site.baseurl }}">
 
+    <!-- Pseudocode -->
+    <!-- <script src="{{ '/css/katex.min.js' | prepend: site.baseurl }}"></script> -->
+    <script src="{{ '/css/pseudocode.min.js' | prepend: site.baseurl }}" type="text/javascript"></script>
+    <!-- <link rel="stylesheet" href="{{ '/css/katex.min.css' | prepend: site.baseurl }}"> -->
+    <link rel="stylesheet" href="{{ '/css/pseudocode.min.css' | prepend: site.baseurl }}" type="text/css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-beta/katex.min.css" integrity="sha384-L/SNYu0HM7XECWBeshTGLluQO9uVI1tvkCtunuoUbCHHoTH76cDyXty69Bb9I0qZ" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-beta/katex.min.js" integrity="sha384-ad+n9lzhJjYgO67lARKETJH6WuQVDDlRfj81AJJSswMyMkXTD49wBj5EP004WOY6" crossorigin="anonymous"></script>
+
+    {% if page.use_math %}
+     {% include mathjax_support %}
+    {% endif %}
+
     <!-- Google fonts -->
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 
